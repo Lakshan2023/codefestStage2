@@ -22,6 +22,8 @@ from datetime import datetime
 import plotly
 import random
 import ast
+import plotly.io as pio
+import plotly.utils
 
 load_dotenv()
 
@@ -408,6 +410,41 @@ def execute_cypher_query(driver, query):
         print(f"Error executing query: {str(e)}")
         return None
 
+def convert_to_html_table(data):
+    if not data:
+        return ""
+
+    # Convert data to pandas DataFrame
+    df = pd.DataFrame(data)
+
+    # Generate HTML table with Bootstrap classes
+    html_table = df.to_html(
+        classes=['table', 'table-striped', 'table-hover', 'table-bordered'],
+        index=False,
+        escape=False,
+        table_id='result-table'
+    )
+
+    return html_table
+
+
+def generate_plotly_html(plotly_code):
+    try:
+        # Execute the plotly code to get the figure
+        local_dict = {}
+        exec(plotly_code, globals(), local_dict)
+        fig = local_dict.get('fig')
+
+        if fig:
+            # Convert the figure to HTML
+            plotly_html = pio.to_html(fig, full_html=False)
+            return plotly_html
+    except Exception as e:
+        print(f"Error generating plotly HTML: {str(e)}")
+        return ""
+    return ""
+
+
 @app.post("/chat")
 async def chat(question: Question):
     try:
@@ -423,8 +460,6 @@ async def chat(question: Question):
         # Get the query generation response
         query_response = generate_query(user_question, session_id)
 
-        print(query_response)
-
         try:
             try:
                 response_dict = json.loads(query_response)
@@ -434,15 +469,29 @@ async def chat(question: Question):
                 except (ValueError, SyntaxError):
                     raise ValueError("Could not parse response as JSON or Python dict")
 
+            # Validate response format
+            required_fields = [
+                "text_explanation",
+                "query_generation_status",
+                "query",
+                "plotly_code_generation_status",
+                "plotly_code"
+            ]
+
             if not isinstance(response_dict, dict) or not all(
-                    key in response_dict for key in ["query_generation_status", "query"]):
+                    key in response_dict for key in required_fields):
                 raise ValueError("Invalid response format")
 
             # Initialize the result
             result = {
+                "text_explanation": response_dict["text_explanation"],
                 "query_generation_status": response_dict["query_generation_status"],
                 "query": response_dict["query"],
-                "data": None
+                "plotly_code_generation_status": response_dict["plotly_code_generation_status"],
+                "plotly_code": response_dict["plotly_code"],
+                "data": None,
+                "html_table_data": "",
+                "html_code_plotly": ""
             }
 
             # Execute the query if status is "Yes"
@@ -450,6 +499,13 @@ async def chat(question: Question):
                 query_result = execute_cypher_query(driver, response_dict["query"])
                 # Ensure the entire result is JSON serializable
                 result["data"] = json.loads(json.dumps(query_result, default=str))
+
+                # Generate HTML table from the data
+                result["html_table_data"] = convert_to_html_table(query_result)
+
+            # Generate Plotly HTML if status is "Yes"
+            if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
+                result["html_code_plotly"] = generate_plotly_html(response_dict["plotly_code"])
 
             return JSONResponse(content={
                 "session_id": session_id,
