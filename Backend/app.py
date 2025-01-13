@@ -1,5 +1,5 @@
 import neo4j
-from neo4j import GraphDatabase
+from neo4j import GraphDatabase, time
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
@@ -21,10 +21,6 @@ from typing import Dict, List
 from datetime import datetime
 import plotly
 import random
-
-import plotly
-import plotly.express as px
-import plotly.graph_objects as go
 import ast
 
 load_dotenv()
@@ -96,16 +92,9 @@ def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
 
     return similar_questions
 
-# user_query = "Provide all the consultants list ?"
-# similar_questions = find_similar_questions(user_query, questions, cypher_queries)
-#
-#
-# print(similar_questions)
-
 class Question(BaseModel):
     question: str
     session_id: str
-
 
 # In-memory storage for chat histories
 chat_histories: Dict[str, List[str]] = {}
@@ -202,205 +191,156 @@ CREATE (o)-[:CONTAINS]->(p)
 """
 
 
-# def generate_query(user_question: str, session_id: str) -> str:
-#     # Define template as a constant
-#     TEMPLATE_CYPHER = {
-#         "query_generation_status": "Yes/No",
-#         "query": "OPTIONAL MATCH query here"
-#     }
-#
-#     # Move the prompt template outside the function
-#     QUERY_CHAT_PROMPT = """
-#     You are intelligent neo4j graph based query generator, which can generate cypher queries.
-#     When user provide you the question you have to provide the query.
-#
-#     This is the graph db created code, when you generate answers only refer the nodes,
-#     elements and relationships mentioned in the graph db created code
-#
-#     graph db code: {graph_db_structure}
-#
-#     The below samples show similar chunks and questions for the users questions.
-#     It will not be the user asking question, but you might get help to understand
-#     the query generation process.
-#
-#     similar_chunks: {similar_chunks}
-#
-#     You should provide only the query. Each query must start with OPTIONAL MATCH.
-#
-#     Refer to the below user question to generate your answer.
-#
-#     Users question: {question}
-#
-#     The answer should be given in below structure:
-#
-#     Template: {template_cypher}
-#
-#     If it is not a question that you can generate a cypher query,
-#     query_generation_status has to be 'No', else 'Yes' along with the answer in query.
-#     If status is 'No' query should be empty strings.
-#     """
-#
-#     retry_count = 0
-#     max_retries = 4
-#
-#     # Get similar questions (assuming this function exists)
-#     try:
-#         similar_chunks = find_similar_questions(user_question, questions, cypher_queries)
-#     except Exception as e:
-#         return f"Error finding similar questions: {str(e)}"
-#
-#     # Format the prompt with all required values
-#     formatted_prompt = QUERY_CHAT_PROMPT.format(
-#         graph_db_structure=graph_db_structure,
-#         similar_chunks=similar_chunks,
-#         question=user_question,
-#         template_cypher=TEMPLATE_CYPHER
-#     )
-#
-#     while retry_count < max_retries:
-#         try:
-#             # Construct chat messages
-#             chat_messages = [
-#                 {
-#                     "role": "system",
-#                     "content": [
-#                         {
-#                             "type": "text",
-#                             "text": formatted_prompt
-#                         }
-#                     ]
-#                 },
-#                 {
-#                     "role": "user",
-#                     "content": [
-#                         {
-#                             "type": "text",
-#                             "text": user_question
-#                         }
-#                     ]
-#                 }
-#             ]
-#
-#             # Make API call
-#             completion = client.chat.completions.create(
-#                 model=deployment,
-#                 messages=chat_messages,
-#                 max_tokens=4096,
-#                 temperature=0.5,
-#                 top_p=0.95,
-#                 frequency_penalty=0,
-#                 presence_penalty=0,
-#                 stop=None,
-#                 stream=False
-#             )
-#
-#             return completion.choices[0].message.content
-#
-#         except Exception as e:
-#             retry_count += 1
-#             if retry_count >= max_retries:
-#                 return f"Error after {max_retries} retries: {str(e)}"
-#             continue
-#
-#     return "Maximum retries exceeded"
+def generate_query(user_question: str, session_id: str) -> str:
+    # Define template as a constant
+    TEMPLATE_CYPHER = {
+        "text_explanation": "",
+        "query_generation_status": "Yes/No",
+        "query": "OPTIONAL MATCH query here",
+        "plotly_code_generation_status": "Yes/No",
+        "plotly_code": "plotly code"
+    }
 
-
-# Modified template for OpenAI response
-TEMPLATE_RESPONSE = {
-    "query_generation_status": "Yes/No",
-    "query": "OPTIONAL MATCH query here",
-    "needs_visualization": False,
-    "visualization_type": "",
-    "visualization_code": "",
-    "explanation": ""
-}
-
-# Updated prompt template for OpenAI
-QUERY_CHAT_PROMPT = """
-You are an intelligent neo4j graph based query generator and data analyst. When user provides a question, you need to:
-1. Generate appropriate Cypher query
-2. Determine if the data needs visualization
-3. If visualization is needed, provide appropriate Plotly code
-4. Provide a detailed explanation of the analysis
-
-Graph db code: {graph_db_structure}
-
-Similar chunks for reference: {similar_chunks}
-
-Consider the user's question: {question}
-
-Analyze if the question requires data visualization. If it does, provide Plotly code that creates an appropriate visualization 
-(e.g., bar charts for comparisons, line charts for trends, scatter plots for relationships, etc.)
-
-The answer should follow this structure:
-{template_response}
-
-For visualization_code, provide complete Plotly code that creates the visualization. Use either plotly.express or plotly.graph_objects.
-The code should take a pandas DataFrame 'df' as input, which will contain the query results.
-
-If visualization is not needed, set needs_visualization to false and leave visualization_type and visualization_code empty.
+    # Move the prompt template outside the function
+    QUERY_CHAT_PROMPT = """Role and Context:
+                        ----------------
+                        You are SyscoPulse, an AI assistant developed by AI-Alchemists from the Informatics Institute of Technology's Artificial Intelligence and Data Science program. Your primary purpose is to help Sales Consultants at Sysco Labs optimize their services.
+                        
+                        Core Capabilities:
+                        ----------------
+                        1. Access and provide saved data
+                        2. Perform data analysis
+                        3. Check meeting schedules
+                        4. Monitor client orders
+                        5. Cross-reference multiple tables when filtering data
+                        
+                        About Sysco Labs:
+                        ----------------
+                        Sysco LABS is the technology and innovation arm of Sysco Corporation, the global leader in foodservice distribution. The organization specializes in:
+                        - Designing advanced digital solutions
+                        - Optimizing supply chains
+                        - Enhancing customer experiences
+                        - Driving operational efficiency
+                        
+                        Database Context:
+                        ---------------
+                        Current Graph Database Structure: {graph_db_structure}
+                        
+                        Similar Reference Examples:
+                        -------------------------
+                        {similar_chunks}
+                        
+                        Query Requirements:
+                        -----------------
+                        1. All queries must start with OPTIONAL MATCH
+                        2. Only use nodes, elements, and relationships defined in the provided graph structure
+                        3. Support cross-table filtering when necessary
+                        
+                        Input Question:
+                        --------------
+                        {question}
+                        
+                        Response Format:
+                        --------------
+                        The response must follow this structure:
+                        {template_cypher}
+                        
+                        Response Guidelines:
+                        ------------------
+                        1. text_explanation:
+                           - Provide natural language explanations
+                           - Can include emojis for better readability
+                           - Must NOT contain code or queries
+                           - If question isn't query-related, provide complete answer here
+                           - Focus on business context and relevance to Sysco Labs
+                        
+                        2. query_generation_status:
+                           - 'Yes': If a Cypher query can be generated
+                           - 'No': If question cannot be answered with a query
+                           - If 'No', query field should be empty
+                        
+                        3. plotly_code_generation_status:
+                           - 'Yes': If query results can be visualized in a single line/bar chart
+                           - 'No': If data isn't suitable for visualization
+                           - Only set to 'Yes' for statistical, numeric, or time series data
+                        
+                        4. plotly_code:
+                           - Include visualization code only if plotly_code_generation_status is 'Yes'
+                           - Ensure visualizations are business-relevant and actionable
+                        
+                        Important Notes:
+                        --------------
+                        - Do not return as JSON
+                        - Maintain the exact template structure
+                        - No additional content before the response template
+                        - Ensure responses align with Sysco Labs' business context
+                        - Consider cross-table relationships when relevant
 """
 
 
-def generate_query_and_visualization(user_question: str, session_id: str) -> str:
+    retry_count = 0
+    max_retries = 4
+
+    # Get similar questions (assuming this function exists)
     try:
         similar_chunks = find_similar_questions(user_question, questions, cypher_queries)
-
-        formatted_prompt = QUERY_CHAT_PROMPT.format(
-            graph_db_structure=graph_db_structure,
-            similar_chunks=similar_chunks,
-            question=user_question,
-            template_response=TEMPLATE_RESPONSE
-        )
-
-        chat_messages = [
-            {
-                "role": "system",
-                "content": [{"type": "text", "text": formatted_prompt}]
-            },
-            {
-                "role": "user",
-                "content": [{"type": "text", "text": user_question}]
-            }
-        ]
-
-        completion = client.chat.completions.create(
-            model=deployment,
-            messages=chat_messages,
-            max_tokens=4096,
-            temperature=0.5,
-            top_p=0.95,
-            frequency_penalty=0,
-            presence_penalty=0,
-            stop=None,
-            stream=False
-        )
-
-        return completion.choices[0].message.content
-
     except Exception as e:
-        return f"Error generating query and visualization: {str(e)}"
+        return f"Error finding similar questions: {str(e)}"
 
+    # Format the prompt with all required values
+    formatted_prompt = QUERY_CHAT_PROMPT.format(
+        graph_db_structure=graph_db_structure,
+        similar_chunks=similar_chunks,
+        question=user_question,
+        template_cypher=TEMPLATE_CYPHER
+    )
 
-def create_visualization(df: pd.DataFrame, viz_code: str) -> dict:
-    try:
-        # Create a local scope with the DataFrame
-        local_scope = {'df': df, 'px': px, 'go': go}
+    while retry_count < max_retries:
+        try:
+            # Construct chat messages
+            chat_messages = [
+                {
+                    "role": "system",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": formatted_prompt
+                        }
+                    ]
+                },
+                {
+                    "role": "user",
+                    "content": [
+                        {
+                            "type": "text",
+                            "text": user_question
+                        }
+                    ]
+                }
+            ]
 
-        # Execute the visualization code
-        exec(viz_code, globals(), local_scope)
+            # Make API call
+            completion = client.chat.completions.create(
+                model=deployment,
+                messages=chat_messages,
+                max_tokens=4096,
+                temperature=0.5,
+                top_p=0.95,
+                frequency_penalty=0,
+                presence_penalty=0,
+                stop=None,
+                stream=False
+            )
 
-        # Get the figure from local scope
-        fig = local_scope.get('fig')
+            return completion.choices[0].message.content
 
-        if fig:
-            # Convert the figure to JSON
-            viz_json = json.loads(plotly.io.to_json(fig))
-            return viz_json
-    except Exception as e:
-        print(f"Error creating visualization: {str(e)}")
-        return None
+        except Exception as e:
+            retry_count += 1
+            if retry_count >= max_retries:
+                return f"Error after {max_retries} retries: {str(e)}"
+            continue
 
+    return "Maximum retries exceeded"
 
 @app.post("/start_session")
 async def start_session():
@@ -468,73 +408,6 @@ def execute_cypher_query(driver, query):
         print(f"Error executing query: {str(e)}")
         return None
 
-# @app.post("/chat")
-# async def chat(question: Question):
-#     try:
-#         session_id = question.session_id
-#         user_question = question.question
-#
-#         if session_id not in chat_histories:
-#             return JSONResponse(
-#                 content={"error": "Invalid session ID"},
-#                 status_code=400
-#             )
-#
-#         # Get the query generation response
-#         query_response = generate_query(user_question, session_id)
-#
-#         print(query_response)
-#
-#         try:
-#             try:
-#                 response_dict = json.loads(query_response)
-#             except json.JSONDecodeError:
-#                 try:
-#                     response_dict = ast.literal_eval(query_response)
-#                 except (ValueError, SyntaxError):
-#                     raise ValueError("Could not parse response as JSON or Python dict")
-#
-#             if not isinstance(response_dict, dict) or not all(
-#                     key in response_dict for key in ["query_generation_status", "query"]):
-#                 raise ValueError("Invalid response format")
-#
-#             # Initialize the result
-#             result = {
-#                 "query_generation_status": response_dict["query_generation_status"],
-#                 "query": response_dict["query"],
-#                 "data": None
-#             }
-#
-#             # Execute the query if status is "Yes"
-#             if response_dict["query_generation_status"].lower() == "yes" and response_dict["query"]:
-#                 query_result = execute_cypher_query(driver, response_dict["query"])
-#                 # Ensure the entire result is JSON serializable
-#                 result["data"] = json.loads(json.dumps(query_result, default=str))
-#
-#             return JSONResponse(content={
-#                 "session_id": session_id,
-#                 "result": result
-#             })
-#
-#         except Exception as e:
-#             return JSONResponse(
-#                 content={
-#                     "error": f"Error processing response: {str(e)}",
-#                     "raw_response": query_response
-#                 },
-#                 status_code=500
-#             )
-#
-#     except Exception as e:
-#         print(f"Error in chat endpoint: {str(e)}")
-#         return JSONResponse(
-#             content={
-#                 "error": "An error occurred processing your request",
-#                 "detail": str(e)
-#             },
-#             status_code=500
-#         )
-
 @app.post("/chat")
 async def chat(question: Question):
     try:
@@ -547,39 +420,36 @@ async def chat(question: Question):
                 status_code=400
             )
 
-        # Get the response including query and visualization info
-        response = generate_query_and_visualization(user_question, session_id)
+        # Get the query generation response
+        query_response = generate_query(user_question, session_id)
+
+        print(query_response)
 
         try:
             try:
-                response_dict = json.loads(response)
+                response_dict = json.loads(query_response)
             except json.JSONDecodeError:
-                response_dict = ast.literal_eval(response)
+                try:
+                    response_dict = ast.literal_eval(query_response)
+                except (ValueError, SyntaxError):
+                    raise ValueError("Could not parse response as JSON or Python dict")
 
+            if not isinstance(response_dict, dict) or not all(
+                    key in response_dict for key in ["query_generation_status", "query"]):
+                raise ValueError("Invalid response format")
+
+            # Initialize the result
             result = {
                 "query_generation_status": response_dict["query_generation_status"],
                 "query": response_dict["query"],
-                "explanation": response_dict.get("explanation", ""),
-                "data": None,
-                "visualization": None
+                "data": None
             }
 
-            # Execute query if status is "Yes"
+            # Execute the query if status is "Yes"
             if response_dict["query_generation_status"].lower() == "yes" and response_dict["query"]:
                 query_result = execute_cypher_query(driver, response_dict["query"])
-
-                # Convert query result to DataFrame for visualization
-                df = pd.DataFrame(query_result)
+                # Ensure the entire result is JSON serializable
                 result["data"] = json.loads(json.dumps(query_result, default=str))
-
-                # Create visualization if needed
-                if response_dict.get("needs_visualization", False) and response_dict.get("visualization_code"):
-                    visualization = create_visualization(df, response_dict["visualization_code"])
-                    if visualization:
-                        result["visualization"] = {
-                            "type": response_dict["visualization_type"],
-                            "plot": visualization
-                        }
 
             return JSONResponse(content={
                 "session_id": session_id,
@@ -590,7 +460,7 @@ async def chat(question: Question):
             return JSONResponse(
                 content={
                     "error": f"Error processing response: {str(e)}",
-                    "raw_response": response
+                    "raw_response": query_response
                 },
                 status_code=500
             )
@@ -605,8 +475,6 @@ async def chat(question: Question):
             status_code=500
         )
 
-
 if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
-
 
