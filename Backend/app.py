@@ -195,7 +195,9 @@ def generate_query(user_question: str, session_id: str) -> str:
     # Define template as a constant
     TEMPLATE_CYPHER = {
         "query_generation_status": "Yes/No",
-        "query": "OPTIONAL MATCH query here"
+        "query": "OPTIONAL MATCH query here",
+        "plotly_code_generation_status": "Yes/No",
+        "plotly_code": "plotly code"
     }
 
     # Move the prompt template outside the function
@@ -227,6 +229,16 @@ def generate_query(user_question: str, session_id: str) -> str:
     If it is not a question that you can generate a cypher query, 
     query_generation_status has to be 'No', else 'Yes' along with the answer in query.
     If status is 'No' query should be empty strings.
+    
+    If query_generation_status and the selected entities can be represented in a plotly graph,
+    provide plotly_code_generation_status as 'Yes', else provide 'No' . (important hint: only statistical, numeric and time series data can be represented in a graph)
+    
+    It should be given 'Yes' if all the entities returned by cypher query can be plotted in a single line/barchart only. 
+    Otherwise provide it as 'No'
+    
+    If plotly_code_generation_status is 'Yes' you should have to provide the plotly code in "plotly_code".
+    
+    Very important : Please do not ever return this as a json, provide it as in the given structure.
     """
 
     retry_count = 0
