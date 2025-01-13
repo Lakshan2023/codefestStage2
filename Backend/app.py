@@ -63,11 +63,13 @@ driver = connect_to_neo4j()
 with open('sample.json', 'r') as file:
     data = json.load(file)
 
+# Extract questions and their corresponding cypher queries
 questions = [item['question'] for item in data['data']]
+cypher_queries = [item['cypher_query'] for item in data['data']]
 
 
 # Function to find the top 5 similar questions
-def find_similar_questions(user_query, questions, top_n=5):
+def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
     # Combine user query with the questions
     corpus = questions + [user_query]
 
@@ -80,12 +82,16 @@ def find_similar_questions(user_query, questions, top_n=5):
 
     # Get the top N similar questions
     similar_indices = similarities.argsort()[-top_n:][::-1]
-    similar_questions = [(questions[i], similarities[i]) for i in similar_indices]
+
+    # Return the question, cypher_query, and similarity score
+    similar_questions = [
+        (questions[i], cypher_queries[i], similarities[i]) for i in similar_indices
+    ]
 
     return similar_questions
 
-user_query = "Provide the sales consultant details with id SC0891?"
-similar_questions = find_similar_questions(user_query, questions)
+user_query = "Provide all the consultants list ?"
+similar_questions = find_similar_questions(user_query, questions, cypher_queries)
 
 print(similar_questions)
 
