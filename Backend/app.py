@@ -194,6 +194,7 @@ CREATE (o)-[:CONTAINS]->(p)
 def generate_query(user_question: str, session_id: str) -> str:
     # Define template as a constant
     TEMPLATE_CYPHER = {
+        "text_explanation": "",
         "query_generation_status": "Yes/No",
         "query": "OPTIONAL MATCH query here",
         "plotly_code_generation_status": "Yes/No",
@@ -225,6 +226,10 @@ def generate_query(user_question: str, session_id: str) -> str:
     The answer should be given in below structure:
 
     Template: {template_cypher}
+    
+    'text_explanation' should contain explanations for the user question based on retrieved plots, data or just common answers. Use emojis if you can for this. Do not ever include codes in  'text_explanation'.
+    if the question is not a query generating one, provide the text based answer in 'text_explanation'. 
+    important: 'text_explanation' provides only descriptions not codes or queries they should be provided in 'query' and within 'plotly_code'
 
     If it is not a question that you can generate a cypher query, 
     query_generation_status has to be 'No', else 'Yes' along with the answer in query.
@@ -239,6 +244,8 @@ def generate_query(user_question: str, session_id: str) -> str:
     If plotly_code_generation_status is 'Yes' you should have to provide the plotly code in "plotly_code".
     
     Very important : Please do not ever return this as a json, provide it as in the given structure.
+    
+    When generating the answer before the curly brackets in the given template, do not include anything.
     """
 
     retry_count = 0
