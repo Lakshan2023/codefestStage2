@@ -293,85 +293,11 @@ def generate_query(user_question: str, session_id: str) -> str:
 
     return "Maximum retries exceeded"
 
-
-def serialize_value(val):
-    if pd.isna(val):
-        return None
-    elif isinstance(val, (pd.Timestamp, datetime)):
-        return val.isoformat()
-    elif isinstance(val, pd.Period):
-        return val.strftime('%Y-%m-%d')  # Convert Period to string
-    elif isinstance(val, np.integer):
-        return int(val)
-    elif isinstance(val, np.floating):
-        return float(val)
-    elif isinstance(val, np.bool_):
-        return bool(val)
-    elif isinstance(val, (np.ndarray, list)):
-        return [serialize_value(v) for v in val]
-    elif isinstance(val, dict):
-        return {k: serialize_value(v) for k, v in val.items()}
-    elif isinstance(val, pd.Index):
-        return serialize_value(val.tolist())
-    elif isinstance(val, pd.Series):
-        return serialize_value(val.tolist())
-    elif isinstance(val, pd.DataFrame):
-        return serialize_value(val.to_dict('records'))
-    elif isinstance(val, pd.DateOffset):
-        return str(val)
-    elif isinstance(val, pd.Interval):
-        return str(val)
-    return val
-
-
 @app.post("/start_session")
 async def start_session():
     session_id = str(uuid.uuid4())
     chat_histories[session_id] = []
     return JSONResponse(content={"session_id": session_id})
-
-# @app.post("/chat")
-# async def chat(question: Question):
-#     try:
-#         session_id = question.session_id
-#         user_question = question.question
-#
-#         if session_id not in chat_histories:
-#             return JSONResponse(
-#                 content={"error": "Invalid session ID"},
-#                 status_code=400
-#             )
-#
-#         answer = generate_query(user_question, session_id)
-#
-#         if answer is not None:
-#             return JSONResponse(content={
-#                 "session_id": session_id,
-#                 "answer": answer
-#             })
-#
-#     except Exception as e:
-#         print(f"Error in chat endpoint: {str(e)}")
-#         return JSONResponse(
-#             content={
-#                 "error": "An error occurred processing your request",
-#                 "detail": str(e)
-#             },
-#             status_code=500
-#         )
-
-
-def execute_cypher_query(driver, query):
-    """Execute a Cypher query and return the results"""
-    try:
-        with driver.session() as session:
-            result = session.run(query)
-            records = [dict(record) for record in result]
-            return records
-    except Exception as e:
-        print(f"Error executing query: {str(e)}")
-        return None
-
 
 def serialize_neo4j_value(val):
     """Serialize Neo4j specific data types"""
