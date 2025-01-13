@@ -1005,6 +1005,102 @@
   {
   "question": "Analyze product category margins",
   "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) RETURN p.Category, AVG(o.Cost_Per_Unit) as Avg_Unit_Cost, SUM(o.Total_Cost) as Total_Revenue, COUNT(*) as Order_Count ORDER BY Total_Revenue DESC"
+  },
+  {
+  "question":"Find customers with specific category preferences",
+  "cypher_query":"OPTIONAL MATCH (c:Customer)\nOPTIONAL MATCH (c)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product)\nWITH c, p.Category as Category,\nCOUNT(*) as Category_Orders,\nSUM(o.Total_Cost) as Category_Spend\nWHERE Category_Orders > 0\nRETURN c.Customer_ID,\n       Category,\n       Category_Orders,\n       Category_Spend\nORDER BY Category_Spend DESC\nLIMIT 20;"
+  },
+  {
+  "question":"Analyze product category average order sizes",
+  "cypher_query":"OPTIONAL MATCH (o:Order)\nOPTIONAL MATCH (o)-[:CONTAINS]->(p:Product)\nRETURN p.Category,\n       AVG(o.Order_Amount) as Avg_Order_Size,\n       MIN(o.Order_Amount) as Min_Order,\n       MAX(o.Order_Amount) as Max_Order\nORDER BY Avg_Order_Size DESC;"
+  },
+  {
+  "question":"Analyze category performance by order value tiers",
+  "cypher_query":"OPTIONAL MATCH (o:Order)\nOPTIONAL MATCH (o)-[:CONTAINS]->(p:Product)\nWITH o, p,\nCASE \n    WHEN o.Total_Cost <= 50000 THEN 'Low Value'\n    WHEN o.Total_Cost <= 200000 THEN 'Medium Value'\n    ELSE 'High Value'\nEND as Value_Tier\nRETURN p.Category,\n       Value_Tier,\n       COUNT(*) as Orders,\n       AVG(o.Total_Cost) as Avg_Value,\n       SUM(o.Order_Amount) as Total_Units\nORDER BY p.Category, Value_Tier;"
+  },
+  {
+  "question":"Which produce items have the highest order cancellation rates in Center-8?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWHERE p.Category = 'Produce' AND o.Sysco_Operation_Center = 'Center-8'\nWITH p.Product_Name as Product, \nCOUNT(*) as Total_Orders,\nCOUNT(CASE WHEN o.Order_Status = 'Cancelled' THEN 1 END) as Cancelled\nRETURN Product, Total_Orders, Cancelled,\n(Cancelled * 100.0/Total_Orders) as Cancellation_Rate\nORDER BY Cancellation_Rate DESC;"
+  },
+  {
+  "question":"What's the average order value for non-food items during night shifts?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWHERE p.Category = 'Non-Food Items' \nAND (substring(toString(o.Order_Time), 0, 2) >= '22' OR substring(toString(o.Order_Time), 0, 2) < '06')\nRETURN p.Product_Name,\nCOUNT(*) as Night_Orders,\nAVG(o.Total_Cost) as Avg_Order_Value\nORDER BY Night_Orders DESC;"
+  },
+  {
+  "question":"Which sales consultants handle the most diverse produce portfolio?",
+  "cypher_query":"OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)-[:CONTAINS]->(p:Product)\nWHERE p.Category = 'Produce'\nRETURN s.Name as Consultant,\nCOUNT(DISTINCT p.Product_Name) as Unique_Products,\nCOUNT(*) as Total_Orders\nORDER BY Unique_Products DESC;"
+  },
+  {
+  "question":"Which operation centers excel at handling fresh produce orders?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWHERE p.Category = 'Produce'\nRETURN o.Sysco_Operation_Center,\nCOUNT(*) as Produce_Orders,\nSUM(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 ELSE 0 END) * 100.0 / COUNT(*) as Success_Rate\nORDER BY Success_Rate DESC;"
+  },
+  {
+  "question":"Which customers frequently order both produce and non-food items?",
+  "cypher_query":"OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product)\nWHERE p.Category IN ['Produce', 'Non-Food Items']\nWITH c, p.Category as Category, COUNT(*) as Category_Orders\nWHERE Category_Orders >= 3\nRETURN c.Customer_ID,\nCOLLECT(Category) as Categories,\nSUM(Category_Orders) as Total_Orders;"
+  },
+  {
+  "question":"What's the distribution of order types for each product category?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nRETURN p.Category,\no.Order_Type,\nCOUNT(*) as Orders,\nAVG(o.Total_Cost) as Avg_Value\nORDER BY p.Category, Orders DESC;"
+  },
+  {
+  "question":" Which sales consultants have the highest success rate with fresh produce orders?",
+  "cypher_query":"OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)-[:CONTAINS]->(p:Product)\nWHERE p.Category = 'Produce'\nWITH s, COUNT(*) as Total_Orders,\nCOUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) as Successful_Orders\nWHERE Total_Orders >= 5\nRETURN s.Name,\nTotal_Orders,\n(Successful_Orders * 100.0/Total_Orders) as Success_Rate\nORDER BY Success_Rate DESC;"
+  },
+  {
+  "question":"What's the average time of day for high-value bakery orders?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWHERE p.Category = 'Bakery' AND o.Total_Cost > 100000\nRETURN p.Product_Name,\ntoString(o.Order_Time) as Order_Time,\nCOUNT(*) as High_Value_Orders,\nAVG(o.Total_Cost) as Avg_Value\nORDER BY High_Value_Orders DESC;"
+  },
+  {
+  "question":" What's the correlation between order amount and cancellation rates for each product?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p.Product_Name as Product,\nAVG(CASE WHEN o.Order_Status = 'Cancelled' THEN o.Order_Amount ELSE 0 END) as Avg_Cancelled_Amount,\nAVG(o.Order_Amount) as Avg_Order_Amount\nRETURN Product,\nAvg_Cancelled_Amount,\nAvg_Order_Amount,\n(Avg_Cancelled_Amount/Avg_Order_Amount * 100) as Cancellation_Size_Ratio\nORDER BY Cancellation_Size_Ratio DESC;\n"
+  },
+  {
+  "question":" What's the relationship between product category and order processing time?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p.Category as Category,\nsubstring(toString(o.Order_Time), 0, 2) as Hour,\nCOUNT(*) as Orders,\nAVG(o.Total_Cost) as Avg_Value\nRETURN Category,\nHour,\nOrders,\nAvg_Value\nORDER BY Category, Hour;"
+  },
+  {
+  "question":"Which product categories show the strongest regional preferences?",
+  "cypher_query":"OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product)\nWITH c.Region as Region,\np.Category as Category,\nCOUNT(*) as Orders,\nCOUNT(DISTINCT c.Customer_ID) as Unique_Customers\nRETURN Region,\nCategory,\nOrders,\n(Orders * 1.0/Unique_Customers) as Orders_Per_Customer\nORDER BY Region, Orders_Per_Customer DESC;"
+  },
+  {
+  "question":" What's the impact of order size on successful delivery for each product?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p.Product_Name as Product,\nCASE\nWHEN o.Order_Amount <= 1000 THEN 'Small'\nWHEN o.Order_Amount <= 3000 THEN 'Medium'\nELSE 'Large'\nEND as Order_Size,\nCOUNT(*) as Total_Orders,\nCOUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) as Successful_Orders\nRETURN Product,\nOrder_Size,\n(Successful_Orders * 100.0/Total_Orders) as Success_Rate\nORDER BY Product, Success_Rate DESC;"
+  },
+  {
+  "question":"Which sales consultants excel at handling specific product categories?",
+  "cypher_query":"OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)-[:CONTAINS]->(p:Product)\nWITH s.Name as Consultant,\np.Category as Category,\nCOUNT(*) as Orders,\nAVG(o.Total_Cost) as Avg_Value,\nCOUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) * 100.0 / COUNT(*) as Success_Rate\nWHERE Orders >= 5\nRETURN Consultant,\nCategory,\nOrders,\nSuccess_Rate\nORDER BY Success_Rate DESC;"
+  },
+  {
+  "question":"Which operation centers handle the most diverse product mix?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH o.Sysco_Operation_Center as Center,\nCOUNT(DISTINCT p.Category) as Category_Count,\nCOUNT(DISTINCT p.Product_ID) as Product_Count\nRETURN Center,\nCategory_Count,\nProduct_Count,\nProduct_Count * 1.0 / Category_Count as Products_Per_Category\nORDER BY Product_Count DESC;"
+  },
+  {
+  "question":"What's the average order value trend for each product category throughout the day?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p.Category as Category,\nsubstring(toString(o.Order_Time), 0, 2) as Hour,\nAVG(o.Total_Cost) as Avg_Value\nRETURN Category,\nHour,\nAvg_Value\nORDER BY Category, Hour;"
+  },
+  {
+  "question":"Which product categories have the most consistent order values?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p.Category as Category,\nAVG(o.Total_Cost) as Avg_Value,\nSTDEV(o.Total_Cost) as Value_StDev,\nCOUNT(*) as Orders\nWHERE Orders >= 10\nRETURN Category,\nAvg_Value,\nValue_StDev,\n(Value_StDev/Avg_Value * 100) as Coefficient_of_Variation\nORDER BY Coefficient_of_Variation;"
+  },
+  {
+  "question":"What's the relationship between product category mix and order success rate?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH o.Order_ID as Order,\nCOUNT(DISTINCT p.Category) as Category_Mix,\no.Order_Status as Status\nRETURN \nCategory_Mix,\nCOUNT(*) as Total_Orders,\nCOUNT(CASE WHEN Status IN ['Completed', 'Shipped'] THEN 1 END) * 100.0 / COUNT(*) as Success_Rate\nORDER BY Category_Mix;"
+  },
+  {
+  "question":"What's the impact of order size on product category mix?",
+  "cypher_query":"OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH o,\nCASE \nWHEN o.Order_Amount <= 1000 THEN 'Small'\nWHEN o.Order_Amount <= 3000 THEN 'Medium'\nELSE 'Large'\nEND as Order_Size,\nCOLLECT(DISTINCT p.Category) as Categories\nRETURN \nOrder_Size,\nCOUNT(*) as Orders,\nAVG(SIZE(Categories)) as Avg_Category_Count,\nCOLLECT(DISTINCT Categories) as Common_Category_Combinations\nORDER BY Orders DESC;"
+  },
+  {
+  "question":"Which customers show consistent high-value purchases across multiple product categories?",
+  "cypher_query":"OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product)\nWHERE o.Total_Cost > 200000\nWITH c.Customer_ID as Customer,\nCOUNT(DISTINCT p.Category) as Categories,\nCOUNT(*) as High_Value_Orders,\nSUM(o.Total_Cost) as Total_Spend\nWHERE Categories >= 2\nRETURN \nCustomer,\nCategories,\nHigh_Value_Orders,\nTotal_Spend,\nTotal_Spend / High_Value_Orders as Avg_Order_Value\nORDER BY Total_Spend DESC"
+  },
+  {
+  "question":"Which product categories show strong regional performance variations?",
+  "cypher_query":"OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product)\nWITH c.Region as Region,\np.Category as Category,\nCOUNT(*) as Orders,\nAVG(o.Total_Cost) as Avg_Value,\nCOUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) * 100.0 / COUNT(*) as Success_Rate\nRETURN \nRegion,\nCategory,\nOrders,\nAvg_Value,\nSuccess_Rate,\nCASE \nWHEN Success_Rate >= 90 THEN 'High Performance'\nWHEN Success_Rate >= 75 THEN 'Medium Performance'\nELSE 'Needs Improvement'\nEND as Performance_Category\nORDER BY Region, Success_Rate DESC;"
+  },
+  {
+  "question":"",
+  "cypher_query":""
   }
   ]
 }
