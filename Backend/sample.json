@@ -809,7 +809,202 @@
  {
   "question": "Which Sales Consultant has the highest customer satisfaction, based on the number of repeat orders?",
   "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)<-[:PLACED]-(c:Customer) WITH s.Name AS Sales_Consultant, c.Customer_Name AS Customer, COUNT(o) AS Repeat_Orders WHERE Repeat_Orders > 1 RETURN Sales_Consultant, Customer, Repeat_Orders ORDER BY Repeat_Orders DESC"
- }
-
+ },
+  {
+  "question": "What is the total number of orders by status?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) RETURN o.Order_Status AS Status, COUNT(*) AS Order_Count ORDER BY Order_Count DESC"
+  },
+  {
+  "question": "Which operation center has the highest number of cancelled orders?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Order_Status = 'Cancelled' RETURN o.Sysco_Operation_Center as Center, COUNT(*) as Cancelled_Orders, SUM(o.Total_Cost) as Lost_Revenue ORDER BY Cancelled_Orders DESC"
+  },
+    {
+  "question": "What is the distribution of order types and their average order values?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) RETURN o.Order_Type as Type, COUNT(*) as Order_Count, AVG(o.Total_Cost) as Avg_Order_Value, SUM(o.Total_Cost) as Total_Revenue ORDER BY Order_Count DESC"
+  },
+  {
+  "question": "Which sales consultants handle the most Direct Supply orders?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order) WHERE o.Order_Type = 'Direct Supply' RETURN s.Name as Consultant, COUNT(*) as Direct_Supply_Orders, SUM(o.Total_Cost) as Total_Value ORDER BY Direct_Supply_Orders DESC"
+  },
+  {
+  "question": "What are the peak ordering hours across all centers?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WITH SUBSTRING(toString(o.Order_Time), 0, 2) as Hour, COUNT(*) as Orders_Count RETURN Hour, Orders_Count, toFloat(Orders_Count)/28 as Avg_Orders_Per_Day ORDER BY Hour"
+  },
+  {
+  "question": "What are the top 5 highest value orders and their details?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product) RETURN o.Order_ID, o.Order_Date, o.Sysco_Operation_Center, o.Order_Type, o.Total_Cost as Order_Value, p.Product_Name ORDER BY o.Total_Cost DESC LIMIT 5"
+ },
+ {
+  "question": "What is the average order value by operation center?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) RETURN o.Sysco_Operation_Center as Center, COUNT(*) as Total_Orders, AVG(o.Total_Cost) as Avg_Order_Value, SUM(o.Total_Cost) as Total_Revenue ORDER BY Total_Revenue DESC"
+ },
+ {
+  "question": "Which sales consultants have the highest average order values?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order) RETURN s.Name as Consultant, COUNT(*) as Order_Count, AVG(o.Total_Cost) as Avg_Order_Value, SUM(o.Total_Cost) as Total_Sales ORDER BY Avg_Order_Value DESC"
+ },
+  {
+  "question": "What is the order status distribution for each sales consultant?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order) RETURN s.Name as Consultant, o.Order_Status as Status, COUNT(*) as Status_Count ORDER BY s.Name, Status_Count DESC"
+ },
+ {
+  "question": "Which products have the highest total order amounts?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product) RETURN p.Product_Name as Product, SUM(o.Total_Cost) as Total_Order_Amount ORDER BY Total_Order_Amount DESC"
+ },
+  {
+  "question": "What is the average cost per unit by product category?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product) RETURN p.Category, AVG(o.Cost_Per_Unit) as Avg_Unit_Cost, COUNT(DISTINCT p.Product_ID) as Product_Count ORDER BY Avg_Unit_Cost DESC"
+  },
+  {
+  "question": "Which customers have the highest total order values?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order) RETURN c.Customer_Name, COUNT(*) as Order_Count, SUM(o.Total_Cost) as Total_Spend ORDER BY Total_Spend DESC LIMIT 10"
+ },
+  {
+  "question": "What is the distribution of order types by customer region?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order) RETURN c.Region, o.Order_Type, COUNT(*) as Type_Count, AVG(o.Total_Cost) as Avg_Order_Value ORDER BY c.Region, Type_Count DESC"
+  },
+  {
+  "question": "What is the efficiency of each operation center based on order status?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WITH o.Sysco_Operation_Center as Center, COUNT(*) as Total_Orders, COUNT(CASE WHEN o.Order_Status = 'Completed' THEN 1 END) as Completed_Orders RETURN Center, Total_Orders, Completed_Orders, toFloat(Completed_Orders)/Total_Orders * 100 as Completion_Rate ORDER BY Completion_Rate DESC"
+  },
+  {
+  "question": "Which operation centers handle the most special orders?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Order_Type = 'Special Order' RETURN o.Sysco_Operation_Center as Center, COUNT(*) as Special_Orders, AVG(o.Total_Cost) as Avg_Special_Order_Value ORDER BY Special_Orders DESC"
+  },
+  {
+  "question": "Which operation centers process orders between 22:00 and 06:00?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE toString(o.Order_Time) >= '22:00:00' OR toString(o.Order_Time) <= '06:00:00' RETURN o.Sysco_Operation_Center as Center, COUNT(*) as Night_Orders, AVG(o.Total_Cost) as Avg_Night_Order_Value ORDER BY Night_Orders DESC"
+  },
+  {
+  "question": "Which customers place high-value orders (>500000) in wholesale category?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order) WHERE o.Total_Cost > 500000 AND o.Order_Type = 'Wholesale' RETURN c.Customer_ID, COUNT(*) as High_Value_Orders, SUM(o.Total_Cost) as Total_Value ORDER BY Total_Value DESC"
+  },
+  {
+  "question": "Find orders with unusually low cost per unit (< 20) but high order amounts (> 2000 units)",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Cost_Per_Unit < 20 AND o.Order_Amount > 2000 RETURN o.Order_ID, o.Cost_Per_Unit, o.Order_Amount, o.Total_Cost, o.Order_Status ORDER BY o.Order_Amount DESC"
+  },
+  {
+  "question": "What's Center-5's efficiency with Direct Supply orders?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Sysco_Operation_Center = 'Center-5' AND o.Order_Type = 'Direct Supply' RETURN o.Order_Status as Status, COUNT(*) as Orders, ROUND(AVG(o.Total_Cost)) as Avg_Order_Value, ROUND(AVG(o.Order_Amount)) as Avg_Units ORDER BY Orders DESC"
+  },
+  {
+  "question": "Find peak hours for high-value orders (>200000) by operation center",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Total_Cost > 200000 WITH substring(toString(o.Order_Time), 0, 2) as Hour, o.Sysco_Operation_Center as Center, COUNT(*) as Orders RETURN Hour, Center, Orders ORDER BY Center, Orders DESC"
+  },
+  {
+  "question": "What's the typical processing time window for special orders?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Order_Type = 'Special Order' WITH toString(o.Order_Time) as OrderTime RETURN CASE WHEN OrderTime >= '09:00:00' AND OrderTime <= '17:00:00' THEN 'Business Hours' WHEN OrderTime >= '17:00:01' AND OrderTime <= '23:59:59' THEN 'Evening' ELSE 'Early Morning' END as Time_Window, COUNT(*) as Order_Count ORDER BY Order_Count DESC"
+  },
+   {
+  "question": "Which sales consultants specialize in handling special orders?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order) WHERE o.Order_Type = 'Special Order' WITH s.Sales_Consultant_ID as Consultant, COUNT(*) as Special_Orders, SUM(o.Total_Cost) as Total_Value MATCH (s2:Sales {Sales_Consultant_ID: Consultant})-[:PROCESSED]->(o2:Order) WITH Consultant, Special_Orders, Total_Value, COUNT(*) as Total_Orders WHERE Special_Orders >= 2 RETURN Consultant, Special_Orders, Total_Value, ROUND((Special_Orders * 100.0 / Total_Orders), 2) as Special_Order_Percentage ORDER BY Special_Order_Percentage DESC"
+  },
+  {
+  "question": "Find products with highly variable cost per unit across different orders",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product) WITH p.Product_ID as Product, AVG(o.Cost_Per_Unit) as Avg_Cost, MIN(o.Cost_Per_Unit) as Min_Cost, MAX(o.Cost_Per_Unit) as Max_Cost, STDEV(o.Cost_Per_Unit) as StDev_Cost WHERE StDev_Cost > 50 RETURN Product, ROUND(Avg_Cost, 2) as Average_Cost, Min_Cost, Max_Cost, ROUND(StDev_Cost, 2) as Standard_Deviation ORDER BY StDev_Cost DESC"
+  },
+  {
+  "question": "Analyze the relationship between order amount and cost per unit",
+  "cypher_query": "OPTIONAL MATCH (o:Order) RETURN CASE WHEN o.Order_Amount <= 1000 THEN 'Small Order' WHEN o.Order_Amount <= 3000 THEN 'Medium Order' ELSE 'Large Order' END as Order_Size, COUNT(*) as Order_Count, ROUND(AVG(o.Cost_Per_Unit), 2) as Avg_Cost_Per_Unit, ROUND(AVG(o.Total_Cost), 2) as Avg_Total_Cost ORDER BY Order_Count DESC"
+  },
+  {
+  "question": "How many orders are placed between 22:00 and 06:00, and what's their completion rate?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE substring(toString(o.Order_Time), 0, 2) >= '22' OR substring(toString(o.Order_Time), 0, 2) < '06' RETURN COUNT(*) as Night_Orders, COUNT(CASE WHEN o.Order_Status = 'Completed' THEN 1 END) * 100.0 / COUNT(*) as Completion_Rate, AVG(o.Total_Cost) as Avg_Night_Order_Value"
+  },
+  {
+  "question": "Which operation centers handle orders over $500,000, and what's their success rate?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Total_Cost > 500000 RETURN o.Sysco_Operation_Center, COUNT(*) as Large_Orders, COUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) as Successful_Orders, AVG(o.Total_Cost) as Avg_Large_Order_Value ORDER BY Large_Orders DESC"
+  },
+  {
+  "question": "What's the price range distribution for Special Orders compared to regular orders, and which operation centers handle orders over $500,000, and what's their success rate?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WITH o, CASE WHEN o.Total_Cost < 50000 THEN 'Low' WHEN o.Total_Cost < 200000 THEN 'Medium' ELSE 'High' END as Price_Range RETURN o.Order_Type, Price_Range, COUNT(*) as Order_Count, AVG(o.Total_Cost) as Avg_Value ORDER BY o.Order_Type, Price_Range; OPTIONAL MATCH (o:Order) WHERE o.Total_Cost > 500000 RETURN o.Sysco_Operation_Center, COUNT(*) as Large_Orders, COUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) as Successful_Orders, AVG(o.Total_Cost) as Avg_Large_Order_Value ORDER BY Large_Orders DESC"
+  },
+  {
+  "question": "How do Direct Supply orders compare to Wholesale orders in terms of processing time and value?",
+  "cypher_query": "MATCH (o:Order) WHERE o.Order_Type IN ['Direct Supply', 'Wholesale'] WITH o.Order_Type as Type, CASE WHEN substring(toString(o.Order_Time), 0, 2) >= '09' AND substring(toString(o.Order_Time), 0, 2) <= '17' THEN 'Business Hours' ELSE 'Off Hours' END as Timing, o RETURN Type, Timing, COUNT(*) as Orders, AVG(o.Total_Cost) as Avg_Value, COUNT(CASE WHEN o.Order_Status = 'Cancelled' THEN 1 END) * 100.0 / COUNT(*) as Cancellation_Rate ORDER BY Type, Timing"
+ },
+ {
+  "question": "Which operation centers have the best performance for orders over 3000 units?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Order_Amount > 3000 RETURN o.Sysco_Operation_Center, COUNT(*) as Large_Volume_Orders, AVG(o.Order_Amount) as Avg_Units, COUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) * 100.0 / COUNT(*) as Success_Rate ORDER BY Success_Rate DESC"
+ },
+ {
+  "question": "Identify operation centers with unusual cost per unit variations",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WITH o.Sysco_Operation_Center as Center, AVG(o.Cost_Per_Unit) as Avg_CPU, STDEV(o.Cost_Per_Unit) as StDev_CPU RETURN Center, Avg_CPU, StDev_CPU, CASE WHEN StDev_CPU > 50 THEN 'High Variation' WHEN StDev_CPU > 25 THEN 'Medium Variation' ELSE 'Consistent' END as Price_Stability ORDER BY StDev_CPU DESC"
+ },
+ {
+  "question": "Which sales consultants excel at handling high-volume orders (>2000 units)?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order) WHERE o.Order_Amount > 2000 WITH s.Name as Consultant, COUNT(*) as Large_Orders, AVG(o.Total_Cost) as Avg_Value, COUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) as Successful_Orders WHERE Large_Orders > 3 RETURN Consultant, Large_Orders, Successful_Orders * 100.0 / Large_Orders as Success_Rate, Avg_Value ORDER BY Success_Rate DESC"
+ },
+ {
+  "question": "What's the relationship between order timing and cancellation rates?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WITH CASE WHEN substring(toString(o.Order_Time), 0, 2) >= '05' AND substring(toString(o.Order_Time), 0, 2) < '12' THEN 'Morning' WHEN substring(toString(o.Order_Time), 0, 2) >= '12' AND substring(toString(o.Order_Time), 0, 2) < '17' THEN 'Afternoon' WHEN substring(toString(o.Order_Time), 0, 2) >= '17' AND substring(toString(o.Order_Time), 0, 2) < '22' THEN 'Evening' ELSE 'Night' END as Time_Period, o RETURN Time_Period, COUNT(*) as Total_Orders, COUNT(CASE WHEN o.Order_Status = 'Cancelled' THEN 1 END) * 100.0 / COUNT(*) as Cancellation_Rate, AVG(o.Total_Cost) as Avg_Order_Value ORDER BY Time_Period"
+ },
+ {
+  "question": "Which operation centers are most efficient with high-value, low-volume orders?",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WHERE o.Total_Cost > 200000 AND o.Order_Amount < 2000 RETURN o.Sysco_Operation_Center, COUNT(*) as Premium_Orders, AVG(o.Cost_Per_Unit) as Avg_Unit_Cost, COUNT(CASE WHEN o.Order_Status IN ['Completed', 'Shipped'] THEN 1 END) * 100.0 / COUNT(*) as Success_Rate ORDER BY Premium_Orders DESC"
+ },
+ {
+  "question": "Which sales consultants handle the most diverse product categories?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)-[:CONTAINS]->(p:Product) RETURN s.Name as Consultant, COUNT(DISTINCT p.Category) as Category_Count, COLLECT(DISTINCT p.Category) as Categories ORDER BY Category_Count DESC"
+ },
+ {
+  "question": "How do product categories perform across different order types?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product) RETURN p.Category, o.Order_Type, COUNT(*) as Orders, AVG(o.Order_Amount) as Avg_Units, SUM(o.Total_Cost) as Total_Revenue ORDER BY p.Category, Orders DESC"
+ },
+ {
+  "question": "What are the most common special order products in each category?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product) WHERE o.Order_Type = 'Special Order' RETURN p.Category, p.Product_Name, COUNT(*) as Special_Orders, AVG(o.Total_Cost) as Avg_Order_Value ORDER BY p.Category, Special_Orders DESC"
+ },
+ {
+  "question": "Which customers order the most diverse range of products within each category?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product) WITH c.Customer_ID as Customer, p.Category as Category, COUNT(DISTINCT p.Product_ID) as Unique_Products RETURN Customer, Category, Unique_Products ORDER BY Category, Unique_Products DESC LIMIT 5"
+ },
+ {
+  "question": "Identify customers who order bakery items but not beverages",
+  "cypher_query": "OPTIONAL MATCH (c:Customer) OPTIONAL MATCH (c)-[:PLACED]->(o1:Order)-[:CONTAINS]->(p1:Product) WHERE p1.Category = 'Bakery' OPTIONAL MATCH (c)-[:PLACED]->(o2:Order)-[:CONTAINS]->(p2:Product) WHERE p2.Category = 'Beverages' WITH c, COUNT(DISTINCT o1) as Bakery_Orders, COUNT(DISTINCT o2) as Beverage_Orders WHERE Bakery_Orders > 0 AND Beverage_Orders = 0 RETURN c.Customer_ID, c.Customer_Name, Bakery_Orders"
+ },
+  {
+  "question": "Find operation centers specializing in fresh produce",
+  "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) WHERE p.Category = 'Produce' WITH o.Sysco_Operation_Center as Center, COUNT(DISTINCT o) as Total_Orders, COUNT(DISTINCT CASE WHEN p IS NOT NULL THEN o END) as Produce_Orders WHERE Produce_Orders > 0 RETURN Center, Produce_Orders, Total_Orders, (Produce_Orders * 100.0/Total_Orders) as Produce_Percentage ORDER BY Produce_Percentage DESC"
+ },
+ {
+  "question": "Analyze sales consultants' performance with high-value orders across categories",
+  "cypher_query": "OPTIONAL MATCH (s:Sales) OPTIONAL MATCH (s)-[:PROCESSED]->(o:Order)-[:CONTAINS]->(p:Product) WHERE o.Total_Cost > 500000 WITH s, p.Category as Category, COUNT(o) as High_Value_Orders, AVG(o.Total_Cost) as Avg_Order_Value WHERE High_Value_Orders > 0 RETURN s.Name, Category, High_Value_Orders, Avg_Order_Value ORDER BY High_Value_Orders DESC"
+ },
+ {
+  "question": "Compare product category performance during business vs. non-business hours",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product) WITH o, p, CASE WHEN substring(toString(o.Order_Time), 0, 2) >= '09' AND substring(toString(o.Order_Time), 0, 2) <= '17' THEN 'Business Hours' ELSE 'Non-Business Hours' END as Time_Period RETURN p.Category, Time_Period, COUNT(*) as Orders, AVG(o.Total_Cost) as Avg_Value, SUM(o.Order_Amount) as Total_Units ORDER BY p.Category, Time_Period"
+ },
+  {
+  "question": "Find customers who consistently order specific product categories",
+  "cypher_query": "OPTIONAL MATCH (c:Customer) OPTIONAL MATCH (c)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product) WITH c, p.Category as Category, COUNT(DISTINCT o) as Order_Count WHERE Order_Count >= 3 RETURN c.Customer_ID, Category, Order_Count, 'Frequent Category Buyer' as Customer_Type ORDER BY Order_Count DESC"
+  },
+  {
+  "question": "Analyze product category performance by order type",
+  "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) RETURN p.Category, o.Order_Type, COUNT(*) as Orders, SUM(o.Order_Amount) as Total_Units, AVG(o.Cost_Per_Unit) as Avg_Unit_Cost ORDER BY p.Category, Orders DESC"
+  },
+  {
+  "question": "Find sales consultants specializing in specific categories",
+  "cypher_query": "OPTIONAL MATCH (s:Sales) OPTIONAL MATCH (s)-[:PROCESSED]->(o:Order)-[:CONTAINS]->(p:Product) WITH s, p.Category as Category, COUNT(DISTINCT o) as Category_Orders, SUM(o.Total_Cost) as Category_Revenue WHERE Category_Orders > 5 RETURN s.Name, Category, Category_Orders, Category_Revenue ORDER BY Category_Revenue DESC"
+  },
+  {
+  "question": "Analyze order cancellation patterns by product category",
+  "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) WHERE o.Order_Status = 'Cancelled' RETURN p.Category, COUNT(*) as Cancelled_Orders, AVG(o.Total_Cost) as Avg_Cancelled_Value, SUM(o.Order_Amount) as Total_Cancelled_Units ORDER BY Cancelled_Orders DESC"
+  },
+  {
+  "question": "Identify high-value product categories by operation center",
+  "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) WHERE o.Total_Cost > 300000 RETURN o.Sysco_Operation_Center, p.Category, COUNT(*) as High_Value_Orders, AVG(o.Total_Cost) as Avg_Order_Value ORDER BY High_Value_Orders DESC"
+  },
+  {
+  "question": "Analyze product category performance in special orders",
+  "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) WHERE o.Order_Type = 'Special Order' RETURN p.Category, COUNT(*) as Special_Orders, AVG(o.Order_Amount) as Avg_Units, SUM(o.Total_Cost) as Total_Revenue ORDER BY Special_Orders DESC"
+  },
+  {
+  "question": "Find customers with diverse category purchasing patterns",
+  "cypher_query": "OPTIONAL MATCH (c:Customer) OPTIONAL MATCH (c)-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product) WITH c, COUNT(DISTINCT p.Category) as Category_Count WHERE Category_Count >= 3 RETURN c.Customer_ID, Category_Count, 'Diverse Buyer' as Customer_Type ORDER BY Category_Count DESC"
+  },
+  {
+  "question": "Analyze product category margins",
+  "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) RETURN p.Category, AVG(o.Cost_Per_Unit) as Avg_Unit_Cost, SUM(o.Total_Cost) as Total_Revenue, COUNT(*) as Order_Count ORDER BY Total_Revenue DESC"
+  }
   ]
 }
