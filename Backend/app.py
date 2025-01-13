@@ -24,6 +24,8 @@ import random
 import ast
 import plotly.io as pio
 import plotly.utils
+import plotly.graph_objects as go
+import plotly.express as px
 
 load_dotenv()
 
@@ -266,11 +268,38 @@ def generate_query(user_question: str, session_id: str) -> str:
                            - 'No': If data isn't suitable for visualization
                            - Only set to 'Yes' for statistical, numeric, or time series data
                         
-                        4. plotly_code:
+                       4. plotly_code:
+                           - IMPORTANT: You must use 'response_dict' to access the actual query results
+                           - Do NOT use any example/dummy data or hardcoded values
+                           - All data for visualization must come from response_dict
+                           - response_dict contains the results of your Cypher query as a list of dictionaries
+                           - Example correct usage: 
+                             df = pd.DataFrame(response_dict)
+                             fig = px.line(df, x='date_column', y='value_column')
+                           - Provide charts in decent colors
                            - Include visualization code only if plotly_code_generation_status is 'Yes'
                            - Ensure visualizations are business-relevant and actionable
+                
+                        Example of correct plotly code:
+                        ----------------------------
+                        # This shows how to properly use response_dict
+                        df = pd.DataFrame(response_dict)
+                        fig = px.bar(df, 
+                                    x=df['date_column'],
+                                    y=df['value_column'],
+                                    title='Chart Title')
                         
-                        Important Notes:
+                        # INCORRECT - Do not use:
+                        data = ['date': '2024-01', 'value': 100]  # Don't use example data
+                        df = pd.DataFrame(data)  # Don't create dummy dataframes
+                
+                        Important Notes for visualizations:
+                        --------------
+                        - response_dict will contain the actual query results at runtime
+                        - Never generate example data or use hardcoded values
+                        - Always read from response_dict for all data visualization
+                        
+                        Important Notes for whole generation:
                         --------------
                         - Do not return as JSON
                         - Maintain the exact template structure
@@ -427,23 +456,74 @@ def convert_to_html_table(data):
 
     return html_table
 
-
-def generate_plotly_html(plotly_code):
+def generate_plotly_html(plotly_code, response_dict):
+    """
+    Generate HTML for plotly visualization with proper error handling and data validation
+    """
     try:
-        # Execute the plotly code to get the figure
-        local_dict = {}
-        exec(plotly_code, globals(), local_dict)
-        fig = local_dict.get('fig')
+        # Validate response_dict
+        if not response_dict or not isinstance(response_dict, list):
+            return "<div class='alert alert-warning'>No valid data available for plotting</div>"
+
+        # Create namespace with all required libraries and data
+        namespace = {
+            'pd': pd,
+            'np': np,
+            'go': go,
+            'px': px,
+            'plotly': plotly,
+            'response_dict': response_dict,
+        }
+
+        # Add data validation before execution
+        if 'df = pd.DataFrame(response_dict)' not in plotly_code:
+            plotly_code = f"df = pd.DataFrame(response_dict)\n{plotly_code}"
+
+        # Execute the plotly code in the prepared namespace
+        exec(plotly_code, namespace)
+
+        # Retrieve the figure from namespace
+        fig = namespace.get('fig')
 
         if fig:
-            # Convert the figure to HTML
-            plotly_html = pio.to_html(fig, full_html=False)
-            return plotly_html
-    except Exception as e:
-        print(f"Error generating plotly HTML: {str(e)}")
-        return ""
-    return ""
+            # Configure the plot for web display
+            fig.update_layout(
+                template='plotly_white',
+                margin=dict(t=50, l=50, r=50, b=50),
+                height=500,
+                showlegend=True,
+                # Add watermark or branding if needed
+                annotations=[
+                    dict(
+                        text="Sysco Labs Analytics",
+                        xref="paper",
+                        yref="paper",
+                        x=0.98,
+                        y=0.02,
+                        showarrow=False,
+                        font=dict(size=10, color="gray"),
+                    )
+                ]
+            )
 
+            # Convert to HTML with specific configurations
+            plotly_html = pio.to_html(
+                fig,
+                full_html=False,
+                include_plotlyjs=True,
+                include_mathjax=False,
+                config={
+                    'responsive': True,
+                    'displayModeBar': True,
+                    'modeBarButtonsToRemove': ['select2d', 'lasso2d']
+                }
+            )
+            return plotly_html
+        return "<div class='alert alert-warning'>No figure was generated from the plotly code</div>"
+
+    except Exception as e:
+        print(f"Plotly Generation Error: {str(e)}")
+        return f"<div class='alert alert-danger'>Error generating plot: {str(e)}</div>"
 
 @app.post("/chat")
 async def chat(question: Question):
@@ -503,9 +583,14 @@ async def chat(question: Question):
                 # Generate HTML table from the data
                 result["html_table_data"] = convert_to_html_table(query_result)
 
-            # Generate Plotly HTML if status is "Yes"
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
-                result["html_code_plotly"] = generate_plotly_html(response_dict["plotly_code"])
+                if result["data"]:  # Only attempt to plot if we have data
+                    result["html_code_plotly"] = generate_plotly_html(
+                        response_dict["plotly_code"],
+                        result["data"]
+                    )
+                else:
+                    result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
 
             return JSONResponse(content={
                 "session_id": session_id,
