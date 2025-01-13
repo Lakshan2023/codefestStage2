@@ -1,4 +1,5 @@
-from neo4j import GraphDatabase
+import neo4j
+from neo4j import GraphDatabase, time
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 import pandas as pd
@@ -293,6 +294,36 @@ def generate_query(user_question: str, session_id: str) -> str:
     return "Maximum retries exceeded"
 
 
+def serialize_value(val):
+    if pd.isna(val):
+        return None
+    elif isinstance(val, (pd.Timestamp, datetime)):
+        return val.isoformat()
+    elif isinstance(val, pd.Period):
+        return val.strftime('%Y-%m-%d')  # Convert Period to string
+    elif isinstance(val, np.integer):
+        return int(val)
+    elif isinstance(val, np.floating):
+        return float(val)
+    elif isinstance(val, np.bool_):
+        return bool(val)
+    elif isinstance(val, (np.ndarray, list)):
+        return [serialize_value(v) for v in val]
+    elif isinstance(val, dict):
+        return {k: serialize_value(v) for k, v in val.items()}
+    elif isinstance(val, pd.Index):
+        return serialize_value(val.tolist())
+    elif isinstance(val, pd.Series):
+        return serialize_value(val.tolist())
+    elif isinstance(val, pd.DataFrame):
+        return serialize_value(val.to_dict('records'))
+    elif isinstance(val, pd.DateOffset):
+        return str(val)
+    elif isinstance(val, pd.Interval):
+        return str(val)
+    return val
+
+
 @app.post("/start_session")
 async def start_session():
     session_id = str(uuid.uuid4())
@@ -342,6 +373,66 @@ def execute_cypher_query(driver, query):
         return None
 
 
+def serialize_neo4j_value(val):
+    """Serialize Neo4j specific data types"""
+    if isinstance(val, (neo4j.time.DateTime, neo4j.time.Date)):
+        return val.iso_format()
+    elif isinstance(val, neo4j.time.Time):
+        return str(val)
+    elif isinstance(val, (int, float, str, bool)):
+        return val
+    elif val is None:
+        return None
+    return str(val)
+
+def serialize_value(val):
+    """Main serialization function for all types"""
+    if pd.isna(val):
+        return None
+    elif isinstance(val, (pd.Timestamp, datetime)):
+        return val.isoformat()
+    elif isinstance(val, pd.Period):
+        return val.strftime('%Y-%m-%d')
+    elif isinstance(val, np.integer):
+        return int(val)
+    elif isinstance(val, np.floating):
+        return float(val)
+    elif isinstance(val, np.bool_):
+        return bool(val)
+    elif isinstance(val, (np.ndarray, list)):
+        return [serialize_value(v) for v in val]
+    elif isinstance(val, dict):
+        return {k: serialize_value(v) for k, v in val.items()}
+    elif isinstance(val, pd.Index):
+        return serialize_value(val.tolist())
+    elif isinstance(val, pd.Series):
+        return serialize_value(val.tolist())
+    elif isinstance(val, pd.DataFrame):
+        return serialize_value(val.to_dict('records'))
+    elif isinstance(val, pd.DateOffset):
+        return str(val)
+    elif isinstance(val, pd.Interval):
+        return str(val)
+    return serialize_neo4j_value(val)
+
+def execute_cypher_query(driver, query):
+    """Execute a Cypher query and return serialized results"""
+    try:
+        with driver.session() as session:
+            result = session.run(query)
+            # Convert Neo4j records to dictionaries and serialize the values
+            records = []
+            for record in result:
+                # Convert each record to a dict and serialize all values
+                record_dict = {}
+                for key, value in dict(record).items():
+                    record_dict[key] = serialize_value(value)
+                records.append(record_dict)
+            return records
+    except Exception as e:
+        print(f"Error executing query: {str(e)}")
+        return None
+
 @app.post("/chat")
 async def chat(question: Question):
     try:
@@ -363,13 +454,11 @@ async def chat(question: Question):
             try:
                 response_dict = json.loads(query_response)
             except json.JSONDecodeError:
-                # If regular JSON parsing fails, try evaluating as Python literal
                 try:
                     response_dict = ast.literal_eval(query_response)
                 except (ValueError, SyntaxError):
                     raise ValueError("Could not parse response as JSON or Python dict")
 
-            # Check if the response has the expected structure
             if not isinstance(response_dict, dict) or not all(
                     key in response_dict for key in ["query_generation_status", "query"]):
                 raise ValueError("Invalid response format")
@@ -384,7 +473,8 @@ async def chat(question: Question):
             # Execute the query if status is "Yes"
             if response_dict["query_generation_status"].lower() == "yes" and response_dict["query"]:
                 query_result = execute_cypher_query(driver, response_dict["query"])
-                result["data"] = query_result
+                # Ensure the entire result is JSON serializable
+                result["data"] = json.loads(json.dumps(query_result, default=str))
 
             return JSONResponse(content={
                 "session_id": session_id,
@@ -392,7 +482,6 @@ async def chat(question: Question):
             })
 
         except Exception as e:
-            # Handle parsing errors with more detail
             return JSONResponse(
                 content={
                     "error": f"Error processing response: {str(e)}",
