@@ -99,9 +99,11 @@ def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
 class Question(BaseModel):
     question: str
     session_id: str
+    question_history: List[str] = []  # Add this line
+    answer_history: List[str] = []  # Add this line
 
 # In-memory storage for chat histories
-chat_histories: Dict[str, List[str]] = {}
+chat_histories: Dict[str, Dict[str, List[str]]] = {}
 
 
 graph_db_structure = """
@@ -196,6 +198,26 @@ CREATE (o)-[:CONTAINS]->(p)
 
 
 def generate_query(user_question: str, session_id: str) -> str:
+    recent_history = []
+    if session_id in chat_histories:
+        questions = chat_histories[session_id]["questions"]
+        answers = chat_histories[session_id]["answers"]
+        # Get the last 3 items, excluding the current question
+        for i in range(max(len(questions) - 4, 0), len(questions) - 1):
+            recent_history.append({
+                "question": questions[i],
+                "answer": answers[i]
+            })
+
+    # Format the conversation history
+    history_text = "No previous conversation." if not recent_history else "\n".join([
+        f"Previous Question: {item['question']}\n"
+        f"Previous Answer: {item['answer']}\n"
+        for item in recent_history
+    ])
+
+    print(history_text)
+
     # Define template as a constant
     TEMPLATE_CYPHER = {
         "text_explanation": "",
@@ -208,6 +230,10 @@ def generate_query(user_question: str, session_id: str) -> str:
     # Move the prompt template outside the function
     QUERY_CHAT_PROMPT = """Role and Context:
                         You are SyscoPulse, an AI assistant developed by AI-Alchemists from the Informatics Institute of Technology's Artificial Intelligence and Data Science program. Your primary purpose is to help Sales Consultants at Sysco Labs optimize their services and provide comprehensive information about Sysco Labs operations.
+                        
+                        Recent Conversation History: (This contains the recent questions user asked)
+                        -------------------------
+                        {history_text}
                         
                         Core Capabilities:
                         ----------------
@@ -234,10 +260,11 @@ def generate_query(user_question: str, session_id: str) -> str:
                         ---------------
                         Current Graph Database Structure: {graph_db_structure}
                         
-                        Similar Reference Examples:
+                        Reference Examples (Not Part of Current Conversation or history):
                         -------------------------
                         {similar_chunks}
                         
+                        You can refer this Reference examples if you are generating a cypher query.
                         Query Requirements:
                         -----------------
                         1. All queries must start with OPTIONAL MATCH
@@ -325,16 +352,26 @@ def generate_query(user_question: str, session_id: str) -> str:
     retry_count = 0
     max_retries = 4
 
-    # Get similar questions (assuming this function exists)
+    # # Get similar questions (assuming this function exists)
+    # try:
+    #     similar_chunks = find_similar_questions(user_question, questions, cypher_queries)
+    # except Exception as e:
+    #     return f"Error finding similar questions: {str(e)}"
+
     try:
-        similar_chunks = find_similar_questions(user_question, questions, cypher_queries)
+        similar_results = find_similar_questions(user_question, questions, cypher_queries)
+        similar_text = "\n".join([
+            f"Reference Q: {q}\nReference Query: {c}\nSimilarity: {s:.2f}"
+            for q, c, s in similar_results
+        ])
     except Exception as e:
-        return f"Error finding similar questions: {str(e)}"
+        similar_text = "No similar examples found."
 
     # Format the prompt with all required values
     formatted_prompt = QUERY_CHAT_PROMPT.format(
+        history_text=history_text,
         graph_db_structure=graph_db_structure,
-        similar_chunks=similar_chunks,
+        similar_chunks=similar_text,
         question=user_question,
         template_cypher=TEMPLATE_CYPHER
     )
@@ -389,7 +426,10 @@ def generate_query(user_question: str, session_id: str) -> str:
 @app.post("/start_session")
 async def start_session():
     session_id = str(uuid.uuid4())
-    chat_histories[session_id] = []
+    chat_histories[session_id] = {
+        "questions": [],
+        "answers": []
+    }
     return JSONResponse(content={"session_id": session_id})
 
 def serialize_neo4j_value(val):
@@ -550,6 +590,8 @@ async def chat(question: Question):
                 status_code=400
             )
 
+        chat_histories[session_id]["questions"].append(user_question)
+
         # Get the query generation response
         query_response = generate_query(user_question, session_id)
 
@@ -604,6 +646,8 @@ async def chat(question: Question):
                     )
                 else:
                     result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
+
+            chat_histories[session_id]["answers"].append(result["text_explanation"])
 
             return JSONResponse(content={
                 "session_id": session_id,
