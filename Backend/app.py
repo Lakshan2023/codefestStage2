@@ -246,8 +246,13 @@ def generate_query(user_question: str, session_id: str) -> str:
                         
                         Response Format:
                         --------------
-                        The response must follow this structure:
-                        {template_cypher}
+                        IMPORTANT: Return ONLY the following structure with no prefix text like 'Template:' or 'JSON:':
+                         {template_cypher}
+                
+                        ⚠️ DO NOT include any text before or after the response structure
+                        ⚠️ DO NOT add labels like 'Template:', 'Response:', or 'JSON:'
+                        ⚠️ DO NOT include any additional formatting or explanation
+                        ⚠️ ONLY return the exact structure shown above
                         
                         Response Guidelines:
                         ------------------
