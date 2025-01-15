@@ -264,7 +264,7 @@ def generate_query(user_question: str, session_id: str) -> str:
                         -------------------------
                         {similar_chunks}
                         
-                        You can refer this Reference examples if you are generating a cypher query.
+                        Note: These examples are ONLY for cypher query generation reference. Do not use them as conversation history or general content.
                         Query Requirements:
                         -----------------
                         1. All queries must start with OPTIONAL MATCH
@@ -342,10 +342,11 @@ def generate_query(user_question: str, session_id: str) -> str:
                         - Provide natural, informative responses without mentioning data sources
                         - Handle both general inquiries and specific analysis requests seamlessly
                         - Focus on delivering value and insights rather than explaining methodology
-                        - Always maintain a professional yet approachable tone
+                        - Always maintain a professional yet approachable tone (Cannot make any jokes)
                         - For general questions, provide comprehensive answers based on Sysco Labs knowledge
                         - For specific queries, focus on insights and actionable recommendations
                         - Never mention database or data access in responses
+                        - You can provide answers only about sysco labs.
 """
 
 
@@ -492,6 +493,7 @@ def execute_cypher_query(driver, query):
         print(f"Error executing query: {str(e)}")
         return None
 
+
 def convert_to_html_table(data):
     if not data:
         return ""
@@ -499,13 +501,21 @@ def convert_to_html_table(data):
     # Convert data to pandas DataFrame
     df = pd.DataFrame(data)
 
-    # Generate HTML table with Bootstrap classes
+    # Generate HTML table
     html_table = df.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-bordered'],
         index=False,
         escape=False,
         table_id='result-table'
     )
+
+    # Add CSS to make column separators visible and apply additional styling
+    html_table = html_table.replace('<table',
+        '<table style="border-collapse: collapse; border: 1px solid black; width: 100%;"')
+    html_table = html_table.replace('<th',
+        '<th style="border: 1px solid black; text-align: center; padding: 8px;"')
+    html_table = html_table.replace('<td',
+        '<td style="border: 1px solid black; text-align: right; padding: 8px;"')
 
     return html_table
 
