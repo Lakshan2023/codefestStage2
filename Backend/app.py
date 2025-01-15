@@ -275,6 +275,10 @@ def generate_query(user_question: str, session_id: str) -> str:
                         2. Only use nodes, elements, and relationships defined in the provided graph structure
                         3. Support cross-table filtering when necessary
                         
+                        Today Date:
+                        ---------------
+                        {date}
+                        
                         Input Question:
                         --------------
                         {question}
@@ -406,8 +410,11 @@ def generate_query(user_question: str, session_id: str) -> str:
     except Exception as e:
         similar_text = "No similar examples found."
 
+    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+
     # Format the prompt with all required values
     formatted_prompt = QUERY_CHAT_PROMPT.format(
+        date=timestamp,
         history_text=history_text,
         graph_db_structure=graph_db_structure,
         similar_chunks=similar_text,
