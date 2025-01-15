@@ -351,6 +351,7 @@ def generate_query(user_question: str, session_id: str) -> str:
                         
                        Important Notes for whole generation:
                         --------------
+                        - If user refers 'you', it means Sysco Labs
                         - Provide natural, informative responses without mentioning data sources
                         - Handle both general inquiries and specific analysis requests seamlessly about sysco labs
                         - Focus on delivering value and insights rather than explaining methodology
