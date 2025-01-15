@@ -265,9 +265,9 @@ def generate_query(user_question: str, session_id: str) -> str:
                         
                         Reference Examples (Not Part of Current Conversation or history):
                         -------------------------
-                        {similar_chunks}
+                        Reference Examples : {similar_chunks}
                         
-                        Note: These examples are ONLY for cypher query generation reference. Do not use them as conversation history or general content.
+                       ⚠️ Note: These examples are ONLY for cypher query generation reference. Do not use Reference Examples as conversation history or general content.
                         Query Requirements:
                         -----------------
                         1. All queries must start with OPTIONAL MATCH
