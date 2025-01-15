@@ -24,6 +24,8 @@ import random
 import ast
 import plotly.io as pio
 import plotly.utils
+import plotly.graph_objects as go
+import plotly.express as px
 
 load_dotenv()
 
@@ -97,9 +99,11 @@ def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
 class Question(BaseModel):
     question: str
     session_id: str
+    question_history: List[str] = []  # Add this line
+    answer_history: List[str] = []  # Add this line
 
 # In-memory storage for chat histories
-chat_histories: Dict[str, List[str]] = {}
+chat_histories: Dict[str, Dict[str, List[str]]] = {}
 
 
 graph_db_structure = """
@@ -194,6 +198,26 @@ CREATE (o)-[:CONTAINS]->(p)
 
 
 def generate_query(user_question: str, session_id: str) -> str:
+    recent_history = []
+    if session_id in chat_histories:
+        questions = chat_histories[session_id]["questions"]
+        answers = chat_histories[session_id]["answers"]
+        # Get the last 3 items, excluding the current question
+        for i in range(max(len(questions) - 4, 0), len(questions) - 1):
+            recent_history.append({
+                "question": questions[i],
+                "answer": answers[i]
+            })
+
+    # Format the conversation history
+    history_text = "No previous conversation." if not recent_history else "\n".join([
+        f"Previous Question: {item['question']}\n"
+        f"Previous Answer: {item['answer']}\n"
+        for item in recent_history
+    ])
+
+    print(history_text)
+
     # Define template as a constant
     TEMPLATE_CYPHER = {
         "text_explanation": "",
@@ -205,33 +229,42 @@ def generate_query(user_question: str, session_id: str) -> str:
 
     # Move the prompt template outside the function
     QUERY_CHAT_PROMPT = """Role and Context:
-                        ----------------
-                        You are SyscoPulse, an AI assistant developed by AI-Alchemists from the Informatics Institute of Technology's Artificial Intelligence and Data Science program. Your primary purpose is to help Sales Consultants at Sysco Labs optimize their services.
+                        You are SyscoPulse, an AI assistant developed by AI-Alchemists from the Informatics Institute of Technology's Artificial Intelligence and Data Science program. Your primary purpose is to help Sales Consultants at Sysco Labs optimize their services and provide comprehensive information about Sysco Labs operations.
+                        
+                        Recent Conversation History: (This contains the recent questions user asked)
+                        -------------------------
+                        {history_text}
                         
                         Core Capabilities:
                         ----------------
-                        1. Access and provide saved data
-                        2. Perform data analysis
-                        3. Check meeting schedules
-                        4. Monitor client orders
-                        5. Cross-reference multiple tables when filtering data
+                        1. Provide comprehensive information about Sysco Labs services and operations
+                        2. Assist with sales and customer relationship management
+                        3. Help with performance analysis and optimization
+                        4. Support meeting and schedule management
+                        5. Offer insights on product information and ordering
+                        6. Answer general questions about Sysco Labs and its services
                         
                         About Sysco Labs:
                         ----------------
                         Sysco LABS is the technology and innovation arm of Sysco Corporation, the global leader in foodservice distribution. The organization specializes in:
-                        - Designing advanced digital solutions
-                        - Optimizing supply chains
-                        - Enhancing customer experiences
-                        - Driving operational efficiency
+                        - Designing advanced digital solutions for the foodservice industry
+                        - Optimizing supply chains through innovative technology
+                        - Enhancing customer experiences with modern digital platforms
+                        - Driving operational efficiency through automation and analytics
+                        - Supporting global foodservice operations
+                        - Developing cutting-edge e-commerce solutions
+                        - Creating technology solutions for inventory management
+                        - Implementing data-driven decision-making tools
                         
                         Database Context:
                         ---------------
                         Current Graph Database Structure: {graph_db_structure}
                         
-                        Similar Reference Examples:
+                        Reference Examples (Not Part of Current Conversation or history):
                         -------------------------
                         {similar_chunks}
                         
+                        Note: These examples are ONLY for cypher query generation reference. Do not use them as conversation history or general content.
                         Query Requirements:
                         -----------------
                         1. All queries must start with OPTIONAL MATCH
@@ -244,8 +277,13 @@ def generate_query(user_question: str, session_id: str) -> str:
                         
                         Response Format:
                         --------------
-                        The response must follow this structure:
-                        {template_cypher}
+                        IMPORTANT: Return ONLY the following structure with no prefix text like 'Template:' or 'JSON:':
+                         {template_cypher}
+                
+                        ⚠️ DO NOT include any text before or after the response structure
+                        ⚠️ DO NOT add labels like 'Template:', 'Response:', or 'JSON:'
+                        ⚠️ DO NOT include any additional formatting or explanation
+                        ⚠️ ONLY return the exact structure shown above
                         
                         Response Guidelines:
                         ------------------
@@ -253,8 +291,10 @@ def generate_query(user_question: str, session_id: str) -> str:
                            - Provide natural language explanations
                            - Can include emojis for better readability
                            - Must NOT contain code or queries
-                           - If question isn't query-related, provide complete answer here
-                           - Focus on business context and relevance to Sysco Labs
+                           - For general questions, provide complete, knowledgeable answers here
+                           - For data-related questions, focus on insights and business impact
+                           - Never mention querying or accessing a database
+                           - Maintain a conversational, helpful tone
                         
                         2. query_generation_status:
                            - 'Yes': If a Cypher query can be generated
@@ -266,33 +306,73 @@ def generate_query(user_question: str, session_id: str) -> str:
                            - 'No': If data isn't suitable for visualization
                            - Only set to 'Yes' for statistical, numeric, or time series data
                         
-                        4. plotly_code:
+                       4. plotly_code:
+                           - IMPORTANT: You must use 'response_dict' to access the actual query results
+                           - Do NOT use any example/dummy data or hardcoded values
+                           - All data for visualization must come from response_dict
+                           - response_dict contains the results of your Cypher query as a list of dictionaries
+                           - Example correct usage: 
+                             df = pd.DataFrame(response_dict)
+                             fig = px.line(df, x='date_column', y='value_column')
+                           - Provide charts in decent colors
                            - Include visualization code only if plotly_code_generation_status is 'Yes'
                            - Ensure visualizations are business-relevant and actionable
+                
+                        Example of correct plotly code:
+                        ----------------------------
+                        # This shows how to properly use response_dict
+                        df = pd.DataFrame(response_dict)
+                        fig = px.bar(df, 
+                                    x=df['date_column'],
+                                    y=df['value_column'],
+                                    title='Chart Title')
                         
-                        Important Notes:
+                        # INCORRECT - Do not use:
+                        data = ['date': '2024-01', 'value': 100]  # Don't use example data
+                        df = pd.DataFrame(data)  # Don't create dummy dataframes
+                
+                        Important Notes for visualizations:
                         --------------
-                        - Do not return as JSON
-                        - Maintain the exact template structure
-                        - No additional content before the response template
-                        - Ensure responses align with Sysco Labs' business context
-                        - Consider cross-table relationships when relevant
+                        - response_dict will contain the actual query results at runtime
+                        - Never generate example data or use hardcoded values
+                        - Always read from response_dict for all data visualization
+                        
+                       Important Notes for whole generation:
+                        --------------
+                        - Provide natural, informative responses without mentioning data sources
+                        - Handle both general inquiries and specific analysis requests seamlessly
+                        - Focus on delivering value and insights rather than explaining methodology
+                        - Always maintain a professional yet approachable tone (Cannot make any jokes)
+                        - For general questions, provide comprehensive answers based on Sysco Labs knowledge
+                        - For specific queries, focus on insights and actionable recommendations
+                        - Never mention database or data access in responses
+                        - You can provide answers only about sysco labs.
 """
 
 
     retry_count = 0
     max_retries = 4
 
-    # Get similar questions (assuming this function exists)
+    # # Get similar questions (assuming this function exists)
+    # try:
+    #     similar_chunks = find_similar_questions(user_question, questions, cypher_queries)
+    # except Exception as e:
+    #     return f"Error finding similar questions: {str(e)}"
+
     try:
-        similar_chunks = find_similar_questions(user_question, questions, cypher_queries)
+        similar_results = find_similar_questions(user_question, questions, cypher_queries)
+        similar_text = "\n".join([
+            f"Reference Q: {q}\nReference Query: {c}\nSimilarity: {s:.2f}"
+            for q, c, s in similar_results
+        ])
     except Exception as e:
-        return f"Error finding similar questions: {str(e)}"
+        similar_text = "No similar examples found."
 
     # Format the prompt with all required values
     formatted_prompt = QUERY_CHAT_PROMPT.format(
+        history_text=history_text,
         graph_db_structure=graph_db_structure,
-        similar_chunks=similar_chunks,
+        similar_chunks=similar_text,
         question=user_question,
         template_cypher=TEMPLATE_CYPHER
     )
@@ -347,7 +427,10 @@ def generate_query(user_question: str, session_id: str) -> str:
 @app.post("/start_session")
 async def start_session():
     session_id = str(uuid.uuid4())
-    chat_histories[session_id] = []
+    chat_histories[session_id] = {
+        "questions": [],
+        "answers": []
+    }
     return JSONResponse(content={"session_id": session_id})
 
 def serialize_neo4j_value(val):
@@ -410,6 +493,7 @@ def execute_cypher_query(driver, query):
         print(f"Error executing query: {str(e)}")
         return None
 
+
 def convert_to_html_table(data):
     if not data:
         return ""
@@ -417,7 +501,7 @@ def convert_to_html_table(data):
     # Convert data to pandas DataFrame
     df = pd.DataFrame(data)
 
-    # Generate HTML table with Bootstrap classes
+    # Generate HTML table
     html_table = df.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-bordered'],
         index=False,
@@ -425,25 +509,84 @@ def convert_to_html_table(data):
         table_id='result-table'
     )
 
+    # Add CSS to make column separators visible and apply additional styling
+    html_table = html_table.replace('<table',
+        '<table style="border-collapse: collapse; border: 1px solid black; width: 100%;"')
+    html_table = html_table.replace('<th',
+        '<th style="border: 1px solid black; text-align: center; padding: 8px;"')
+    html_table = html_table.replace('<td',
+        '<td style="border: 1px solid black; text-align: right; padding: 8px;"')
+
     return html_table
 
-
-def generate_plotly_html(plotly_code):
+def generate_plotly_html(plotly_code, response_dict):
+    """
+    Generate HTML for plotly visualization with proper error handling and data validation
+    """
     try:
-        # Execute the plotly code to get the figure
-        local_dict = {}
-        exec(plotly_code, globals(), local_dict)
-        fig = local_dict.get('fig')
+        # Validate response_dict
+        if not response_dict or not isinstance(response_dict, list):
+            return "<div class='alert alert-warning'>No valid data available for plotting</div>"
+
+        # Create namespace with all required libraries and data
+        namespace = {
+            'pd': pd,
+            'np': np,
+            'go': go,
+            'px': px,
+            'plotly': plotly,
+            'response_dict': response_dict,
+        }
+
+        # Add data validation before execution
+        if 'df = pd.DataFrame(response_dict)' not in plotly_code:
+            plotly_code = f"df = pd.DataFrame(response_dict)\n{plotly_code}"
+
+        # Execute the plotly code in the prepared namespace
+        exec(plotly_code, namespace)
+
+        # Retrieve the figure from namespace
+        fig = namespace.get('fig')
 
         if fig:
-            # Convert the figure to HTML
-            plotly_html = pio.to_html(fig, full_html=False)
-            return plotly_html
-    except Exception as e:
-        print(f"Error generating plotly HTML: {str(e)}")
-        return ""
-    return ""
+            # Configure the plot for web display
+            fig.update_layout(
+                template='plotly_white',
+                margin=dict(t=50, l=50, r=50, b=50),
+                height=500,
+                showlegend=True,
+                # Add watermark or branding if needed
+                annotations=[
+                    dict(
+                        text="Sysco Labs Analytics",
+                        xref="paper",
+                        yref="paper",
+                        x=0.98,
+                        y=0.02,
+                        showarrow=False,
+                        font=dict(size=10, color="gray"),
+                    )
+                ]
+            )
 
+            # Convert to HTML with specific configurations
+            plotly_html = pio.to_html(
+                fig,
+                full_html=False,
+                include_plotlyjs=True,
+                include_mathjax=False,
+                config={
+                    'responsive': True,
+                    'displayModeBar': True,
+                    'modeBarButtonsToRemove': ['select2d', 'lasso2d']
+                }
+            )
+            return plotly_html
+        return "<div class='alert alert-warning'>No figure was generated from the plotly code</div>"
+
+    except Exception as e:
+        print(f"Plotly Generation Error: {str(e)}")
+        return f"<div class='alert alert-danger'>Error generating plot: {str(e)}</div>"
 
 @app.post("/chat")
 async def chat(question: Question):
@@ -456,6 +599,8 @@ async def chat(question: Question):
                 content={"error": "Invalid session ID"},
                 status_code=400
             )
+
+        chat_histories[session_id]["questions"].append(user_question)
 
         # Get the query generation response
         query_response = generate_query(user_question, session_id)
@@ -503,9 +648,16 @@ async def chat(question: Question):
                 # Generate HTML table from the data
                 result["html_table_data"] = convert_to_html_table(query_result)
 
-            # Generate Plotly HTML if status is "Yes"
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
-                result["html_code_plotly"] = generate_plotly_html(response_dict["plotly_code"])
+                if result["data"]:  # Only attempt to plot if we have data
+                    result["html_code_plotly"] = generate_plotly_html(
+                        response_dict["plotly_code"],
+                        result["data"]
+                    )
+                else:
+                    result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
+
+            chat_histories[session_id]["answers"].append(result["text_explanation"])
 
             return JSONResponse(content={
                 "session_id": session_id,
