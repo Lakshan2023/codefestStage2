@@ -26,6 +26,7 @@ import plotly.io as pio
 import plotly.utils
 import plotly.graph_objects as go
 import plotly.express as px
+from fastapi.staticfiles import StaticFiles
 
 load_dotenv()
 
@@ -104,6 +105,8 @@ class Question(BaseModel):
 
 # In-memory storage for chat histories
 chat_histories: Dict[str, Dict[str, List[str]]] = {}
+
+app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 graph_db_structure = """
@@ -615,6 +618,8 @@ async def chat(question: Question):
     try:
         session_id = question.session_id
         user_question = question.question
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        static_dir = "static/temp"
 
         if session_id not in chat_histories:
             return JSONResponse(
@@ -670,12 +675,32 @@ async def chat(question: Question):
                 # Generate HTML table from the data
                 result["html_table_data"] = convert_to_html_table(query_result)
 
+                # Save HTML table if it exists
+                if result["html_table_data"]:
+                    table_filename = f'table_{session_id}_{timestamp}.html'
+                    file_path = os.path.join(static_dir, table_filename)
+                    os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                    with open(file_path, 'w', encoding='utf-8') as f:
+                        f.write(result["html_table_data"])
+                    result[
+                        "table_file_url"] = f"https://codefest-backend.azurewebsites.net/static/temp/{table_filename}"
+
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
                 if result["data"]:  # Only attempt to plot if we have data
                     result["html_code_plotly"] = generate_plotly_html(
                         response_dict["plotly_code"],
                         result["data"]
                     )
+
+                    # Save chart HTML if it exists
+                    if result["html_code_plotly"]:
+                        chart_filename = f'chart_{session_id}_{timestamp}.html'
+                        file_path = os.path.join(static_dir, chart_filename)
+                        os.makedirs(os.path.dirname(file_path), exist_ok=True)
+                        with open(file_path, 'w', encoding='utf-8') as f:
+                            f.write(result["html_code_plotly"])
+                        result[
+                            "chart_file_url"] = f"https://codefest-backend.azurewebsites.net/static/temp/{chart_filename}"
                 else:
                     result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
 
