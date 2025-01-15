@@ -536,6 +536,23 @@ def convert_to_html_table(data):
     # Convert data to pandas DataFrame
     df = pd.DataFrame(data)
 
+    # Function to convert email to clickable link
+    def make_email_link(value):
+        if pd.isna(value):
+            return ""
+        value_str = str(value).strip()
+        # Check if the value looks like an email address
+        if '@' in value_str and '.' in value_str.split('@')[1]:
+            return f'<a href="mailto:{value_str}" style="color: #0066cc; text-decoration: none;">{value_str}</a>'
+        return value_str
+
+    # Identify email columns (any column with 'email' in the name, case-insensitive)
+    email_columns = [col for col in df.columns if 'email' in col.lower()]
+
+    # Apply the email link conversion to identified columns
+    for col in email_columns:
+        df[col] = df[col].apply(make_email_link)
+
     # Generate HTML table
     html_table = df.to_html(
         classes=['table', 'table-striped', 'table-hover', 'table-bordered'],
