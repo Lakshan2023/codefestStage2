@@ -333,6 +333,7 @@ def generate_query(user_question: str, session_id: str) -> str:
                            - Example correct usage: 
                              df = pd.DataFrame(response_dict)
                              fig = px.line(df, x='date_column', y='value_column')
+                           - ⚠️ All arguments should have the same length
                            - Provide charts in decent colors (bars and lines should be dark and vibrant colors)
                            - fig.show() code has to be there at the end (This is very very important)
                            - Include visualization code only if plotly_code_generation_status is 'Yes'
@@ -617,13 +618,15 @@ def generate_plotly_html(plotly_code, response_dict):
         fig = namespace.get('fig')
 
         if fig:
-            # Configure the plot for web display
+            # Configure the plot for web display with proper background settings
             fig.update_layout(
-                template='plotly_white',
+                template='plotly_white',  # This sets the overall template
+                paper_bgcolor='white',    # Explicit background color for the paper
+                plot_bgcolor='white',     # Explicit background color for the plot
                 margin=dict(t=50, l=50, r=50, b=50),
                 height=500,
                 showlegend=True,
-                # Add watermark or branding if needed
+                # Add watermark or branding
                 annotations=[
                     dict(
                         text="Sysco Labs Analytics",
@@ -636,6 +639,10 @@ def generate_plotly_html(plotly_code, response_dict):
                     )
                 ]
             )
+
+            # Additional styling for better visualization
+            fig.update_xaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
+            fig.update_yaxes(showgrid=True, gridwidth=1, gridcolor='lightgray')
 
             # Convert to HTML with specific configurations
             plotly_html = pio.to_html(
