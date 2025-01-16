@@ -334,6 +334,7 @@ def generate_query(user_question: str, session_id: str) -> str:
                              df = pd.DataFrame(response_dict)
                              fig = px.line(df, x='date_column', y='value_column')
                            - ⚠️ All arguments should have the same length
+                           - ⚠️ You can generate bar charts, stack bar charts, line charts, pie charts or Data Cards / Big Numbers
                            - Provide charts in decent colors (bars and lines should be dark and vibrant colors)
                            - fig.show() code has to be there at the end (This is very very important)
                            - Include visualization code only if plotly_code_generation_status is 'Yes'
