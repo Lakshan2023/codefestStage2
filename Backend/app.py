@@ -314,12 +314,17 @@ def generate_query(user_question: str, session_id: str) -> str:
                            - 'No': If question cannot be answered with a query
                            - If 'No', query field should be empty
                         
-                        3. plotly_code_generation_status:
+                        3. query structure details:
+                           - ⚠️ Do not ever provide multiple relations in one line
+                              eg multiple relations: OPTIONAL MATCH (s:Sales {{Sales_Consultant_ID: \"SC0001\"}})-[:CONDUCTED]->(m:Meeting)-[:PARTICIPATED_IN]->(c:Customer)
+                              ⚠️ ⚠️  break it down to lines using 'WITH' term.
+                        
+                        4. plotly_code_generation_status:
                            - 'Yes': If query results can be visualized in a single line/bar chart
                            - 'No': If data isn't suitable for visualization
                            - Only set to 'Yes' for statistical, numeric, or time series data
                         
-                       4. plotly_code:
+                       5. plotly_code:
                            - IMPORTANT: You must use 'response_dict' to access the actual query results
                            - Very Very Important: ⚠️ Do NOT use any example/dummy data or hardcoded values
                            - All data for visualization must come from response_dict
