@@ -327,7 +327,7 @@ def generate_query(user_question: str, session_id: str) -> str:
                         
                        5. plotly_code:
                            - IMPORTANT: You must use 'response_dict' to access the actual query results
-                           - Very Very Important: ⚠️ Do NOT use any example/dummy data or hardcoded values
+                           - Very Very Important: ⚠️⚠️⚠️ Do NOT use any example/dummy data or hardcoded values to the response_dict. response_dict is defined from outer scope.
                            - All data for visualization must come from response_dict
                            - response_dict contains the results of your Cypher query as a list of dictionaries
                            - Example correct usage: 
@@ -664,6 +664,62 @@ def generate_plotly_html(plotly_code, response_dict):
         print(f"Plotly Generation Error: {str(e)}")
         return f"<div class='alert alert-danger'>Error generating plot: {str(e)}</div>"
 
+
+
+def generate_chart_analysis(plotly_code, data, user_question, client, deployment):
+    if not plotly_code or not data:
+        return "Unable to provide analytical insights at the moment due to missing data or visualization."
+
+    try:
+        # Extract key information from plotly code to understand chart type
+        plotly_code_lower = plotly_code.lower()
+        chart_type = ""
+        if "px.bar" in plotly_code_lower:
+            chart_type = "bar chart"
+        elif "px.line" in plotly_code_lower:
+            chart_type = "line chart"
+        elif "px.pie" in plotly_code_lower:
+            chart_type = "pie chart"
+        else:
+            chart_type = "chart"
+
+        # Prepare prompt for LLM
+        analysis_prompt = f"""You are an analytics expert at Sysco Labs. Analyze the following data visualization in context of the user's question and provide 3-4 key business insights.
+
+        Original Question: {user_question}
+        Chart Type: {chart_type}
+        Data: {str(data)}
+        Visualization Code: {plotly_code}
+
+        Requirements:
+        1. Address the user's original question directly in your analysis
+        2. Focus on business implications and actionable insights
+        3. Be specific about trends, patterns, or anomalies
+        4. Relate insights to Sysco Labs business context
+        5. Keep explanations clear and concise
+        6. Avoid technical jargon
+        7. Use bullet points for better readability
+        8. Include relevant emojis for each point
+        9. Ensure insights are directly relevant to what the user wanted to know
+
+        Format your response as a direct list of insights without any preamble or introduction."""
+
+        # Make API call
+        completion = client.chat.completions.create(
+            model=deployment,
+            messages=[
+                {"role": "system", "content": analysis_prompt},
+                {"role": "user", "content": "Please provide the analysis."}
+            ],
+            max_tokens=1000,
+            temperature=0.7
+        )
+
+        return completion.choices[0].message.content
+
+    except Exception as e:
+        return f"Unable to provide analytical insights at the moment. Error: {str(e)}"
+
 @app.post("/chat")
 async def chat(question: Question):
     try:
@@ -714,7 +770,8 @@ async def chat(question: Question):
                 "plotly_code": response_dict["plotly_code"],
                 "data": None,
                 "html_table_data": "",
-                "html_code_plotly": ""
+                "html_code_plotly": "",
+                "chart_analysis": ""
             }
 
             # Execute the query if status is "Yes"
@@ -754,6 +811,17 @@ async def chat(question: Question):
                             "chart_file_url"] = f"https://codefest-backend.azurewebsites.net/static/temp/{chart_filename}"
                 else:
                     result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
+
+            if result["html_code_plotly"] and "alert alert-warning" not in result["html_code_plotly"].lower():
+                result["chart_analysis"] = generate_chart_analysis(
+                    response_dict["plotly_code"],
+                    result["data"],
+                    user_question,  # Pass the user's question
+                    client,
+                    deployment
+                )
+            else:
+                result["chart_analysis"] = "Unable to provide analytical insights due to visualization error."
 
             chat_histories[session_id]["answers"].append(result["text_explanation"])
 
