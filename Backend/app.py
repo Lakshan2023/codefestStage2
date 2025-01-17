@@ -110,7 +110,7 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 graph_db_structure = """
-// First create Sales Consultant nodes
+// Create Sales Consultant nodes
 LOAD CSV WITH HEADERS FROM 'file:///sales_consultants.csv' AS ss
 CREATE (:Sales {
     Sales_Consultant_ID: ss.Sales_Consultant_ID,
@@ -122,16 +122,19 @@ CREATE (:Sales {
 })
 WITH count(*) as dummy
 
-// Create Customer nodes
+// Create Customer nodes with updated properties
 LOAD CSV WITH HEADERS FROM 'file:///customers.csv' AS ct
 CREATE (:Customer {
-    Customer_Name: ct.Customer_Name,
-    Region: ct.Region,
-    Email: ct.Email,
-    Telephone: ct.Telephone,
-    Address: ct.Address,
     Customer_ID: ct.Customer_ID,
-    Country: ct.Country
+    Customer_Name: ct.Customer_Name,
+    Company_Name: ct.Company_Name,
+    Company_Type: ct.Company_Type,
+    Email: ct.Email,
+    Address: ct.Address,
+    Telephone: ct.Telephone,
+    City: ct.City,
+    Country: ct.Country,
+    Region: ct.Region
 })
 WITH count(*) as dummy2
 
@@ -197,6 +200,47 @@ CREATE (o:Order {
 CREATE (s)-[:PROCESSED]->(o)
 CREATE (c)-[:PLACED]->(o)
 CREATE (o)-[:CONTAINS]->(p)
+WITH count(*) as dummy6
+
+// Create Vendor nodes
+LOAD CSV WITH HEADERS FROM 'file:///food_vendor_data.csv' AS vd
+CREATE (:Vendor {
+    Vendor_ID: vd.Vendor_ID,
+    Vendor_Name: vd.Vendor_Name,
+    Representative_Name: vd.Representative_Name,
+    Email: vd.Email,
+    Telephone: vd.Telephone,
+    Address: vd.Address,
+    Country: vd.Country,
+    Region: vd.Region
+})
+WITH count(*) as dummy7
+
+// Create relationships between Sales Consultants and Vendors
+LOAD CSV WITH HEADERS FROM 'file:///vendor_sales_consultant_mapping.csv' AS vm
+MATCH (s:Sales {Sales_Consultant_ID: vm.Sales_Consultant_ID})
+MATCH (v:Vendor {Vendor_ID: vm.Vendor_ID})
+CREATE (s)-[:MANAGES]->(v)
+WITH count(*) as dummy8
+
+// Create relationships between Vendors and Products
+LOAD CSV WITH HEADERS FROM 'file:///vendor_products_relationships.csv' AS vp
+MATCH (v:Vendor {Vendor_ID: vp.Vendor_ID})
+MATCH (p:Product {Product_ID: vp.Food_ID})
+CREATE (v)-[:SUPPLIES]->(p)
+WITH count(*) as dummy9
+
+// Create Stock nodes and relationships
+LOAD CSV WITH HEADERS FROM 'file:///stock_data.csv' AS sd
+MATCH (p:Product {Product_ID: sd.Food_ID})
+CREATE (s:Stock {
+    Stock_Amount: toInteger(sd.Stock_Amount),
+    Unit: sd.Unit,
+    Date: date(sd.Date),
+    Time: time(sd.Time),
+    Food_ID: sd.Food_ID
+})
+CREATE (p)-[:HAS_STOCK]->(s)
 """
 
 
