@@ -72,7 +72,7 @@
     },
     {
       "question": "Find the regions where customers place orders predominantly during 9 AM to 12 AM.",
-      "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWHERE o.Order_Time >= time('09:00:00') AND o.Order_Time <= time('12:00:00')\nRETURN c.Region AS Region, COUNT(o) AS OrderCount\nORDER BY OrderCount DESC;"
+      "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWHERE o.Order_Time IS NOT NULL\n  AND time(o.Order_Time) >= time('09:00:00')\n  AND time(o.Order_Time) <= time('12:00:00')\nRETURN c.Region AS Region, COUNT(o) AS OrderCount\nORDER BY OrderCount DESC;"
     },
     {
       "question": "Identify Sales Consultants who have processed orders for more than 10 unique products.",
@@ -148,7 +148,7 @@
     },
     {
       "question": "List the sales consultants who have conducted meetings with customers in Africa.",
-      "cypher_query": "OPTIONAL MATCH (s:Sales)-[:CONDUCTED]->(m:Meeting)<-[:PARTICIPATED_IN]-(c:Customer {Region: \"Africa\"})\nRETURN s.Name AS SalesConsultantName, COUNT(m) AS MeetingsCount;"
+      "cypher_query": "OPTIONAL MATCH (s:Sales)-[:CONDUCTED]->(m:Meeting)\nOPTIONAL MATCH (m)<-[:PARTICIPATED_IN]-(c:Customer {Region: \"Africa\"})\nRETURN s.Name AS SalesConsultantName, COUNT(m) AS MeetingsCount;\n"
     },
     {
       "question": "What are the order statuses and their counts processed by SC0054?",
@@ -156,7 +156,7 @@
     },
     {
       "question": "Find all products ordered by customer James Black, including their category.",
-      "cypher_query": "OPTIONAL MATCH (c:Customer {Customer_Name: 'James Black'})-[:PLACED]->(o:Order)-[:CONTAINS]->(p:Product)\nRETURN p.Product_Name, p.Category, p.Product_ID;"
+      "cypher_query": "OPTIONAL MATCH (c:Customer {Customer_Name: 'James Black'})-[:PLACED]->(o:Order)\nOPTIONAL MATCH (o)-[:CONTAINS]->(p:Product)\nRETURN p.Product_Name, p.Category, p.Product_ID;"
     },
     {
       "question": "Find the details of the sales consultant with the email jerome.carmichael@example.org.",
@@ -176,31 +176,31 @@
     },
     {
       "question": "Which meetings involve Customer Calls and are delivered Online?",
-      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE m.Meeting_Details = \"Customer Call\" AND m.Delivery_Type = \"Online\"\nRETURN m.Meeting_ID, m.Customer_ID, m.Sales_Consultant_ID, m.Meeting_Date, m.Meeting_Time;"
+      "cypher_query": "OPTIONAL MATCH (m:Meeting)<-[:CONDUCTED]-(s:Sales)\nMATCH (m:Meeting)<-[:PARTICIPATED_IN]-(c:Customer)\nWHERE m.Meeting_Details = \"Customer Call\" AND m.Delivery_Type = \"Online\"\nRETURN m.Meeting_ID, c.Customer_ID, s.Sales_Consultant_ID, m.Meeting_Date, m.Meeting_Time;"
     },
     {
       "question": "What are the details of meetings scheduled for Hybrid delivery?",
-      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE m.Delivery_Type = \"Hybrid\"\nRETURN m.Meeting_ID, m.Customer_ID, m.Sales_Consultant_ID, m.Meeting_Date, m.Meeting_Details;"
+      "cypher_query": "OPTIONAL MATCH (m:Meeting)<-[:CONDUCTED]-(s:Sales)\nMATCH (m:Meeting)<-[:PARTICIPATED_IN]-(c:Customer)\nWHERE m.Delivery_Type = \"Hybrid\"\nRETURN m.Meeting_ID, c.Customer_ID, s.Sales_Consultant_ID, m.Meeting_Date, m.Meeting_Details;"
     },
     {
       "question": "How many Sales Pitches were conducted by each Sales Consultant?",
-      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE m.Meeting_Details = \"Sales Pitch\"\nRETURN m.Sales_Consultant_ID, COUNT(m) AS SalesPitchCount\nORDER BY SalesPitchCount DESC;"
+      "cypher_query": "OPTIONAL MATCH (m:Meeting)<-[:CONDUCTED]-(s:Sales)\nWHERE m.Meeting_Details = \"Sales Pitch\"\nRETURN s.Sales_Consultant_ID, COUNT(m) AS SalesPitchCount\nORDER BY SalesPitchCount DESC;"
     },
     {
       "question": "What is the earliest \"Follow-up\" meeting scheduled?",
-      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE m.Meeting_Details = \"Follow-up\"\nRETURN m.Meeting_ID, m.Customer_ID, m.Meeting_Date, m.Meeting_Time\nORDER BY date(m.Meeting_Date) ASC\nLIMIT 1;"
+      "cypher_query": "OPTIONAL MATCH (m:Meeting)<-[:PARTICIPATED_IN]-(c:Customer)\nWHERE m.Meeting_Details = \"Follow-up\"\nRETURN m.Meeting_ID, c.Customer_ID, m.Meeting_Date, m.Meeting_Time\nORDER BY date(m.Meeting_Date) ASC\nLIMIT 1;"
     },
     {
       "question": "How many meetings are scheduled per month in 2024?",
-      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE m.Meeting_Date >= date(\"2024-01-01\") AND m.Meeting_Date < date(\"2025-01-01\")\nWITH date(m.Meeting_Date).month AS Month, COUNT(m) AS MeetingCount\nRETURN Month, MeetingCount\nORDER BY Month;"
+      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE date(m.Meeting_Date) >= date(\"2024-01-01\") AND date(m.Meeting_Date) < date(\"2025-01-01\")\nWITH date(m.Meeting_Date).month AS Month, COUNT(m) AS MeetingCount\nRETURN Month, MeetingCount\nORDER BY Month;"
     },
     {
       "question": "List all meetings that include Product Demonstration and are delivered Hybrid.",
-      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE m.Meeting_Details = \"Product Demonstration\" AND m.Delivery_Type = \"Hybrid\"\nRETURN m.Meeting_ID, m.Customer_ID, m.Meeting_Date, m.Meeting_Time;"
+      "cypher_query": "OPTIONAL MATCH (m:Meeting)<-[:PARTICIPATED_IN]-(c:Customer)\nWHERE m.Meeting_Details = \"Product Demonstration\" AND m.Delivery_Type = \"Hybrid\"\nRETURN m.Meeting_ID, c.Customer_ID, m.Meeting_Date, m.Meeting_Time;"
     },
     {
       "question": "Which meetings involve Contract Negotiation and are delivered In-person?",
-      "cypher_query": "OPTIONAL MATCH (m:Meeting)\nWHERE m.Meeting_Details = \"Contract Negotiation\" AND m.Delivery_Type = \"In-person\"\nRETURN m.Meeting_ID, m.Customer_ID, m.Meeting_Date, m.Meeting_Time;"
+      "cypher_query": "OPTIONAL MATCH (m:Meeting)<-[:PARTICIPATED_IN]-(c:Customer)\nWHERE m.Meeting_Details = \"Contract Negotiation\" AND m.Delivery_Type = \"In-person\"\nRETURN m.Meeting_ID, c.Customer_ID, m.Meeting_Date, m.Meeting_Time;"
     },
     {
       "question": "How many sales consultants are there in each Sysco Lab Branch?",

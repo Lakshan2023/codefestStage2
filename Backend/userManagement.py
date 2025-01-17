@@ -16,9 +16,9 @@ import secrets
 app = FastAPI()
 
 # Neo4j setup
-NEO4J_URI = "bolt://localhost:7687"
+NEO4J_URI = "neo4j+s://3f045921.databases.neo4j.io"
 NEO4J_USERNAME = "neo4j"
-NEO4J_PASSWORD = "codefest@123"
+NEO4J_PASSWORD = "xQk-dXXaM5oicDcSzSeFRCQz2sz905kl5XbPYwbvwbg"
 driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
 
 # Security setup
