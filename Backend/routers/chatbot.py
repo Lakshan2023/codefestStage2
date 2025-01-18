@@ -101,7 +101,7 @@ class Question(BaseModel):
     question: str
     session_id: str
     settings: Settings
-    timestamp: str
+    time: str = None
     question_history: List[str] = []  # Add this line
     answer_history: List[str] = []  # Add this line
 
@@ -414,7 +414,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
        - Politeness Level: {question.settings.politeness_level}
        - Formality: {question.settings.formality}
        - Response Length: {question.settings.response_length}
-       - Current time: {question.timestamp}
+       - Current time: {question.time}
 
        Please adjust your response according to these settings:
        1. Use the specified {question.settings.language} language
@@ -616,7 +616,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
 
     # Format the prompt with all required values
     formatted_prompt = QUERY_CHAT_PROMPT.format(
-        date=question.settings.time,
+        date=question.time,
         history_text=history_text,
         graph_db_structure=graph_db_structure,
         similar_chunks=similar_text,
@@ -884,7 +884,7 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                - Politeness Level: {question.settings.politeness_level}
                - Formality: {question.settings.formality}
                - Response Length: {question.settings.response_length}
-               - Current time: {question.timestamp}
+               - Current time: {question.time}
 
                Please adjust your response according to these settings:
                1. Use the specified {question.settings.language} language
