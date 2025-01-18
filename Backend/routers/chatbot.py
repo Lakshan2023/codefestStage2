@@ -521,6 +521,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                            - ⚠️⚠️ If you consider today's date and time, please provide it in the cypher query related date and time formats
                            - ⚠️⚠️ All the cypher people, food and place names are capitalized in the first letter of each word use this method when searching.
                            - Dates are stored as strings: "2024-12-09T00:00:00Z" time is also as strings: "09:00:00"
+                           - Never provide multiple relationships together using one OPTIONAL MATCH statement, use multiple OPTIONAL statements always
                         
                         4. plotly_code_generation_status:
                            - 'Yes': If query results can be visualized in a single line/bar chart
@@ -945,6 +946,30 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
     except Exception as e:
         return f"Unable to provide analytical insights at the moment. Error: {str(e)}"
 
+
+def generate_plot_analysis(data: str):
+    try:
+        analysis_prompt = f"""
+                If this data contains not only null values return 'yes'.
+                If the data only contains null values say you cannot generate an answer at the moment in a creative way with emojis.
+                
+                data : {data}
+                """
+        completion = client.chat.completions.create(
+            model=deployment,
+            messages=[
+                {"role": "system", "content": analysis_prompt},
+                {"role": "user", "content": "Please return 'yes' or explanation based on data."}
+            ],
+            max_tokens=1000,
+            temperature=0
+        )
+
+        return completion.choices[0].message.content
+    except Exception as e:
+        return f"Unable to provide table insights at this moment. Error: {str(e)}"
+
+
 @router.post("/chat")
 async def chat(question: Question):
     try:
@@ -1017,6 +1042,9 @@ async def chat(question: Question):
                         f.write(result["html_table_data"])
                     result[
                         "table_file_url"] = f"https://codefest-backend.azurewebsites.net/static/temp/{table_filename}"
+
+                if result["html_table_data"]:
+                    result["table_accept_status"] = generate_plot_analysis(result["data"][:300])
 
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
                 if result["data"]:  # Only attempt to plot if we have data
