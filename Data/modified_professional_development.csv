@@ -1,0 +1,3001 @@
+Event_ID,Event_Date,Event_Time,Event_Type,Attendance_Status,Consultant_ID
+PD001,2024-06-01,17:10:22,Webinar,Attended,SC0242
+PD002,2024-06-01,13:23:46,Workshop,Upcoming,SC0005
+PD003,2024-06-01,14:43:25,Networking Event,Upcoming,SC0398
+PD004,2024-06-02,15:18:09,Networking Event,Attended,SC0396
+PD005,2024-06-02,13:17:14,Training Session,Missed,SC0569
+PD006,2024-06-02,16:38:15,Workshop,Attended,SC0016
+PD007,2024-06-02,13:26:57,Industry Conference,Attended,SC0305
+PD008,2024-06-03,11:41:41,Industry Conference,Attended,SC0510
+PD009,2024-06-03,13:19:22,Workshop,Missed,SC0308
+PD010,2024-06-03,10:03:03,Workshop,Attended,SC0739
+PD011,2024-06-03,16:17:22,Workshop,Attended,SC0212
+PD012,2024-06-03,15:40:17,Webinar,Attended,SC0439
+PD013,2024-06-03,11:15:49,Networking Event,Missed,SC0120
+PD014,2024-06-03,09:46:36,Networking Event,Attended,SC0736
+PD015,2024-06-03,15:37:02,Training Session,Attended,SC0132
+PD016,2024-06-03,13:54:14,Workshop,Attended,SC0555
+PD017,2024-06-04,15:27:47,Training Session,Missed,SC0279
+PD018,2024-06-04,11:19:32,Webinar,Attended,SC0542
+PD019,2024-06-04,11:12:56,Workshop,Upcoming,SC0359
+PD020,2024-06-04,16:00:14,Industry Conference,Attended,SC0352
+PD021,2024-06-04,11:39:37,Training Session,Attended,SC0180
+PD022,2024-06-04,11:22:16,Workshop,Upcoming,SC0610
+PD023,2024-06-05,16:40:32,Workshop,Missed,SC0593
+PD024,2024-06-05,17:24:42,Workshop,Attended,SC0077
+PD025,2024-06-05,10:10:20,Industry Conference,Upcoming,SC0133
+PD026,2024-06-06,16:02:07,Networking Event,Attended,SC0172
+PD027,2024-06-06,14:31:03,Industry Conference,Attended,SC0539
+PD028,2024-06-06,16:06:52,Industry Conference,Attended,SC0021
+PD029,2024-06-07,12:59:43,Training Session,Attended,SC0108
+PD030,2024-06-07,14:42:49,Webinar,Upcoming,SC0526
+PD031,2024-06-07,10:50:13,Training Session,Missed,SC0696
+PD032,2024-06-08,16:18:55,Workshop,Attended,SC0230
+PD033,2024-06-08,17:27:08,Webinar,Upcoming,SC0160
+PD034,2024-06-08,16:15:25,Industry Conference,Missed,SC0565
+PD035,2024-06-08,09:06:59,Webinar,Upcoming,SC0397
+PD036,2024-06-08,09:19:14,Industry Conference,Attended,SC0611
+PD037,2024-06-08,17:42:37,Industry Conference,Missed,SC0076
+PD038,2024-06-09,15:34:01,Workshop,Missed,SC0252
+PD039,2024-06-09,12:29:09,Workshop,Upcoming,SC0725
+PD040,2024-06-09,16:05:55,Industry Conference,Attended,SC0074
+PD041,2024-06-10,14:36:29,Workshop,Attended,SC0529
+PD042,2024-06-10,13:22:37,Training Session,Missed,SC0399
+PD043,2024-06-10,16:31:45,Training Session,Missed,SC0686
+PD044,2024-06-10,13:56:14,Industry Conference,Attended,SC0157
+PD045,2024-06-10,10:08:53,Workshop,Upcoming,SC0580
+PD046,2024-06-10,09:10:59,Workshop,Attended,SC0693
+PD047,2024-06-11,13:01:19,Networking Event,Upcoming,SC0343
+PD048,2024-06-11,09:28:28,Industry Conference,Missed,SC0064
+PD049,2024-06-11,16:57:38,Industry Conference,Attended,SC0650
+PD050,2024-06-12,10:04:39,Industry Conference,Missed,SC0521
+PD051,2024-06-12,12:45:32,Networking Event,Upcoming,SC0354
+PD052,2024-06-12,15:22:57,Industry Conference,Missed,SC0132
+PD053,2024-06-12,16:32:45,Workshop,Missed,SC0701
+PD054,2024-06-13,10:40:02,Workshop,Upcoming,SC0177
+PD055,2024-06-13,09:26:16,Networking Event,Upcoming,SC0488
+PD056,2024-06-13,13:36:40,Training Session,Missed,SC0420
+PD057,2024-06-13,12:21:57,Industry Conference,Missed,SC0347
+PD058,2024-06-14,12:58:59,Workshop,Upcoming,SC0090
+PD059,2024-06-14,09:56:56,Networking Event,Upcoming,SC0588
+PD060,2024-06-14,17:18:46,Workshop,Missed,SC0605
+PD061,2024-06-14,10:38:56,Industry Conference,Missed,SC0298
+PD062,2024-06-15,16:23:13,Webinar,Missed,SC0541
+PD063,2024-06-16,16:28:09,Industry Conference,Attended,SC0704
+PD064,2024-06-16,09:27:25,Networking Event,Attended,SC0186
+PD065,2024-06-16,09:00:15,Workshop,Upcoming,SC0543
+PD066,2024-06-17,11:03:01,Networking Event,Missed,SC0430
+PD067,2024-06-17,09:59:51,Networking Event,Missed,SC0619
+PD068,2024-06-17,16:48:03,Industry Conference,Attended,SC0405
+PD069,2024-06-18,09:08:38,Industry Conference,Missed,SC0100
+PD070,2024-06-18,10:05:24,Webinar,Attended,SC0327
+PD071,2024-06-18,16:20:40,Industry Conference,Attended,SC0195
+PD072,2024-06-18,13:54:06,Industry Conference,Missed,SC0352
+PD073,2024-06-18,09:10:13,Training Session,Attended,SC0157
+PD074,2024-06-19,15:31:20,Training Session,Attended,SC0414
+PD075,2024-06-19,14:00:06,Training Session,Missed,SC0446
+PD076,2024-06-19,09:02:22,Workshop,Attended,SC0466
+PD077,2024-06-19,11:56:19,Training Session,Attended,SC0270
+PD078,2024-06-20,10:39:21,Training Session,Upcoming,SC0474
+PD079,2024-06-20,12:22:16,Networking Event,Attended,SC0637
+PD080,2024-06-20,15:11:14,Workshop,Attended,SC0455
+PD081,2024-06-20,15:37:35,Industry Conference,Attended,SC0110
+PD082,2024-06-20,17:17:39,Training Session,Missed,SC0520
+PD083,2024-06-21,11:15:36,Webinar,Upcoming,SC0458
+PD084,2024-06-21,10:26:29,Workshop,Upcoming,SC0682
+PD085,2024-06-21,14:41:26,Webinar,Attended,SC0272
+PD086,2024-06-21,16:46:13,Workshop,Attended,SC0483
+PD087,2024-06-21,17:19:53,Webinar,Attended,SC0028
+PD088,2024-06-21,13:00:55,Networking Event,Attended,SC0608
+PD089,2024-06-21,17:18:18,Webinar,Missed,SC0022
+PD090,2024-06-22,09:07:16,Webinar,Attended,SC0606
+PD091,2024-06-22,10:09:07,Networking Event,Attended,SC0086
+PD092,2024-06-22,10:04:28,Workshop,Upcoming,SC0643
+PD093,2024-06-22,17:29:21,Webinar,Attended,SC0693
+PD094,2024-06-22,09:53:56,Workshop,Upcoming,SC0111
+PD095,2024-06-22,10:39:09,Workshop,Missed,SC0360
+PD096,2024-06-22,12:08:36,Workshop,Missed,SC0730
+PD097,2024-06-23,15:37:11,Training Session,Attended,SC0011
+PD098,2024-06-24,15:59:08,Industry Conference,Upcoming,SC0573
+PD099,2024-06-24,13:51:01,Webinar,Upcoming,SC0743
+PD100,2024-06-24,10:53:16,Webinar,Attended,SC0354
+PD101,2024-06-24,11:44:37,Webinar,Missed,SC0495
+PD102,2024-06-24,13:43:50,Training Session,Missed,SC0195
+PD103,2024-06-24,11:15:49,Webinar,Missed,SC0246
+PD104,2024-06-25,10:15:39,Industry Conference,Upcoming,SC0720
+PD105,2024-06-25,10:59:45,Webinar,Attended,SC0324
+PD106,2024-06-25,13:56:02,Networking Event,Upcoming,SC0697
+PD107,2024-06-25,11:11:25,Webinar,Missed,SC0269
+PD108,2024-06-26,13:16:41,Webinar,Attended,SC0744
+PD109,2024-06-26,11:50:17,Workshop,Attended,SC0067
+PD110,2024-06-26,13:53:41,Networking Event,Upcoming,SC0443
+PD111,2024-06-27,11:14:35,Industry Conference,Missed,SC0283
+PD112,2024-06-27,09:00:45,Workshop,Missed,SC0402
+PD113,2024-06-27,12:39:30,Workshop,Missed,SC0728
+PD114,2024-06-27,14:54:54,Industry Conference,Upcoming,SC0025
+PD115,2024-06-27,17:29:24,Webinar,Upcoming,SC0569
+PD116,2024-06-27,15:23:48,Training Session,Attended,SC0063
+PD117,2024-06-27,09:52:49,Industry Conference,Missed,SC0047
+PD118,2024-06-27,17:02:50,Networking Event,Attended,SC0322
+PD119,2024-06-28,12:55:28,Training Session,Upcoming,SC0080
+PD120,2024-06-28,16:06:58,Networking Event,Missed,SC0001
+PD121,2024-06-28,09:04:21,Webinar,Upcoming,SC0634
+PD122,2024-06-28,15:58:08,Workshop,Attended,SC0084
+PD123,2024-06-29,15:55:23,Networking Event,Missed,SC0637
+PD124,2024-06-29,09:21:45,Industry Conference,Upcoming,SC0409
+PD125,2024-06-29,09:53:24,Workshop,Upcoming,SC0367
+PD126,2024-06-29,16:33:55,Training Session,Missed,SC0473
+PD127,2024-06-30,09:08:27,Workshop,Attended,SC0738
+PD128,2024-07-01,17:09:39,Networking Event,Upcoming,SC0306
+PD129,2024-07-01,09:15:08,Workshop,Missed,SC0133
+PD130,2024-07-01,12:33:25,Industry Conference,Attended,SC0093
+PD131,2024-07-01,11:09:46,Webinar,Missed,SC0200
+PD132,2024-07-01,11:49:19,Industry Conference,Missed,SC0037
+PD133,2024-07-01,10:22:51,Webinar,Attended,SC0618
+PD134,2024-07-01,14:32:54,Training Session,Upcoming,SC0644
+PD135,2024-07-01,16:18:35,Webinar,Upcoming,SC0525
+PD136,2024-07-02,15:11:28,Networking Event,Upcoming,SC0167
+PD137,2024-07-02,15:30:20,Networking Event,Missed,SC0233
+PD138,2024-07-02,10:59:04,Training Session,Attended,SC0438
+PD139,2024-07-02,09:56:38,Networking Event,Missed,SC0465
+PD140,2024-07-02,09:52:13,Webinar,Missed,SC0635
+PD141,2024-07-02,14:49:00,Networking Event,Attended,SC0088
+PD142,2024-07-03,10:36:05,Training Session,Missed,SC0206
+PD143,2024-07-04,12:29:57,Industry Conference,Upcoming,SC0430
+PD144,2024-07-04,14:28:05,Workshop,Attended,SC0383
+PD145,2024-07-04,15:34:50,Industry Conference,Attended,SC0159
+PD146,2024-07-04,10:33:47,Training Session,Attended,SC0323
+PD147,2024-07-04,09:54:35,Training Session,Missed,SC0187
+PD148,2024-07-05,09:14:45,Webinar,Upcoming,SC0590
+PD149,2024-07-05,12:45:31,Training Session,Upcoming,SC0135
+PD150,2024-07-05,11:07:25,Webinar,Missed,SC0649
+PD151,2024-07-05,14:59:57,Workshop,Attended,SC0488
+PD152,2024-07-05,09:46:21,Webinar,Attended,SC0218
+PD153,2024-07-05,15:55:57,Networking Event,Attended,SC0179
+PD154,2024-07-05,17:11:44,Webinar,Missed,SC0024
+PD155,2024-07-05,09:35:37,Industry Conference,Upcoming,SC0048
+PD156,2024-07-06,09:11:25,Training Session,Upcoming,SC0081
+PD157,2024-07-06,11:43:02,Webinar,Upcoming,SC0434
+PD158,2024-07-06,17:23:14,Networking Event,Missed,SC0575
+PD159,2024-07-06,14:46:15,Webinar,Missed,SC0079
+PD160,2024-07-07,10:00:58,Workshop,Missed,SC0520
+PD161,2024-07-07,10:32:06,Training Session,Attended,SC0052
+PD162,2024-07-07,11:45:40,Workshop,Upcoming,SC0563
+PD163,2024-07-07,16:47:38,Networking Event,Attended,SC0400
+PD164,2024-07-08,16:15:38,Training Session,Missed,SC0469
+PD165,2024-07-09,15:32:59,Networking Event,Upcoming,SC0489
+PD166,2024-07-10,14:43:56,Workshop,Upcoming,SC0147
+PD167,2024-07-10,15:56:47,Training Session,Upcoming,SC0177
+PD168,2024-07-10,15:37:17,Training Session,Upcoming,SC0199
+PD169,2024-07-10,16:14:01,Training Session,Missed,SC0002
+PD170,2024-07-10,15:30:47,Training Session,Attended,SC0699
+PD171,2024-07-10,15:36:33,Webinar,Attended,SC0719
+PD172,2024-07-10,16:51:23,Industry Conference,Attended,SC0048
+PD173,2024-07-11,17:43:39,Webinar,Attended,SC0723
+PD174,2024-07-11,12:41:39,Training Session,Upcoming,SC0420
+PD175,2024-07-11,11:38:04,Training Session,Attended,SC0488
+PD176,2024-07-11,10:10:28,Workshop,Upcoming,SC0643
+PD177,2024-07-11,16:21:00,Workshop,Upcoming,SC0377
+PD178,2024-07-11,10:07:14,Networking Event,Upcoming,SC0440
+PD179,2024-07-11,13:17:48,Workshop,Upcoming,SC0017
+PD180,2024-07-12,15:12:28,Training Session,Missed,SC0158
+PD181,2024-07-13,12:15:15,Training Session,Attended,SC0562
+PD182,2024-07-13,09:35:41,Webinar,Missed,SC0748
+PD183,2024-07-14,09:40:20,Industry Conference,Missed,SC0055
+PD184,2024-07-14,09:32:21,Webinar,Upcoming,SC0008
+PD185,2024-07-14,11:27:10,Networking Event,Missed,SC0265
+PD186,2024-07-14,17:58:30,Training Session,Upcoming,SC0496
+PD187,2024-07-15,16:00:17,Workshop,Missed,SC0057
+PD188,2024-07-15,14:53:30,Webinar,Upcoming,SC0137
+PD189,2024-07-15,10:30:55,Workshop,Attended,SC0298
+PD190,2024-07-15,15:43:51,Webinar,Attended,SC0026
+PD191,2024-07-15,10:29:55,Webinar,Attended,SC0477
+PD192,2024-07-15,11:47:11,Industry Conference,Missed,SC0649
+PD193,2024-07-15,14:37:52,Networking Event,Upcoming,SC0084
+PD194,2024-07-16,09:05:49,Webinar,Missed,SC0150
+PD195,2024-07-16,09:15:50,Webinar,Upcoming,SC0099
+PD196,2024-07-16,13:37:39,Industry Conference,Upcoming,SC0176
+PD197,2024-07-16,10:08:54,Industry Conference,Upcoming,SC0570
+PD198,2024-07-16,10:24:15,Workshop,Missed,SC0294
+PD199,2024-07-16,11:50:37,Webinar,Missed,SC0105
+PD200,2024-07-17,13:44:45,Networking Event,Attended,SC0564
+PD201,2024-07-17,14:32:08,Webinar,Attended,SC0275
+PD202,2024-07-18,10:52:26,Webinar,Attended,SC0123
+PD203,2024-07-18,17:25:52,Training Session,Missed,SC0711
+PD204,2024-07-18,09:06:34,Training Session,Upcoming,SC0317
+PD205,2024-07-19,14:22:52,Workshop,Upcoming,SC0274
+PD206,2024-07-20,11:39:55,Workshop,Missed,SC0295
+PD207,2024-07-20,12:06:32,Webinar,Upcoming,SC0392
+PD208,2024-07-20,12:12:49,Industry Conference,Attended,SC0158
+PD209,2024-07-20,16:30:58,Networking Event,Attended,SC0451
+PD210,2024-07-20,17:02:47,Webinar,Upcoming,SC0234
+PD211,2024-07-20,13:27:09,Training Session,Attended,SC0481
+PD212,2024-07-20,12:11:31,Webinar,Attended,SC0436
+PD213,2024-07-20,11:50:38,Networking Event,Attended,SC0466
+PD214,2024-07-20,11:33:29,Workshop,Missed,SC0465
+PD215,2024-07-20,13:58:49,Training Session,Attended,SC0391
+PD216,2024-07-21,09:09:13,Training Session,Upcoming,SC0572
+PD217,2024-07-21,10:42:25,Industry Conference,Missed,SC0369
+PD218,2024-07-21,14:05:41,Training Session,Attended,SC0506
+PD219,2024-07-21,12:06:01,Training Session,Attended,SC0559
+PD220,2024-07-21,12:18:49,Industry Conference,Attended,SC0686
+PD221,2024-07-22,16:17:24,Industry Conference,Missed,SC0475
+PD222,2024-07-22,11:20:19,Networking Event,Missed,SC0696
+PD223,2024-07-22,13:06:46,Workshop,Missed,SC0667
+PD224,2024-07-22,10:28:15,Training Session,Attended,SC0492
+PD225,2024-07-23,17:12:06,Workshop,Upcoming,SC0356
+PD226,2024-07-23,16:31:50,Industry Conference,Missed,SC0666
+PD227,2024-07-23,17:18:29,Webinar,Upcoming,SC0555
+PD228,2024-07-23,11:12:32,Workshop,Missed,SC0035
+PD229,2024-07-23,12:16:49,Industry Conference,Missed,SC0519
+PD230,2024-07-23,12:17:19,Industry Conference,Missed,SC0674
+PD231,2024-07-24,15:48:51,Webinar,Missed,SC0375
+PD232,2024-07-24,09:18:43,Networking Event,Upcoming,SC0270
+PD233,2024-07-24,13:22:42,Workshop,Attended,SC0371
+PD234,2024-07-25,11:13:48,Networking Event,Attended,SC0184
+PD235,2024-07-25,16:13:10,Industry Conference,Attended,SC0139
+PD236,2024-07-25,11:10:33,Workshop,Attended,SC0650
+PD237,2024-07-26,09:57:47,Workshop,Upcoming,SC0449
+PD238,2024-07-26,17:57:11,Training Session,Attended,SC0233
+PD239,2024-07-26,11:29:14,Networking Event,Upcoming,SC0027
+PD240,2024-07-26,10:40:47,Industry Conference,Upcoming,SC0212
+PD241,2024-07-26,14:21:35,Networking Event,Upcoming,SC0387
+PD242,2024-07-26,11:22:31,Webinar,Attended,SC0129
+PD243,2024-07-26,12:06:57,Industry Conference,Attended,SC0519
+PD244,2024-07-27,16:10:34,Workshop,Attended,SC0277
+PD245,2024-07-27,16:52:10,Networking Event,Upcoming,SC0490
+PD246,2024-07-27,12:32:24,Workshop,Upcoming,SC0663
+PD247,2024-07-27,17:24:04,Networking Event,Attended,SC0720
+PD248,2024-07-27,15:52:37,Industry Conference,Missed,SC0406
+PD249,2024-07-27,17:41:02,Webinar,Missed,SC0478
+PD250,2024-07-28,09:25:05,Workshop,Upcoming,SC0089
+PD251,2024-07-28,12:01:41,Training Session,Attended,SC0034
+PD252,2024-07-28,12:33:00,Workshop,Missed,SC0358
+PD253,2024-07-28,16:15:57,Workshop,Missed,SC0730
+PD254,2024-07-28,16:45:36,Webinar,Upcoming,SC0386
+PD255,2024-07-29,14:24:22,Workshop,Upcoming,SC0460
+PD256,2024-07-29,15:56:55,Workshop,Attended,SC0294
+PD257,2024-07-29,13:58:27,Networking Event,Upcoming,SC0611
+PD258,2024-07-29,16:48:49,Networking Event,Upcoming,SC0323
+PD259,2024-07-30,11:31:25,Training Session,Missed,SC0423
+PD260,2024-07-31,16:05:59,Industry Conference,Upcoming,SC0326
+PD261,2024-07-31,10:32:57,Networking Event,Upcoming,SC0128
+PD262,2024-07-31,15:31:32,Webinar,Missed,SC0197
+PD263,2024-07-31,09:00:58,Networking Event,Missed,SC0742
+PD264,2024-08-01,15:29:04,Workshop,Upcoming,SC0586
+PD265,2024-08-01,12:20:09,Workshop,Upcoming,SC0288
+PD266,2024-08-01,13:31:43,Networking Event,Missed,SC0481
+PD267,2024-08-01,14:02:38,Industry Conference,Missed,SC0189
+PD268,2024-08-01,15:00:40,Workshop,Missed,SC0655
+PD269,2024-08-02,14:22:21,Webinar,Attended,SC0717
+PD270,2024-08-02,17:30:58,Training Session,Attended,SC0222
+PD271,2024-08-02,14:23:38,Workshop,Upcoming,SC0369
+PD272,2024-08-03,11:19:31,Networking Event,Upcoming,SC0358
+PD273,2024-08-04,12:23:50,Training Session,Upcoming,SC0592
+PD274,2024-08-04,16:05:00,Webinar,Attended,SC0188
+PD275,2024-08-05,17:55:22,Industry Conference,Missed,SC0043
+PD276,2024-08-05,11:23:53,Training Session,Upcoming,SC0554
+PD277,2024-08-05,10:50:32,Webinar,Upcoming,SC0611
+PD278,2024-08-05,16:53:37,Workshop,Attended,SC0326
+PD279,2024-08-06,12:24:27,Training Session,Upcoming,SC0526
+PD280,2024-08-06,13:13:32,Webinar,Upcoming,SC0233
+PD281,2024-08-06,14:37:08,Training Session,Missed,SC0655
+PD282,2024-08-07,14:16:13,Industry Conference,Upcoming,SC0282
+PD283,2024-08-07,14:10:20,Webinar,Upcoming,SC0567
+PD284,2024-08-07,16:41:15,Webinar,Upcoming,SC0188
+PD285,2024-08-08,11:16:23,Training Session,Attended,SC0371
+PD286,2024-08-08,17:39:27,Workshop,Upcoming,SC0418
+PD287,2024-08-08,11:04:08,Industry Conference,Upcoming,SC0460
+PD288,2024-08-08,15:50:41,Webinar,Attended,SC0023
+PD289,2024-08-08,14:11:31,Webinar,Attended,SC0196
+PD290,2024-08-09,15:01:18,Networking Event,Missed,SC0045
+PD291,2024-08-09,17:17:48,Training Session,Missed,SC0475
+PD292,2024-08-09,16:11:36,Webinar,Upcoming,SC0067
+PD293,2024-08-09,17:24:16,Training Session,Upcoming,SC0037
+PD294,2024-08-09,10:44:42,Webinar,Missed,SC0456
+PD295,2024-08-09,14:59:14,Networking Event,Attended,SC0319
+PD296,2024-08-10,17:36:08,Training Session,Attended,SC0200
+PD297,2024-08-10,17:21:29,Training Session,Attended,SC0055
+PD298,2024-08-11,14:31:56,Industry Conference,Missed,SC0544
+PD299,2024-08-11,14:39:03,Webinar,Missed,SC0148
+PD300,2024-08-11,11:14:16,Webinar,Missed,SC0636
+PD301,2024-08-11,13:40:13,Networking Event,Attended,SC0176
+PD302,2024-08-11,17:37:11,Workshop,Missed,SC0513
+PD303,2024-08-12,13:01:38,Networking Event,Upcoming,SC0663
+PD304,2024-08-12,12:54:21,Industry Conference,Upcoming,SC0202
+PD305,2024-08-12,13:56:44,Networking Event,Missed,SC0233
+PD306,2024-08-12,16:43:06,Industry Conference,Missed,SC0609
+PD307,2024-08-13,15:30:58,Industry Conference,Attended,SC0181
+PD308,2024-08-13,09:25:24,Training Session,Missed,SC0006
+PD309,2024-08-13,10:01:02,Industry Conference,Upcoming,SC0653
+PD310,2024-08-14,12:28:24,Training Session,Missed,SC0100
+PD311,2024-08-14,14:57:51,Webinar,Upcoming,SC0102
+PD312,2024-08-14,13:40:47,Workshop,Attended,SC0518
+PD313,2024-08-15,10:41:03,Industry Conference,Attended,SC0350
+PD314,2024-08-15,09:58:12,Training Session,Attended,SC0717
+PD315,2024-08-16,10:26:13,Webinar,Attended,SC0067
+PD316,2024-08-16,17:34:02,Webinar,Missed,SC0122
+PD317,2024-08-16,15:39:33,Networking Event,Upcoming,SC0178
+PD318,2024-08-16,12:29:41,Training Session,Upcoming,SC0511
+PD319,2024-08-16,15:31:41,Networking Event,Upcoming,SC0169
+PD320,2024-08-17,13:31:59,Webinar,Attended,SC0137
+PD321,2024-08-17,14:56:54,Workshop,Upcoming,SC0489
+PD322,2024-08-17,12:58:10,Webinar,Missed,SC0265
+PD323,2024-08-17,16:04:19,Training Session,Missed,SC0452
+PD324,2024-08-18,11:21:35,Training Session,Attended,SC0675
+PD325,2024-08-18,12:57:18,Webinar,Missed,SC0601
+PD326,2024-08-18,12:38:01,Networking Event,Upcoming,SC0139
+PD327,2024-08-18,11:20:21,Networking Event,Missed,SC0360
+PD328,2024-08-18,13:44:09,Webinar,Attended,SC0580
+PD329,2024-08-18,17:56:25,Webinar,Attended,SC0626
+PD330,2024-08-18,14:53:20,Industry Conference,Missed,SC0690
+PD331,2024-08-18,09:34:41,Training Session,Attended,SC0494
+PD332,2024-08-18,11:04:20,Networking Event,Attended,SC0234
+PD333,2024-08-18,10:04:26,Training Session,Attended,SC0673
+PD334,2024-08-18,13:10:11,Training Session,Missed,SC0295
+PD335,2024-08-18,15:58:01,Networking Event,Attended,SC0159
+PD336,2024-08-19,10:26:50,Training Session,Attended,SC0493
+PD337,2024-08-19,12:30:56,Webinar,Attended,SC0362
+PD338,2024-08-20,14:55:30,Workshop,Attended,SC0596
+PD339,2024-08-20,17:42:28,Networking Event,Missed,SC0377
+PD340,2024-08-20,16:24:27,Networking Event,Upcoming,SC0389
+PD341,2024-08-20,12:04:55,Training Session,Attended,SC0688
+PD342,2024-08-20,12:38:57,Webinar,Upcoming,SC0599
+PD343,2024-08-20,13:29:21,Training Session,Attended,SC0172
+PD344,2024-08-20,10:47:12,Training Session,Attended,SC0721
+PD345,2024-08-20,16:39:09,Workshop,Attended,SC0742
+PD346,2024-08-20,17:12:06,Industry Conference,Missed,SC0415
+PD347,2024-08-22,14:12:16,Networking Event,Upcoming,SC0292
+PD348,2024-08-22,09:22:17,Workshop,Attended,SC0163
+PD349,2024-08-22,11:10:21,Networking Event,Attended,SC0307
+PD350,2024-08-22,17:23:19,Industry Conference,Upcoming,SC0260
+PD351,2024-08-22,11:56:50,Training Session,Upcoming,SC0402
+PD352,2024-08-22,17:08:06,Networking Event,Upcoming,SC0219
+PD353,2024-08-23,14:22:55,Workshop,Upcoming,SC0671
+PD354,2024-08-23,15:58:48,Industry Conference,Upcoming,SC0142
+PD355,2024-08-23,16:15:00,Networking Event,Attended,SC0727
+PD356,2024-08-23,14:54:39,Webinar,Upcoming,SC0570
+PD357,2024-08-23,11:49:02,Networking Event,Attended,SC0586
+PD358,2024-08-24,12:36:08,Training Session,Attended,SC0165
+PD359,2024-08-24,11:29:32,Webinar,Missed,SC0530
+PD360,2024-08-24,16:41:21,Industry Conference,Upcoming,SC0270
+PD361,2024-08-24,12:33:56,Training Session,Upcoming,SC0011
+PD362,2024-08-24,17:39:57,Industry Conference,Attended,SC0196
+PD363,2024-08-24,17:02:42,Webinar,Missed,SC0642
+PD364,2024-08-25,12:08:28,Webinar,Attended,SC0122
+PD365,2024-08-25,12:01:59,Workshop,Missed,SC0611
+PD366,2024-08-26,15:24:49,Industry Conference,Missed,SC0532
+PD367,2024-08-26,14:35:06,Workshop,Attended,SC0004
+PD368,2024-08-26,11:17:33,Industry Conference,Attended,SC0356
+PD369,2024-08-26,17:24:38,Training Session,Upcoming,SC0517
+PD370,2024-08-27,16:34:02,Training Session,Attended,SC0703
+PD371,2024-08-27,16:48:11,Networking Event,Upcoming,SC0110
+PD372,2024-08-27,13:57:25,Industry Conference,Missed,SC0562
+PD373,2024-08-27,14:15:03,Workshop,Attended,SC0226
+PD374,2024-08-27,17:02:27,Workshop,Upcoming,SC0184
+PD375,2024-08-28,13:26:35,Training Session,Upcoming,SC0139
+PD376,2024-08-28,17:22:24,Industry Conference,Attended,SC0197
+PD377,2024-08-28,13:48:37,Industry Conference,Attended,SC0606
+PD378,2024-08-28,16:47:29,Industry Conference,Missed,SC0084
+PD379,2024-08-28,15:42:09,Webinar,Attended,SC0604
+PD380,2024-08-29,17:44:46,Workshop,Upcoming,SC0642
+PD381,2024-08-29,10:57:33,Workshop,Upcoming,SC0351
+PD382,2024-08-29,15:24:50,Training Session,Attended,SC0568
+PD383,2024-08-30,09:15:04,Networking Event,Missed,SC0741
+PD384,2024-08-30,14:17:38,Networking Event,Missed,SC0741
+PD385,2024-08-30,16:50:17,Workshop,Missed,SC0441
+PD386,2024-08-31,11:24:14,Workshop,Attended,SC0255
+PD387,2024-08-31,09:24:07,Workshop,Upcoming,SC0221
+PD388,2024-09-01,13:04:31,Industry Conference,Upcoming,SC0206
+PD389,2024-09-01,12:47:43,Webinar,Attended,SC0673
+PD390,2024-09-02,17:51:17,Workshop,Attended,SC0555
+PD391,2024-09-02,16:55:02,Workshop,Upcoming,SC0456
+PD392,2024-09-02,17:25:17,Networking Event,Attended,SC0050
+PD393,2024-09-03,17:31:02,Training Session,Missed,SC0644
+PD394,2024-09-03,16:53:00,Webinar,Missed,SC0215
+PD395,2024-09-04,12:27:54,Industry Conference,Upcoming,SC0163
+PD396,2024-09-04,11:51:21,Workshop,Missed,SC0177
+PD397,2024-09-04,10:38:57,Networking Event,Missed,SC0548
+PD398,2024-09-04,10:27:46,Training Session,Missed,SC0647
+PD399,2024-09-05,12:10:17,Industry Conference,Missed,SC0447
+PD400,2024-09-05,10:51:47,Training Session,Upcoming,SC0474
+PD401,2024-09-05,12:37:18,Workshop,Upcoming,SC0302
+PD402,2024-09-06,16:42:41,Networking Event,Upcoming,SC0360
+PD403,2024-09-06,16:02:47,Training Session,Missed,SC0102
+PD404,2024-09-06,15:55:38,Webinar,Missed,SC0024
+PD405,2024-09-06,16:45:35,Workshop,Missed,SC0292
+PD406,2024-09-06,15:50:09,Networking Event,Missed,SC0517
+PD407,2024-09-07,10:27:29,Workshop,Upcoming,SC0598
+PD408,2024-09-07,10:35:51,Industry Conference,Missed,SC0508
+PD409,2024-09-07,14:52:54,Industry Conference,Attended,SC0714
+PD410,2024-09-07,09:45:27,Industry Conference,Missed,SC0431
+PD411,2024-09-07,11:24:58,Workshop,Upcoming,SC0153
+PD412,2024-09-07,16:12:44,Networking Event,Attended,SC0327
+PD413,2024-09-08,16:30:23,Networking Event,Upcoming,SC0124
+PD414,2024-09-08,09:49:39,Industry Conference,Attended,SC0069
+PD415,2024-09-08,13:49:08,Training Session,Upcoming,SC0370
+PD416,2024-09-09,11:56:49,Networking Event,Upcoming,SC0485
+PD417,2024-09-09,14:14:44,Training Session,Attended,SC0470
+PD418,2024-09-09,15:00:06,Training Session,Upcoming,SC0091
+PD419,2024-09-10,13:45:00,Training Session,Missed,SC0682
+PD420,2024-09-10,14:28:02,Webinar,Attended,SC0583
+PD421,2024-09-10,16:04:40,Networking Event,Missed,SC0464
+PD422,2024-09-11,13:12:01,Training Session,Upcoming,SC0014
+PD423,2024-09-11,16:24:29,Workshop,Missed,SC0694
+PD424,2024-09-12,09:28:22,Webinar,Upcoming,SC0621
+PD425,2024-09-12,15:38:14,Workshop,Upcoming,SC0422
+PD426,2024-09-12,17:45:31,Training Session,Attended,SC0158
+PD427,2024-09-12,12:00:08,Industry Conference,Missed,SC0289
+PD428,2024-09-12,11:02:14,Industry Conference,Upcoming,SC0448
+PD429,2024-09-12,09:57:08,Industry Conference,Missed,SC0223
+PD430,2024-09-12,17:58:01,Workshop,Attended,SC0051
+PD431,2024-09-13,17:00:04,Webinar,Upcoming,SC0511
+PD432,2024-09-13,12:23:55,Industry Conference,Missed,SC0361
+PD433,2024-09-13,13:01:34,Workshop,Attended,SC0470
+PD434,2024-09-13,12:48:37,Networking Event,Upcoming,SC0064
+PD435,2024-09-13,11:42:50,Training Session,Missed,SC0510
+PD436,2024-09-14,10:15:34,Networking Event,Attended,SC0433
+PD437,2024-09-14,16:21:14,Webinar,Attended,SC0718
+PD438,2024-09-14,16:50:15,Training Session,Attended,SC0734
+PD439,2024-09-14,15:49:37,Workshop,Missed,SC0047
+PD440,2024-09-15,16:48:13,Networking Event,Upcoming,SC0373
+PD441,2024-09-15,17:08:37,Workshop,Upcoming,SC0521
+PD442,2024-09-16,14:00:23,Training Session,Attended,SC0519
+PD443,2024-09-16,12:12:06,Workshop,Attended,SC0178
+PD444,2024-09-16,17:08:30,Workshop,Attended,SC0256
+PD445,2024-09-16,17:43:21,Industry Conference,Upcoming,SC0691
+PD446,2024-09-17,11:25:55,Industry Conference,Attended,SC0659
+PD447,2024-09-17,17:55:15,Webinar,Attended,SC0298
+PD448,2024-09-17,09:42:04,Workshop,Missed,SC0547
+PD449,2024-09-17,09:36:02,Industry Conference,Missed,SC0392
+PD450,2024-09-17,17:12:47,Workshop,Upcoming,SC0312
+PD451,2024-09-18,17:51:30,Training Session,Missed,SC0317
+PD452,2024-09-18,09:58:28,Workshop,Upcoming,SC0428
+PD453,2024-09-18,10:19:48,Workshop,Upcoming,SC0665
+PD454,2024-09-18,14:14:45,Training Session,Attended,SC0461
+PD455,2024-09-18,17:17:46,Workshop,Upcoming,SC0621
+PD456,2024-09-18,12:37:27,Workshop,Attended,SC0472
+PD457,2024-09-18,17:34:39,Webinar,Upcoming,SC0319
+PD458,2024-09-19,15:56:20,Networking Event,Upcoming,SC0254
+PD459,2024-09-19,17:46:33,Industry Conference,Upcoming,SC0510
+PD460,2024-09-19,17:54:06,Networking Event,Upcoming,SC0456
+PD461,2024-09-19,09:44:09,Industry Conference,Attended,SC0092
+PD462,2024-09-19,09:57:59,Webinar,Upcoming,SC0598
+PD463,2024-09-19,10:04:11,Workshop,Missed,SC0527
+PD464,2024-09-19,14:09:13,Networking Event,Upcoming,SC0294
+PD465,2024-09-19,14:35:55,Networking Event,Attended,SC0703
+PD466,2024-09-20,09:38:44,Networking Event,Attended,SC0194
+PD467,2024-09-20,12:11:24,Webinar,Upcoming,SC0021
+PD468,2024-09-20,16:59:52,Industry Conference,Attended,SC0086
+PD469,2024-09-20,16:38:10,Networking Event,Attended,SC0118
+PD470,2024-09-20,13:16:10,Training Session,Upcoming,SC0143
+PD471,2024-09-21,11:07:26,Workshop,Missed,SC0253
+PD472,2024-09-21,10:59:22,Industry Conference,Attended,SC0468
+PD473,2024-09-21,16:52:23,Webinar,Missed,SC0680
+PD474,2024-09-21,15:03:54,Networking Event,Missed,SC0678
+PD475,2024-09-21,12:11:14,Industry Conference,Attended,SC0633
+PD476,2024-09-21,17:39:15,Training Session,Upcoming,SC0396
+PD477,2024-09-22,10:00:08,Networking Event,Upcoming,SC0222
+PD478,2024-09-22,09:30:50,Networking Event,Upcoming,SC0012
+PD479,2024-09-22,12:31:28,Webinar,Upcoming,SC0038
+PD480,2024-09-22,17:28:26,Networking Event,Missed,SC0400
+PD481,2024-09-23,12:28:45,Industry Conference,Attended,SC0102
+PD482,2024-09-23,15:56:58,Networking Event,Missed,SC0497
+PD483,2024-09-23,11:56:15,Training Session,Attended,SC0271
+PD484,2024-09-23,11:56:15,Workshop,Attended,SC0112
+PD485,2024-09-23,14:11:14,Webinar,Upcoming,SC0655
+PD486,2024-09-24,13:05:49,Webinar,Missed,SC0516
+PD487,2024-09-24,13:21:00,Networking Event,Missed,SC0459
+PD488,2024-09-24,09:33:13,Training Session,Attended,SC0077
+PD489,2024-09-24,11:11:48,Webinar,Upcoming,SC0243
+PD490,2024-09-24,15:49:53,Training Session,Missed,SC0636
+PD491,2024-09-24,10:59:35,Networking Event,Attended,SC0436
+PD492,2024-09-24,09:56:56,Workshop,Upcoming,SC0124
+PD493,2024-09-25,17:50:08,Workshop,Attended,SC0030
+PD494,2024-09-25,11:12:10,Industry Conference,Missed,SC0084
+PD495,2024-09-25,15:43:19,Webinar,Attended,SC0141
+PD496,2024-09-25,17:17:46,Industry Conference,Attended,SC0179
+PD497,2024-09-26,14:27:55,Webinar,Upcoming,SC0531
+PD498,2024-09-27,09:28:56,Industry Conference,Attended,SC0211
+PD499,2024-09-27,17:43:45,Webinar,Missed,SC0693
+PD500,2024-09-27,15:55:07,Training Session,Missed,SC0633
+PD501,2024-09-27,13:03:38,Industry Conference,Upcoming,SC0167
+PD502,2024-09-27,10:48:21,Webinar,Attended,SC0166
+PD503,2024-09-27,14:08:30,Webinar,Attended,SC0031
+PD504,2024-09-27,12:16:23,Networking Event,Missed,SC0259
+PD505,2024-09-27,16:35:16,Networking Event,Upcoming,SC0304
+PD506,2024-09-27,11:24:01,Training Session,Missed,SC0575
+PD507,2024-09-27,15:06:34,Webinar,Attended,SC0098
+PD508,2024-09-28,14:07:44,Webinar,Upcoming,SC0019
+PD509,2024-09-29,14:54:56,Training Session,Attended,SC0044
+PD510,2024-09-29,10:55:16,Webinar,Missed,SC0641
+PD511,2024-09-29,16:05:06,Training Session,Upcoming,SC0624
+PD512,2024-09-30,16:41:28,Training Session,Upcoming,SC0723
+PD513,2024-09-30,11:19:56,Training Session,Missed,SC0693
+PD514,2024-09-30,10:43:40,Networking Event,Attended,SC0743
+PD515,2024-09-30,11:44:55,Workshop,Upcoming,SC0157
+PD516,2024-10-01,10:01:58,Workshop,Upcoming,SC0435
+PD517,2024-10-01,15:52:27,Industry Conference,Missed,SC0336
+PD518,2024-10-01,09:39:35,Networking Event,Upcoming,SC0033
+PD519,2024-10-01,15:13:20,Workshop,Upcoming,SC0716
+PD520,2024-10-01,12:54:37,Training Session,Attended,SC0534
+PD521,2024-10-01,13:19:30,Training Session,Attended,SC0628
+PD522,2024-10-01,12:15:08,Networking Event,Upcoming,SC0190
+PD523,2024-10-01,14:27:40,Training Session,Missed,SC0512
+PD524,2024-10-01,16:07:35,Webinar,Missed,SC0418
+PD525,2024-10-01,17:50:22,Networking Event,Attended,SC0487
+PD526,2024-10-01,12:34:56,Networking Event,Attended,SC0266
+PD527,2024-10-02,13:23:56,Training Session,Attended,SC0205
+PD528,2024-10-02,15:46:49,Industry Conference,Upcoming,SC0391
+PD529,2024-10-02,14:49:29,Training Session,Missed,SC0628
+PD530,2024-10-03,13:30:13,Industry Conference,Attended,SC0600
+PD531,2024-10-03,10:38:14,Webinar,Upcoming,SC0178
+PD532,2024-10-04,15:41:27,Webinar,Attended,SC0322
+PD533,2024-10-04,11:41:00,Training Session,Attended,SC0135
+PD534,2024-10-04,17:26:38,Training Session,Missed,SC0387
+PD535,2024-10-04,15:23:51,Webinar,Missed,SC0277
+PD536,2024-10-05,14:29:12,Industry Conference,Upcoming,SC0146
+PD537,2024-10-05,09:40:52,Webinar,Attended,SC0496
+PD538,2024-10-05,09:41:04,Webinar,Missed,SC0120
+PD539,2024-10-05,11:02:08,Training Session,Missed,SC0220
+PD540,2024-10-06,17:10:21,Webinar,Attended,SC0210
+PD541,2024-10-06,14:21:11,Webinar,Missed,SC0081
+PD542,2024-10-06,13:09:21,Workshop,Attended,SC0179
+PD543,2024-10-06,11:26:56,Networking Event,Upcoming,SC0144
+PD544,2024-10-06,14:15:45,Webinar,Attended,SC0380
+PD545,2024-10-07,16:34:25,Networking Event,Missed,SC0098
+PD546,2024-10-07,14:28:09,Workshop,Attended,SC0049
+PD547,2024-10-07,17:06:15,Webinar,Attended,SC0309
+PD548,2024-10-07,16:58:47,Industry Conference,Attended,SC0736
+PD549,2024-10-07,16:54:04,Webinar,Missed,SC0555
+PD550,2024-10-08,13:30:03,Workshop,Attended,SC0736
+PD551,2024-10-08,16:08:34,Industry Conference,Upcoming,SC0048
+PD552,2024-10-08,14:55:33,Training Session,Attended,SC0525
+PD553,2024-10-08,16:06:42,Webinar,Attended,SC0089
+PD554,2024-10-08,12:24:41,Networking Event,Missed,SC0452
+PD555,2024-10-08,09:19:24,Industry Conference,Attended,SC0744
+PD556,2024-10-08,16:55:58,Training Session,Missed,SC0154
+PD557,2024-10-09,09:02:13,Networking Event,Upcoming,SC0215
+PD558,2024-10-09,16:49:39,Webinar,Attended,SC0305
+PD559,2024-10-09,13:17:47,Networking Event,Upcoming,SC0418
+PD560,2024-10-10,12:22:42,Networking Event,Attended,SC0599
+PD561,2024-10-10,16:37:57,Workshop,Attended,SC0353
+PD562,2024-10-10,15:05:37,Webinar,Attended,SC0629
+PD563,2024-10-10,15:57:40,Industry Conference,Attended,SC0346
+PD564,2024-10-10,09:28:01,Workshop,Upcoming,SC0685
+PD565,2024-10-10,09:25:05,Networking Event,Missed,SC0205
+PD566,2024-10-10,17:41:44,Training Session,Attended,SC0365
+PD567,2024-10-11,16:50:56,Training Session,Missed,SC0517
+PD568,2024-10-11,14:04:42,Networking Event,Upcoming,SC0683
+PD569,2024-10-11,09:21:15,Industry Conference,Attended,SC0058
+PD570,2024-10-12,16:22:10,Training Session,Attended,SC0411
+PD571,2024-10-13,15:35:34,Training Session,Missed,SC0144
+PD572,2024-10-13,14:23:28,Industry Conference,Attended,SC0696
+PD573,2024-10-13,13:46:08,Training Session,Upcoming,SC0567
+PD574,2024-10-13,09:39:12,Networking Event,Upcoming,SC0636
+PD575,2024-10-13,12:14:13,Networking Event,Attended,SC0243
+PD576,2024-10-14,13:29:22,Networking Event,Missed,SC0692
+PD577,2024-10-14,17:28:15,Industry Conference,Upcoming,SC0184
+PD578,2024-10-14,17:15:28,Workshop,Missed,SC0301
+PD579,2024-10-14,10:26:19,Webinar,Missed,SC0038
+PD580,2024-10-14,10:58:17,Industry Conference,Attended,SC0321
+PD581,2024-10-14,14:59:25,Training Session,Missed,SC0673
+PD582,2024-10-14,10:28:00,Webinar,Upcoming,SC0336
+PD583,2024-10-14,10:22:18,Workshop,Missed,SC0056
+PD584,2024-10-15,10:47:32,Webinar,Missed,SC0690
+PD585,2024-10-15,13:04:12,Training Session,Missed,SC0708
+PD586,2024-10-15,11:58:27,Workshop,Attended,SC0078
+PD587,2024-10-15,12:57:02,Training Session,Upcoming,SC0004
+PD588,2024-10-15,14:37:25,Webinar,Attended,SC0059
+PD589,2024-10-16,10:35:09,Training Session,Upcoming,SC0291
+PD590,2024-10-16,16:20:39,Training Session,Missed,SC0499
+PD591,2024-10-16,12:20:15,Industry Conference,Attended,SC0125
+PD592,2024-10-16,12:28:48,Webinar,Upcoming,SC0347
+PD593,2024-10-16,14:05:01,Networking Event,Upcoming,SC0246
+PD594,2024-10-16,10:22:10,Industry Conference,Upcoming,SC0122
+PD595,2024-10-17,11:25:46,Networking Event,Missed,SC0001
+PD596,2024-10-17,10:45:43,Training Session,Attended,SC0020
+PD597,2024-10-17,17:00:26,Industry Conference,Attended,SC0284
+PD598,2024-10-17,14:23:57,Workshop,Upcoming,SC0636
+PD599,2024-10-18,12:26:19,Industry Conference,Upcoming,SC0184
+PD600,2024-10-18,15:35:25,Training Session,Attended,SC0068
+PD601,2024-10-18,15:33:29,Workshop,Attended,SC0595
+PD602,2024-10-18,16:53:59,Networking Event,Upcoming,SC0222
+PD603,2024-10-18,11:41:12,Industry Conference,Upcoming,SC0196
+PD604,2024-10-18,17:49:10,Training Session,Missed,SC0228
+PD605,2024-10-19,14:49:43,Networking Event,Missed,SC0729
+PD606,2024-10-19,10:12:21,Industry Conference,Missed,SC0679
+PD607,2024-10-19,10:55:41,Training Session,Missed,SC0001
+PD608,2024-10-19,15:09:45,Webinar,Upcoming,SC0601
+PD609,2024-10-20,15:36:50,Networking Event,Attended,SC0135
+PD610,2024-10-20,14:22:54,Workshop,Missed,SC0606
+PD611,2024-10-20,11:14:29,Industry Conference,Attended,SC0367
+PD612,2024-10-20,09:35:57,Webinar,Attended,SC0013
+PD613,2024-10-20,09:08:05,Networking Event,Attended,SC0669
+PD614,2024-10-20,13:19:58,Networking Event,Missed,SC0065
+PD615,2024-10-21,17:06:03,Workshop,Upcoming,SC0074
+PD616,2024-10-21,17:22:15,Training Session,Upcoming,SC0187
+PD617,2024-10-21,14:33:21,Industry Conference,Upcoming,SC0177
+PD618,2024-10-21,16:04:43,Industry Conference,Attended,SC0585
+PD619,2024-10-22,17:34:47,Training Session,Missed,SC0545
+PD620,2024-10-22,13:21:34,Networking Event,Upcoming,SC0015
+PD621,2024-10-23,16:24:58,Training Session,Upcoming,SC0630
+PD622,2024-10-23,10:13:30,Industry Conference,Missed,SC0119
+PD623,2024-10-23,12:42:48,Training Session,Missed,SC0480
+PD624,2024-10-24,12:10:05,Workshop,Attended,SC0191
+PD625,2024-10-24,17:14:55,Industry Conference,Attended,SC0505
+PD626,2024-10-24,16:06:18,Workshop,Attended,SC0552
+PD627,2024-10-24,14:18:56,Training Session,Missed,SC0484
+PD628,2024-10-24,09:39:09,Industry Conference,Upcoming,SC0627
+PD629,2024-10-24,12:34:07,Industry Conference,Missed,SC0717
+PD630,2024-10-25,14:55:05,Webinar,Attended,SC0298
+PD631,2024-10-25,12:59:06,Networking Event,Missed,SC0495
+PD632,2024-10-25,13:46:24,Networking Event,Missed,SC0430
+PD633,2024-10-25,16:49:45,Networking Event,Upcoming,SC0507
+PD634,2024-10-26,14:19:45,Industry Conference,Upcoming,SC0268
+PD635,2024-10-26,13:16:58,Workshop,Missed,SC0411
+PD636,2024-10-26,10:48:15,Networking Event,Missed,SC0604
+PD637,2024-10-26,09:57:58,Industry Conference,Upcoming,SC0068
+PD638,2024-10-27,12:46:48,Webinar,Attended,SC0549
+PD639,2024-10-27,15:56:07,Networking Event,Upcoming,SC0597
+PD640,2024-10-28,09:56:18,Networking Event,Upcoming,SC0037
+PD641,2024-10-28,10:17:42,Training Session,Missed,SC0600
+PD642,2024-10-28,15:47:11,Networking Event,Missed,SC0674
+PD643,2024-10-29,16:44:06,Networking Event,Missed,SC0025
+PD644,2024-10-29,16:36:03,Training Session,Missed,SC0098
+PD645,2024-10-30,15:53:03,Training Session,Upcoming,SC0554
+PD646,2024-10-30,12:41:51,Networking Event,Missed,SC0173
+PD647,2024-10-30,13:04:52,Webinar,Missed,SC0736
+PD648,2024-10-30,14:56:44,Webinar,Upcoming,SC0004
+PD649,2024-10-30,14:56:52,Training Session,Missed,SC0312
+PD650,2024-10-31,13:03:26,Workshop,Upcoming,SC0375
+PD651,2024-10-31,09:13:14,Industry Conference,Attended,SC0623
+PD652,2024-10-31,16:08:51,Training Session,Attended,SC0247
+PD653,2024-10-31,16:25:48,Training Session,Upcoming,SC0352
+PD654,2024-10-31,11:45:57,Training Session,Upcoming,SC0037
+PD655,2024-11-01,14:15:32,Networking Event,Upcoming,SC0441
+PD656,2024-11-01,14:18:18,Workshop,Attended,SC0544
+PD657,2024-11-01,09:57:14,Webinar,Attended,SC0275
+PD658,2024-11-02,11:58:57,Industry Conference,Missed,SC0185
+PD659,2024-11-02,12:58:07,Networking Event,Attended,SC0684
+PD660,2024-11-03,14:17:59,Networking Event,Missed,SC0109
+PD661,2024-11-03,17:02:01,Training Session,Attended,SC0597
+PD662,2024-11-04,14:28:23,Networking Event,Missed,SC0378
+PD663,2024-11-04,15:35:26,Workshop,Attended,SC0680
+PD664,2024-11-04,16:14:39,Training Session,Upcoming,SC0518
+PD665,2024-11-04,12:39:58,Training Session,Upcoming,SC0495
+PD666,2024-11-04,17:23:17,Networking Event,Upcoming,SC0001
+PD667,2024-11-04,09:34:15,Webinar,Attended,SC0232
+PD668,2024-11-04,16:03:51,Webinar,Missed,SC0232
+PD669,2024-11-05,09:48:02,Industry Conference,Attended,SC0133
+PD670,2024-11-05,14:04:43,Networking Event,Attended,SC0503
+PD671,2024-11-05,09:04:41,Training Session,Attended,SC0387
+PD672,2024-11-05,09:05:48,Webinar,Attended,SC0357
+PD673,2024-11-06,15:26:42,Workshop,Upcoming,SC0516
+PD674,2024-11-06,10:41:32,Industry Conference,Attended,SC0046
+PD675,2024-11-07,16:24:28,Webinar,Upcoming,SC0681
+PD676,2024-11-07,15:45:04,Training Session,Attended,SC0053
+PD677,2024-11-07,13:51:49,Workshop,Upcoming,SC0542
+PD678,2024-11-07,16:53:49,Networking Event,Missed,SC0130
+PD679,2024-11-08,11:45:53,Networking Event,Missed,SC0724
+PD680,2024-11-09,17:19:00,Training Session,Missed,SC0267
+PD681,2024-11-09,11:33:42,Training Session,Attended,SC0033
+PD682,2024-11-09,12:27:15,Workshop,Missed,SC0417
+PD683,2024-11-09,15:04:44,Industry Conference,Attended,SC0732
+PD684,2024-11-09,13:26:06,Webinar,Attended,SC0651
+PD685,2024-11-09,14:52:02,Workshop,Upcoming,SC0082
+PD686,2024-11-09,12:59:37,Industry Conference,Upcoming,SC0128
+PD687,2024-11-10,12:39:54,Industry Conference,Missed,SC0435
+PD688,2024-11-10,16:18:26,Training Session,Attended,SC0264
+PD689,2024-11-10,16:38:03,Workshop,Upcoming,SC0455
+PD690,2024-11-11,12:30:46,Industry Conference,Upcoming,SC0034
+PD691,2024-11-11,15:31:52,Training Session,Missed,SC0697
+PD692,2024-11-11,16:24:21,Webinar,Upcoming,SC0612
+PD693,2024-11-11,13:14:52,Industry Conference,Upcoming,SC0701
+PD694,2024-11-11,16:00:43,Training Session,Attended,SC0040
+PD695,2024-11-11,12:23:59,Industry Conference,Attended,SC0686
+PD696,2024-11-12,17:56:53,Webinar,Attended,SC0626
+PD697,2024-11-12,14:14:39,Training Session,Upcoming,SC0180
+PD698,2024-11-13,17:04:25,Workshop,Missed,SC0162
+PD699,2024-11-13,15:26:17,Webinar,Missed,SC0102
+PD700,2024-11-13,15:07:51,Workshop,Upcoming,SC0627
+PD701,2024-11-13,14:44:50,Workshop,Upcoming,SC0520
+PD702,2024-11-13,13:25:16,Workshop,Upcoming,SC0555
+PD703,2024-11-14,14:23:39,Webinar,Missed,SC0179
+PD704,2024-11-15,12:33:51,Industry Conference,Upcoming,SC0375
+PD705,2024-11-15,10:28:36,Networking Event,Attended,SC0653
+PD706,2024-11-16,14:24:56,Industry Conference,Missed,SC0353
+PD707,2024-11-16,16:24:09,Industry Conference,Missed,SC0248
+PD708,2024-11-16,09:41:55,Training Session,Missed,SC0550
+PD709,2024-11-16,11:44:16,Networking Event,Missed,SC0225
+PD710,2024-11-17,13:35:46,Training Session,Attended,SC0651
+PD711,2024-11-17,10:20:20,Training Session,Upcoming,SC0205
+PD712,2024-11-17,17:27:33,Workshop,Attended,SC0250
+PD713,2024-11-17,11:36:36,Workshop,Attended,SC0490
+PD714,2024-11-18,17:45:34,Networking Event,Attended,SC0465
+PD715,2024-11-18,11:44:30,Training Session,Upcoming,SC0585
+PD716,2024-11-18,09:17:22,Webinar,Upcoming,SC0124
+PD717,2024-11-18,15:43:29,Industry Conference,Missed,SC0129
+PD718,2024-11-19,15:54:37,Industry Conference,Attended,SC0264
+PD719,2024-11-19,13:19:09,Industry Conference,Upcoming,SC0358
+PD720,2024-11-19,15:18:34,Training Session,Attended,SC0467
+PD721,2024-11-19,17:52:20,Industry Conference,Upcoming,SC0048
+PD722,2024-11-19,13:30:47,Industry Conference,Missed,SC0429
+PD723,2024-11-19,10:23:06,Workshop,Attended,SC0647
+PD724,2024-11-19,09:33:52,Workshop,Upcoming,SC0575
+PD725,2024-11-19,11:42:41,Training Session,Missed,SC0175
+PD726,2024-11-20,13:45:14,Webinar,Attended,SC0156
+PD727,2024-11-20,14:09:24,Industry Conference,Attended,SC0078
+PD728,2024-11-20,16:04:37,Industry Conference,Attended,SC0408
+PD729,2024-11-20,15:33:31,Workshop,Attended,SC0746
+PD730,2024-11-20,16:51:37,Workshop,Missed,SC0205
+PD731,2024-11-21,10:54:00,Webinar,Upcoming,SC0537
+PD732,2024-11-21,16:46:27,Training Session,Upcoming,SC0726
+PD733,2024-11-21,14:20:49,Networking Event,Attended,SC0375
+PD734,2024-11-22,16:47:30,Training Session,Upcoming,SC0446
+PD735,2024-11-22,17:34:28,Industry Conference,Attended,SC0402
+PD736,2024-11-22,11:28:51,Networking Event,Upcoming,SC0120
+PD737,2024-11-23,17:32:37,Industry Conference,Missed,SC0595
+PD738,2024-11-23,09:00:44,Networking Event,Attended,SC0636
+PD739,2024-11-23,16:30:53,Webinar,Upcoming,SC0552
+PD740,2024-11-23,11:42:14,Industry Conference,Attended,SC0125
+PD741,2024-11-24,10:49:08,Workshop,Upcoming,SC0423
+PD742,2024-11-24,09:30:31,Networking Event,Attended,SC0687
+PD743,2024-11-25,13:02:02,Webinar,Upcoming,SC0632
+PD744,2024-11-25,10:27:29,Webinar,Missed,SC0120
+PD745,2024-11-25,12:33:12,Industry Conference,Attended,SC0198
+PD746,2024-11-26,16:23:35,Workshop,Attended,SC0032
+PD747,2024-11-26,09:48:57,Webinar,Missed,SC0167
+PD748,2024-11-26,16:51:47,Training Session,Attended,SC0434
+PD749,2024-11-26,14:02:09,Webinar,Missed,SC0438
+PD750,2024-11-26,15:58:11,Training Session,Attended,SC0123
+PD751,2024-11-26,17:19:57,Industry Conference,Upcoming,SC0739
+PD752,2024-11-27,12:49:27,Workshop,Attended,SC0387
+PD753,2024-11-28,13:58:32,Webinar,Attended,SC0103
+PD754,2024-11-28,14:06:02,Webinar,Upcoming,SC0279
+PD755,2024-11-28,13:20:47,Workshop,Missed,SC0037
+PD756,2024-11-28,15:35:59,Training Session,Missed,SC0168
+PD757,2024-11-28,14:09:49,Training Session,Missed,SC0104
+PD758,2024-11-28,11:09:25,Workshop,Upcoming,SC0488
+PD759,2024-11-28,15:04:20,Workshop,Upcoming,SC0563
+PD760,2024-11-29,13:47:35,Workshop,Attended,SC0030
+PD761,2024-11-29,14:28:22,Training Session,Missed,SC0652
+PD762,2024-11-29,11:08:02,Industry Conference,Missed,SC0093
+PD763,2024-11-29,14:19:20,Networking Event,Missed,SC0741
+PD764,2024-11-30,14:52:41,Webinar,Attended,SC0530
+PD765,2024-11-30,12:03:40,Training Session,Attended,SC0709
+PD766,2024-11-30,10:48:01,Webinar,Missed,SC0285
+PD767,2024-11-30,11:50:26,Industry Conference,Upcoming,SC0720
+PD768,2024-11-30,10:21:44,Networking Event,Upcoming,SC0203
+PD769,2024-12-01,17:01:38,Training Session,Upcoming,SC0608
+PD770,2024-12-01,15:56:05,Webinar,Missed,SC0438
+PD771,2024-12-01,09:37:33,Networking Event,Attended,SC0033
+PD772,2024-12-01,14:17:45,Webinar,Attended,SC0075
+PD773,2024-12-01,13:34:55,Webinar,Attended,SC0233
+PD774,2024-12-01,09:24:32,Networking Event,Upcoming,SC0044
+PD775,2024-12-02,12:46:43,Networking Event,Missed,SC0663
+PD776,2024-12-02,15:55:44,Webinar,Upcoming,SC0287
+PD777,2024-12-02,13:05:47,Webinar,Upcoming,SC0736
+PD778,2024-12-03,13:02:32,Industry Conference,Missed,SC0407
+PD779,2024-12-03,10:20:54,Workshop,Missed,SC0240
+PD780,2024-12-03,17:36:50,Networking Event,Upcoming,SC0738
+PD781,2024-12-04,10:12:31,Webinar,Attended,SC0406
+PD782,2024-12-04,16:42:49,Training Session,Upcoming,SC0507
+PD783,2024-12-05,13:10:15,Industry Conference,Upcoming,SC0019
+PD784,2024-12-05,13:46:03,Industry Conference,Missed,SC0063
+PD785,2024-12-05,11:25:35,Training Session,Upcoming,SC0297
+PD786,2024-12-06,09:20:48,Webinar,Upcoming,SC0535
+PD787,2024-12-06,10:23:34,Training Session,Upcoming,SC0644
+PD788,2024-12-07,10:22:10,Networking Event,Upcoming,SC0179
+PD789,2024-12-07,11:04:04,Webinar,Attended,SC0648
+PD790,2024-12-08,12:07:25,Industry Conference,Missed,SC0440
+PD791,2024-12-08,12:47:31,Webinar,Attended,SC0395
+PD792,2024-12-08,14:30:52,Networking Event,Attended,SC0672
+PD793,2024-12-08,17:40:32,Training Session,Upcoming,SC0272
+PD794,2024-12-09,15:26:33,Industry Conference,Attended,SC0495
+PD795,2024-12-09,13:32:45,Training Session,Upcoming,SC0403
+PD796,2024-12-10,15:08:50,Workshop,Attended,SC0356
+PD797,2024-12-10,14:36:56,Webinar,Attended,SC0361
+PD798,2024-12-10,14:22:14,Webinar,Attended,SC0750
+PD799,2024-12-10,11:30:37,Webinar,Upcoming,SC0621
+PD800,2024-12-11,17:46:11,Training Session,Attended,SC0649
+PD801,2024-12-11,15:00:06,Workshop,Attended,SC0409
+PD802,2024-12-11,11:50:59,Webinar,Missed,SC0275
+PD803,2024-12-11,12:50:20,Workshop,Upcoming,SC0607
+PD804,2024-12-12,14:28:50,Industry Conference,Attended,SC0288
+PD805,2024-12-12,09:44:36,Training Session,Missed,SC0397
+PD806,2024-12-13,11:39:38,Webinar,Upcoming,SC0093
+PD807,2024-12-13,16:50:13,Networking Event,Missed,SC0243
+PD808,2024-12-13,14:00:42,Workshop,Missed,SC0098
+PD809,2024-12-14,15:05:44,Industry Conference,Upcoming,SC0462
+PD810,2024-12-14,10:45:24,Workshop,Attended,SC0225
+PD811,2024-12-14,10:05:24,Workshop,Missed,SC0499
+PD812,2024-12-15,17:41:56,Networking Event,Missed,SC0130
+PD813,2024-12-15,09:00:41,Workshop,Attended,SC0701
+PD814,2024-12-16,11:35:45,Webinar,Missed,SC0311
+PD815,2024-12-16,11:03:50,Networking Event,Upcoming,SC0670
+PD816,2024-12-16,17:37:51,Industry Conference,Attended,SC0439
+PD817,2024-12-16,10:22:52,Networking Event,Attended,SC0613
+PD818,2024-12-16,11:59:56,Workshop,Upcoming,SC0732
+PD819,2024-12-17,13:14:41,Industry Conference,Upcoming,SC0371
+PD820,2024-12-17,17:31:58,Networking Event,Missed,SC0256
+PD821,2024-12-17,10:38:10,Industry Conference,Attended,SC0670
+PD822,2024-12-17,15:36:33,Networking Event,Attended,SC0558
+PD823,2024-12-18,15:42:18,Workshop,Missed,SC0487
+PD824,2024-12-18,11:11:53,Networking Event,Upcoming,SC0035
+PD825,2024-12-19,15:50:10,Workshop,Attended,SC0282
+PD826,2024-12-19,09:04:59,Networking Event,Missed,SC0582
+PD827,2024-12-19,15:54:54,Networking Event,Missed,SC0631
+PD828,2024-12-19,14:56:31,Industry Conference,Upcoming,SC0737
+PD829,2024-12-19,17:58:44,Industry Conference,Missed,SC0664
+PD830,2024-12-19,14:53:40,Workshop,Missed,SC0089
+PD831,2024-12-19,15:26:36,Training Session,Attended,SC0252
+PD832,2024-12-19,12:33:30,Webinar,Upcoming,SC0039
+PD833,2024-12-19,13:09:57,Industry Conference,Missed,SC0743
+PD834,2024-12-19,17:59:33,Networking Event,Attended,SC0301
+PD835,2024-12-20,09:23:39,Networking Event,Attended,SC0525
+PD836,2024-12-20,16:48:17,Industry Conference,Attended,SC0053
+PD837,2024-12-20,10:15:26,Webinar,Attended,SC0094
+PD838,2024-12-20,12:00:35,Training Session,Upcoming,SC0281
+PD839,2024-12-20,15:15:50,Workshop,Attended,SC0699
+PD840,2024-12-21,17:32:50,Networking Event,Missed,SC0375
+PD841,2024-12-21,15:14:55,Networking Event,Missed,SC0222
+PD842,2024-12-22,14:37:55,Webinar,Upcoming,SC0644
+PD843,2024-12-22,14:24:39,Training Session,Attended,SC0137
+PD844,2024-12-22,15:18:07,Webinar,Attended,SC0085
+PD845,2024-12-22,12:01:02,Networking Event,Missed,SC0169
+PD846,2024-12-22,10:16:01,Webinar,Missed,SC0121
+PD847,2024-12-22,10:02:34,Networking Event,Upcoming,SC0529
+PD848,2024-12-23,14:39:08,Industry Conference,Upcoming,SC0256
+PD849,2024-12-23,13:20:12,Industry Conference,Missed,SC0311
+PD850,2024-12-23,12:16:05,Workshop,Attended,SC0106
+PD851,2024-12-23,14:28:59,Training Session,Upcoming,SC0091
+PD852,2024-12-24,16:06:40,Networking Event,Missed,SC0094
+PD853,2024-12-24,15:56:31,Workshop,Upcoming,SC0177
+PD854,2024-12-24,16:59:19,Networking Event,Missed,SC0569
+PD855,2024-12-24,13:39:38,Training Session,Missed,SC0711
+PD856,2024-12-24,11:58:57,Training Session,Missed,SC0431
+PD857,2024-12-24,12:19:55,Networking Event,Upcoming,SC0554
+PD858,2024-12-25,13:59:22,Workshop,Attended,SC0212
+PD859,2024-12-25,12:34:19,Training Session,Upcoming,SC0006
+PD860,2024-12-25,09:09:08,Webinar,Attended,SC0109
+PD861,2024-12-25,13:02:54,Webinar,Attended,SC0219
+PD862,2024-12-25,13:37:09,Training Session,Attended,SC0618
+PD863,2024-12-25,10:28:13,Networking Event,Upcoming,SC0541
+PD864,2024-12-25,14:47:40,Webinar,Missed,SC0019
+PD865,2024-12-26,16:11:04,Training Session,Upcoming,SC0336
+PD866,2024-12-26,11:27:21,Training Session,Missed,SC0632
+PD867,2024-12-26,17:48:09,Industry Conference,Missed,SC0349
+PD868,2024-12-26,15:01:54,Webinar,Attended,SC0003
+PD869,2024-12-27,16:23:13,Industry Conference,Attended,SC0691
+PD870,2024-12-27,10:27:24,Training Session,Missed,SC0192
+PD871,2024-12-27,09:05:17,Networking Event,Attended,SC0605
+PD872,2024-12-27,17:34:51,Networking Event,Attended,SC0472
+PD873,2024-12-28,13:35:28,Networking Event,Attended,SC0043
+PD874,2024-12-28,11:12:58,Industry Conference,Attended,SC0495
+PD875,2024-12-28,15:47:50,Networking Event,Missed,SC0689
+PD876,2024-12-28,09:36:57,Training Session,Missed,SC0250
+PD877,2024-12-29,17:10:51,Industry Conference,Missed,SC0408
+PD878,2024-12-29,16:23:52,Webinar,Upcoming,SC0074
+PD879,2024-12-29,11:08:01,Industry Conference,Attended,SC0575
+PD880,2024-12-29,10:44:25,Training Session,Attended,SC0481
+PD881,2024-12-30,13:33:56,Industry Conference,Missed,SC0527
+PD882,2024-12-30,10:10:33,Training Session,Upcoming,SC0608
+PD883,2024-12-30,09:46:25,Industry Conference,Missed,SC0738
+PD884,2024-12-30,09:14:12,Workshop,Attended,SC0423
+PD885,2024-12-30,15:50:14,Training Session,Attended,SC0382
+PD886,2024-12-30,17:33:35,Webinar,Missed,SC0587
+PD887,2024-12-30,11:50:58,Industry Conference,Missed,SC0394
+PD888,2024-12-30,12:16:41,Training Session,Attended,SC0580
+PD889,2024-12-31,09:44:04,Industry Conference,Attended,SC0299
+PD890,2025-01-01,12:51:42,Industry Conference,Upcoming,SC0591
+PD891,2025-01-01,17:23:35,Workshop,Attended,SC0030
+PD892,2025-01-01,11:24:06,Workshop,Attended,SC0176
+PD893,2025-01-01,15:39:09,Webinar,Attended,SC0220
+PD894,2025-01-01,14:02:03,Training Session,Attended,SC0069
+PD895,2025-01-01,12:25:25,Industry Conference,Missed,SC0644
+PD896,2025-01-02,17:00:27,Networking Event,Missed,SC0544
+PD897,2025-01-02,17:17:46,Industry Conference,Upcoming,SC0300
+PD898,2025-01-02,11:21:03,Webinar,Upcoming,SC0537
+PD899,2025-01-03,16:39:32,Workshop,Upcoming,SC0732
+PD900,2025-01-03,11:26:14,Training Session,Upcoming,SC0679
+PD901,2025-01-03,09:42:56,Networking Event,Attended,SC0152
+PD902,2025-01-03,10:52:51,Industry Conference,Attended,SC0132
+PD903,2025-01-03,16:42:44,Training Session,Attended,SC0637
+PD904,2025-01-03,12:07:57,Training Session,Attended,SC0304
+PD905,2025-01-04,16:54:39,Networking Event,Upcoming,SC0248
+PD906,2025-01-04,17:44:12,Training Session,Upcoming,SC0652
+PD907,2025-01-04,14:03:26,Workshop,Attended,SC0204
+PD908,2025-01-05,13:28:18,Webinar,Upcoming,SC0629
+PD909,2025-01-05,12:50:04,Workshop,Missed,SC0357
+PD910,2025-01-05,17:54:37,Training Session,Upcoming,SC0443
+PD911,2025-01-05,11:28:12,Networking Event,Attended,SC0479
+PD912,2025-01-05,13:57:34,Networking Event,Attended,SC0578
+PD913,2025-01-06,16:04:04,Webinar,Upcoming,SC0017
+PD914,2025-01-06,10:57:26,Workshop,Missed,SC0681
+PD915,2025-01-07,09:30:00,Training Session,Attended,SC0740
+PD916,2025-01-07,11:11:32,Networking Event,Upcoming,SC0058
+PD917,2025-01-07,10:11:40,Networking Event,Missed,SC0247
+PD918,2025-01-07,10:51:56,Webinar,Missed,SC0020
+PD919,2025-01-07,10:31:53,Industry Conference,Upcoming,SC0212
+PD920,2025-01-07,10:41:31,Webinar,Upcoming,SC0410
+PD921,2025-01-08,13:28:38,Networking Event,Attended,SC0508
+PD922,2025-01-08,13:26:54,Networking Event,Upcoming,SC0716
+PD923,2025-01-08,14:00:26,Training Session,Attended,SC0377
+PD924,2025-01-08,15:42:52,Industry Conference,Upcoming,SC0745
+PD925,2025-01-09,12:28:45,Networking Event,Attended,SC0037
+PD926,2025-01-09,13:12:09,Webinar,Upcoming,SC0261
+PD927,2025-01-09,16:25:36,Networking Event,Missed,SC0671
+PD928,2025-01-09,12:13:52,Training Session,Missed,SC0401
+PD929,2025-01-10,15:00:44,Networking Event,Missed,SC0169
+PD930,2025-01-10,17:55:23,Industry Conference,Missed,SC0482
+PD931,2025-01-10,16:11:03,Networking Event,Attended,SC0369
+PD932,2025-01-10,15:37:08,Industry Conference,Missed,SC0460
+PD933,2025-01-11,09:42:25,Workshop,Attended,SC0005
+PD934,2025-01-11,16:38:58,Workshop,Missed,SC0132
+PD935,2025-01-11,14:39:06,Industry Conference,Upcoming,SC0248
+PD936,2025-01-12,17:35:14,Webinar,Missed,SC0074
+PD937,2025-01-13,15:00:44,Workshop,Attended,SC0145
+PD938,2025-01-13,15:25:21,Workshop,Upcoming,SC0516
+PD939,2025-01-13,11:05:43,Networking Event,Upcoming,SC0385
+PD940,2025-01-13,10:57:55,Webinar,Missed,SC0152
+PD941,2025-01-14,10:17:21,Networking Event,Missed,SC0614
+PD942,2025-01-14,09:48:19,Training Session,Attended,SC0443
+PD943,2025-01-15,15:43:34,Workshop,Attended,SC0739
+PD944,2025-01-15,15:30:31,Training Session,Upcoming,SC0697
+PD945,2025-01-15,16:53:10,Training Session,Missed,SC0003
+PD946,2025-01-15,17:16:30,Networking Event,Upcoming,SC0740
+PD947,2025-01-16,15:32:10,Training Session,Upcoming,SC0586
+PD948,2025-01-16,10:59:04,Training Session,Missed,SC0336
+PD949,2025-01-16,15:58:54,Webinar,Attended,SC0069
+PD950,2025-01-16,11:04:11,Networking Event,Missed,SC0671
+PD951,2025-01-16,13:41:02,Industry Conference,Attended,SC0047
+PD952,2025-01-16,15:15:19,Training Session,Attended,SC0495
+PD953,2025-01-17,14:48:26,Workshop,Upcoming,SC0483
+PD954,2025-01-17,15:56:43,Networking Event,Attended,SC0051
+PD955,2025-01-17,09:25:33,Networking Event,Upcoming,SC0695
+PD956,2025-01-17,14:03:07,Workshop,Attended,SC0186
+PD957,2025-01-17,17:00:37,Workshop,Attended,SC0257
+PD958,2025-01-18,09:47:33,Networking Event,Upcoming,SC0229
+PD959,2025-01-18,09:26:55,Webinar,Attended,SC0399
+PD960,2025-01-18,11:33:05,Training Session,Missed,SC0108
+PD961,2025-01-18,09:25:25,Training Session,Attended,SC0566
+PD962,2025-01-18,10:39:05,Networking Event,Upcoming,SC0391
+PD963,2025-01-18,11:15:07,Workshop,Attended,SC0123
+PD964,2025-01-19,11:10:59,Training Session,Upcoming,SC0517
+PD965,2025-01-19,14:23:11,Networking Event,Upcoming,SC0454
+PD966,2025-01-19,14:07:32,Training Session,Attended,SC0336
+PD967,2025-01-20,09:02:07,Workshop,Attended,SC0541
+PD968,2025-01-20,09:29:20,Workshop,Missed,SC0577
+PD969,2025-01-20,16:36:14,Industry Conference,Upcoming,SC0447
+PD970,2025-01-20,13:56:42,Workshop,Attended,SC0397
+PD971,2025-01-20,17:52:49,Webinar,Missed,SC0367
+PD972,2025-01-20,14:55:11,Training Session,Upcoming,SC0061
+PD973,2025-01-20,13:53:46,Webinar,Upcoming,SC0487
+PD974,2025-01-20,17:34:04,Training Session,Missed,SC0207
+PD975,2025-01-20,14:17:19,Webinar,Upcoming,SC0136
+PD976,2025-01-20,15:08:03,Workshop,Missed,SC0110
+PD977,2025-01-21,11:21:01,Workshop,Upcoming,SC0280
+PD978,2025-01-21,15:17:58,Networking Event,Attended,SC0696
+PD979,2025-01-21,12:08:10,Networking Event,Upcoming,SC0558
+PD980,2025-01-22,17:50:27,Industry Conference,Missed,SC0167
+PD981,2025-01-22,17:54:15,Webinar,Attended,SC0111
+PD982,2025-01-22,14:41:35,Workshop,Upcoming,SC0459
+PD983,2025-01-22,15:54:53,Training Session,Missed,SC0209
+PD984,2025-01-23,09:56:59,Networking Event,Missed,SC0616
+PD985,2025-01-23,16:33:01,Industry Conference,Missed,SC0310
+PD986,2025-01-23,12:22:21,Webinar,Missed,SC0430
+PD987,2025-01-23,09:55:21,Training Session,Upcoming,SC0155
+PD988,2025-01-23,16:43:31,Industry Conference,Attended,SC0062
+PD989,2025-01-24,16:06:35,Industry Conference,Missed,SC0648
+PD990,2025-01-24,10:30:57,Networking Event,Upcoming,SC0561
+PD991,2025-01-24,13:46:21,Industry Conference,Attended,SC0393
+PD992,2025-01-24,10:14:02,Webinar,Attended,SC0124
+PD993,2025-01-24,14:00:41,Industry Conference,Missed,SC0114
+PD994,2025-01-24,15:35:52,Networking Event,Missed,SC0322
+PD995,2025-01-25,17:41:40,Industry Conference,Upcoming,SC0197
+PD996,2025-01-26,09:30:16,Workshop,Upcoming,SC0394
+PD997,2025-01-26,12:51:31,Training Session,Attended,SC0170
+PD998,2025-01-26,16:02:04,Workshop,Upcoming,SC0719
+PD999,2025-01-26,17:53:05,Training Session,Attended,SC0091
+PD1000,2025-01-26,16:11:21,Networking Event,Missed,SC0677
+PD1001,2025-01-26,11:57:30,Networking Event,Missed,SC0041
+PD1002,2025-01-26,14:01:06,Workshop,Upcoming,SC0598
+PD1003,2025-01-27,17:26:23,Networking Event,Upcoming,SC0705
+PD1004,2025-01-28,15:26:57,Workshop,Missed,SC0554
+PD1005,2025-01-28,10:56:39,Training Session,Attended,SC0645
+PD1006,2025-01-28,12:34:38,Training Session,Upcoming,SC0012
+PD1007,2025-01-28,13:43:27,Training Session,Attended,SC0627
+PD1008,2025-01-28,10:42:02,Training Session,Attended,SC0302
+PD1009,2025-01-29,14:41:13,Training Session,Attended,SC0019
+PD1010,2025-01-29,15:26:25,Networking Event,Missed,SC0646
+PD1011,2025-01-29,15:46:01,Industry Conference,Upcoming,SC0485
+PD1012,2025-01-30,10:32:19,Training Session,Missed,SC0265
+PD1013,2025-01-30,12:24:21,Networking Event,Attended,SC0280
+PD1014,2025-01-30,09:55:20,Networking Event,Attended,SC0319
+PD1015,2025-01-30,10:56:29,Workshop,Missed,SC0198
+PD1016,2025-01-31,17:59:54,Workshop,Missed,SC0234
+PD1017,2025-01-31,14:59:23,Networking Event,Missed,SC0441
+PD1018,2025-01-31,13:29:35,Training Session,Missed,SC0623
+PD1019,2025-01-31,13:52:58,Networking Event,Missed,SC0161
+PD1020,2025-01-31,10:52:14,Networking Event,Missed,SC0747
+PD1021,2025-01-31,15:41:30,Industry Conference,Attended,SC0060
+PD1022,2025-01-31,16:31:13,Training Session,Attended,SC0117
+PD1023,2025-01-31,17:48:23,Industry Conference,Upcoming,SC0408
+PD1024,2025-01-31,17:30:18,Webinar,Upcoming,SC0172
+PD1025,2025-01-31,09:57:47,Training Session,Attended,SC0219
+PD1026,2025-01-31,12:21:01,Industry Conference,Upcoming,SC0528
+PD1027,2025-01-31,14:32:53,Workshop,Upcoming,SC0722
+PD1028,2025-01-31,10:59:48,Networking Event,Attended,SC0154
+PD1029,2025-01-31,15:05:56,Industry Conference,Missed,SC0107
+PD1030,2025-01-31,17:16:57,Industry Conference,Attended,SC0150
+PD1031,2025-01-31,16:10:14,Workshop,Attended,SC0506
+PD1032,2025-01-31,09:12:39,Industry Conference,Missed,SC0538
+PD1033,2025-01-31,17:03:42,Networking Event,Missed,SC0594
+PD1034,2025-01-31,11:27:03,Industry Conference,Upcoming,SC0100
+PD1035,2025-01-31,15:24:43,Industry Conference,Attended,SC0192
+PD1036,2025-01-31,15:16:21,Training Session,Missed,SC0457
+PD1037,2025-01-31,15:31:05,Industry Conference,Upcoming,SC0497
+PD1038,2025-01-31,15:58:38,Industry Conference,Upcoming,SC0265
+PD1039,2025-01-31,16:41:28,Training Session,Attended,SC0157
+PD1040,2025-01-31,12:30:24,Networking Event,Attended,SC0305
+PD1041,2025-01-31,14:18:17,Networking Event,Missed,SC0115
+PD1042,2025-01-31,16:16:10,Networking Event,Upcoming,SC0725
+PD1043,2025-01-31,15:30:05,Networking Event,Upcoming,SC0403
+PD1044,2025-01-31,10:10:13,Workshop,Upcoming,SC0181
+PD1045,2025-01-31,10:24:15,Industry Conference,Upcoming,SC0215
+PD1046,2025-01-31,16:08:15,Networking Event,Upcoming,SC0446
+PD1047,2025-01-31,10:00:47,Training Session,Upcoming,SC0564
+PD1048,2025-01-31,11:14:19,Industry Conference,Missed,SC0659
+PD1049,2025-01-31,17:56:58,Training Session,Attended,SC0695
+PD1050,2025-01-31,09:17:13,Workshop,Attended,SC0107
+PD1051,2025-01-31,16:43:41,Industry Conference,Missed,SC0494
+PD1052,2025-01-31,13:33:25,Workshop,Missed,SC0430
+PD1053,2025-01-31,13:14:17,Industry Conference,Upcoming,SC0066
+PD1054,2025-01-31,15:43:04,Training Session,Upcoming,SC0304
+PD1055,2025-01-31,10:38:04,Workshop,Attended,SC0410
+PD1056,2025-01-31,15:56:28,Industry Conference,Upcoming,SC0179
+PD1057,2025-01-31,14:26:19,Industry Conference,Missed,SC0130
+PD1058,2025-01-31,13:16:06,Webinar,Missed,SC0078
+PD1059,2025-01-31,11:55:24,Industry Conference,Upcoming,SC0095
+PD1060,2025-01-31,14:25:30,Workshop,Attended,SC0180
+PD1061,2025-01-31,16:32:55,Webinar,Upcoming,SC0467
+PD1062,2025-01-31,12:37:46,Networking Event,Attended,SC0345
+PD1063,2025-01-31,17:36:47,Industry Conference,Attended,SC0507
+PD1064,2025-01-31,14:14:27,Industry Conference,Upcoming,SC0368
+PD1065,2025-01-31,11:28:23,Industry Conference,Missed,SC0256
+PD1066,2025-01-31,14:18:46,Industry Conference,Attended,SC0671
+PD1067,2025-01-31,17:19:58,Training Session,Missed,SC0585
+PD1068,2025-01-31,10:27:00,Webinar,Upcoming,SC0729
+PD1069,2025-01-31,17:42:02,Networking Event,Missed,SC0577
+PD1070,2025-01-31,17:18:43,Workshop,Upcoming,SC0045
+PD1071,2025-01-31,16:17:16,Industry Conference,Attended,SC0041
+PD1072,2025-01-31,09:15:00,Webinar,Upcoming,SC0098
+PD1073,2025-01-31,11:28:26,Networking Event,Attended,SC0668
+PD1074,2025-01-31,17:02:33,Training Session,Upcoming,SC0439
+PD1075,2025-01-31,09:35:30,Networking Event,Upcoming,SC0069
+PD1076,2025-01-31,13:53:27,Webinar,Missed,SC0678
+PD1077,2025-01-31,16:22:15,Workshop,Missed,SC0573
+PD1078,2025-01-31,16:57:27,Webinar,Upcoming,SC0660
+PD1079,2025-01-31,12:14:32,Networking Event,Upcoming,SC0541
+PD1080,2025-01-31,13:53:29,Industry Conference,Upcoming,SC0497
+PD1081,2025-01-31,13:28:16,Industry Conference,Missed,SC0019
+PD1082,2025-01-31,11:13:48,Industry Conference,Missed,SC0467
+PD1083,2025-01-31,11:34:58,Industry Conference,Missed,SC0331
+PD1084,2025-01-31,12:32:10,Workshop,Missed,SC0669
+PD1085,2025-01-31,16:15:59,Industry Conference,Upcoming,SC0568
+PD1086,2025-01-31,16:19:30,Webinar,Upcoming,SC0209
+PD1087,2025-01-31,13:18:40,Workshop,Upcoming,SC0119
+PD1088,2025-01-31,15:44:42,Industry Conference,Missed,SC0465
+PD1089,2025-01-31,13:14:32,Networking Event,Upcoming,SC0686
+PD1090,2025-01-31,12:04:45,Networking Event,Missed,SC0380
+PD1091,2025-01-31,14:33:08,Webinar,Upcoming,SC0502
+PD1092,2025-01-31,15:23:18,Industry Conference,Missed,SC0416
+PD1093,2025-01-31,10:24:06,Workshop,Upcoming,SC0338
+PD1094,2025-01-31,13:01:43,Networking Event,Upcoming,SC0333
+PD1095,2025-01-31,10:01:04,Industry Conference,Upcoming,SC0353
+PD1096,2025-01-31,11:23:12,Training Session,Missed,SC0743
+PD1097,2025-01-31,15:15:46,Training Session,Upcoming,SC0217
+PD1098,2025-01-31,09:02:24,Webinar,Upcoming,SC0378
+PD1099,2025-01-31,09:55:45,Webinar,Missed,SC0614
+PD1100,2025-01-31,09:50:21,Networking Event,Upcoming,SC0680
+PD1101,2025-01-31,17:05:53,Industry Conference,Attended,SC0679
+PD1102,2025-01-31,09:25:00,Workshop,Missed,SC0152
+PD1103,2025-01-31,09:01:57,Webinar,Upcoming,SC0480
+PD1104,2025-01-31,16:05:30,Webinar,Upcoming,SC0515
+PD1105,2025-01-31,14:50:47,Industry Conference,Missed,SC0714
+PD1106,2025-01-31,17:55:18,Workshop,Upcoming,SC0562
+PD1107,2025-01-31,09:51:54,Networking Event,Upcoming,SC0699
+PD1108,2025-01-31,12:04:52,Networking Event,Upcoming,SC0355
+PD1109,2025-01-31,11:50:53,Training Session,Upcoming,SC0548
+PD1110,2025-01-31,17:25:11,Webinar,Missed,SC0044
+PD1111,2025-01-31,12:10:07,Webinar,Upcoming,SC0150
+PD1112,2025-01-31,13:37:02,Networking Event,Missed,SC0317
+PD1113,2025-01-31,17:31:24,Workshop,Attended,SC0123
+PD1114,2025-01-31,13:28:26,Training Session,Missed,SC0463
+PD1115,2025-01-31,09:07:02,Training Session,Upcoming,SC0408
+PD1116,2025-01-31,12:37:07,Workshop,Missed,SC0248
+PD1117,2025-01-31,14:00:57,Training Session,Upcoming,SC0529
+PD1118,2025-01-31,11:12:14,Training Session,Attended,SC0059
+PD1119,2025-01-31,17:11:01,Webinar,Attended,SC0518
+PD1120,2025-01-31,12:02:44,Networking Event,Upcoming,SC0388
+PD1121,2025-01-31,09:59:19,Networking Event,Attended,SC0728
+PD1122,2025-01-31,13:09:15,Networking Event,Attended,SC0080
+PD1123,2025-01-31,11:37:59,Webinar,Missed,SC0568
+PD1124,2025-01-31,12:36:02,Industry Conference,Missed,SC0188
+PD1125,2025-01-31,14:49:23,Industry Conference,Upcoming,SC0374
+PD1126,2025-01-31,15:32:36,Workshop,Missed,SC0336
+PD1127,2025-01-31,14:42:25,Training Session,Attended,SC0071
+PD1128,2025-01-31,14:20:19,Training Session,Missed,SC0629
+PD1129,2025-01-31,11:42:06,Webinar,Missed,SC0588
+PD1130,2025-01-31,09:53:03,Training Session,Missed,SC0440
+PD1131,2025-01-31,14:31:45,Webinar,Missed,SC0564
+PD1132,2025-01-31,17:52:36,Workshop,Missed,SC0308
+PD1133,2025-01-31,17:06:36,Networking Event,Missed,SC0288
+PD1134,2025-01-31,09:55:36,Networking Event,Upcoming,SC0252
+PD1135,2025-01-31,13:07:22,Industry Conference,Upcoming,SC0088
+PD1136,2025-01-31,14:18:47,Webinar,Upcoming,SC0042
+PD1137,2025-01-31,17:07:28,Webinar,Missed,SC0511
+PD1138,2025-01-31,15:46:12,Networking Event,Upcoming,SC0318
+PD1139,2025-01-31,09:09:30,Training Session,Attended,SC0378
+PD1140,2025-01-31,10:25:43,Workshop,Missed,SC0241
+PD1141,2025-01-31,11:47:14,Networking Event,Upcoming,SC0615
+PD1142,2025-01-31,12:07:06,Webinar,Upcoming,SC0371
+PD1143,2025-01-31,11:50:54,Workshop,Attended,SC0533
+PD1144,2025-01-31,15:50:55,Training Session,Upcoming,SC0380
+PD1145,2025-01-31,11:36:57,Webinar,Attended,SC0405
+PD1146,2025-01-31,11:16:19,Training Session,Attended,SC0345
+PD1147,2025-01-31,15:27:20,Networking Event,Attended,SC0163
+PD1148,2025-01-31,10:18:17,Training Session,Missed,SC0453
+PD1149,2025-01-31,13:43:18,Webinar,Missed,SC0152
+PD1150,2025-01-31,12:38:35,Webinar,Upcoming,SC0290
+PD1151,2025-01-31,10:40:21,Training Session,Attended,SC0207
+PD1152,2025-01-31,10:19:29,Networking Event,Missed,SC0102
+PD1153,2025-01-31,14:33:35,Workshop,Attended,SC0677
+PD1154,2025-01-31,10:04:02,Webinar,Attended,SC0380
+PD1155,2025-01-31,13:06:28,Workshop,Upcoming,SC0240
+PD1156,2025-01-31,13:27:41,Industry Conference,Upcoming,SC0451
+PD1157,2025-01-31,10:09:12,Workshop,Upcoming,SC0147
+PD1158,2025-01-31,09:03:44,Industry Conference,Upcoming,SC0593
+PD1159,2025-01-31,16:14:01,Workshop,Upcoming,SC0401
+PD1160,2025-01-31,15:12:02,Industry Conference,Attended,SC0673
+PD1161,2025-01-31,09:10:14,Training Session,Missed,SC0286
+PD1162,2025-01-31,12:21:44,Workshop,Upcoming,SC0419
+PD1163,2025-01-31,17:13:38,Industry Conference,Missed,SC0468
+PD1164,2025-01-31,14:06:37,Industry Conference,Attended,SC0709
+PD1165,2025-01-31,13:13:27,Webinar,Attended,SC0670
+PD1166,2025-01-31,12:57:55,Workshop,Attended,SC0407
+PD1167,2025-01-31,17:57:44,Webinar,Attended,SC0472
+PD1168,2025-01-31,11:52:55,Workshop,Missed,SC0104
+PD1169,2025-01-31,15:02:15,Networking Event,Missed,SC0282
+PD1170,2025-01-31,12:26:16,Networking Event,Missed,SC0523
+PD1171,2025-01-31,09:59:16,Industry Conference,Attended,SC0352
+PD1172,2025-01-31,13:17:52,Workshop,Attended,SC0542
+PD1173,2025-01-31,14:06:07,Industry Conference,Attended,SC0149
+PD1174,2025-01-31,13:48:02,Webinar,Attended,SC0447
+PD1175,2025-01-31,16:43:16,Webinar,Upcoming,SC0097
+PD1176,2025-01-31,12:46:53,Training Session,Upcoming,SC0208
+PD1177,2025-01-31,13:54:39,Training Session,Missed,SC0231
+PD1178,2025-01-31,12:12:58,Workshop,Upcoming,SC0030
+PD1179,2025-01-31,14:36:54,Networking Event,Missed,SC0151
+PD1180,2025-01-31,16:58:34,Networking Event,Attended,SC0208
+PD1181,2025-01-31,16:25:04,Training Session,Attended,SC0475
+PD1182,2025-01-31,17:52:48,Webinar,Missed,SC0723
+PD1183,2025-01-31,15:34:16,Webinar,Missed,SC0481
+PD1184,2025-01-31,13:20:57,Industry Conference,Upcoming,SC0572
+PD1185,2025-01-31,10:48:39,Workshop,Attended,SC0066
+PD1186,2025-01-31,12:33:50,Training Session,Attended,SC0105
+PD1187,2025-01-31,11:18:46,Networking Event,Attended,SC0490
+PD1188,2025-01-31,13:10:32,Networking Event,Missed,SC0672
+PD1189,2025-01-31,12:07:01,Networking Event,Missed,SC0210
+PD1190,2025-01-31,14:22:23,Networking Event,Attended,SC0396
+PD1191,2025-01-31,13:47:13,Training Session,Upcoming,SC0034
+PD1192,2025-01-31,14:25:18,Networking Event,Missed,SC0114
+PD1193,2025-01-31,15:08:51,Networking Event,Missed,SC0502
+PD1194,2025-01-31,13:45:06,Networking Event,Upcoming,SC0246
+PD1195,2025-01-31,17:13:54,Training Session,Attended,SC0201
+PD1196,2025-01-31,10:05:47,Training Session,Upcoming,SC0053
+PD1197,2025-01-31,13:44:13,Webinar,Missed,SC0386
+PD1198,2025-01-31,11:41:42,Webinar,Upcoming,SC0137
+PD1199,2025-01-31,10:04:34,Webinar,Missed,SC0400
+PD1200,2025-01-31,12:58:04,Webinar,Upcoming,SC0736
+PD1201,2025-01-31,13:10:30,Networking Event,Attended,SC0208
+PD1202,2025-01-31,09:32:37,Workshop,Missed,SC0156
+PD1203,2025-01-31,13:14:37,Networking Event,Upcoming,SC0730
+PD1204,2025-01-31,13:01:16,Industry Conference,Attended,SC0645
+PD1205,2025-01-31,14:40:53,Workshop,Missed,SC0420
+PD1206,2025-01-31,12:29:51,Workshop,Attended,SC0505
+PD1207,2025-01-31,12:43:51,Workshop,Upcoming,SC0557
+PD1208,2025-01-31,09:31:01,Industry Conference,Upcoming,SC0239
+PD1209,2025-01-31,09:54:58,Workshop,Missed,SC0403
+PD1210,2025-01-31,17:43:05,Industry Conference,Attended,SC0714
+PD1211,2025-01-31,11:32:29,Networking Event,Missed,SC0335
+PD1212,2025-01-31,09:32:55,Webinar,Upcoming,SC0321
+PD1213,2025-01-31,17:07:17,Industry Conference,Upcoming,SC0492
+PD1214,2025-01-31,13:20:14,Workshop,Missed,SC0026
+PD1215,2025-01-31,10:15:03,Industry Conference,Missed,SC0186
+PD1216,2025-01-31,17:03:42,Workshop,Attended,SC0047
+PD1217,2025-01-31,17:58:11,Webinar,Missed,SC0362
+PD1218,2025-01-31,11:12:07,Webinar,Attended,SC0033
+PD1219,2025-01-31,16:07:11,Webinar,Upcoming,SC0748
+PD1220,2025-01-31,09:07:34,Networking Event,Missed,SC0564
+PD1221,2025-01-31,10:36:48,Industry Conference,Upcoming,SC0687
+PD1222,2025-01-31,16:08:24,Training Session,Attended,SC0356
+PD1223,2025-01-31,16:12:34,Networking Event,Attended,SC0305
+PD1224,2025-01-31,12:19:49,Workshop,Attended,SC0010
+PD1225,2025-01-31,12:27:24,Networking Event,Missed,SC0742
+PD1226,2025-01-31,09:13:06,Training Session,Attended,SC0085
+PD1227,2025-01-31,10:55:44,Training Session,Missed,SC0738
+PD1228,2025-01-31,15:29:20,Industry Conference,Missed,SC0382
+PD1229,2025-01-31,09:36:21,Training Session,Attended,SC0109
+PD1230,2025-01-31,16:45:59,Networking Event,Attended,SC0132
+PD1231,2025-01-31,09:47:07,Workshop,Upcoming,SC0012
+PD1232,2025-01-31,10:46:03,Training Session,Missed,SC0455
+PD1233,2025-01-31,15:14:32,Industry Conference,Attended,SC0214
+PD1234,2025-01-31,14:07:25,Training Session,Upcoming,SC0669
+PD1235,2025-01-31,11:42:28,Webinar,Missed,SC0592
+PD1236,2025-01-31,13:28:24,Training Session,Attended,SC0201
+PD1237,2025-01-31,17:49:54,Networking Event,Attended,SC0744
+PD1238,2025-01-31,16:51:29,Networking Event,Missed,SC0380
+PD1239,2025-01-31,09:10:44,Industry Conference,Upcoming,SC0147
+PD1240,2025-01-31,14:38:31,Webinar,Upcoming,SC0611
+PD1241,2025-01-31,10:41:49,Webinar,Attended,SC0156
+PD1242,2025-01-31,11:10:56,Networking Event,Attended,SC0745
+PD1243,2025-01-31,17:50:10,Industry Conference,Missed,SC0070
+PD1244,2025-01-31,15:19:32,Training Session,Upcoming,SC0666
+PD1245,2025-01-31,14:33:50,Training Session,Attended,SC0280
+PD1246,2025-01-31,13:16:17,Networking Event,Upcoming,SC0038
+PD1247,2025-01-31,12:24:23,Workshop,Missed,SC0344
+PD1248,2025-01-31,11:47:18,Networking Event,Missed,SC0089
+PD1249,2025-01-31,10:29:08,Networking Event,Attended,SC0655
+PD1250,2025-01-31,14:10:09,Industry Conference,Missed,SC0196
+PD1251,2025-01-31,15:05:38,Training Session,Missed,SC0471
+PD1252,2025-01-31,14:39:37,Training Session,Attended,SC0416
+PD1253,2025-01-31,09:11:51,Workshop,Attended,SC0702
+PD1254,2025-01-31,12:09:33,Networking Event,Upcoming,SC0284
+PD1255,2025-01-31,12:42:53,Training Session,Missed,SC0204
+PD1256,2025-01-31,17:13:59,Training Session,Upcoming,SC0308
+PD1257,2025-01-31,14:21:19,Webinar,Upcoming,SC0649
+PD1258,2025-01-31,14:27:36,Webinar,Attended,SC0712
+PD1259,2025-01-31,16:42:31,Industry Conference,Upcoming,SC0710
+PD1260,2025-01-31,11:41:00,Training Session,Attended,SC0207
+PD1261,2025-01-31,11:32:06,Workshop,Missed,SC0746
+PD1262,2025-01-31,12:35:00,Webinar,Missed,SC0552
+PD1263,2025-01-31,11:37:13,Workshop,Upcoming,SC0287
+PD1264,2025-01-31,14:30:54,Webinar,Upcoming,SC0336
+PD1265,2025-01-31,16:21:49,Webinar,Upcoming,SC0404
+PD1266,2025-01-31,09:26:09,Workshop,Upcoming,SC0209
+PD1267,2025-01-31,13:15:36,Workshop,Upcoming,SC0346
+PD1268,2025-01-31,09:50:18,Industry Conference,Upcoming,SC0085
+PD1269,2025-01-31,17:36:13,Industry Conference,Upcoming,SC0612
+PD1270,2025-01-31,14:32:16,Webinar,Upcoming,SC0710
+PD1271,2025-01-31,17:07:27,Training Session,Attended,SC0007
+PD1272,2025-01-31,16:56:04,Networking Event,Missed,SC0454
+PD1273,2025-01-31,10:26:00,Workshop,Upcoming,SC0084
+PD1274,2025-01-31,09:45:50,Workshop,Upcoming,SC0038
+PD1275,2025-01-31,14:12:18,Networking Event,Attended,SC0109
+PD1276,2025-01-31,15:18:15,Industry Conference,Attended,SC0083
+PD1277,2025-01-31,11:33:23,Industry Conference,Missed,SC0551
+PD1278,2025-01-31,12:03:00,Webinar,Attended,SC0428
+PD1279,2025-01-31,11:15:42,Workshop,Missed,SC0583
+PD1280,2025-01-31,15:49:26,Webinar,Upcoming,SC0295
+PD1281,2025-01-31,15:14:30,Webinar,Upcoming,SC0167
+PD1282,2025-01-31,09:28:14,Industry Conference,Attended,SC0295
+PD1283,2025-01-31,09:11:15,Industry Conference,Missed,SC0211
+PD1284,2025-01-31,14:47:02,Webinar,Missed,SC0296
+PD1285,2025-01-31,15:32:52,Training Session,Missed,SC0644
+PD1286,2025-01-31,16:24:48,Industry Conference,Attended,SC0085
+PD1287,2025-01-31,10:58:52,Webinar,Attended,SC0587
+PD1288,2025-01-31,14:33:52,Webinar,Missed,SC0226
+PD1289,2025-01-31,17:09:28,Webinar,Attended,SC0204
+PD1290,2025-01-31,09:16:23,Industry Conference,Missed,SC0357
+PD1291,2025-01-31,13:10:00,Industry Conference,Upcoming,SC0265
+PD1292,2025-01-31,14:12:25,Webinar,Upcoming,SC0330
+PD1293,2025-01-31,12:26:19,Training Session,Attended,SC0646
+PD1294,2025-01-31,13:15:11,Networking Event,Upcoming,SC0328
+PD1295,2025-01-31,09:48:51,Training Session,Attended,SC0222
+PD1296,2025-01-31,17:03:15,Training Session,Missed,SC0553
+PD1297,2025-01-31,15:05:08,Industry Conference,Upcoming,SC0084
+PD1298,2025-01-31,17:45:45,Industry Conference,Upcoming,SC0212
+PD1299,2025-01-31,12:40:29,Training Session,Missed,SC0193
+PD1300,2025-01-31,14:34:43,Networking Event,Upcoming,SC0742
+PD1301,2025-01-31,10:41:51,Industry Conference,Upcoming,SC0056
+PD1302,2025-01-31,10:55:11,Webinar,Missed,SC0275
+PD1303,2025-01-31,14:46:39,Workshop,Upcoming,SC0580
+PD1304,2025-01-31,14:17:36,Workshop,Attended,SC0538
+PD1305,2025-01-31,17:11:05,Workshop,Upcoming,SC0149
+PD1306,2025-01-31,16:24:48,Industry Conference,Upcoming,SC0692
+PD1307,2025-01-31,12:14:25,Networking Event,Upcoming,SC0599
+PD1308,2025-01-31,14:17:46,Training Session,Upcoming,SC0316
+PD1309,2025-01-31,16:05:48,Workshop,Upcoming,SC0183
+PD1310,2025-01-31,17:49:09,Webinar,Attended,SC0176
+PD1311,2025-01-31,12:49:25,Workshop,Attended,SC0151
+PD1312,2025-01-31,13:08:58,Industry Conference,Attended,SC0002
+PD1313,2025-01-31,11:08:51,Industry Conference,Missed,SC0537
+PD1314,2025-01-31,09:52:42,Webinar,Upcoming,SC0641
+PD1315,2025-01-31,15:50:11,Training Session,Attended,SC0653
+PD1316,2025-01-31,15:24:33,Training Session,Missed,SC0523
+PD1317,2025-01-31,15:27:43,Industry Conference,Attended,SC0367
+PD1318,2025-01-31,13:40:47,Webinar,Upcoming,SC0003
+PD1319,2025-01-31,12:19:19,Training Session,Attended,SC0067
+PD1320,2025-01-31,10:26:35,Training Session,Attended,SC0606
+PD1321,2025-01-31,17:38:46,Networking Event,Missed,SC0494
+PD1322,2025-01-31,14:30:03,Networking Event,Upcoming,SC0616
+PD1323,2025-01-31,14:54:49,Industry Conference,Attended,SC0158
+PD1324,2025-01-31,15:12:26,Industry Conference,Missed,SC0474
+PD1325,2025-01-31,13:09:10,Training Session,Upcoming,SC0216
+PD1326,2025-01-31,15:46:52,Workshop,Missed,SC0274
+PD1327,2025-01-31,13:07:42,Industry Conference,Missed,SC0540
+PD1328,2025-01-31,09:21:12,Industry Conference,Missed,SC0115
+PD1329,2025-01-31,14:57:01,Webinar,Upcoming,SC0715
+PD1330,2025-01-31,17:01:46,Workshop,Missed,SC0096
+PD1331,2025-01-31,16:23:46,Training Session,Attended,SC0367
+PD1332,2025-01-31,17:26:38,Webinar,Missed,SC0373
+PD1333,2025-01-31,12:40:13,Industry Conference,Upcoming,SC0117
+PD1334,2025-01-31,17:34:29,Training Session,Missed,SC0750
+PD1335,2025-01-31,13:12:48,Training Session,Missed,SC0178
+PD1336,2025-01-31,17:25:31,Training Session,Missed,SC0742
+PD1337,2025-01-31,14:31:15,Webinar,Upcoming,SC0324
+PD1338,2025-01-31,13:09:35,Workshop,Missed,SC0023
+PD1339,2025-01-31,09:06:05,Networking Event,Attended,SC0354
+PD1340,2025-01-31,09:51:55,Networking Event,Missed,SC0737
+PD1341,2025-01-31,15:49:41,Industry Conference,Missed,SC0619
+PD1342,2025-01-31,16:46:43,Networking Event,Missed,SC0619
+PD1343,2025-01-31,10:10:36,Industry Conference,Missed,SC0744
+PD1344,2025-01-31,15:09:46,Networking Event,Attended,SC0722
+PD1345,2025-01-31,17:12:46,Networking Event,Upcoming,SC0133
+PD1346,2025-01-31,10:46:19,Workshop,Attended,SC0669
+PD1347,2025-01-31,09:49:20,Industry Conference,Upcoming,SC0572
+PD1348,2025-01-31,12:49:52,Webinar,Upcoming,SC0267
+PD1349,2025-01-31,09:52:25,Industry Conference,Upcoming,SC0226
+PD1350,2025-01-31,17:04:28,Training Session,Upcoming,SC0543
+PD1351,2025-01-31,17:13:38,Industry Conference,Upcoming,SC0495
+PD1352,2025-01-31,16:18:06,Training Session,Missed,SC0117
+PD1353,2025-01-31,16:48:11,Workshop,Missed,SC0573
+PD1354,2025-01-31,17:22:36,Networking Event,Attended,SC0265
+PD1355,2025-01-31,15:07:57,Training Session,Attended,SC0451
+PD1356,2025-01-31,15:51:45,Training Session,Missed,SC0072
+PD1357,2025-01-31,10:30:06,Networking Event,Missed,SC0232
+PD1358,2025-01-31,16:02:06,Networking Event,Upcoming,SC0312
+PD1359,2025-01-31,17:50:40,Networking Event,Upcoming,SC0712
+PD1360,2025-01-31,13:13:43,Training Session,Attended,SC0093
+PD1361,2025-01-31,17:11:35,Industry Conference,Attended,SC0412
+PD1362,2025-01-31,11:56:27,Webinar,Upcoming,SC0051
+PD1363,2025-01-31,10:45:13,Industry Conference,Missed,SC0640
+PD1364,2025-01-31,12:29:38,Industry Conference,Missed,SC0058
+PD1365,2025-01-31,14:10:07,Industry Conference,Upcoming,SC0479
+PD1366,2025-01-31,09:50:38,Industry Conference,Missed,SC0652
+PD1367,2025-01-31,11:44:42,Training Session,Upcoming,SC0469
+PD1368,2025-01-31,15:40:51,Webinar,Attended,SC0168
+PD1369,2025-01-31,14:28:07,Training Session,Missed,SC0081
+PD1370,2025-01-31,11:06:16,Industry Conference,Missed,SC0682
+PD1371,2025-01-31,11:09:47,Networking Event,Upcoming,SC0425
+PD1372,2025-01-31,17:28:37,Workshop,Missed,SC0486
+PD1373,2025-01-31,12:32:00,Workshop,Attended,SC0312
+PD1374,2025-01-31,09:18:42,Workshop,Upcoming,SC0600
+PD1375,2025-01-31,16:34:11,Workshop,Upcoming,SC0203
+PD1376,2025-01-31,13:39:21,Webinar,Upcoming,SC0432
+PD1377,2025-01-31,17:43:14,Industry Conference,Attended,SC0576
+PD1378,2025-01-31,09:11:12,Training Session,Missed,SC0367
+PD1379,2025-01-31,14:14:33,Training Session,Upcoming,SC0428
+PD1380,2025-01-31,17:03:55,Webinar,Missed,SC0187
+PD1381,2025-01-31,11:44:56,Networking Event,Missed,SC0368
+PD1382,2025-01-31,13:07:22,Workshop,Attended,SC0659
+PD1383,2025-01-31,09:37:02,Workshop,Missed,SC0177
+PD1384,2025-01-31,12:37:36,Networking Event,Upcoming,SC0744
+PD1385,2025-01-31,14:37:46,Webinar,Upcoming,SC0468
+PD1386,2025-01-31,12:44:24,Workshop,Upcoming,SC0016
+PD1387,2025-01-31,17:07:10,Industry Conference,Upcoming,SC0743
+PD1388,2025-01-31,15:58:31,Workshop,Missed,SC0430
+PD1389,2025-01-31,09:09:58,Industry Conference,Upcoming,SC0329
+PD1390,2025-01-31,10:46:30,Webinar,Attended,SC0070
+PD1391,2025-01-31,09:39:33,Workshop,Missed,SC0155
+PD1392,2025-01-31,10:46:36,Training Session,Missed,SC0171
+PD1393,2025-01-31,16:55:45,Networking Event,Upcoming,SC0401
+PD1394,2025-01-31,17:38:31,Webinar,Attended,SC0234
+PD1395,2025-01-31,12:03:38,Networking Event,Upcoming,SC0345
+PD1396,2025-01-31,13:17:16,Networking Event,Upcoming,SC0363
+PD1397,2025-01-31,16:28:00,Networking Event,Upcoming,SC0469
+PD1398,2025-01-31,15:04:44,Industry Conference,Missed,SC0485
+PD1399,2025-01-31,14:57:02,Training Session,Attended,SC0431
+PD1400,2025-01-31,13:40:22,Webinar,Upcoming,SC0562
+PD1401,2025-01-31,15:57:26,Networking Event,Attended,SC0718
+PD1402,2025-01-31,14:05:55,Industry Conference,Upcoming,SC0309
+PD1403,2025-01-31,11:00:53,Industry Conference,Upcoming,SC0164
+PD1404,2025-01-31,15:27:59,Workshop,Upcoming,SC0712
+PD1405,2025-01-31,17:06:22,Industry Conference,Upcoming,SC0528
+PD1406,2025-01-31,16:08:13,Training Session,Upcoming,SC0051
+PD1407,2025-01-31,17:07:07,Training Session,Attended,SC0691
+PD1408,2025-01-31,15:14:05,Webinar,Missed,SC0705
+PD1409,2025-01-31,14:56:56,Webinar,Missed,SC0683
+PD1410,2025-01-31,11:32:48,Networking Event,Missed,SC0073
+PD1411,2025-01-31,16:28:20,Industry Conference,Missed,SC0551
+PD1412,2025-01-31,09:12:54,Workshop,Attended,SC0125
+PD1413,2025-01-31,14:36:58,Workshop,Attended,SC0188
+PD1414,2025-01-31,16:20:17,Networking Event,Missed,SC0665
+PD1415,2025-01-31,09:56:04,Training Session,Missed,SC0539
+PD1416,2025-01-31,11:31:40,Workshop,Missed,SC0691
+PD1417,2025-01-31,14:40:48,Industry Conference,Attended,SC0405
+PD1418,2025-01-31,10:07:33,Training Session,Attended,SC0192
+PD1419,2025-01-31,10:30:34,Training Session,Attended,SC0619
+PD1420,2025-01-31,12:23:04,Industry Conference,Attended,SC0127
+PD1421,2025-01-31,14:33:09,Industry Conference,Upcoming,SC0663
+PD1422,2025-01-31,17:26:05,Webinar,Upcoming,SC0397
+PD1423,2025-01-31,09:00:37,Training Session,Missed,SC0490
+PD1424,2025-01-31,11:07:21,Training Session,Missed,SC0083
+PD1425,2025-01-31,12:13:15,Industry Conference,Missed,SC0516
+PD1426,2025-01-31,16:31:34,Workshop,Missed,SC0555
+PD1427,2025-01-31,09:04:29,Networking Event,Attended,SC0256
+PD1428,2025-01-31,15:18:13,Training Session,Upcoming,SC0102
+PD1429,2025-01-31,17:57:28,Workshop,Upcoming,SC0514
+PD1430,2025-01-31,16:53:38,Webinar,Attended,SC0628
+PD1431,2025-01-31,15:52:00,Webinar,Upcoming,SC0287
+PD1432,2025-01-31,15:52:00,Industry Conference,Upcoming,SC0244
+PD1433,2025-01-31,11:38:57,Networking Event,Missed,SC0595
+PD1434,2025-01-31,13:10:17,Workshop,Upcoming,SC0693
+PD1435,2025-01-31,12:25:39,Webinar,Missed,SC0720
+PD1436,2025-01-31,11:56:59,Networking Event,Missed,SC0697
+PD1437,2025-01-31,15:38:03,Workshop,Attended,SC0138
+PD1438,2025-01-31,15:13:35,Training Session,Missed,SC0022
+PD1439,2025-01-31,15:10:42,Networking Event,Attended,SC0407
+PD1440,2025-01-31,10:40:44,Industry Conference,Upcoming,SC0165
+PD1441,2025-01-31,13:00:45,Industry Conference,Missed,SC0138
+PD1442,2025-01-31,17:21:41,Training Session,Missed,SC0735
+PD1443,2025-01-31,12:26:55,Industry Conference,Upcoming,SC0165
+PD1444,2025-01-31,16:42:34,Webinar,Attended,SC0490
+PD1445,2025-01-31,09:23:30,Networking Event,Upcoming,SC0274
+PD1446,2025-01-31,11:23:13,Workshop,Missed,SC0222
+PD1447,2025-01-31,17:13:00,Workshop,Attended,SC0496
+PD1448,2025-01-31,17:27:15,Networking Event,Attended,SC0394
+PD1449,2025-01-31,11:16:45,Webinar,Attended,SC0153
+PD1450,2025-01-31,13:15:46,Webinar,Attended,SC0246
+PD1451,2025-01-31,14:36:35,Training Session,Attended,SC0581
+PD1452,2025-01-31,17:40:07,Networking Event,Missed,SC0460
+PD1453,2025-01-31,13:20:57,Workshop,Missed,SC0481
+PD1454,2025-01-31,15:59:15,Training Session,Missed,SC0588
+PD1455,2025-01-31,11:48:06,Webinar,Attended,SC0655
+PD1456,2025-01-31,13:44:44,Training Session,Upcoming,SC0252
+PD1457,2025-01-31,17:10:18,Webinar,Attended,SC0395
+PD1458,2025-01-31,17:19:13,Training Session,Attended,SC0420
+PD1459,2025-01-31,13:26:08,Training Session,Attended,SC0494
+PD1460,2025-01-31,09:58:46,Networking Event,Upcoming,SC0632
+PD1461,2025-01-31,17:41:55,Workshop,Upcoming,SC0249
+PD1462,2025-01-31,15:22:38,Training Session,Upcoming,SC0740
+PD1463,2025-01-31,15:32:24,Networking Event,Upcoming,SC0583
+PD1464,2025-01-31,13:42:35,Training Session,Upcoming,SC0099
+PD1465,2025-01-31,13:38:16,Training Session,Attended,SC0516
+PD1466,2025-01-31,10:30:34,Networking Event,Missed,SC0232
+PD1467,2025-01-31,12:18:25,Webinar,Upcoming,SC0608
+PD1468,2025-01-31,13:02:54,Industry Conference,Upcoming,SC0691
+PD1469,2025-01-31,13:03:46,Workshop,Missed,SC0229
+PD1470,2025-01-31,11:09:40,Networking Event,Missed,SC0010
+PD1471,2025-01-31,14:26:36,Networking Event,Attended,SC0224
+PD1472,2025-01-31,17:21:16,Networking Event,Upcoming,SC0749
+PD1473,2025-01-31,17:42:23,Webinar,Attended,SC0281
+PD1474,2025-01-31,11:30:12,Webinar,Missed,SC0243
+PD1475,2025-01-31,10:03:33,Training Session,Attended,SC0667
+PD1476,2025-01-31,11:18:28,Industry Conference,Missed,SC0238
+PD1477,2025-01-31,15:19:40,Networking Event,Attended,SC0323
+PD1478,2025-01-31,15:04:06,Webinar,Upcoming,SC0055
+PD1479,2025-01-31,15:37:58,Networking Event,Attended,SC0065
+PD1480,2025-01-31,14:36:20,Workshop,Attended,SC0349
+PD1481,2025-01-31,13:03:19,Training Session,Missed,SC0253
+PD1482,2025-01-31,16:15:32,Webinar,Missed,SC0406
+PD1483,2025-01-31,17:14:45,Industry Conference,Upcoming,SC0051
+PD1484,2025-01-31,14:01:05,Training Session,Attended,SC0555
+PD1485,2025-01-31,15:27:22,Networking Event,Attended,SC0187
+PD1486,2025-01-31,17:22:05,Training Session,Attended,SC0303
+PD1487,2025-01-31,09:46:38,Training Session,Attended,SC0341
+PD1488,2025-01-31,09:33:00,Industry Conference,Attended,SC0332
+PD1489,2025-01-31,17:07:17,Industry Conference,Upcoming,SC0630
+PD1490,2025-01-31,09:30:57,Workshop,Upcoming,SC0683
+PD1491,2025-01-31,10:40:46,Workshop,Attended,SC0740
+PD1492,2025-01-31,15:16:16,Industry Conference,Missed,SC0633
+PD1493,2025-01-31,12:21:11,Workshop,Attended,SC0503
+PD1494,2025-01-31,15:50:22,Networking Event,Missed,SC0434
+PD1495,2025-01-31,10:10:24,Webinar,Upcoming,SC0270
+PD1496,2025-01-31,15:26:43,Workshop,Upcoming,SC0488
+PD1497,2025-01-31,12:29:11,Workshop,Upcoming,SC0267
+PD1498,2025-01-31,14:06:04,Webinar,Upcoming,SC0312
+PD1499,2025-01-31,10:37:48,Networking Event,Attended,SC0321
+PD1500,2025-01-31,16:42:09,Training Session,Missed,SC0407
+PD1501,2025-01-31,15:44:40,Workshop,Upcoming,SC0533
+PD1502,2025-01-31,14:24:17,Webinar,Upcoming,SC0468
+PD1503,2025-01-31,16:50:42,Networking Event,Attended,SC0543
+PD1504,2025-01-31,13:28:28,Industry Conference,Attended,SC0515
+PD1505,2025-01-31,15:50:51,Training Session,Upcoming,SC0283
+PD1506,2025-01-31,13:05:13,Webinar,Missed,SC0144
+PD1507,2025-01-31,13:57:31,Networking Event,Upcoming,SC0468
+PD1508,2025-01-31,16:21:57,Training Session,Upcoming,SC0117
+PD1509,2025-01-31,13:01:28,Webinar,Upcoming,SC0309
+PD1510,2025-01-31,11:57:59,Networking Event,Attended,SC0346
+PD1511,2025-01-31,14:10:28,Industry Conference,Attended,SC0046
+PD1512,2025-01-31,12:20:34,Networking Event,Missed,SC0034
+PD1513,2025-01-31,17:02:24,Networking Event,Missed,SC0461
+PD1514,2025-01-31,13:58:08,Training Session,Missed,SC0577
+PD1515,2025-01-31,16:59:04,Training Session,Missed,SC0309
+PD1516,2025-01-31,17:24:13,Training Session,Missed,SC0468
+PD1517,2025-01-31,12:45:36,Networking Event,Missed,SC0265
+PD1518,2025-01-31,10:44:01,Networking Event,Attended,SC0280
+PD1519,2025-01-31,16:54:59,Networking Event,Missed,SC0164
+PD1520,2025-01-31,11:11:18,Training Session,Upcoming,SC0146
+PD1521,2025-01-31,14:01:01,Webinar,Upcoming,SC0526
+PD1522,2025-01-31,13:11:11,Training Session,Upcoming,SC0268
+PD1523,2025-01-31,13:40:11,Networking Event,Missed,SC0157
+PD1524,2025-01-31,10:39:44,Webinar,Upcoming,SC0176
+PD1525,2025-01-31,12:42:31,Training Session,Upcoming,SC0064
+PD1526,2025-01-31,12:14:09,Training Session,Missed,SC0123
+PD1527,2025-01-31,13:36:29,Webinar,Missed,SC0300
+PD1528,2025-01-31,14:48:22,Training Session,Missed,SC0400
+PD1529,2025-01-31,09:55:38,Training Session,Upcoming,SC0148
+PD1530,2025-01-31,11:38:29,Training Session,Attended,SC0562
+PD1531,2025-01-31,16:40:27,Industry Conference,Upcoming,SC0709
+PD1532,2025-01-31,10:44:31,Networking Event,Upcoming,SC0239
+PD1533,2025-01-31,16:29:35,Webinar,Missed,SC0460
+PD1534,2025-01-31,16:05:06,Industry Conference,Missed,SC0589
+PD1535,2025-01-31,16:20:25,Training Session,Attended,SC0508
+PD1536,2025-01-31,13:51:57,Workshop,Missed,SC0115
+PD1537,2025-01-31,10:27:39,Industry Conference,Missed,SC0363
+PD1538,2025-01-31,09:06:07,Networking Event,Attended,SC0079
+PD1539,2025-01-31,13:14:16,Networking Event,Attended,SC0714
+PD1540,2025-01-31,13:22:43,Webinar,Upcoming,SC0398
+PD1541,2025-01-31,14:44:43,Training Session,Upcoming,SC0724
+PD1542,2025-01-31,13:06:22,Training Session,Missed,SC0692
+PD1543,2025-01-31,16:55:20,Workshop,Missed,SC0589
+PD1544,2025-01-31,11:25:24,Webinar,Missed,SC0428
+PD1545,2025-01-31,15:56:36,Industry Conference,Missed,SC0507
+PD1546,2025-01-31,13:09:17,Networking Event,Missed,SC0319
+PD1547,2025-01-31,12:48:32,Networking Event,Missed,SC0292
+PD1548,2025-01-31,10:51:27,Webinar,Attended,SC0335
+PD1549,2025-01-31,10:47:26,Webinar,Upcoming,SC0658
+PD1550,2025-01-31,12:46:44,Webinar,Attended,SC0256
+PD1551,2025-01-31,10:59:31,Industry Conference,Upcoming,SC0334
+PD1552,2025-01-31,10:46:54,Industry Conference,Upcoming,SC0680
+PD1553,2025-01-31,16:42:03,Webinar,Attended,SC0623
+PD1554,2025-01-31,17:32:01,Training Session,Missed,SC0356
+PD1555,2025-01-31,14:01:28,Training Session,Upcoming,SC0129
+PD1556,2025-01-31,15:45:45,Networking Event,Attended,SC0609
+PD1557,2025-01-31,17:52:04,Networking Event,Attended,SC0293
+PD1558,2025-01-31,12:38:02,Workshop,Upcoming,SC0521
+PD1559,2025-01-31,14:37:48,Webinar,Missed,SC0391
+PD1560,2025-01-31,16:38:11,Webinar,Attended,SC0587
+PD1561,2025-01-31,09:43:44,Workshop,Missed,SC0032
+PD1562,2025-01-31,09:25:02,Industry Conference,Attended,SC0477
+PD1563,2025-01-31,10:56:12,Webinar,Attended,SC0629
+PD1564,2025-01-31,11:50:22,Webinar,Attended,SC0705
+PD1565,2025-01-31,11:07:00,Networking Event,Attended,SC0099
+PD1566,2025-01-31,11:38:25,Webinar,Attended,SC0193
+PD1567,2025-01-31,14:43:44,Webinar,Attended,SC0052
+PD1568,2025-01-31,17:53:11,Workshop,Missed,SC0364
+PD1569,2025-01-31,10:57:42,Training Session,Attended,SC0304
+PD1570,2025-01-31,13:50:28,Webinar,Missed,SC0494
+PD1571,2025-01-31,17:58:25,Networking Event,Missed,SC0383
+PD1572,2025-01-31,12:33:04,Networking Event,Upcoming,SC0507
+PD1573,2025-01-31,12:50:36,Networking Event,Attended,SC0420
+PD1574,2025-01-31,15:46:33,Industry Conference,Attended,SC0201
+PD1575,2025-01-31,17:10:15,Webinar,Attended,SC0380
+PD1576,2025-01-31,10:46:42,Networking Event,Attended,SC0692
+PD1577,2025-01-31,11:11:45,Industry Conference,Attended,SC0014
+PD1578,2025-01-31,12:00:43,Networking Event,Upcoming,SC0531
+PD1579,2025-01-31,16:28:03,Training Session,Attended,SC0413
+PD1580,2025-01-31,11:47:55,Networking Event,Attended,SC0240
+PD1581,2025-01-31,13:18:25,Networking Event,Missed,SC0403
+PD1582,2025-01-31,17:25:40,Networking Event,Missed,SC0672
+PD1583,2025-01-31,10:01:16,Workshop,Upcoming,SC0560
+PD1584,2025-01-31,11:20:40,Training Session,Upcoming,SC0495
+PD1585,2025-01-31,12:38:44,Industry Conference,Attended,SC0255
+PD1586,2025-01-31,14:00:34,Webinar,Upcoming,SC0478
+PD1587,2025-01-31,16:55:35,Industry Conference,Upcoming,SC0353
+PD1588,2025-01-31,11:00:52,Networking Event,Missed,SC0512
+PD1589,2025-01-31,14:05:46,Workshop,Attended,SC0464
+PD1590,2025-01-31,10:47:57,Training Session,Attended,SC0025
+PD1591,2025-01-31,17:51:01,Networking Event,Attended,SC0065
+PD1592,2025-01-31,13:13:16,Networking Event,Attended,SC0266
+PD1593,2025-01-31,09:17:23,Workshop,Attended,SC0739
+PD1594,2025-01-31,12:03:07,Industry Conference,Upcoming,SC0273
+PD1595,2025-01-31,15:57:28,Industry Conference,Upcoming,SC0086
+PD1596,2025-01-31,10:31:49,Training Session,Attended,SC0493
+PD1597,2025-01-31,13:32:57,Networking Event,Upcoming,SC0413
+PD1598,2025-01-31,09:56:21,Training Session,Missed,SC0010
+PD1599,2025-01-31,15:20:36,Webinar,Attended,SC0260
+PD1600,2025-01-31,11:56:34,Webinar,Attended,SC0688
+PD1601,2025-01-31,17:51:57,Industry Conference,Missed,SC0088
+PD1602,2025-01-31,10:50:40,Training Session,Attended,SC0411
+PD1603,2025-01-31,15:25:36,Networking Event,Upcoming,SC0721
+PD1604,2025-01-31,15:49:26,Networking Event,Upcoming,SC0377
+PD1605,2025-01-31,16:37:48,Training Session,Missed,SC0159
+PD1606,2025-01-31,15:40:05,Webinar,Upcoming,SC0493
+PD1607,2025-01-31,15:33:37,Webinar,Attended,SC0111
+PD1608,2025-01-31,10:01:01,Industry Conference,Missed,SC0270
+PD1609,2025-01-31,17:48:29,Training Session,Attended,SC0030
+PD1610,2025-01-31,14:37:00,Webinar,Missed,SC0357
+PD1611,2025-01-31,12:23:53,Workshop,Attended,SC0532
+PD1612,2025-01-31,10:15:07,Workshop,Upcoming,SC0471
+PD1613,2025-01-31,16:06:18,Workshop,Attended,SC0284
+PD1614,2025-01-31,17:01:46,Networking Event,Attended,SC0309
+PD1615,2025-01-31,09:36:52,Industry Conference,Attended,SC0317
+PD1616,2025-01-31,11:52:26,Networking Event,Missed,SC0634
+PD1617,2025-01-31,17:17:57,Webinar,Attended,SC0662
+PD1618,2025-01-31,15:42:49,Training Session,Upcoming,SC0193
+PD1619,2025-01-31,13:29:54,Training Session,Upcoming,SC0692
+PD1620,2025-01-31,12:57:30,Webinar,Attended,SC0583
+PD1621,2025-01-31,16:04:26,Networking Event,Missed,SC0390
+PD1622,2025-01-31,16:27:46,Industry Conference,Upcoming,SC0385
+PD1623,2025-01-31,12:16:05,Workshop,Attended,SC0431
+PD1624,2025-01-31,14:47:46,Networking Event,Attended,SC0187
+PD1625,2025-01-31,10:28:34,Webinar,Upcoming,SC0216
+PD1626,2025-01-31,09:12:38,Networking Event,Upcoming,SC0479
+PD1627,2025-01-31,10:42:40,Training Session,Attended,SC0260
+PD1628,2025-01-31,12:56:43,Webinar,Attended,SC0354
+PD1629,2025-01-31,10:08:53,Workshop,Missed,SC0680
+PD1630,2025-01-31,12:31:14,Networking Event,Upcoming,SC0056
+PD1631,2025-01-31,16:56:17,Workshop,Missed,SC0050
+PD1632,2025-01-31,11:42:33,Webinar,Attended,SC0638
+PD1633,2025-01-31,13:54:37,Training Session,Missed,SC0550
+PD1634,2025-01-31,10:30:55,Training Session,Attended,SC0176
+PD1635,2025-01-31,14:39:16,Networking Event,Attended,SC0551
+PD1636,2025-01-31,10:52:24,Workshop,Missed,SC0021
+PD1637,2025-01-31,12:50:32,Workshop,Upcoming,SC0388
+PD1638,2025-01-31,11:32:00,Industry Conference,Upcoming,SC0600
+PD1639,2025-01-31,17:04:02,Industry Conference,Attended,SC0395
+PD1640,2025-01-31,15:55:39,Training Session,Attended,SC0659
+PD1641,2025-01-31,15:15:16,Industry Conference,Missed,SC0072
+PD1642,2025-01-31,13:30:14,Workshop,Missed,SC0428
+PD1643,2025-01-31,17:55:16,Networking Event,Missed,SC0014
+PD1644,2025-01-31,12:50:26,Networking Event,Missed,SC0193
+PD1645,2025-01-31,09:25:31,Training Session,Upcoming,SC0101
+PD1646,2025-01-31,16:22:49,Industry Conference,Upcoming,SC0076
+PD1647,2025-01-31,13:48:08,Industry Conference,Missed,SC0351
+PD1648,2025-01-31,10:57:04,Training Session,Missed,SC0286
+PD1649,2025-01-31,16:36:37,Training Session,Attended,SC0040
+PD1650,2025-01-31,13:10:28,Networking Event,Upcoming,SC0435
+PD1651,2025-01-31,11:12:20,Webinar,Upcoming,SC0598
+PD1652,2025-01-31,17:28:59,Training Session,Attended,SC0514
+PD1653,2025-01-31,12:44:03,Industry Conference,Attended,SC0564
+PD1654,2025-01-31,10:38:57,Workshop,Missed,SC0493
+PD1655,2025-01-31,15:54:54,Workshop,Missed,SC0471
+PD1656,2025-01-31,09:52:38,Networking Event,Missed,SC0095
+PD1657,2025-01-31,16:04:16,Networking Event,Missed,SC0071
+PD1658,2025-01-31,14:05:34,Industry Conference,Missed,SC0142
+PD1659,2025-01-31,17:06:09,Networking Event,Missed,SC0551
+PD1660,2025-01-31,14:59:16,Workshop,Upcoming,SC0001
+PD1661,2025-01-31,14:47:46,Networking Event,Upcoming,SC0686
+PD1662,2025-01-31,10:47:09,Workshop,Upcoming,SC0572
+PD1663,2025-01-31,14:50:30,Networking Event,Upcoming,SC0665
+PD1664,2025-01-31,11:16:09,Networking Event,Upcoming,SC0066
+PD1665,2025-01-31,16:58:01,Industry Conference,Attended,SC0435
+PD1666,2025-01-31,11:05:50,Industry Conference,Missed,SC0679
+PD1667,2025-01-31,15:32:59,Training Session,Missed,SC0072
+PD1668,2025-01-31,11:09:47,Training Session,Upcoming,SC0510
+PD1669,2025-01-31,11:49:15,Training Session,Attended,SC0750
+PD1670,2025-01-31,11:16:35,Networking Event,Upcoming,SC0265
+PD1671,2025-01-31,17:49:02,Industry Conference,Upcoming,SC0458
+PD1672,2025-01-31,11:03:29,Training Session,Upcoming,SC0297
+PD1673,2025-01-31,15:04:16,Networking Event,Missed,SC0521
+PD1674,2025-01-31,10:41:05,Industry Conference,Attended,SC0119
+PD1675,2025-01-31,17:08:44,Training Session,Attended,SC0700
+PD1676,2025-01-31,16:02:59,Training Session,Upcoming,SC0461
+PD1677,2025-01-31,16:04:15,Workshop,Missed,SC0067
+PD1678,2025-01-31,09:37:37,Training Session,Upcoming,SC0649
+PD1679,2025-01-31,09:37:01,Workshop,Attended,SC0151
+PD1680,2025-01-31,14:19:37,Industry Conference,Attended,SC0064
+PD1681,2025-01-31,16:02:03,Training Session,Upcoming,SC0411
+PD1682,2025-01-31,14:57:21,Industry Conference,Upcoming,SC0684
+PD1683,2025-01-31,14:16:59,Networking Event,Upcoming,SC0527
+PD1684,2025-01-31,11:47:59,Networking Event,Attended,SC0109
+PD1685,2025-01-31,15:20:14,Workshop,Missed,SC0121
+PD1686,2025-01-31,16:33:15,Networking Event,Missed,SC0684
+PD1687,2025-01-31,16:37:35,Industry Conference,Missed,SC0333
+PD1688,2025-01-31,12:15:54,Training Session,Upcoming,SC0598
+PD1689,2025-01-31,11:31:34,Webinar,Missed,SC0167
+PD1690,2025-01-31,10:11:39,Networking Event,Attended,SC0070
+PD1691,2025-01-31,12:48:32,Training Session,Upcoming,SC0121
+PD1692,2025-01-31,12:27:58,Industry Conference,Missed,SC0371
+PD1693,2025-01-31,12:24:11,Networking Event,Missed,SC0295
+PD1694,2025-01-31,14:11:17,Industry Conference,Attended,SC0334
+PD1695,2025-01-31,15:51:24,Workshop,Missed,SC0572
+PD1696,2025-01-31,10:26:20,Networking Event,Missed,SC0302
+PD1697,2025-01-31,10:12:49,Industry Conference,Upcoming,SC0241
+PD1698,2025-01-31,09:38:10,Industry Conference,Upcoming,SC0070
+PD1699,2025-01-31,11:13:07,Networking Event,Upcoming,SC0446
+PD1700,2025-01-31,10:17:41,Training Session,Missed,SC0599
+PD1701,2025-01-31,10:30:28,Workshop,Attended,SC0602
+PD1702,2025-01-31,12:38:29,Webinar,Attended,SC0132
+PD1703,2025-01-31,16:07:31,Workshop,Missed,SC0041
+PD1704,2025-01-31,12:06:37,Webinar,Upcoming,SC0435
+PD1705,2025-01-31,17:34:59,Training Session,Attended,SC0681
+PD1706,2025-01-31,10:36:22,Webinar,Missed,SC0217
+PD1707,2025-01-31,10:30:15,Webinar,Missed,SC0619
+PD1708,2025-01-31,13:45:02,Industry Conference,Attended,SC0423
+PD1709,2025-01-31,17:28:07,Industry Conference,Upcoming,SC0083
+PD1710,2025-01-31,17:54:51,Training Session,Attended,SC0690
+PD1711,2025-01-31,17:58:55,Webinar,Attended,SC0240
+PD1712,2025-01-31,16:46:08,Workshop,Upcoming,SC0155
+PD1713,2025-01-31,11:21:31,Networking Event,Attended,SC0341
+PD1714,2025-01-31,16:43:02,Industry Conference,Attended,SC0335
+PD1715,2025-01-31,12:47:18,Training Session,Missed,SC0402
+PD1716,2025-01-31,09:56:33,Webinar,Upcoming,SC0120
+PD1717,2025-01-31,11:11:48,Training Session,Missed,SC0462
+PD1718,2025-01-31,13:52:52,Training Session,Missed,SC0590
+PD1719,2025-01-31,13:29:19,Workshop,Upcoming,SC0116
+PD1720,2025-01-31,17:44:54,Networking Event,Attended,SC0199
+PD1721,2025-01-31,13:08:57,Workshop,Attended,SC0108
+PD1722,2025-01-31,10:33:35,Training Session,Missed,SC0175
+PD1723,2025-01-31,11:23:39,Networking Event,Attended,SC0044
+PD1724,2025-01-31,13:15:44,Training Session,Upcoming,SC0316
+PD1725,2025-01-31,10:26:52,Training Session,Missed,SC0290
+PD1726,2025-01-31,16:01:01,Webinar,Upcoming,SC0571
+PD1727,2025-01-31,13:58:49,Workshop,Attended,SC0029
+PD1728,2025-01-31,12:07:30,Training Session,Attended,SC0238
+PD1729,2025-01-31,15:31:30,Industry Conference,Attended,SC0086
+PD1730,2025-01-31,17:21:49,Networking Event,Attended,SC0040
+PD1731,2025-01-31,10:16:53,Webinar,Missed,SC0319
+PD1732,2025-01-31,15:13:41,Training Session,Missed,SC0049
+PD1733,2025-01-31,17:19:35,Networking Event,Attended,SC0074
+PD1734,2025-01-31,15:18:14,Training Session,Missed,SC0104
+PD1735,2025-01-31,13:39:10,Training Session,Upcoming,SC0080
+PD1736,2025-01-31,17:56:45,Workshop,Upcoming,SC0664
+PD1737,2025-01-31,17:42:56,Industry Conference,Attended,SC0008
+PD1738,2025-01-31,13:42:28,Webinar,Attended,SC0391
+PD1739,2025-01-31,10:18:35,Training Session,Upcoming,SC0449
+PD1740,2025-01-31,12:49:52,Training Session,Attended,SC0530
+PD1741,2025-01-31,15:08:06,Industry Conference,Upcoming,SC0688
+PD1742,2025-01-31,14:35:24,Training Session,Upcoming,SC0227
+PD1743,2025-01-31,15:44:30,Networking Event,Attended,SC0419
+PD1744,2025-01-31,17:52:28,Training Session,Missed,SC0171
+PD1745,2025-01-31,17:02:57,Workshop,Upcoming,SC0690
+PD1746,2025-01-31,12:29:31,Industry Conference,Attended,SC0563
+PD1747,2025-01-31,14:55:08,Industry Conference,Missed,SC0702
+PD1748,2025-01-31,14:18:38,Industry Conference,Attended,SC0435
+PD1749,2025-01-31,13:48:06,Workshop,Missed,SC0364
+PD1750,2025-01-31,12:07:53,Industry Conference,Upcoming,SC0716
+PD1751,2025-01-31,16:39:20,Webinar,Missed,SC0008
+PD1752,2025-01-31,09:02:39,Industry Conference,Upcoming,SC0568
+PD1753,2025-01-31,17:33:16,Networking Event,Missed,SC0186
+PD1754,2025-01-31,13:23:21,Networking Event,Attended,SC0297
+PD1755,2025-01-31,12:34:03,Industry Conference,Upcoming,SC0450
+PD1756,2025-01-31,10:51:59,Training Session,Attended,SC0109
+PD1757,2025-01-31,11:34:22,Industry Conference,Attended,SC0653
+PD1758,2025-01-31,16:30:05,Webinar,Upcoming,SC0379
+PD1759,2025-01-31,14:40:21,Workshop,Attended,SC0538
+PD1760,2025-01-31,15:53:22,Workshop,Attended,SC0373
+PD1761,2025-01-31,16:42:02,Webinar,Missed,SC0440
+PD1762,2025-01-31,13:08:27,Workshop,Upcoming,SC0647
+PD1763,2025-01-31,12:19:58,Industry Conference,Upcoming,SC0144
+PD1764,2025-01-31,12:26:12,Industry Conference,Missed,SC0603
+PD1765,2025-01-31,09:51:11,Webinar,Missed,SC0195
+PD1766,2025-01-31,16:16:22,Webinar,Attended,SC0358
+PD1767,2025-01-31,13:01:59,Networking Event,Upcoming,SC0054
+PD1768,2025-01-31,09:50:51,Workshop,Attended,SC0267
+PD1769,2025-01-31,15:54:19,Workshop,Missed,SC0383
+PD1770,2025-01-31,15:30:02,Training Session,Missed,SC0293
+PD1771,2025-01-31,17:06:16,Industry Conference,Upcoming,SC0211
+PD1772,2025-01-31,16:30:17,Industry Conference,Attended,SC0070
+PD1773,2025-01-31,12:12:44,Networking Event,Missed,SC0580
+PD1774,2025-01-31,16:49:48,Webinar,Attended,SC0743
+PD1775,2025-01-31,16:09:30,Networking Event,Attended,SC0236
+PD1776,2025-01-31,14:16:39,Training Session,Upcoming,SC0049
+PD1777,2025-01-31,15:19:41,Industry Conference,Upcoming,SC0248
+PD1778,2025-01-31,09:03:55,Industry Conference,Attended,SC0568
+PD1779,2025-01-31,14:49:37,Training Session,Upcoming,SC0053
+PD1780,2025-01-31,13:25:05,Industry Conference,Attended,SC0116
+PD1781,2025-01-31,13:49:49,Industry Conference,Upcoming,SC0093
+PD1782,2025-01-31,13:00:23,Training Session,Attended,SC0708
+PD1783,2025-01-31,15:46:23,Industry Conference,Missed,SC0543
+PD1784,2025-01-31,17:12:06,Industry Conference,Missed,SC0588
+PD1785,2025-01-31,10:44:58,Industry Conference,Missed,SC0120
+PD1786,2025-01-31,17:49:57,Workshop,Missed,SC0322
+PD1787,2025-01-31,17:01:52,Training Session,Attended,SC0178
+PD1788,2025-01-31,15:23:05,Workshop,Missed,SC0191
+PD1789,2025-01-31,14:26:55,Networking Event,Upcoming,SC0086
+PD1790,2025-01-31,11:32:19,Webinar,Missed,SC0688
+PD1791,2025-01-31,11:12:01,Workshop,Missed,SC0077
+PD1792,2025-01-31,11:37:48,Training Session,Missed,SC0746
+PD1793,2025-01-31,09:55:05,Industry Conference,Missed,SC0585
+PD1794,2025-01-31,14:35:42,Networking Event,Attended,SC0609
+PD1795,2025-01-31,11:43:42,Networking Event,Missed,SC0578
+PD1796,2025-01-31,13:26:53,Training Session,Attended,SC0093
+PD1797,2025-01-31,11:35:47,Workshop,Attended,SC0425
+PD1798,2025-01-31,15:25:39,Training Session,Attended,SC0299
+PD1799,2025-01-31,17:45:40,Workshop,Upcoming,SC0166
+PD1800,2025-01-31,13:19:15,Training Session,Missed,SC0443
+PD1801,2025-01-31,09:52:29,Webinar,Attended,SC0192
+PD1802,2025-01-31,14:41:51,Training Session,Attended,SC0173
+PD1803,2025-01-31,13:02:07,Networking Event,Upcoming,SC0564
+PD1804,2025-01-31,11:57:46,Networking Event,Missed,SC0689
+PD1805,2025-01-31,17:12:35,Networking Event,Upcoming,SC0734
+PD1806,2025-01-31,14:48:28,Training Session,Missed,SC0170
+PD1807,2025-01-31,13:20:35,Webinar,Missed,SC0576
+PD1808,2025-01-31,10:47:42,Webinar,Upcoming,SC0594
+PD1809,2025-01-31,10:21:20,Workshop,Missed,SC0185
+PD1810,2025-01-31,17:16:38,Industry Conference,Upcoming,SC0082
+PD1811,2025-01-31,15:44:59,Networking Event,Missed,SC0725
+PD1812,2025-01-31,10:15:18,Networking Event,Upcoming,SC0332
+PD1813,2025-01-31,16:32:21,Training Session,Missed,SC0693
+PD1814,2025-01-31,15:45:22,Training Session,Upcoming,SC0280
+PD1815,2025-01-31,09:13:15,Networking Event,Missed,SC0364
+PD1816,2025-01-31,15:05:24,Networking Event,Upcoming,SC0556
+PD1817,2025-01-31,11:20:44,Networking Event,Attended,SC0077
+PD1818,2025-01-31,10:13:24,Training Session,Upcoming,SC0720
+PD1819,2025-01-31,15:19:44,Workshop,Missed,SC0739
+PD1820,2025-01-31,12:14:40,Industry Conference,Attended,SC0079
+PD1821,2025-01-31,15:06:11,Industry Conference,Upcoming,SC0075
+PD1822,2025-01-31,14:36:51,Industry Conference,Upcoming,SC0298
+PD1823,2025-01-31,12:54:29,Industry Conference,Attended,SC0153
+PD1824,2025-01-31,16:24:47,Workshop,Attended,SC0391
+PD1825,2025-01-31,11:39:45,Networking Event,Missed,SC0221
+PD1826,2025-01-31,15:12:57,Industry Conference,Upcoming,SC0678
+PD1827,2025-01-31,14:37:47,Webinar,Missed,SC0566
+PD1828,2025-01-31,09:04:35,Networking Event,Upcoming,SC0574
+PD1829,2025-01-31,12:56:18,Industry Conference,Attended,SC0679
+PD1830,2025-01-31,17:03:52,Webinar,Upcoming,SC0608
+PD1831,2025-01-31,16:13:00,Workshop,Missed,SC0519
+PD1832,2025-01-31,14:59:23,Networking Event,Missed,SC0360
+PD1833,2025-01-31,16:19:52,Workshop,Missed,SC0582
+PD1834,2025-01-31,17:27:49,Webinar,Upcoming,SC0061
+PD1835,2025-01-31,13:14:28,Industry Conference,Attended,SC0290
+PD1836,2025-01-31,09:04:01,Networking Event,Attended,SC0248
+PD1837,2025-01-31,09:17:45,Workshop,Missed,SC0604
+PD1838,2025-01-31,09:14:20,Networking Event,Upcoming,SC0727
+PD1839,2025-01-31,13:28:17,Webinar,Attended,SC0049
+PD1840,2025-01-31,11:00:49,Networking Event,Attended,SC0503
+PD1841,2025-01-31,14:28:14,Workshop,Attended,SC0649
+PD1842,2025-01-31,11:59:47,Webinar,Missed,SC0726
+PD1843,2025-01-31,09:04:42,Training Session,Attended,SC0123
+PD1844,2025-01-31,17:32:12,Networking Event,Attended,SC0667
+PD1845,2025-01-31,12:10:33,Networking Event,Missed,SC0425
+PD1846,2025-01-31,13:36:36,Webinar,Missed,SC0326
+PD1847,2025-01-31,13:37:24,Industry Conference,Missed,SC0027
+PD1848,2025-01-31,15:38:16,Workshop,Upcoming,SC0188
+PD1849,2025-01-31,09:24:23,Industry Conference,Missed,SC0685
+PD1850,2025-01-31,12:21:46,Workshop,Attended,SC0193
+PD1851,2025-01-31,10:09:08,Webinar,Upcoming,SC0122
+PD1852,2025-01-31,12:06:04,Webinar,Attended,SC0483
+PD1853,2025-01-31,16:42:03,Training Session,Missed,SC0307
+PD1854,2025-01-31,11:50:04,Industry Conference,Missed,SC0184
+PD1855,2025-01-31,09:57:03,Workshop,Attended,SC0620
+PD1856,2025-01-31,13:57:48,Training Session,Missed,SC0407
+PD1857,2025-01-31,10:15:51,Industry Conference,Missed,SC0744
+PD1858,2025-01-31,15:54:39,Industry Conference,Upcoming,SC0316
+PD1859,2025-01-31,09:11:35,Training Session,Attended,SC0173
+PD1860,2025-01-31,09:16:01,Industry Conference,Missed,SC0437
+PD1861,2025-01-31,10:59:50,Webinar,Attended,SC0365
+PD1862,2025-01-31,14:47:12,Webinar,Upcoming,SC0587
+PD1863,2025-01-31,13:08:50,Training Session,Missed,SC0216
+PD1864,2025-01-31,12:09:49,Networking Event,Upcoming,SC0466
+PD1865,2025-01-31,11:32:22,Training Session,Missed,SC0519
+PD1866,2025-01-31,16:28:45,Workshop,Upcoming,SC0638
+PD1867,2025-01-31,14:50:34,Training Session,Upcoming,SC0720
+PD1868,2025-01-31,11:20:38,Webinar,Attended,SC0504
+PD1869,2025-01-31,15:22:22,Workshop,Attended,SC0736
+PD1870,2025-01-31,09:42:53,Training Session,Upcoming,SC0122
+PD1871,2025-01-31,17:20:53,Workshop,Missed,SC0711
+PD1872,2025-01-31,11:18:31,Workshop,Upcoming,SC0113
+PD1873,2025-01-31,13:50:51,Training Session,Missed,SC0174
+PD1874,2025-01-31,11:19:02,Workshop,Missed,SC0415
+PD1875,2025-01-31,11:54:13,Webinar,Attended,SC0702
+PD1876,2025-01-31,16:09:45,Industry Conference,Missed,SC0120
+PD1877,2025-01-31,09:41:27,Training Session,Upcoming,SC0145
+PD1878,2025-01-31,15:30:35,Webinar,Attended,SC0307
+PD1879,2025-01-31,17:27:36,Networking Event,Missed,SC0519
+PD1880,2025-01-31,13:34:45,Networking Event,Upcoming,SC0523
+PD1881,2025-01-31,13:55:19,Webinar,Attended,SC0469
+PD1882,2025-01-31,17:44:28,Industry Conference,Upcoming,SC0404
+PD1883,2025-01-31,15:09:31,Networking Event,Missed,SC0637
+PD1884,2025-01-31,17:28:43,Webinar,Attended,SC0449
+PD1885,2025-01-31,15:50:54,Industry Conference,Missed,SC0347
+PD1886,2025-01-31,17:53:33,Workshop,Missed,SC0063
+PD1887,2025-01-31,09:19:09,Training Session,Missed,SC0525
+PD1888,2025-01-31,13:55:11,Industry Conference,Attended,SC0197
+PD1889,2025-01-31,17:04:31,Industry Conference,Upcoming,SC0173
+PD1890,2025-01-31,16:33:33,Workshop,Attended,SC0246
+PD1891,2025-01-31,17:47:38,Workshop,Upcoming,SC0557
+PD1892,2025-01-31,14:08:31,Networking Event,Attended,SC0713
+PD1893,2025-01-31,17:47:39,Webinar,Attended,SC0008
+PD1894,2025-01-31,12:09:33,Webinar,Missed,SC0395
+PD1895,2025-01-31,14:10:04,Training Session,Upcoming,SC0442
+PD1896,2025-01-31,14:08:09,Training Session,Upcoming,SC0566
+PD1897,2025-01-31,11:11:29,Workshop,Missed,SC0646
+PD1898,2025-01-31,11:00:46,Industry Conference,Upcoming,SC0711
+PD1899,2025-01-31,16:21:35,Workshop,Missed,SC0701
+PD1900,2025-01-31,11:41:27,Networking Event,Upcoming,SC0598
+PD1901,2025-01-31,12:00:22,Workshop,Upcoming,SC0278
+PD1902,2025-01-31,16:53:35,Workshop,Missed,SC0415
+PD1903,2025-01-31,16:44:19,Networking Event,Upcoming,SC0311
+PD1904,2025-01-31,10:10:18,Training Session,Upcoming,SC0026
+PD1905,2025-01-31,13:34:34,Networking Event,Missed,SC0684
+PD1906,2025-01-31,14:50:01,Workshop,Attended,SC0128
+PD1907,2025-01-31,12:42:23,Training Session,Missed,SC0575
+PD1908,2025-01-31,15:44:35,Industry Conference,Attended,SC0672
+PD1909,2025-01-31,09:44:11,Training Session,Upcoming,SC0648
+PD1910,2025-01-31,14:16:21,Webinar,Attended,SC0352
+PD1911,2025-01-31,11:01:30,Industry Conference,Upcoming,SC0421
+PD1912,2025-01-31,13:46:54,Industry Conference,Missed,SC0600
+PD1913,2025-01-31,11:44:13,Industry Conference,Upcoming,SC0210
+PD1914,2025-01-31,14:07:30,Workshop,Attended,SC0637
+PD1915,2025-01-31,15:05:07,Webinar,Missed,SC0491
+PD1916,2025-01-31,09:41:37,Industry Conference,Missed,SC0421
+PD1917,2025-01-31,16:39:40,Training Session,Missed,SC0398
+PD1918,2025-01-31,09:38:32,Workshop,Upcoming,SC0084
+PD1919,2025-01-31,14:42:21,Webinar,Upcoming,SC0040
+PD1920,2025-01-31,09:53:24,Networking Event,Missed,SC0008
+PD1921,2025-01-31,11:58:38,Webinar,Upcoming,SC0199
+PD1922,2025-01-31,12:20:10,Networking Event,Upcoming,SC0412
+PD1923,2025-01-31,13:38:17,Training Session,Missed,SC0460
+PD1924,2025-01-31,17:45:17,Training Session,Missed,SC0725
+PD1925,2025-01-31,14:49:41,Training Session,Missed,SC0020
+PD1926,2025-01-31,09:52:23,Industry Conference,Missed,SC0621
+PD1927,2025-01-31,11:42:22,Networking Event,Missed,SC0419
+PD1928,2025-01-31,15:57:21,Training Session,Missed,SC0627
+PD1929,2025-01-31,16:06:29,Networking Event,Missed,SC0447
+PD1930,2025-01-31,11:57:36,Networking Event,Attended,SC0078
+PD1931,2025-01-31,12:08:06,Webinar,Attended,SC0565
+PD1932,2025-01-31,14:24:29,Industry Conference,Upcoming,SC0584
+PD1933,2025-01-31,14:21:23,Industry Conference,Missed,SC0094
+PD1934,2025-01-31,11:02:03,Networking Event,Upcoming,SC0152
+PD1935,2025-01-31,16:11:09,Webinar,Upcoming,SC0609
+PD1936,2025-01-31,16:58:25,Industry Conference,Missed,SC0535
+PD1937,2025-01-31,11:28:26,Webinar,Upcoming,SC0585
+PD1938,2025-01-31,16:12:45,Industry Conference,Upcoming,SC0743
+PD1939,2025-01-31,15:08:52,Workshop,Missed,SC0041
+PD1940,2025-01-31,14:54:52,Networking Event,Attended,SC0602
+PD1941,2025-01-31,17:55:46,Industry Conference,Upcoming,SC0267
+PD1942,2025-01-31,09:14:42,Industry Conference,Missed,SC0656
+PD1943,2025-01-31,12:53:21,Webinar,Attended,SC0715
+PD1944,2025-01-31,17:07:40,Industry Conference,Missed,SC0033
+PD1945,2025-01-31,13:08:11,Networking Event,Attended,SC0282
+PD1946,2025-01-31,11:52:08,Workshop,Upcoming,SC0522
+PD1947,2025-01-31,15:30:10,Networking Event,Attended,SC0660
+PD1948,2025-01-31,13:37:56,Industry Conference,Missed,SC0745
+PD1949,2025-01-31,16:49:26,Webinar,Missed,SC0121
+PD1950,2025-01-31,16:30:59,Networking Event,Attended,SC0039
+PD1951,2025-01-31,15:37:12,Networking Event,Attended,SC0365
+PD1952,2025-01-31,14:49:35,Training Session,Upcoming,SC0356
+PD1953,2025-01-31,13:58:34,Webinar,Missed,SC0196
+PD1954,2025-01-31,16:05:40,Industry Conference,Upcoming,SC0232
+PD1955,2025-01-31,09:18:15,Networking Event,Upcoming,SC0411
+PD1956,2025-01-31,16:59:22,Workshop,Missed,SC0463
+PD1957,2025-01-31,16:59:17,Training Session,Upcoming,SC0329
+PD1958,2025-01-31,16:46:14,Webinar,Missed,SC0685
+PD1959,2025-01-31,11:47:50,Industry Conference,Missed,SC0079
+PD1960,2025-01-31,15:24:33,Workshop,Attended,SC0242
+PD1961,2025-01-31,14:32:11,Industry Conference,Missed,SC0336
+PD1962,2025-01-31,10:53:55,Workshop,Upcoming,SC0204
+PD1963,2025-01-31,10:10:14,Networking Event,Upcoming,SC0639
+PD1964,2025-01-31,11:08:56,Networking Event,Upcoming,SC0618
+PD1965,2025-01-31,11:06:41,Webinar,Attended,SC0082
+PD1966,2025-01-31,09:13:36,Workshop,Upcoming,SC0080
+PD1967,2025-01-31,15:01:10,Training Session,Upcoming,SC0179
+PD1968,2025-01-31,16:16:11,Networking Event,Attended,SC0571
+PD1969,2025-01-31,16:44:12,Workshop,Attended,SC0503
+PD1970,2025-01-31,14:38:05,Workshop,Attended,SC0660
+PD1971,2025-01-31,14:57:10,Webinar,Attended,SC0013
+PD1972,2025-01-31,17:00:52,Workshop,Missed,SC0726
+PD1973,2025-01-31,09:12:31,Workshop,Missed,SC0511
+PD1974,2025-01-31,13:31:55,Networking Event,Upcoming,SC0218
+PD1975,2025-01-31,13:41:38,Networking Event,Upcoming,SC0213
+PD1976,2025-01-31,16:29:18,Networking Event,Attended,SC0392
+PD1977,2025-01-31,14:06:06,Networking Event,Upcoming,SC0462
+PD1978,2025-01-31,10:09:58,Webinar,Upcoming,SC0095
+PD1979,2025-01-31,09:09:15,Webinar,Attended,SC0210
+PD1980,2025-01-31,10:27:44,Training Session,Attended,SC0651
+PD1981,2025-01-31,14:30:40,Networking Event,Missed,SC0514
+PD1982,2025-01-31,17:18:21,Networking Event,Missed,SC0320
+PD1983,2025-01-31,15:15:39,Industry Conference,Missed,SC0690
+PD1984,2025-01-31,13:56:54,Webinar,Upcoming,SC0467
+PD1985,2025-01-31,16:55:34,Workshop,Attended,SC0265
+PD1986,2025-01-31,17:01:16,Industry Conference,Attended,SC0041
+PD1987,2025-01-31,13:11:14,Industry Conference,Upcoming,SC0212
+PD1988,2025-01-31,12:38:36,Webinar,Missed,SC0537
+PD1989,2025-01-31,15:53:00,Webinar,Missed,SC0489
+PD1990,2025-01-31,10:42:27,Industry Conference,Attended,SC0216
+PD1991,2025-01-31,16:39:58,Networking Event,Attended,SC0025
+PD1992,2025-01-31,09:32:18,Industry Conference,Upcoming,SC0027
+PD1993,2025-01-31,17:39:39,Webinar,Upcoming,SC0058
+PD1994,2025-01-31,14:15:14,Workshop,Attended,SC0240
+PD1995,2025-01-31,10:14:21,Workshop,Upcoming,SC0091
+PD1996,2025-01-31,09:50:01,Training Session,Attended,SC0255
+PD1997,2025-01-31,15:29:06,Training Session,Upcoming,SC0308
+PD1998,2025-01-31,10:58:15,Training Session,Missed,SC0030
+PD1999,2025-01-31,13:35:43,Workshop,Upcoming,SC0530
+PD2000,2025-01-31,10:37:23,Networking Event,Upcoming,SC0744
+PD2001,2025-01-31,11:21:55,Training Session,Missed,SC0003
+PD2002,2025-01-31,09:25:36,Workshop,Missed,SC0381
+PD2003,2025-01-31,12:41:42,Industry Conference,Missed,SC0517
+PD2004,2025-01-31,10:18:49,Networking Event,Missed,SC0059
+PD2005,2025-01-31,11:44:41,Webinar,Upcoming,SC0215
+PD2006,2025-01-31,10:41:23,Training Session,Upcoming,SC0491
+PD2007,2025-01-31,15:47:31,Networking Event,Upcoming,SC0039
+PD2008,2025-01-31,10:18:19,Webinar,Attended,SC0680
+PD2009,2025-01-31,14:19:18,Webinar,Attended,SC0576
+PD2010,2025-01-31,15:21:25,Industry Conference,Upcoming,SC0687
+PD2011,2025-01-31,09:56:11,Training Session,Upcoming,SC0100
+PD2012,2025-01-31,09:14:49,Webinar,Upcoming,SC0689
+PD2013,2025-01-31,09:17:35,Workshop,Upcoming,SC0172
+PD2014,2025-01-31,11:28:55,Training Session,Upcoming,SC0637
+PD2015,2025-01-31,14:10:09,Industry Conference,Attended,SC0233
+PD2016,2025-01-31,17:03:14,Networking Event,Attended,SC0577
+PD2017,2025-01-31,17:47:59,Networking Event,Upcoming,SC0446
+PD2018,2025-01-31,14:02:34,Networking Event,Missed,SC0093
+PD2019,2025-01-31,14:49:09,Workshop,Missed,SC0063
+PD2020,2025-01-31,11:17:48,Industry Conference,Upcoming,SC0741
+PD2021,2025-01-31,16:01:35,Industry Conference,Upcoming,SC0039
+PD2022,2025-01-31,15:09:14,Workshop,Attended,SC0335
+PD2023,2025-01-31,10:18:50,Webinar,Upcoming,SC0001
+PD2024,2025-01-31,14:50:15,Networking Event,Missed,SC0429
+PD2025,2025-01-31,17:13:35,Training Session,Missed,SC0744
+PD2026,2025-01-31,15:18:55,Industry Conference,Upcoming,SC0046
+PD2027,2025-01-31,14:00:49,Workshop,Missed,SC0705
+PD2028,2025-01-31,11:08:50,Networking Event,Attended,SC0498
+PD2029,2025-01-31,16:10:25,Networking Event,Attended,SC0188
+PD2030,2025-01-31,12:16:47,Webinar,Upcoming,SC0352
+PD2031,2025-01-31,09:01:24,Webinar,Missed,SC0617
+PD2032,2025-01-31,15:58:56,Networking Event,Missed,SC0339
+PD2033,2025-01-31,15:48:08,Networking Event,Attended,SC0633
+PD2034,2025-01-31,12:24:53,Workshop,Missed,SC0254
+PD2035,2025-01-31,09:51:34,Networking Event,Upcoming,SC0671
+PD2036,2025-01-31,10:05:13,Workshop,Attended,SC0078
+PD2037,2025-01-31,14:57:40,Training Session,Attended,SC0516
+PD2038,2025-01-31,14:36:19,Webinar,Attended,SC0059
+PD2039,2025-01-31,15:53:20,Training Session,Attended,SC0095
+PD2040,2025-01-31,16:56:57,Webinar,Missed,SC0440
+PD2041,2025-01-31,14:26:34,Networking Event,Attended,SC0015
+PD2042,2025-01-31,15:47:43,Webinar,Missed,SC0365
+PD2043,2025-01-31,13:01:55,Industry Conference,Missed,SC0318
+PD2044,2025-01-31,16:35:08,Workshop,Attended,SC0557
+PD2045,2025-01-31,16:30:30,Networking Event,Attended,SC0448
+PD2046,2025-01-31,10:07:45,Industry Conference,Missed,SC0542
+PD2047,2025-01-31,15:07:51,Webinar,Missed,SC0515
+PD2048,2025-01-31,14:40:41,Webinar,Attended,SC0495
+PD2049,2025-01-31,13:28:00,Workshop,Upcoming,SC0311
+PD2050,2025-01-31,17:10:57,Networking Event,Attended,SC0113
+PD2051,2025-01-31,15:15:33,Webinar,Attended,SC0270
+PD2052,2025-01-31,15:53:37,Webinar,Attended,SC0123
+PD2053,2025-01-31,17:47:03,Industry Conference,Upcoming,SC0265
+PD2054,2025-01-31,15:48:16,Workshop,Upcoming,SC0226
+PD2055,2025-01-31,11:18:35,Training Session,Missed,SC0466
+PD2056,2025-01-31,16:59:13,Workshop,Upcoming,SC0672
+PD2057,2025-01-31,13:36:30,Webinar,Attended,SC0324
+PD2058,2025-01-31,12:13:57,Webinar,Attended,SC0198
+PD2059,2025-01-31,10:37:36,Workshop,Upcoming,SC0389
+PD2060,2025-01-31,17:36:10,Industry Conference,Attended,SC0511
+PD2061,2025-01-31,16:34:48,Industry Conference,Attended,SC0743
+PD2062,2025-01-31,16:11:08,Industry Conference,Upcoming,SC0639
+PD2063,2025-01-31,13:28:54,Webinar,Attended,SC0736
+PD2064,2025-01-31,09:52:33,Workshop,Attended,SC0619
+PD2065,2025-01-31,15:01:15,Training Session,Missed,SC0279
+PD2066,2025-01-31,12:00:47,Networking Event,Attended,SC0098
+PD2067,2025-01-31,09:33:03,Industry Conference,Upcoming,SC0222
+PD2068,2025-01-31,11:34:21,Networking Event,Attended,SC0697
+PD2069,2025-01-31,14:32:59,Training Session,Attended,SC0008
+PD2070,2025-01-31,15:44:04,Webinar,Upcoming,SC0014
+PD2071,2025-01-31,11:59:24,Webinar,Upcoming,SC0600
+PD2072,2025-01-31,12:14:10,Training Session,Missed,SC0071
+PD2073,2025-01-31,13:54:29,Training Session,Upcoming,SC0579
+PD2074,2025-01-31,10:40:31,Networking Event,Missed,SC0551
+PD2075,2025-01-31,11:12:32,Industry Conference,Missed,SC0219
+PD2076,2025-01-31,16:48:04,Webinar,Missed,SC0645
+PD2077,2025-01-31,12:34:59,Workshop,Upcoming,SC0137
+PD2078,2025-01-31,14:23:43,Workshop,Upcoming,SC0456
+PD2079,2025-01-31,12:13:32,Industry Conference,Attended,SC0159
+PD2080,2025-01-31,12:06:53,Workshop,Missed,SC0348
+PD2081,2025-01-31,13:28:46,Industry Conference,Upcoming,SC0507
+PD2082,2025-01-31,13:30:21,Industry Conference,Attended,SC0017
+PD2083,2025-01-31,11:02:27,Networking Event,Upcoming,SC0067
+PD2084,2025-01-31,14:56:29,Networking Event,Missed,SC0552
+PD2085,2025-01-31,11:46:46,Webinar,Attended,SC0404
+PD2086,2025-01-31,13:53:09,Training Session,Missed,SC0720
+PD2087,2025-01-31,10:41:54,Networking Event,Upcoming,SC0562
+PD2088,2025-01-31,17:28:42,Workshop,Missed,SC0504
+PD2089,2025-01-31,16:45:23,Workshop,Missed,SC0415
+PD2090,2025-01-31,10:18:22,Networking Event,Upcoming,SC0020
+PD2091,2025-01-31,11:20:41,Workshop,Missed,SC0214
+PD2092,2025-01-31,12:42:17,Networking Event,Attended,SC0268
+PD2093,2025-01-31,14:04:40,Networking Event,Attended,SC0144
+PD2094,2025-01-31,10:07:55,Workshop,Attended,SC0079
+PD2095,2025-01-31,17:22:04,Workshop,Missed,SC0199
+PD2096,2025-01-31,09:31:04,Workshop,Attended,SC0188
+PD2097,2025-01-31,10:09:51,Networking Event,Missed,SC0491
+PD2098,2025-01-31,14:48:51,Networking Event,Attended,SC0482
+PD2099,2025-01-31,16:17:15,Networking Event,Missed,SC0680
+PD2100,2025-01-31,14:18:41,Industry Conference,Attended,SC0212
+PD2101,2025-01-31,14:43:27,Industry Conference,Missed,SC0367
+PD2102,2025-01-31,13:20:23,Networking Event,Attended,SC0265
+PD2103,2025-01-31,16:44:17,Networking Event,Attended,SC0126
+PD2104,2025-01-31,17:26:25,Training Session,Attended,SC0626
+PD2105,2025-01-31,13:01:17,Industry Conference,Missed,SC0370
+PD2106,2025-01-31,17:10:04,Industry Conference,Upcoming,SC0597
+PD2107,2025-01-31,13:11:39,Industry Conference,Upcoming,SC0229
+PD2108,2025-01-31,12:34:31,Networking Event,Upcoming,SC0528
+PD2109,2025-01-31,13:44:59,Industry Conference,Upcoming,SC0200
+PD2110,2025-01-31,13:41:07,Training Session,Missed,SC0437
+PD2111,2025-01-31,17:17:51,Workshop,Upcoming,SC0128
+PD2112,2025-01-31,14:12:55,Industry Conference,Upcoming,SC0557
+PD2113,2025-01-31,11:53:37,Industry Conference,Upcoming,SC0345
+PD2114,2025-01-31,13:05:51,Workshop,Attended,SC0353
+PD2115,2025-01-31,09:26:34,Networking Event,Upcoming,SC0221
+PD2116,2025-01-31,11:54:23,Webinar,Upcoming,SC0706
+PD2117,2025-01-31,12:47:15,Industry Conference,Missed,SC0129
+PD2118,2025-01-31,09:03:43,Workshop,Upcoming,SC0226
+PD2119,2025-01-31,16:07:50,Training Session,Missed,SC0737
+PD2120,2025-01-31,09:09:50,Industry Conference,Missed,SC0038
+PD2121,2025-01-31,10:54:12,Webinar,Upcoming,SC0083
+PD2122,2025-01-31,12:09:35,Networking Event,Upcoming,SC0628
+PD2123,2025-01-31,11:34:00,Training Session,Missed,SC0605
+PD2124,2025-01-31,09:45:00,Industry Conference,Attended,SC0699
+PD2125,2025-01-31,11:49:18,Industry Conference,Upcoming,SC0052
+PD2126,2025-01-31,15:26:19,Workshop,Missed,SC0558
+PD2127,2025-01-31,10:58:45,Networking Event,Missed,SC0015
+PD2128,2025-01-31,14:40:44,Webinar,Upcoming,SC0513
+PD2129,2025-01-31,12:58:05,Workshop,Missed,SC0606
+PD2130,2025-01-31,11:58:43,Training Session,Missed,SC0326
+PD2131,2025-01-31,15:04:08,Workshop,Missed,SC0634
+PD2132,2025-01-31,10:12:58,Workshop,Upcoming,SC0301
+PD2133,2025-01-31,17:56:27,Networking Event,Missed,SC0180
+PD2134,2025-01-31,15:20:50,Industry Conference,Missed,SC0466
+PD2135,2025-01-31,16:26:09,Workshop,Missed,SC0101
+PD2136,2025-01-31,17:24:20,Networking Event,Attended,SC0397
+PD2137,2025-01-31,13:46:52,Networking Event,Upcoming,SC0368
+PD2138,2025-01-31,15:15:35,Training Session,Missed,SC0229
+PD2139,2025-01-31,17:31:10,Industry Conference,Missed,SC0688
+PD2140,2025-01-31,10:21:42,Webinar,Attended,SC0340
+PD2141,2025-01-31,14:38:08,Workshop,Attended,SC0527
+PD2142,2025-01-31,13:21:13,Training Session,Upcoming,SC0380
+PD2143,2025-01-31,15:25:37,Industry Conference,Upcoming,SC0164
+PD2144,2025-01-31,17:54:47,Webinar,Attended,SC0451
+PD2145,2025-01-31,17:08:45,Workshop,Attended,SC0134
+PD2146,2025-01-31,15:39:19,Webinar,Missed,SC0071
+PD2147,2025-01-31,15:04:01,Industry Conference,Attended,SC0198
+PD2148,2025-01-31,11:26:15,Webinar,Attended,SC0059
+PD2149,2025-01-31,14:57:53,Networking Event,Missed,SC0669
+PD2150,2025-01-31,13:14:55,Networking Event,Upcoming,SC0419
+PD2151,2025-01-31,10:26:46,Webinar,Upcoming,SC0616
+PD2152,2025-01-31,12:01:31,Industry Conference,Upcoming,SC0095
+PD2153,2025-01-31,11:06:23,Workshop,Upcoming,SC0569
+PD2154,2025-01-31,17:12:04,Networking Event,Upcoming,SC0088
+PD2155,2025-01-31,11:14:55,Training Session,Missed,SC0066
+PD2156,2025-01-31,12:17:26,Industry Conference,Missed,SC0639
+PD2157,2025-01-31,17:13:45,Training Session,Upcoming,SC0034
+PD2158,2025-01-31,12:01:07,Training Session,Attended,SC0186
+PD2159,2025-01-31,11:40:02,Workshop,Attended,SC0351
+PD2160,2025-01-31,09:53:12,Training Session,Attended,SC0387
+PD2161,2025-01-31,12:48:28,Networking Event,Upcoming,SC0331
+PD2162,2025-01-31,16:08:05,Workshop,Missed,SC0225
+PD2163,2025-01-31,09:30:44,Industry Conference,Missed,SC0431
+PD2164,2025-01-31,15:19:02,Training Session,Upcoming,SC0339
+PD2165,2025-01-31,13:20:07,Networking Event,Missed,SC0096
+PD2166,2025-01-31,13:54:33,Workshop,Upcoming,SC0488
+PD2167,2025-01-31,15:00:11,Workshop,Upcoming,SC0215
+PD2168,2025-01-31,12:42:35,Networking Event,Upcoming,SC0338
+PD2169,2025-01-31,17:58:12,Webinar,Attended,SC0595
+PD2170,2025-01-31,17:11:32,Networking Event,Attended,SC0592
+PD2171,2025-01-31,13:56:55,Training Session,Upcoming,SC0548
+PD2172,2025-01-31,09:12:05,Workshop,Attended,SC0551
+PD2173,2025-01-31,10:46:07,Webinar,Missed,SC0146
+PD2174,2025-01-31,16:49:25,Webinar,Upcoming,SC0029
+PD2175,2025-01-31,12:43:33,Networking Event,Upcoming,SC0038
+PD2176,2025-01-31,16:05:04,Training Session,Missed,SC0683
+PD2177,2025-01-31,17:10:17,Workshop,Upcoming,SC0380
+PD2178,2025-01-31,16:43:51,Industry Conference,Missed,SC0138
+PD2179,2025-01-31,09:54:27,Networking Event,Upcoming,SC0705
+PD2180,2025-01-31,13:34:42,Industry Conference,Upcoming,SC0289
+PD2181,2025-01-31,12:00:31,Training Session,Missed,SC0717
+PD2182,2025-01-31,09:40:50,Webinar,Upcoming,SC0008
+PD2183,2025-01-31,15:38:52,Training Session,Attended,SC0623
+PD2184,2025-01-31,17:33:21,Networking Event,Upcoming,SC0652
+PD2185,2025-01-31,17:24:56,Industry Conference,Missed,SC0731
+PD2186,2025-01-31,17:08:20,Webinar,Upcoming,SC0400
+PD2187,2025-01-31,16:38:06,Webinar,Upcoming,SC0014
+PD2188,2025-01-31,17:44:28,Networking Event,Upcoming,SC0128
+PD2189,2025-01-31,12:55:39,Workshop,Attended,SC0432
+PD2190,2025-01-31,11:53:45,Webinar,Attended,SC0357
+PD2191,2025-01-31,15:56:46,Webinar,Upcoming,SC0005
+PD2192,2025-01-31,17:33:31,Industry Conference,Upcoming,SC0037
+PD2193,2025-01-31,14:51:57,Workshop,Upcoming,SC0366
+PD2194,2025-01-31,11:35:15,Networking Event,Missed,SC0087
+PD2195,2025-01-31,10:51:44,Workshop,Missed,SC0717
+PD2196,2025-01-31,16:44:04,Networking Event,Attended,SC0015
+PD2197,2025-01-31,13:14:54,Networking Event,Attended,SC0193
+PD2198,2025-01-31,11:25:58,Training Session,Missed,SC0415
+PD2199,2025-01-31,17:05:44,Training Session,Upcoming,SC0372
+PD2200,2025-01-31,17:59:00,Workshop,Attended,SC0006
+PD2201,2025-01-31,11:35:58,Training Session,Attended,SC0663
+PD2202,2025-01-31,12:12:28,Workshop,Missed,SC0028
+PD2203,2025-01-31,15:59:26,Industry Conference,Attended,SC0016
+PD2204,2025-01-31,17:52:26,Training Session,Missed,SC0174
+PD2205,2025-01-31,13:34:59,Workshop,Attended,SC0002
+PD2206,2025-01-31,14:36:17,Training Session,Attended,SC0120
+PD2207,2025-01-31,13:36:08,Webinar,Upcoming,SC0594
+PD2208,2025-01-31,09:45:47,Industry Conference,Attended,SC0285
+PD2209,2025-01-31,10:24:37,Training Session,Upcoming,SC0198
+PD2210,2025-01-31,13:29:10,Workshop,Missed,SC0601
+PD2211,2025-01-31,14:00:36,Industry Conference,Attended,SC0680
+PD2212,2025-01-31,13:13:29,Training Session,Attended,SC0106
+PD2213,2025-01-31,16:24:12,Training Session,Missed,SC0432
+PD2214,2025-01-31,11:46:30,Workshop,Missed,SC0375
+PD2215,2025-01-31,10:15:22,Workshop,Missed,SC0547
+PD2216,2025-01-31,14:48:52,Networking Event,Attended,SC0215
+PD2217,2025-01-31,17:32:34,Industry Conference,Upcoming,SC0549
+PD2218,2025-01-31,17:14:02,Industry Conference,Upcoming,SC0591
+PD2219,2025-01-31,10:02:25,Networking Event,Upcoming,SC0730
+PD2220,2025-01-31,15:47:07,Training Session,Attended,SC0635
+PD2221,2025-01-31,10:56:57,Webinar,Upcoming,SC0522
+PD2222,2025-01-31,17:35:27,Webinar,Attended,SC0306
+PD2223,2025-01-31,13:55:39,Webinar,Upcoming,SC0004
+PD2224,2025-01-31,17:45:22,Networking Event,Upcoming,SC0737
+PD2225,2025-01-31,10:37:32,Webinar,Attended,SC0731
+PD2226,2025-01-31,16:58:08,Networking Event,Attended,SC0465
+PD2227,2025-01-31,11:46:42,Networking Event,Upcoming,SC0696
+PD2228,2025-01-31,11:42:03,Workshop,Upcoming,SC0083
+PD2229,2025-01-31,15:19:10,Workshop,Attended,SC0465
+PD2230,2025-01-31,10:05:38,Webinar,Upcoming,SC0072
+PD2231,2025-01-31,17:52:14,Industry Conference,Attended,SC0333
+PD2232,2025-01-31,15:47:13,Webinar,Upcoming,SC0019
+PD2233,2025-01-31,15:57:55,Industry Conference,Attended,SC0465
+PD2234,2025-01-31,09:36:02,Workshop,Upcoming,SC0449
+PD2235,2025-01-31,09:15:08,Networking Event,Upcoming,SC0343
+PD2236,2025-01-31,16:54:03,Training Session,Missed,SC0560
+PD2237,2025-01-31,12:07:35,Webinar,Missed,SC0248
+PD2238,2025-01-31,11:29:24,Training Session,Missed,SC0383
+PD2239,2025-01-31,17:00:40,Networking Event,Upcoming,SC0129
+PD2240,2025-01-31,14:28:49,Industry Conference,Upcoming,SC0712
+PD2241,2025-01-31,13:48:20,Training Session,Upcoming,SC0308
+PD2242,2025-01-31,16:27:24,Workshop,Upcoming,SC0432
+PD2243,2025-01-31,17:37:39,Workshop,Missed,SC0530
+PD2244,2025-01-31,13:56:45,Industry Conference,Missed,SC0674
+PD2245,2025-01-31,17:07:19,Webinar,Attended,SC0225
+PD2246,2025-01-31,15:53:15,Training Session,Upcoming,SC0002
+PD2247,2025-01-31,12:01:32,Workshop,Upcoming,SC0410
+PD2248,2025-01-31,17:36:33,Training Session,Missed,SC0503
+PD2249,2025-01-31,13:08:05,Workshop,Missed,SC0576
+PD2250,2025-01-31,10:07:47,Networking Event,Attended,SC0750
+PD2251,2025-01-31,12:02:00,Networking Event,Attended,SC0046
+PD2252,2025-01-31,17:17:24,Webinar,Missed,SC0278
+PD2253,2025-01-31,09:11:46,Training Session,Upcoming,SC0020
+PD2254,2025-01-31,11:06:29,Networking Event,Attended,SC0366
+PD2255,2025-01-31,17:25:54,Workshop,Upcoming,SC0379
+PD2256,2025-01-31,16:38:13,Training Session,Missed,SC0364
+PD2257,2025-01-31,17:04:41,Workshop,Missed,SC0494
+PD2258,2025-01-31,12:36:08,Networking Event,Upcoming,SC0055
+PD2259,2025-01-31,12:41:41,Networking Event,Missed,SC0725
+PD2260,2025-01-31,09:58:54,Industry Conference,Attended,SC0293
+PD2261,2025-01-31,15:41:26,Industry Conference,Attended,SC0663
+PD2262,2025-01-31,14:35:18,Workshop,Upcoming,SC0714
+PD2263,2025-01-31,12:41:27,Networking Event,Upcoming,SC0644
+PD2264,2025-01-31,16:09:57,Training Session,Upcoming,SC0710
+PD2265,2025-01-31,11:45:45,Industry Conference,Missed,SC0663
+PD2266,2025-01-31,12:17:39,Webinar,Attended,SC0042
+PD2267,2025-01-31,09:40:53,Webinar,Missed,SC0112
+PD2268,2025-01-31,11:29:13,Training Session,Missed,SC0356
+PD2269,2025-01-31,17:14:04,Workshop,Upcoming,SC0183
+PD2270,2025-01-31,15:03:44,Training Session,Attended,SC0551
+PD2271,2025-01-31,13:11:14,Workshop,Missed,SC0185
+PD2272,2025-01-31,15:29:24,Industry Conference,Attended,SC0036
+PD2273,2025-01-31,14:25:15,Training Session,Attended,SC0725
+PD2274,2025-01-31,15:22:13,Webinar,Upcoming,SC0594
+PD2275,2025-01-31,10:45:31,Networking Event,Missed,SC0479
+PD2276,2025-01-31,13:51:25,Workshop,Missed,SC0542
+PD2277,2025-01-31,12:39:47,Industry Conference,Upcoming,SC0047
+PD2278,2025-01-31,10:29:49,Networking Event,Attended,SC0126
+PD2279,2025-01-31,15:21:04,Workshop,Missed,SC0206
+PD2280,2025-01-31,15:29:38,Workshop,Attended,SC0438
+PD2281,2025-01-31,16:30:40,Networking Event,Upcoming,SC0411
+PD2282,2025-01-31,11:50:26,Industry Conference,Upcoming,SC0489
+PD2283,2025-01-31,16:05:43,Networking Event,Attended,SC0584
+PD2284,2025-01-31,10:26:47,Workshop,Upcoming,SC0600
+PD2285,2025-01-31,11:38:06,Training Session,Missed,SC0429
+PD2286,2025-01-31,12:11:36,Webinar,Attended,SC0160
+PD2287,2025-01-31,12:37:53,Industry Conference,Upcoming,SC0031
+PD2288,2025-01-31,10:50:12,Industry Conference,Upcoming,SC0651
+PD2289,2025-01-31,14:59:01,Workshop,Attended,SC0706
+PD2290,2025-01-31,14:05:28,Workshop,Upcoming,SC0154
+PD2291,2025-01-31,17:32:25,Networking Event,Attended,SC0418
+PD2292,2025-01-31,12:09:58,Industry Conference,Upcoming,SC0622
+PD2293,2025-01-31,15:31:53,Networking Event,Attended,SC0172
+PD2294,2025-01-31,09:22:39,Industry Conference,Attended,SC0354
+PD2295,2025-01-31,14:04:24,Training Session,Attended,SC0426
+PD2296,2025-01-31,16:14:45,Workshop,Attended,SC0321
+PD2297,2025-01-31,13:34:35,Workshop,Attended,SC0391
+PD2298,2025-01-31,14:32:23,Webinar,Missed,SC0255
+PD2299,2025-01-31,14:00:08,Training Session,Attended,SC0568
+PD2300,2025-01-31,13:56:35,Webinar,Upcoming,SC0186
+PD2301,2025-01-31,13:07:37,Networking Event,Attended,SC0166
+PD2302,2025-01-31,17:18:30,Industry Conference,Attended,SC0597
+PD2303,2025-01-31,11:00:52,Webinar,Attended,SC0557
+PD2304,2025-01-31,10:20:19,Webinar,Upcoming,SC0345
+PD2305,2025-01-31,10:44:54,Networking Event,Missed,SC0399
+PD2306,2025-01-31,12:30:45,Industry Conference,Missed,SC0025
+PD2307,2025-01-31,10:16:19,Networking Event,Attended,SC0712
+PD2308,2025-01-31,09:11:26,Workshop,Missed,SC0649
+PD2309,2025-01-31,16:40:17,Training Session,Missed,SC0009
+PD2310,2025-01-31,11:09:15,Industry Conference,Upcoming,SC0480
+PD2311,2025-01-31,10:36:54,Networking Event,Missed,SC0631
+PD2312,2025-01-31,11:01:53,Networking Event,Missed,SC0203
+PD2313,2025-01-31,15:17:19,Industry Conference,Upcoming,SC0201
+PD2314,2025-01-31,14:22:59,Networking Event,Attended,SC0062
+PD2315,2025-01-31,09:12:25,Workshop,Missed,SC0404
+PD2316,2025-01-31,14:07:59,Networking Event,Attended,SC0212
+PD2317,2025-01-31,10:27:00,Industry Conference,Attended,SC0373
+PD2318,2025-01-31,15:00:30,Workshop,Missed,SC0055
+PD2319,2025-01-31,12:43:24,Webinar,Missed,SC0018
+PD2320,2025-01-31,15:35:37,Workshop,Upcoming,SC0483
+PD2321,2025-01-31,10:50:50,Webinar,Missed,SC0475
+PD2322,2025-01-31,15:26:38,Workshop,Upcoming,SC0354
+PD2323,2025-01-31,12:48:42,Networking Event,Upcoming,SC0702
+PD2324,2025-01-31,16:24:47,Networking Event,Attended,SC0747
+PD2325,2025-01-31,10:56:34,Industry Conference,Attended,SC0461
+PD2326,2025-01-31,14:37:39,Networking Event,Attended,SC0154
+PD2327,2025-01-31,11:36:32,Workshop,Missed,SC0297
+PD2328,2025-01-31,14:04:48,Networking Event,Attended,SC0719
+PD2329,2025-01-31,17:40:37,Networking Event,Missed,SC0331
+PD2330,2025-01-31,16:08:56,Networking Event,Upcoming,SC0512
+PD2331,2025-01-31,14:31:55,Workshop,Upcoming,SC0660
+PD2332,2025-01-31,13:33:21,Webinar,Upcoming,SC0053
+PD2333,2025-01-31,09:36:35,Workshop,Missed,SC0265
+PD2334,2025-01-31,14:11:49,Networking Event,Upcoming,SC0246
+PD2335,2025-01-31,17:54:29,Networking Event,Missed,SC0155
+PD2336,2025-01-31,14:16:16,Workshop,Upcoming,SC0413
+PD2337,2025-01-31,11:20:43,Webinar,Upcoming,SC0309
+PD2338,2025-01-31,17:54:23,Networking Event,Missed,SC0481
+PD2339,2025-01-31,14:57:54,Webinar,Upcoming,SC0254
+PD2340,2025-01-31,17:55:31,Networking Event,Attended,SC0048
+PD2341,2025-01-31,13:40:11,Industry Conference,Attended,SC0547
+PD2342,2025-01-31,12:09:06,Networking Event,Attended,SC0195
+PD2343,2025-01-31,09:30:14,Industry Conference,Missed,SC0625
+PD2344,2025-01-31,09:02:08,Industry Conference,Upcoming,SC0164
+PD2345,2025-01-31,10:55:04,Industry Conference,Attended,SC0019
+PD2346,2025-01-31,12:09:30,Webinar,Attended,SC0125
+PD2347,2025-01-31,13:24:00,Webinar,Upcoming,SC0270
+PD2348,2025-01-31,10:24:40,Workshop,Attended,SC0396
+PD2349,2025-01-31,11:48:53,Training Session,Missed,SC0379
+PD2350,2025-01-31,16:47:17,Webinar,Upcoming,SC0098
+PD2351,2025-01-31,09:13:10,Industry Conference,Upcoming,SC0206
+PD2352,2025-01-31,17:44:46,Webinar,Missed,SC0521
+PD2353,2025-01-31,10:06:05,Industry Conference,Attended,SC0530
+PD2354,2025-01-31,11:58:41,Webinar,Attended,SC0424
+PD2355,2025-01-31,13:10:34,Industry Conference,Attended,SC0473
+PD2356,2025-01-31,14:39:15,Workshop,Missed,SC0500
+PD2357,2025-01-31,14:09:39,Webinar,Upcoming,SC0091
+PD2358,2025-01-31,15:22:44,Workshop,Attended,SC0268
+PD2359,2025-01-31,13:00:50,Training Session,Upcoming,SC0574
+PD2360,2025-01-31,17:43:25,Networking Event,Upcoming,SC0548
+PD2361,2025-01-31,17:39:49,Training Session,Attended,SC0405
+PD2362,2025-01-31,16:51:04,Webinar,Upcoming,SC0432
+PD2363,2025-01-31,12:35:22,Industry Conference,Attended,SC0219
+PD2364,2025-01-31,13:13:25,Training Session,Missed,SC0109
+PD2365,2025-01-31,17:27:33,Webinar,Attended,SC0580
+PD2366,2025-01-31,15:21:15,Workshop,Missed,SC0319
+PD2367,2025-01-31,16:02:12,Webinar,Upcoming,SC0082
+PD2368,2025-01-31,17:24:40,Workshop,Upcoming,SC0415
+PD2369,2025-01-31,16:43:14,Industry Conference,Missed,SC0134
+PD2370,2025-01-31,12:36:16,Webinar,Upcoming,SC0594
+PD2371,2025-01-31,17:54:06,Webinar,Upcoming,SC0653
+PD2372,2025-01-31,15:15:02,Industry Conference,Upcoming,SC0525
+PD2373,2025-01-31,11:03:45,Networking Event,Missed,SC0387
+PD2374,2025-01-31,10:12:21,Networking Event,Missed,SC0572
+PD2375,2025-01-31,14:19:17,Networking Event,Upcoming,SC0299
+PD2376,2025-01-31,11:47:32,Industry Conference,Upcoming,SC0465
+PD2377,2025-01-31,10:19:49,Training Session,Upcoming,SC0182
+PD2378,2025-01-31,13:30:14,Webinar,Attended,SC0043
+PD2379,2025-01-31,12:53:31,Workshop,Attended,SC0115
+PD2380,2025-01-31,10:49:26,Webinar,Attended,SC0624
+PD2381,2025-01-31,13:01:43,Training Session,Attended,SC0505
+PD2382,2025-01-31,13:49:34,Workshop,Missed,SC0260
+PD2383,2025-01-31,16:30:01,Networking Event,Attended,SC0658
+PD2384,2025-01-31,14:54:53,Training Session,Missed,SC0585
+PD2385,2025-01-31,17:05:14,Industry Conference,Missed,SC0724
+PD2386,2025-01-31,10:09:51,Workshop,Upcoming,SC0589
+PD2387,2025-01-31,13:20:23,Training Session,Upcoming,SC0638
+PD2388,2025-01-31,09:31:03,Workshop,Upcoming,SC0406
+PD2389,2025-01-31,15:12:01,Networking Event,Attended,SC0134
+PD2390,2025-01-31,12:58:09,Webinar,Missed,SC0317
+PD2391,2025-01-31,17:38:48,Webinar,Missed,SC0352
+PD2392,2025-01-31,16:10:17,Webinar,Upcoming,SC0621
+PD2393,2025-01-31,09:46:20,Training Session,Upcoming,SC0525
+PD2394,2025-01-31,12:57:20,Workshop,Upcoming,SC0617
+PD2395,2025-01-31,09:13:54,Webinar,Missed,SC0714
+PD2396,2025-01-31,16:37:51,Industry Conference,Attended,SC0650
+PD2397,2025-01-31,14:22:47,Networking Event,Upcoming,SC0627
+PD2398,2025-01-31,14:40:51,Networking Event,Attended,SC0210
+PD2399,2025-01-31,12:02:14,Industry Conference,Missed,SC0156
+PD2400,2025-01-31,13:29:15,Industry Conference,Missed,SC0178
+PD2401,2025-01-31,15:23:59,Workshop,Upcoming,SC0269
+PD2402,2025-01-31,09:51:12,Workshop,Attended,SC0383
+PD2403,2025-01-31,09:56:27,Workshop,Attended,SC0568
+PD2404,2025-01-31,09:36:09,Industry Conference,Missed,SC0636
+PD2405,2025-01-31,10:38:28,Webinar,Upcoming,SC0561
+PD2406,2025-01-31,13:25:02,Webinar,Upcoming,SC0483
+PD2407,2025-01-31,15:23:14,Workshop,Attended,SC0604
+PD2408,2025-01-31,16:01:15,Workshop,Upcoming,SC0428
+PD2409,2025-01-31,14:53:59,Workshop,Missed,SC0160
+PD2410,2025-01-31,10:40:02,Training Session,Upcoming,SC0553
+PD2411,2025-01-31,14:47:54,Webinar,Attended,SC0114
+PD2412,2025-01-31,12:35:44,Webinar,Missed,SC0053
+PD2413,2025-01-31,17:24:50,Webinar,Missed,SC0604
+PD2414,2025-01-31,10:43:25,Training Session,Upcoming,SC0745
+PD2415,2025-01-31,17:04:18,Webinar,Attended,SC0710
+PD2416,2025-01-31,15:36:31,Workshop,Missed,SC0213
+PD2417,2025-01-31,09:18:11,Industry Conference,Attended,SC0169
+PD2418,2025-01-31,17:13:35,Industry Conference,Upcoming,SC0463
+PD2419,2025-01-31,15:14:50,Workshop,Attended,SC0300
+PD2420,2025-01-31,13:49:07,Workshop,Missed,SC0272
+PD2421,2025-01-31,16:01:20,Industry Conference,Attended,SC0062
+PD2422,2025-01-31,17:13:30,Networking Event,Missed,SC0403
+PD2423,2025-01-31,17:10:50,Industry Conference,Missed,SC0645
+PD2424,2025-01-31,13:39:36,Networking Event,Upcoming,SC0613
+PD2425,2025-01-31,12:04:46,Workshop,Attended,SC0034
+PD2426,2025-01-31,17:54:41,Webinar,Upcoming,SC0291
+PD2427,2025-01-31,16:42:58,Workshop,Missed,SC0262
+PD2428,2025-01-31,11:14:54,Workshop,Upcoming,SC0607
+PD2429,2025-01-31,09:10:05,Webinar,Upcoming,SC0475
+PD2430,2025-01-31,16:59:32,Webinar,Missed,SC0015
+PD2431,2025-01-31,16:46:37,Networking Event,Attended,SC0435
+PD2432,2025-01-31,14:49:58,Networking Event,Attended,SC0523
+PD2433,2025-01-31,12:39:51,Webinar,Upcoming,SC0600
+PD2434,2025-01-31,09:04:36,Industry Conference,Upcoming,SC0154
+PD2435,2025-01-31,09:52:14,Workshop,Upcoming,SC0405
+PD2436,2025-01-31,10:11:22,Industry Conference,Attended,SC0747
+PD2437,2025-01-31,10:35:43,Industry Conference,Upcoming,SC0399
+PD2438,2025-01-31,09:37:18,Webinar,Missed,SC0235
+PD2439,2025-01-31,10:07:20,Industry Conference,Upcoming,SC0710
+PD2440,2025-01-31,12:53:04,Training Session,Attended,SC0352
+PD2441,2025-01-31,12:56:18,Workshop,Upcoming,SC0328
+PD2442,2025-01-31,09:14:01,Training Session,Attended,SC0369
+PD2443,2025-01-31,13:13:15,Industry Conference,Attended,SC0105
+PD2444,2025-01-31,15:27:57,Industry Conference,Missed,SC0317
+PD2445,2025-01-31,12:16:58,Webinar,Upcoming,SC0441
+PD2446,2025-01-31,13:49:16,Networking Event,Upcoming,SC0470
+PD2447,2025-01-31,17:23:17,Industry Conference,Upcoming,SC0232
+PD2448,2025-01-31,10:25:17,Workshop,Upcoming,SC0037
+PD2449,2025-01-31,13:13:30,Webinar,Missed,SC0484
+PD2450,2025-01-31,14:34:51,Workshop,Upcoming,SC0658
+PD2451,2025-01-31,16:08:41,Industry Conference,Upcoming,SC0323
+PD2452,2025-01-31,15:03:40,Workshop,Missed,SC0040
+PD2453,2025-01-31,17:35:53,Networking Event,Missed,SC0094
+PD2454,2025-01-31,17:49:11,Workshop,Upcoming,SC0700
+PD2455,2025-01-31,16:05:40,Webinar,Attended,SC0605
+PD2456,2025-01-31,16:57:20,Networking Event,Upcoming,SC0458
+PD2457,2025-01-31,09:31:20,Workshop,Upcoming,SC0070
+PD2458,2025-01-31,10:33:23,Workshop,Attended,SC0619
+PD2459,2025-01-31,10:13:29,Webinar,Missed,SC0486
+PD2460,2025-01-31,12:08:48,Webinar,Upcoming,SC0743
+PD2461,2025-01-31,14:21:30,Industry Conference,Missed,SC0745
+PD2462,2025-01-31,09:20:46,Workshop,Missed,SC0429
+PD2463,2025-01-31,13:45:15,Industry Conference,Upcoming,SC0138
+PD2464,2025-01-31,15:05:59,Networking Event,Upcoming,SC0646
+PD2465,2025-01-31,11:53:44,Webinar,Upcoming,SC0419
+PD2466,2025-01-31,11:30:17,Training Session,Upcoming,SC0025
+PD2467,2025-01-31,12:51:54,Industry Conference,Attended,SC0125
+PD2468,2025-01-31,15:27:20,Webinar,Missed,SC0037
+PD2469,2025-01-31,12:59:57,Industry Conference,Attended,SC0093
+PD2470,2025-01-31,10:20:11,Industry Conference,Attended,SC0380
+PD2471,2025-01-31,17:39:48,Webinar,Attended,SC0728
+PD2472,2025-01-31,13:53:54,Webinar,Attended,SC0619
+PD2473,2025-01-31,15:22:21,Training Session,Missed,SC0731
+PD2474,2025-01-31,12:52:26,Networking Event,Attended,SC0491
+PD2475,2025-01-31,15:29:10,Webinar,Missed,SC0294
+PD2476,2025-01-31,14:50:03,Networking Event,Attended,SC0384
+PD2477,2025-01-31,09:55:55,Networking Event,Upcoming,SC0667
+PD2478,2025-01-31,09:47:03,Networking Event,Attended,SC0671
+PD2479,2025-01-31,13:51:34,Networking Event,Missed,SC0620
+PD2480,2025-01-31,09:09:05,Networking Event,Missed,SC0095
+PD2481,2025-01-31,17:26:07,Training Session,Missed,SC0507
+PD2482,2025-01-31,13:07:33,Webinar,Upcoming,SC0637
+PD2483,2025-01-31,11:19:00,Training Session,Missed,SC0059
+PD2484,2025-01-31,13:00:44,Industry Conference,Upcoming,SC0518
+PD2485,2025-01-31,11:00:21,Networking Event,Missed,SC0115
+PD2486,2025-01-31,10:43:28,Industry Conference,Attended,SC0723
+PD2487,2025-01-31,11:56:35,Industry Conference,Attended,SC0695
+PD2488,2025-01-31,15:55:27,Training Session,Missed,SC0682
+PD2489,2025-01-31,14:45:18,Industry Conference,Missed,SC0697
+PD2490,2025-01-31,15:13:01,Industry Conference,Attended,SC0003
+PD2491,2025-01-31,13:30:20,Industry Conference,Missed,SC0054
+PD2492,2025-01-31,11:42:38,Webinar,Missed,SC0219
+PD2493,2025-01-31,15:38:29,Industry Conference,Missed,SC0740
+PD2494,2025-01-31,15:08:21,Industry Conference,Upcoming,SC0071
+PD2495,2025-01-31,12:39:57,Industry Conference,Missed,SC0281
+PD2496,2025-01-31,15:39:31,Webinar,Missed,SC0426
+PD2497,2025-01-31,17:39:47,Training Session,Missed,SC0101
+PD2498,2025-01-31,16:01:24,Webinar,Missed,SC0629
+PD2499,2025-01-31,09:32:57,Networking Event,Missed,SC0173
+PD2500,2025-01-31,10:47:54,Training Session,Upcoming,SC0732
+PD2501,2025-01-31,17:34:17,Workshop,Upcoming,SC0186
+PD2502,2025-01-31,12:44:13,Workshop,Upcoming,SC0446
+PD2503,2025-01-31,17:14:10,Workshop,Attended,SC0276
+PD2504,2025-01-31,12:37:23,Workshop,Missed,SC0007
+PD2505,2025-01-31,09:31:57,Training Session,Missed,SC0076
+PD2506,2025-01-31,17:00:08,Training Session,Attended,SC0472
+PD2507,2025-01-31,14:14:05,Training Session,Upcoming,SC0611
+PD2508,2025-01-31,14:34:09,Webinar,Attended,SC0433
+PD2509,2025-01-31,14:01:47,Webinar,Attended,SC0677
+PD2510,2025-01-31,16:09:26,Webinar,Missed,SC0735
+PD2511,2025-01-31,12:15:38,Networking Event,Missed,SC0441
+PD2512,2025-01-31,15:12:06,Webinar,Upcoming,SC0447
+PD2513,2025-01-31,11:28:19,Training Session,Missed,SC0366
+PD2514,2025-01-31,12:22:42,Networking Event,Missed,SC0500
+PD2515,2025-01-31,10:34:29,Networking Event,Attended,SC0443
+PD2516,2025-01-31,09:56:49,Workshop,Attended,SC0629
+PD2517,2025-01-31,14:56:10,Training Session,Missed,SC0216
+PD2518,2025-01-31,15:21:31,Networking Event,Upcoming,SC0660
+PD2519,2025-01-31,13:57:04,Networking Event,Missed,SC0247
+PD2520,2025-01-31,12:52:49,Training Session,Upcoming,SC0720
+PD2521,2025-01-31,09:51:06,Workshop,Attended,SC0012
+PD2522,2025-01-31,09:00:11,Workshop,Missed,SC0104
+PD2523,2025-01-31,09:26:44,Workshop,Upcoming,SC0610
+PD2524,2025-01-31,11:43:07,Training Session,Missed,SC0193
+PD2525,2025-01-31,09:30:55,Training Session,Upcoming,SC0318
+PD2526,2025-01-31,16:43:36,Training Session,Missed,SC0263
+PD2527,2025-01-31,14:32:47,Networking Event,Upcoming,SC0524
+PD2528,2025-01-31,09:10:43,Workshop,Upcoming,SC0300
+PD2529,2025-01-31,12:13:26,Webinar,Upcoming,SC0323
+PD2530,2025-01-31,10:36:21,Industry Conference,Upcoming,SC0009
+PD2531,2025-01-31,13:46:47,Networking Event,Missed,SC0732
+PD2532,2025-01-31,17:38:09,Workshop,Upcoming,SC0142
+PD2533,2025-01-31,11:44:32,Industry Conference,Missed,SC0276
+PD2534,2025-01-31,16:30:28,Workshop,Upcoming,SC0164
+PD2535,2025-01-31,09:01:12,Networking Event,Attended,SC0058
+PD2536,2025-01-31,15:59:40,Webinar,Attended,SC0522
+PD2537,2025-01-31,13:24:12,Industry Conference,Missed,SC0061
+PD2538,2025-01-31,09:28:51,Training Session,Upcoming,SC0647
+PD2539,2025-01-31,17:11:18,Networking Event,Missed,SC0366
+PD2540,2025-01-31,12:48:51,Webinar,Attended,SC0071
+PD2541,2025-01-31,10:06:35,Networking Event,Attended,SC0322
+PD2542,2025-01-31,11:25:58,Training Session,Attended,SC0602
+PD2543,2025-01-31,13:06:06,Workshop,Missed,SC0690
+PD2544,2025-01-31,10:05:54,Training Session,Attended,SC0434
+PD2545,2025-01-31,13:49:05,Workshop,Missed,SC0208
+PD2546,2025-01-31,15:23:37,Workshop,Attended,SC0428
+PD2547,2025-01-31,10:09:35,Training Session,Upcoming,SC0399
+PD2548,2025-01-31,17:40:09,Workshop,Attended,SC0585
+PD2549,2025-01-31,11:55:22,Webinar,Upcoming,SC0032
+PD2550,2025-01-31,14:34:54,Industry Conference,Upcoming,SC0296
+PD2551,2025-01-31,15:15:44,Webinar,Upcoming,SC0613
+PD2552,2025-01-31,09:27:00,Training Session,Attended,SC0282
+PD2553,2025-01-31,10:33:27,Industry Conference,Attended,SC0586
+PD2554,2025-01-31,10:29:18,Webinar,Missed,SC0289
+PD2555,2025-01-31,13:40:14,Networking Event,Missed,SC0251
+PD2556,2025-01-31,10:35:08,Industry Conference,Attended,SC0275
+PD2557,2025-01-31,16:00:03,Webinar,Missed,SC0258
+PD2558,2025-01-31,12:40:49,Webinar,Missed,SC0456
+PD2559,2025-01-31,13:23:09,Networking Event,Attended,SC0700
+PD2560,2025-01-31,13:35:53,Networking Event,Attended,SC0722
+PD2561,2025-01-31,10:37:33,Workshop,Upcoming,SC0595
+PD2562,2025-01-31,17:40:30,Workshop,Upcoming,SC0398
+PD2563,2025-01-31,16:03:15,Networking Event,Upcoming,SC0480
+PD2564,2025-01-31,10:51:17,Industry Conference,Missed,SC0121
+PD2565,2025-01-31,16:30:47,Webinar,Attended,SC0552
+PD2566,2025-01-31,09:50:31,Industry Conference,Missed,SC0291
+PD2567,2025-01-31,14:52:24,Workshop,Upcoming,SC0440
+PD2568,2025-01-31,17:34:57,Networking Event,Missed,SC0440
+PD2569,2025-01-31,16:40:30,Networking Event,Upcoming,SC0612
+PD2570,2025-01-31,13:09:18,Workshop,Missed,SC0185
+PD2571,2025-01-31,14:42:01,Workshop,Upcoming,SC0159
+PD2572,2025-01-31,11:05:16,Industry Conference,Missed,SC0561
+PD2573,2025-01-31,15:27:28,Workshop,Missed,SC0160
+PD2574,2025-01-31,13:21:01,Industry Conference,Upcoming,SC0086
+PD2575,2025-01-31,11:34:46,Networking Event,Upcoming,SC0400
+PD2576,2025-01-31,13:37:31,Networking Event,Missed,SC0689
+PD2577,2025-01-31,14:56:09,Industry Conference,Upcoming,SC0588
+PD2578,2025-01-31,13:40:49,Industry Conference,Attended,SC0565
+PD2579,2025-01-31,17:55:20,Networking Event,Upcoming,SC0665
+PD2580,2025-01-31,12:01:35,Networking Event,Attended,SC0136
+PD2581,2025-01-31,13:32:12,Workshop,Attended,SC0489
+PD2582,2025-01-31,14:22:14,Networking Event,Upcoming,SC0570
+PD2583,2025-01-31,17:33:27,Workshop,Upcoming,SC0605
+PD2584,2025-01-31,12:38:22,Training Session,Attended,SC0028
+PD2585,2025-01-31,11:03:31,Networking Event,Attended,SC0126
+PD2586,2025-01-31,10:28:13,Networking Event,Upcoming,SC0303
+PD2587,2025-01-31,12:46:38,Webinar,Upcoming,SC0574
+PD2588,2025-01-31,13:07:44,Networking Event,Attended,SC0473
+PD2589,2025-01-31,15:49:54,Webinar,Missed,SC0694
+PD2590,2025-01-31,17:21:14,Networking Event,Attended,SC0439
+PD2591,2025-01-31,14:40:28,Webinar,Attended,SC0583
+PD2592,2025-01-31,15:05:56,Webinar,Attended,SC0396
+PD2593,2025-01-31,13:57:15,Networking Event,Upcoming,SC0528
+PD2594,2025-01-31,10:01:01,Industry Conference,Attended,SC0669
+PD2595,2025-01-31,16:47:31,Webinar,Attended,SC0482
+PD2596,2025-01-31,15:19:46,Workshop,Upcoming,SC0500
+PD2597,2025-01-31,09:13:55,Webinar,Upcoming,SC0223
+PD2598,2025-01-31,09:01:30,Industry Conference,Attended,SC0072
+PD2599,2025-01-31,14:23:44,Workshop,Missed,SC0037
+PD2600,2025-01-31,14:24:07,Training Session,Attended,SC0279
+PD2601,2025-01-31,13:13:19,Webinar,Attended,SC0128
+PD2602,2025-01-31,16:58:15,Industry Conference,Upcoming,SC0372
+PD2603,2025-01-31,15:00:43,Webinar,Missed,SC0283
+PD2604,2025-01-31,14:39:45,Webinar,Attended,SC0067
+PD2605,2025-01-31,14:34:27,Training Session,Upcoming,SC0351
+PD2606,2025-01-31,09:43:13,Workshop,Attended,SC0132
+PD2607,2025-01-31,15:52:57,Webinar,Missed,SC0305
+PD2608,2025-01-31,16:29:16,Industry Conference,Missed,SC0578
+PD2609,2025-01-31,14:07:50,Training Session,Upcoming,SC0291
+PD2610,2025-01-31,17:09:16,Training Session,Missed,SC0136
+PD2611,2025-01-31,16:13:46,Industry Conference,Upcoming,SC0400
+PD2612,2025-01-31,09:47:05,Webinar,Upcoming,SC0276
+PD2613,2025-01-31,14:00:57,Training Session,Missed,SC0257
+PD2614,2025-01-31,11:21:51,Networking Event,Attended,SC0705
+PD2615,2025-01-31,13:55:09,Industry Conference,Missed,SC0428
+PD2616,2025-01-31,11:47:53,Training Session,Attended,SC0490
+PD2617,2025-01-31,14:13:41,Webinar,Missed,SC0333
+PD2618,2025-01-31,13:59:36,Industry Conference,Missed,SC0567
+PD2619,2025-01-31,15:48:21,Networking Event,Upcoming,SC0173
+PD2620,2025-01-31,12:01:22,Industry Conference,Upcoming,SC0374
+PD2621,2025-01-31,16:56:36,Webinar,Upcoming,SC0115
+PD2622,2025-01-31,15:12:46,Networking Event,Attended,SC0237
+PD2623,2025-01-31,13:04:55,Industry Conference,Upcoming,SC0395
+PD2624,2025-01-31,10:34:25,Workshop,Attended,SC0570
+PD2625,2025-01-31,10:09:08,Training Session,Upcoming,SC0284
+PD2626,2025-01-31,15:24:34,Workshop,Upcoming,SC0384
+PD2627,2025-01-31,11:44:57,Industry Conference,Missed,SC0278
+PD2628,2025-01-31,15:29:01,Networking Event,Missed,SC0377
+PD2629,2025-01-31,16:29:12,Training Session,Missed,SC0558
+PD2630,2025-01-31,11:28:33,Industry Conference,Attended,SC0500
+PD2631,2025-01-31,10:17:26,Networking Event,Attended,SC0283
+PD2632,2025-01-31,10:42:12,Workshop,Attended,SC0697
+PD2633,2025-01-31,13:06:59,Networking Event,Missed,SC0338
+PD2634,2025-01-31,16:20:19,Webinar,Missed,SC0551
+PD2635,2025-01-31,13:23:27,Training Session,Attended,SC0701
+PD2636,2025-01-31,14:51:17,Training Session,Attended,SC0402
+PD2637,2025-01-31,09:46:05,Industry Conference,Attended,SC0688
+PD2638,2025-01-31,16:25:07,Webinar,Missed,SC0109
+PD2639,2025-01-31,12:19:37,Industry Conference,Missed,SC0343
+PD2640,2025-01-31,15:27:52,Networking Event,Upcoming,SC0499
+PD2641,2025-01-31,11:55:37,Training Session,Attended,SC0031
+PD2642,2025-01-31,15:27:11,Networking Event,Missed,SC0422
+PD2643,2025-01-31,09:43:11,Workshop,Missed,SC0680
+PD2644,2025-01-31,13:30:46,Webinar,Attended,SC0038
+PD2645,2025-01-31,16:15:02,Workshop,Missed,SC0003
+PD2646,2025-01-31,16:49:15,Webinar,Attended,SC0098
+PD2647,2025-01-31,17:45:20,Webinar,Missed,SC0742
+PD2648,2025-01-31,17:09:24,Networking Event,Upcoming,SC0130
+PD2649,2025-01-31,09:02:41,Webinar,Missed,SC0202
+PD2650,2025-01-31,11:19:59,Networking Event,Upcoming,SC0394
+PD2651,2025-01-31,13:38:56,Training Session,Upcoming,SC0618
+PD2652,2025-01-31,12:28:26,Webinar,Attended,SC0130
+PD2653,2025-01-31,16:19:01,Networking Event,Attended,SC0692
+PD2654,2025-01-31,13:40:38,Industry Conference,Upcoming,SC0698
+PD2655,2025-01-31,10:05:13,Workshop,Upcoming,SC0188
+PD2656,2025-01-31,11:26:05,Training Session,Attended,SC0629
+PD2657,2025-01-31,12:26:09,Industry Conference,Missed,SC0599
+PD2658,2025-01-31,12:47:23,Training Session,Attended,SC0651
+PD2659,2025-01-31,14:05:24,Workshop,Missed,SC0299
+PD2660,2025-01-31,16:26:55,Training Session,Upcoming,SC0684
+PD2661,2025-01-31,17:52:09,Networking Event,Attended,SC0285
+PD2662,2025-01-31,09:17:13,Workshop,Attended,SC0217
+PD2663,2025-01-31,10:01:24,Workshop,Attended,SC0053
+PD2664,2025-01-31,09:28:50,Industry Conference,Attended,SC0700
+PD2665,2025-01-31,12:40:29,Industry Conference,Upcoming,SC0681
+PD2666,2025-01-31,16:10:21,Workshop,Attended,SC0445
+PD2667,2025-01-31,15:51:15,Training Session,Missed,SC0249
+PD2668,2025-01-31,15:31:49,Workshop,Missed,SC0590
+PD2669,2025-01-31,15:35:18,Workshop,Upcoming,SC0130
+PD2670,2025-01-31,11:17:15,Workshop,Missed,SC0279
+PD2671,2025-01-31,13:39:44,Industry Conference,Upcoming,SC0690
+PD2672,2025-01-31,09:09:51,Training Session,Upcoming,SC0467
+PD2673,2025-01-31,17:01:12,Industry Conference,Missed,SC0245
+PD2674,2025-01-31,16:01:49,Networking Event,Upcoming,SC0038
+PD2675,2025-01-31,09:01:49,Networking Event,Attended,SC0367
+PD2676,2025-01-31,16:51:15,Networking Event,Missed,SC0212
+PD2677,2025-01-31,12:54:02,Training Session,Upcoming,SC0724
+PD2678,2025-01-31,10:15:42,Networking Event,Missed,SC0015
+PD2679,2025-01-31,14:01:01,Networking Event,Upcoming,SC0068
+PD2680,2025-01-31,14:01:49,Training Session,Upcoming,SC0707
+PD2681,2025-01-31,17:45:21,Training Session,Missed,SC0500
+PD2682,2025-01-31,16:45:45,Workshop,Missed,SC0741
+PD2683,2025-01-31,10:00:11,Training Session,Upcoming,SC0289
+PD2684,2025-01-31,12:46:11,Webinar,Missed,SC0306
+PD2685,2025-01-31,15:34:17,Industry Conference,Attended,SC0741
+PD2686,2025-01-31,11:04:30,Workshop,Attended,SC0466
+PD2687,2025-01-31,09:33:46,Networking Event,Attended,SC0492
+PD2688,2025-01-31,17:24:53,Networking Event,Attended,SC0454
+PD2689,2025-01-31,09:52:48,Networking Event,Attended,SC0422
+PD2690,2025-01-31,11:09:48,Networking Event,Attended,SC0637
+PD2691,2025-01-31,17:45:49,Networking Event,Upcoming,SC0484
+PD2692,2025-01-31,15:38:10,Webinar,Upcoming,SC0030
+PD2693,2025-01-31,11:44:35,Industry Conference,Attended,SC0167
+PD2694,2025-01-31,16:44:31,Training Session,Missed,SC0080
+PD2695,2025-01-31,13:48:42,Webinar,Upcoming,SC0614
+PD2696,2025-01-31,12:44:15,Industry Conference,Attended,SC0232
+PD2697,2025-01-31,10:16:21,Webinar,Attended,SC0591
+PD2698,2025-01-31,09:01:44,Networking Event,Upcoming,SC0175
+PD2699,2025-01-31,14:35:13,Industry Conference,Attended,SC0034
+PD2700,2025-01-31,15:50:22,Webinar,Attended,SC0306
+PD2701,2025-01-31,12:57:37,Industry Conference,Missed,SC0426
+PD2702,2025-01-31,10:31:29,Industry Conference,Missed,SC0463
+PD2703,2025-01-31,15:11:00,Webinar,Upcoming,SC0329
+PD2704,2025-01-31,17:59:24,Training Session,Missed,SC0458
+PD2705,2025-01-31,14:14:55,Networking Event,Upcoming,SC0309
+PD2706,2025-01-31,12:34:34,Workshop,Missed,SC0473
+PD2707,2025-01-31,10:37:00,Networking Event,Upcoming,SC0092
+PD2708,2025-01-31,16:07:20,Networking Event,Missed,SC0444
+PD2709,2025-01-31,17:31:28,Workshop,Attended,SC0727
+PD2710,2025-01-31,13:11:20,Industry Conference,Upcoming,SC0646
+PD2711,2025-01-31,11:53:22,Industry Conference,Attended,SC0709
+PD2712,2025-01-31,11:50:09,Webinar,Missed,SC0505
+PD2713,2025-01-31,12:01:01,Training Session,Attended,SC0345
+PD2714,2025-01-31,09:15:33,Webinar,Upcoming,SC0087
+PD2715,2025-01-31,17:44:53,Webinar,Missed,SC0098
+PD2716,2025-01-31,15:19:02,Webinar,Missed,SC0315
+PD2717,2025-01-31,16:32:43,Industry Conference,Missed,SC0538
+PD2718,2025-01-31,11:43:36,Webinar,Attended,SC0610
+PD2719,2025-01-31,14:51:41,Workshop,Missed,SC0486
+PD2720,2025-01-31,16:00:15,Workshop,Attended,SC0509
+PD2721,2025-01-31,15:24:57,Training Session,Upcoming,SC0237
+PD2722,2025-01-31,17:38:21,Industry Conference,Attended,SC0657
+PD2723,2025-01-31,10:37:06,Webinar,Upcoming,SC0647
+PD2724,2025-01-31,11:05:11,Workshop,Upcoming,SC0410
+PD2725,2025-01-31,17:23:14,Networking Event,Upcoming,SC0447
+PD2726,2025-01-31,13:15:39,Webinar,Attended,SC0593
+PD2727,2025-01-31,13:17:56,Training Session,Upcoming,SC0415
+PD2728,2025-01-31,15:52:09,Industry Conference,Attended,SC0520
+PD2729,2025-01-31,16:43:33,Workshop,Upcoming,SC0169
+PD2730,2025-01-31,10:49:47,Webinar,Upcoming,SC0324
+PD2731,2025-01-31,12:28:42,Webinar,Upcoming,SC0065
+PD2732,2025-01-31,17:14:52,Networking Event,Missed,SC0074
+PD2733,2025-01-31,12:57:03,Networking Event,Missed,SC0390
+PD2734,2025-01-31,13:02:48,Webinar,Attended,SC0372
+PD2735,2025-01-31,11:46:23,Workshop,Missed,SC0660
+PD2736,2025-01-31,13:10:51,Training Session,Upcoming,SC0051
+PD2737,2025-01-31,10:57:07,Industry Conference,Missed,SC0678
+PD2738,2025-01-31,11:06:49,Webinar,Missed,SC0158
+PD2739,2025-01-31,10:12:49,Workshop,Attended,SC0070
+PD2740,2025-01-31,12:16:33,Industry Conference,Attended,SC0301
+PD2741,2025-01-31,12:59:11,Networking Event,Upcoming,SC0187
+PD2742,2025-01-31,10:11:55,Webinar,Missed,SC0151
+PD2743,2025-01-31,16:21:16,Networking Event,Upcoming,SC0542
+PD2744,2025-01-31,12:29:51,Webinar,Attended,SC0636
+PD2745,2025-01-31,17:23:10,Training Session,Upcoming,SC0345
+PD2746,2025-01-31,16:00:33,Training Session,Upcoming,SC0320
+PD2747,2025-01-31,13:41:08,Industry Conference,Missed,SC0005
+PD2748,2025-01-31,16:33:52,Training Session,Attended,SC0368
+PD2749,2025-01-31,16:26:38,Webinar,Attended,SC0688
+PD2750,2025-01-31,11:28:01,Industry Conference,Missed,SC0254
+PD2751,2025-01-31,17:21:16,Webinar,Attended,SC0103
+PD2752,2025-01-31,13:47:48,Workshop,Attended,SC0570
+PD2753,2025-01-31,12:14:24,Webinar,Missed,SC0606
+PD2754,2025-01-31,17:19:54,Industry Conference,Upcoming,SC0211
+PD2755,2025-01-31,10:29:23,Networking Event,Upcoming,SC0585
+PD2756,2025-01-31,13:34:33,Webinar,Attended,SC0431
+PD2757,2025-01-31,09:44:16,Training Session,Missed,SC0098
+PD2758,2025-01-31,13:36:07,Workshop,Missed,SC0346
+PD2759,2025-01-31,12:07:24,Training Session,Attended,SC0537
+PD2760,2025-01-31,16:25:13,Industry Conference,Missed,SC0227
+PD2761,2025-01-31,10:24:57,Workshop,Missed,SC0333
+PD2762,2025-01-31,13:37:55,Industry Conference,Attended,SC0360
+PD2763,2025-01-31,09:03:01,Training Session,Missed,SC0116
+PD2764,2025-01-31,15:00:01,Workshop,Upcoming,SC0608
+PD2765,2025-01-31,15:50:42,Webinar,Attended,SC0093
+PD2766,2025-01-31,17:55:49,Industry Conference,Upcoming,SC0649
+PD2767,2025-01-31,13:10:00,Industry Conference,Attended,SC0461
+PD2768,2025-01-31,10:13:44,Industry Conference,Missed,SC0472
+PD2769,2025-01-31,09:01:13,Industry Conference,Upcoming,SC0494
+PD2770,2025-01-31,15:28:39,Industry Conference,Attended,SC0443
+PD2771,2025-01-31,13:46:09,Industry Conference,Upcoming,SC0277
+PD2772,2025-01-31,10:54:46,Workshop,Missed,SC0161
+PD2773,2025-01-31,12:35:28,Networking Event,Attended,SC0495
+PD2774,2025-01-31,11:45:28,Networking Event,Missed,SC0578
+PD2775,2025-01-31,10:09:24,Networking Event,Upcoming,SC0286
+PD2776,2025-01-31,10:22:36,Industry Conference,Missed,SC0230
+PD2777,2025-01-31,12:19:20,Webinar,Missed,SC0130
+PD2778,2025-01-31,10:35:39,Workshop,Upcoming,SC0193
+PD2779,2025-01-31,09:24:28,Workshop,Upcoming,SC0333
+PD2780,2025-01-31,12:10:28,Training Session,Missed,SC0517
+PD2781,2025-01-31,14:35:50,Workshop,Attended,SC0191
+PD2782,2025-01-31,14:31:24,Industry Conference,Attended,SC0395
+PD2783,2025-01-31,14:55:32,Workshop,Missed,SC0702
+PD2784,2025-01-31,12:00:44,Industry Conference,Upcoming,SC0090
+PD2785,2025-01-31,12:11:41,Industry Conference,Attended,SC0116
+PD2786,2025-01-31,12:34:20,Workshop,Attended,SC0425
+PD2787,2025-01-31,10:44:50,Networking Event,Attended,SC0749
+PD2788,2025-01-31,13:15:51,Workshop,Attended,SC0319
+PD2789,2025-01-31,09:03:48,Workshop,Missed,SC0522
+PD2790,2025-01-31,11:31:53,Networking Event,Upcoming,SC0031
+PD2791,2025-01-31,09:19:29,Webinar,Missed,SC0556
+PD2792,2025-01-31,10:51:38,Workshop,Missed,SC0113
+PD2793,2025-01-31,12:47:33,Networking Event,Attended,SC0044
+PD2794,2025-01-31,17:56:08,Training Session,Missed,SC0436
+PD2795,2025-01-31,12:59:31,Webinar,Attended,SC0530
+PD2796,2025-01-31,13:30:39,Training Session,Upcoming,SC0101
+PD2797,2025-01-31,17:27:23,Industry Conference,Upcoming,SC0127
+PD2798,2025-01-31,16:57:32,Webinar,Missed,SC0612
+PD2799,2025-01-31,10:34:19,Webinar,Attended,SC0455
+PD2800,2025-01-31,12:18:44,Webinar,Upcoming,SC0501
+PD2801,2025-01-31,16:13:48,Training Session,Upcoming,SC0199
+PD2802,2025-01-31,11:26:49,Workshop,Attended,SC0459
+PD2803,2025-01-31,17:45:53,Webinar,Attended,SC0273
+PD2804,2025-01-31,13:18:27,Workshop,Upcoming,SC0479
+PD2805,2025-01-31,10:57:30,Webinar,Missed,SC0567
+PD2806,2025-01-31,11:22:27,Networking Event,Upcoming,SC0171
+PD2807,2025-01-31,15:14:35,Workshop,Attended,SC0147
+PD2808,2025-01-31,14:00:04,Industry Conference,Missed,SC0713
+PD2809,2025-01-31,14:05:23,Training Session,Upcoming,SC0207
+PD2810,2025-01-31,11:24:19,Workshop,Upcoming,SC0522
+PD2811,2025-01-31,16:04:07,Training Session,Missed,SC0382
+PD2812,2025-01-31,17:37:13,Industry Conference,Attended,SC0679
+PD2813,2025-01-31,16:42:25,Webinar,Upcoming,SC0632
+PD2814,2025-01-31,10:39:26,Networking Event,Upcoming,SC0186
+PD2815,2025-01-31,13:23:56,Industry Conference,Upcoming,SC0399
+PD2816,2025-01-31,15:41:48,Webinar,Attended,SC0161
+PD2817,2025-01-31,09:45:04,Networking Event,Missed,SC0135
+PD2818,2025-01-31,09:35:39,Webinar,Missed,SC0160
+PD2819,2025-01-31,16:24:32,Training Session,Attended,SC0188
+PD2820,2025-01-31,13:02:02,Webinar,Attended,SC0245
+PD2821,2025-01-31,15:05:11,Networking Event,Attended,SC0653
+PD2822,2025-01-31,15:12:56,Workshop,Upcoming,SC0123
+PD2823,2025-01-31,14:24:26,Webinar,Missed,SC0669
+PD2824,2025-01-31,11:58:00,Training Session,Attended,SC0233
+PD2825,2025-01-31,09:44:48,Workshop,Upcoming,SC0351
+PD2826,2025-01-31,14:38:21,Workshop,Missed,SC0615
+PD2827,2025-01-31,12:48:16,Industry Conference,Attended,SC0513
+PD2828,2025-01-31,13:49:36,Networking Event,Missed,SC0569
+PD2829,2025-01-31,13:26:28,Webinar,Missed,SC0433
+PD2830,2025-01-31,15:12:21,Industry Conference,Upcoming,SC0461
+PD2831,2025-01-31,14:36:18,Networking Event,Upcoming,SC0436
+PD2832,2025-01-31,11:03:15,Industry Conference,Upcoming,SC0227
+PD2833,2025-01-31,13:42:42,Industry Conference,Upcoming,SC0066
+PD2834,2025-01-31,16:16:41,Webinar,Missed,SC0247
+PD2835,2025-01-31,13:58:56,Training Session,Attended,SC0518
+PD2836,2025-01-31,10:48:44,Training Session,Upcoming,SC0441
+PD2837,2025-01-31,09:39:40,Industry Conference,Attended,SC0578
+PD2838,2025-01-31,09:49:12,Webinar,Upcoming,SC0712
+PD2839,2025-01-31,12:16:25,Workshop,Missed,SC0331
+PD2840,2025-01-31,10:54:27,Workshop,Missed,SC0445
+PD2841,2025-01-31,11:21:52,Workshop,Missed,SC0723
+PD2842,2025-01-31,16:55:09,Webinar,Attended,SC0449
+PD2843,2025-01-31,14:15:25,Webinar,Missed,SC0378
+PD2844,2025-01-31,17:05:48,Networking Event,Attended,SC0426
+PD2845,2025-01-31,10:50:04,Webinar,Attended,SC0275
+PD2846,2025-01-31,11:46:02,Industry Conference,Attended,SC0316
+PD2847,2025-01-31,15:33:23,Webinar,Upcoming,SC0109
+PD2848,2025-01-31,15:14:28,Industry Conference,Missed,SC0674
+PD2849,2025-01-31,17:54:41,Industry Conference,Missed,SC0433
+PD2850,2025-01-31,11:32:43,Workshop,Missed,SC0194
+PD2851,2025-01-31,16:29:09,Training Session,Missed,SC0345
+PD2852,2025-01-31,09:41:14,Workshop,Missed,SC0590
+PD2853,2025-01-31,11:51:12,Training Session,Missed,SC0221
+PD2854,2025-01-31,10:14:06,Training Session,Attended,SC0188
+PD2855,2025-01-31,12:46:50,Networking Event,Missed,SC0114
+PD2856,2025-01-31,15:20:57,Industry Conference,Attended,SC0075
+PD2857,2025-01-31,16:55:55,Industry Conference,Missed,SC0208
+PD2858,2025-01-31,17:42:58,Industry Conference,Attended,SC0328
+PD2859,2025-01-31,12:42:26,Training Session,Upcoming,SC0148
+PD2860,2025-01-31,15:36:24,Training Session,Attended,SC0377
+PD2861,2025-01-31,12:32:34,Training Session,Missed,SC0245
+PD2862,2025-01-31,16:32:57,Training Session,Upcoming,SC0650
+PD2863,2025-01-31,13:11:07,Networking Event,Attended,SC0505
+PD2864,2025-01-31,09:01:08,Webinar,Missed,SC0499
+PD2865,2025-01-31,14:46:55,Training Session,Upcoming,SC0103
+PD2866,2025-01-31,13:03:03,Webinar,Upcoming,SC0497
+PD2867,2025-01-31,14:35:49,Webinar,Missed,SC0651
+PD2868,2025-01-31,09:38:13,Industry Conference,Attended,SC0102
+PD2869,2025-01-31,14:28:45,Networking Event,Missed,SC0616
+PD2870,2025-01-31,09:04:16,Industry Conference,Attended,SC0335
+PD2871,2025-01-31,17:39:04,Industry Conference,Missed,SC0373
+PD2872,2025-01-31,12:52:47,Webinar,Missed,SC0188
+PD2873,2025-01-31,16:12:29,Training Session,Upcoming,SC0529
+PD2874,2025-01-31,10:16:05,Networking Event,Attended,SC0669
+PD2875,2025-01-31,11:40:34,Training Session,Attended,SC0477
+PD2876,2025-01-31,09:17:15,Training Session,Missed,SC0573
+PD2877,2025-01-31,17:45:15,Industry Conference,Upcoming,SC0424
+PD2878,2025-01-31,09:34:45,Industry Conference,Missed,SC0557
+PD2879,2025-01-31,10:28:15,Industry Conference,Attended,SC0115
+PD2880,2025-01-31,10:23:42,Industry Conference,Attended,SC0465
+PD2881,2025-01-31,17:12:21,Industry Conference,Missed,SC0300
+PD2882,2025-01-31,14:41:48,Networking Event,Attended,SC0298
+PD2883,2025-01-31,17:41:12,Industry Conference,Upcoming,SC0403
+PD2884,2025-01-31,17:05:14,Networking Event,Attended,SC0216
+PD2885,2025-01-31,14:14:15,Training Session,Upcoming,SC0681
+PD2886,2025-01-31,13:24:20,Workshop,Upcoming,SC0729
+PD2887,2025-01-31,15:07:50,Workshop,Missed,SC0605
+PD2888,2025-01-31,14:06:56,Training Session,Missed,SC0366
+PD2889,2025-01-31,16:26:31,Industry Conference,Missed,SC0470
+PD2890,2025-01-31,10:37:37,Industry Conference,Attended,SC0061
+PD2891,2025-01-31,13:53:22,Training Session,Missed,SC0470
+PD2892,2025-01-31,17:56:19,Training Session,Upcoming,SC0458
+PD2893,2025-01-31,09:10:49,Webinar,Missed,SC0420
+PD2894,2025-01-31,14:15:28,Industry Conference,Attended,SC0531
+PD2895,2025-01-31,14:08:19,Workshop,Attended,SC0501
+PD2896,2025-01-31,14:30:02,Training Session,Missed,SC0132
+PD2897,2025-01-31,14:49:05,Industry Conference,Attended,SC0174
+PD2898,2025-01-31,17:23:18,Training Session,Attended,SC0068
+PD2899,2025-01-31,12:06:55,Workshop,Upcoming,SC0550
+PD2900,2025-01-31,11:04:13,Networking Event,Upcoming,SC0680
+PD2901,2025-01-31,10:21:06,Workshop,Attended,SC0372
+PD2902,2025-01-31,09:53:39,Networking Event,Upcoming,SC0301
+PD2903,2025-01-31,17:13:26,Workshop,Missed,SC0256
+PD2904,2025-01-31,14:19:02,Workshop,Attended,SC0462
+PD2905,2025-01-31,12:22:58,Networking Event,Upcoming,SC0388
+PD2906,2025-01-31,11:58:27,Networking Event,Missed,SC0302
+PD2907,2025-01-31,09:13:31,Workshop,Attended,SC0212
+PD2908,2025-01-31,11:14:15,Webinar,Missed,SC0474
+PD2909,2025-01-31,09:45:22,Industry Conference,Attended,SC0375
+PD2910,2025-01-31,17:29:10,Webinar,Upcoming,SC0696
+PD2911,2025-01-31,14:12:08,Networking Event,Upcoming,SC0298
+PD2912,2025-01-31,11:49:02,Training Session,Attended,SC0602
+PD2913,2025-01-31,13:22:16,Webinar,Attended,SC0016
+PD2914,2025-01-31,12:33:17,Webinar,Attended,SC0208
+PD2915,2025-01-31,10:47:11,Training Session,Upcoming,SC0319
+PD2916,2025-01-31,17:49:08,Training Session,Attended,SC0468
+PD2917,2025-01-31,15:55:21,Webinar,Upcoming,SC0649
+PD2918,2025-01-31,12:29:31,Industry Conference,Upcoming,SC0517
+PD2919,2025-01-31,10:31:18,Networking Event,Upcoming,SC0736
+PD2920,2025-01-31,09:44:25,Training Session,Upcoming,SC0553
+PD2921,2025-01-31,17:18:22,Webinar,Attended,SC0553
+PD2922,2025-01-31,16:44:10,Workshop,Attended,SC0410
+PD2923,2025-01-31,14:03:13,Training Session,Missed,SC0147
+PD2924,2025-01-31,16:29:48,Networking Event,Upcoming,SC0307
+PD2925,2025-01-31,10:09:18,Webinar,Attended,SC0174
+PD2926,2025-01-31,11:06:18,Training Session,Attended,SC0313
+PD2927,2025-01-31,10:41:01,Webinar,Upcoming,SC0651
+PD2928,2025-01-31,17:38:28,Training Session,Upcoming,SC0012
+PD2929,2025-01-31,13:34:31,Training Session,Attended,SC0186
+PD2930,2025-01-31,10:49:58,Training Session,Attended,SC0210
+PD2931,2025-01-31,16:19:40,Workshop,Attended,SC0629
+PD2932,2025-01-31,15:39:33,Webinar,Missed,SC0360
+PD2933,2025-01-31,15:13:37,Webinar,Upcoming,SC0608
+PD2934,2025-01-31,10:18:08,Workshop,Upcoming,SC0300
+PD2935,2025-01-31,16:02:40,Webinar,Attended,SC0273
+PD2936,2025-01-31,17:29:51,Webinar,Missed,SC0363
+PD2937,2025-01-31,14:23:26,Training Session,Upcoming,SC0711
+PD2938,2025-01-31,17:25:20,Industry Conference,Attended,SC0095
+PD2939,2025-01-31,15:46:14,Training Session,Upcoming,SC0715
+PD2940,2025-01-31,12:46:03,Industry Conference,Missed,SC0704
+PD2941,2025-01-31,14:41:25,Training Session,Attended,SC0614
+PD2942,2025-01-31,13:44:25,Industry Conference,Missed,SC0690
+PD2943,2025-01-31,10:58:27,Industry Conference,Attended,SC0017
+PD2944,2025-01-31,09:18:15,Networking Event,Missed,SC0137
+PD2945,2025-01-31,09:58:08,Workshop,Upcoming,SC0654
+PD2946,2025-01-31,10:01:35,Workshop,Missed,SC0585
+PD2947,2025-01-31,13:49:22,Industry Conference,Attended,SC0422
+PD2948,2025-01-31,10:21:52,Industry Conference,Upcoming,SC0002
+PD2949,2025-01-31,13:20:07,Networking Event,Missed,SC0052
+PD2950,2025-01-31,15:25:23,Workshop,Attended,SC0157
+PD2951,2025-01-31,09:03:17,Networking Event,Upcoming,SC0594
+PD2952,2025-01-31,12:44:31,Networking Event,Upcoming,SC0434
+PD2953,2025-01-31,15:20:46,Webinar,Upcoming,SC0712
+PD2954,2025-01-31,16:44:05,Webinar,Attended,SC0420
+PD2955,2025-01-31,16:14:46,Training Session,Attended,SC0212
+PD2956,2025-01-31,11:51:00,Industry Conference,Missed,SC0165
+PD2957,2025-01-31,15:16:40,Industry Conference,Attended,SC0092
+PD2958,2025-01-31,14:10:04,Webinar,Attended,SC0340
+PD2959,2025-01-31,16:08:27,Industry Conference,Attended,SC0283
+PD2960,2025-01-31,13:51:45,Workshop,Missed,SC0548
+PD2961,2025-01-31,14:11:02,Networking Event,Attended,SC0350
+PD2962,2025-01-31,09:39:30,Webinar,Upcoming,SC0458
+PD2963,2025-01-31,14:25:46,Training Session,Upcoming,SC0076
+PD2964,2025-01-31,17:58:41,Networking Event,Attended,SC0496
+PD2965,2025-01-31,17:38:31,Industry Conference,Attended,SC0741
+PD2966,2025-01-31,12:05:07,Networking Event,Attended,SC0441
+PD2967,2025-01-31,15:00:02,Industry Conference,Missed,SC0126
+PD2968,2025-01-31,14:41:16,Networking Event,Attended,SC0438
+PD2969,2025-01-31,16:15:28,Webinar,Upcoming,SC0365
+PD2970,2025-01-31,12:50:52,Training Session,Missed,SC0579
+PD2971,2025-01-31,13:21:53,Networking Event,Attended,SC0114
+PD2972,2025-01-31,11:31:24,Training Session,Upcoming,SC0468
+PD2973,2025-01-31,09:23:01,Workshop,Upcoming,SC0242
+PD2974,2025-01-31,16:41:02,Networking Event,Upcoming,SC0565
+PD2975,2025-01-31,14:58:11,Industry Conference,Upcoming,SC0494
+PD2976,2025-01-31,10:25:38,Training Session,Missed,SC0668
+PD2977,2025-01-31,17:47:58,Workshop,Upcoming,SC0573
+PD2978,2025-01-31,09:04:25,Industry Conference,Attended,SC0265
+PD2979,2025-01-31,12:05:29,Training Session,Upcoming,SC0310
+PD2980,2025-01-31,13:59:24,Training Session,Upcoming,SC0411
+PD2981,2025-01-31,11:51:55,Webinar,Attended,SC0105
+PD2982,2025-01-31,12:01:10,Networking Event,Upcoming,SC0262
+PD2983,2025-01-31,10:13:25,Networking Event,Upcoming,SC0379
+PD2984,2025-01-31,17:35:04,Industry Conference,Attended,SC0583
+PD2985,2025-01-31,14:33:31,Workshop,Attended,SC0336
+PD2986,2025-01-31,09:31:33,Workshop,Missed,SC0744
+PD2987,2025-01-31,17:54:23,Industry Conference,Upcoming,SC0603
+PD2988,2025-01-31,11:44:46,Workshop,Missed,SC0750
+PD2989,2025-01-31,09:25:16,Networking Event,Upcoming,SC0662
+PD2990,2025-01-31,16:03:11,Webinar,Attended,SC0334
+PD2991,2025-01-31,13:33:37,Networking Event,Upcoming,SC0583
+PD2992,2025-01-31,17:10:12,Webinar,Attended,SC0078
+PD2993,2025-01-31,10:18:18,Workshop,Attended,SC0288
+PD2994,2025-01-31,12:02:55,Training Session,Missed,SC0254
+PD2995,2025-01-31,14:44:36,Networking Event,Missed,SC0157
+PD2996,2025-01-31,12:45:19,Training Session,Attended,SC0007
+PD2997,2025-01-31,11:49:13,Training Session,Missed,SC0515
+PD2998,2025-01-31,17:48:44,Webinar,Missed,SC0300
+PD2999,2025-01-31,09:07:47,Industry Conference,Missed,SC0537
+PD3000,2025-01-31,13:08:27,Webinar,Upcoming,SC0024

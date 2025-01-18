@@ -1,0 +1,16 @@
+# Ignore JetBrains IDE settings
+**/.idea/
+
+# Ignore VS Code settings
+**/.vscode/
+
+# Ignore environment variable files
+**/.env
+
+# Ignore virtual environment folders named 'venv' at any level
+**/venv/
+
+# Ignore Python bytecode and cache files
+**/__pycache__/
+**/*.pyc
+**/*.pyo

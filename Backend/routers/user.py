@@ -1,0 +1,673 @@
+from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
+from pydantic import BaseModel, EmailStr
+from typing import Optional
+import jwt
+from datetime import datetime, timedelta
+import smtplib
+from email.mime.text import MIMEText
+from email.mime.multipart import MIMEMultipart
+from neo4j import GraphDatabase
+import uvicorn
+import os
+import secrets
+from cryptography.fernet import Fernet
+import base64
+from cryptography.hazmat.primitives import hashes
+from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
+import string
+import secrets
+from fastapi.middleware.cors import CORSMiddleware
+from dotenv import load_dotenv
+from fastapi import APIRouter, HTTPException
+
+router = APIRouter()
+
+load_dotenv()
+
+# Initialize FastAPI app
+
+NEO4J_URI = os.getenv("NEO4J_URI")
+NEO4J_USERNAME = os.getenv("NEO4J_USERNAME")
+NEO4J_PASSWORD = os.getenv("NEO4J_PASSWORD")
+driver = GraphDatabase.driver(NEO4J_URI, auth=(NEO4J_USERNAME, NEO4J_PASSWORD))
+
+# Security setup
+oauth2_scheme = OAuth2PasswordBearer(tokenUrl="token")
+SECRET_KEY = "codefest@123"
+ALGORITHM = "HS256"
+
+# Email configuration
+SMTP_SERVER = os.getenv("SMTP_SERVER", "smtp.gmail.com")
+SMTP_PORT = int(os.getenv("SMTP_PORT", 587))
+SMTP_USERNAME = os.getenv("SMTP_USERNAME")
+SMTP_PASSWORD = os.getenv("SMTP_PASSWORD")
+ADMIN_EMAIL = os.getenv("ADMIN_EMAIL")
+
+
+def generate_secure_password():
+    """Generate a secure random password with:
+    - At least 12 characters
+    - Mix of uppercase, lowercase, numbers, and special characters
+    - Truly random using secrets module
+    """
+    # Define character sets
+    lowercase = string.ascii_lowercase
+    uppercase = string.ascii_uppercase
+    digits = string.digits
+    special = "!@#$%^&*"
+
+    # Ensure at least one character from each set
+    password = [
+        secrets.choice(lowercase),
+        secrets.choice(uppercase),
+        secrets.choice(digits),
+        secrets.choice(special),
+    ]
+
+    # Add remaining random characters
+    all_characters = lowercase + uppercase + digits + special
+    password.extend(secrets.choice(all_characters) for _ in range(8))
+
+    # Shuffle the password
+    shuffled = list(password)
+    secrets.SystemRandom().shuffle(shuffled)
+
+    return ''.join(shuffled)
+
+
+# Add encryption setup
+def generate_key():
+    salt = b'syscolabs'
+    kdf = PBKDF2HMAC(
+        algorithm=hashes.SHA256(),
+        length=32,
+        salt=salt,
+        iterations=100000,
+    )
+    key = base64.urlsafe_b64encode(kdf.derive(b"codefest@123"))
+    return key
+
+
+cipher_suite = Fernet(generate_key())
+
+
+def encrypt_password(password: str) -> str:
+    encrypted_pass = cipher_suite.encrypt(password.encode())
+    return base64.urlsafe_b64encode(encrypted_pass).decode()
+
+
+def decrypt_password(encrypted_password: str) -> str:
+    try:
+        decoded = base64.urlsafe_b64decode(encrypted_password.encode())
+        decrypted_pass = cipher_suite.decrypt(decoded)
+        return decrypted_pass.decode()
+    except Exception:
+        return None
+
+
+# Pydantic models remain the same
+class UserCreate(BaseModel):
+    email: EmailStr
+    employee_id: str
+    company_position: str
+
+
+class UserLogin(BaseModel):
+    email: EmailStr
+    password: str
+
+
+class ForgotPassword(BaseModel):
+    email: EmailStr
+
+
+class AdminApproval(BaseModel):
+    approval_token: str
+    approved: bool
+
+
+# Only modify the password-related Neo4j functions
+def activate_user(tx, email: str, password: str):
+    encrypted_password = encrypt_password(password)
+    query = """
+    MATCH (u:User {email: $email})
+    SET u.password = $password,
+        u.status = 'active',
+        u.is_active = true,
+        u.approval_token = null
+    """
+    tx.run(query, email=email, password=encrypted_password)
+
+
+# Only modify the login endpoint
+@router.post("/login")
+async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    with driver.session() as session:
+        user = session.execute_read(get_user, form_data.username)
+
+        if not user or user['status'] != 'active':
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid credentials or inactive account"
+            )
+
+        stored_password = decrypt_password(user['password'])
+        if not stored_password or stored_password != form_data.password:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid credentials"
+            )
+
+        return {
+            "detail": "true"
+        }
+
+
+# All other functions and endpoints remain exactly the same
+def create_pending_user(tx, email: str, employee_id: str, company_position: str, approval_token: str):
+    query = """
+    CREATE (u:User {
+        email: $email,
+        employee_id: $employee_id,
+        company_position: $company_position,
+        approval_token: $approval_token,
+        status: 'pending',
+        is_active: false
+    })
+    """
+    tx.run(query, email=email, employee_id=employee_id,
+           company_position=company_position, approval_token=approval_token)
+
+
+def get_user(tx, email: str):
+    query = """
+    MATCH (u:User {email: $email})
+    RETURN u
+    """
+    result = tx.run(query, email=email)
+    record = result.single()
+    return record['u'] if record else None
+
+
+def get_user_by_token(tx, token: str):
+    query = """
+    MATCH (u:User {approval_token: $token})
+    RETURN u
+    """
+    result = tx.run(query, token=token)
+    record = result.single()
+    return record['u'] if record else None
+
+
+def set_password_reset_token(tx, email: str, reset_token: str):
+    query = """
+    MATCH (u:User {email: $email})
+    SET u.reset_token = $reset_token
+    """
+    tx.run(query, email=email, reset_token=reset_token)
+
+
+# Helper functions remain the same
+def send_email(to_email: str, subject: str, body: str):
+    msg = MIMEMultipart()
+    msg['From'] = SMTP_USERNAME
+    msg['To'] = to_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'html'))
+
+    with smtplib.SMTP(SMTP_SERVER, SMTP_PORT) as server:
+        server.starttls()
+        server.login(SMTP_USERNAME, SMTP_PASSWORD)
+        server.send_message(msg)
+
+
+# API Endpoints
+@router.post("/admin/create-account")
+async def create_account(user: UserCreate):
+    """Admin initiates account creation"""
+
+    approval_token = secrets.token_urlsafe(32)
+
+    try:
+        with driver.session() as session:
+            existing_user = session.execute_read(get_user, user.email)
+            if existing_user:
+                raise HTTPException(
+                    status_code=400,
+                    detail="User already exists"
+                )
+
+            # Create pending user
+            session.execute_write(create_pending_user,
+                                  user.email,
+                                  user.employee_id,
+                                  user.company_position,
+                                  approval_token)
+
+    except Exception as e:
+        raise HTTPException(
+            status_code=400,
+            detail=f"Error creating user: {str(e)}"
+        )
+
+    # Send approval request to admin
+    admin_email_body = f"""
+    <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }}
+        .header {{
+            background-color: #0068B3;
+            color: white;
+            padding: 20px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }}
+        h1 {{
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }}
+        h2 {{
+            color: #0068B3;
+            font-size: 22px;
+            margin-top: 20px;
+        }}
+        .content {{
+            padding: 20px 0;
+        }}
+        .info-item {{
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }}
+        .button {{
+            display: inline-block;
+            background-color: #0068B3;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+            color:white
+        }}
+        .button:hover {{
+            background-color: #005291;
+        }}
+        .token {{
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sysco Pulse</h1>
+        </div>
+        <div class="content">
+            <h2>New Account Creation Request</h2>
+            <p>Please review and approve the following account:</p>
+
+            <div class="info-item">
+                <strong>Email:</strong> {user.email}
+            </div>
+            <div class="info-item">
+                <strong>Employee ID:</strong> {user.employee_id}
+            </div>
+            <div class="info-item">
+                <strong>Company Position:</strong> {user.company_position}
+            </div>
+
+            <p>To approve this account, click the button below:</p>
+            <a href="https://codefest-backend.azurewebsites.net/admin/approve-account?token={approval_token}&action=approve" class="button">
+                Approve Account
+            </a>
+
+            <p>Or use the approval token:</p>
+            <div class="token">
+                {approval_token}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+    """
+
+    send_email(
+        ADMIN_EMAIL,
+        f"Account Creation Approval Required - {user.email}",
+        admin_email_body
+    )
+
+    return {"message": "Account creation request sent to admin for approval"}
+
+
+@router.post("/admin/approve-account")
+async def approve_account(approval: AdminApproval):
+    """Admin approves or denies account creation"""
+
+    with driver.session() as session:
+        user = session.execute_read(get_user_by_token, approval.approval_token)
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="Invalid approval token"
+            )
+
+        if approval.approved:
+            # Generate unique secure password for each user
+            temp_password = generate_secure_password()
+
+            # Activate user account with encrypted password
+            session.execute_write(activate_user, user['email'], temp_password)
+
+            # Send credentials to user
+            user_email_body = f"""
+           <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }}
+        .header {{
+            background-color: #0068B3;
+            color: white;
+            padding: 20px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }}
+        h1 {{
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }}
+        h2 {{
+            color: #0068B3;
+            font-size: 22px;
+            margin-top: 20px;
+        }}
+        .content {{
+            padding: 20px 0;
+        }}
+        .info-item {{
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }}
+        .credentials-box {{
+            background-color: #f8f9fa;
+            border-left: 4px solid #0068B3;
+            padding: 15px;
+            margin: 20px 0;
+            border-radius: 0 4px 4px 0;
+        }}
+        .important-note {{
+            color: #721c24;
+            background-color: #f8d7da;
+            padding: 10px;
+            border-radius: 4px;
+            margin: 20px 0;
+        }}
+        .login-link {{
+            display: inline-block;
+            background-color: #0068B3;
+            color: white;
+            padding: 12px 24px;
+            text-decoration: none;
+            border-radius: 4px;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+        }}
+        .login-link:hover{{
+            background-color: #005291;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sysco Pulse</h1>
+        </div>
+        <div class="content">
+            <h2>Welcome to Sysco Pulse</h2>
+            <p>Your account has been approved and is ready to use. Please find your login credentials below:</p>
+
+            <div class="credentials-box">
+                <div class="info-item">
+                    <strong>Email:</strong> {user['email']}
+                </div>
+                <div class="info-item">
+                    <strong>Password:</strong> {temp_password}
+                </div>
+            </div>
+            <p>If you have any questions or need assistance, please contact your system administrator.</p>
+        </div>
+    </div>
+</body>
+</html>
+            """
+
+            send_email(
+                user['email'],
+                "Welcome to SyscoPulse - Account Approved",
+                user_email_body
+            )
+
+            return {"message": "Account approved and credentials sent"}
+        else:
+            # Handle account denial
+            # You might want to implement additional logic here
+            return {"message": "Account denied"}
+
+
+@router.post("/forgot-password")
+async def forgot_password(request: ForgotPassword):
+    """User initiates forgot password process"""
+
+    reset_token = secrets.token_urlsafe(32)
+
+    with driver.session() as session:
+        user = session.execute_read(get_user, request.email)
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="User not found"
+            )
+
+        # Store reset token
+        session.execute_write(set_password_reset_token, request.email, reset_token)
+
+        # Send approval request to admin
+        admin_email_body = f"""
+        <!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        body {{
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f5f5f5;
+        }}
+        .container {{
+            max-width: 600px;
+            margin: 20px auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        }}
+        .header {{
+            background-color: #0068B3;
+            color: white;
+            padding: 20px;
+            margin: -30px -30px 20px -30px;
+            border-radius: 8px 8px 0 0;
+            text-align: center;
+        }}
+        h1 {{
+            margin: 0;
+            font-size: 28px;
+            font-weight: bold;
+        }}
+        h2 {{
+            color: #0068B3;
+            font-size: 22px;
+            margin-top: 20px;
+        }}
+        .content {{
+            padding: 20px 0;
+        }}
+        .info-item {{
+            margin: 10px 0;
+            padding: 10px;
+            background-color: #f8f9fa;
+            border-radius: 4px;
+        }}
+        .button {{
+            display: inline-block;
+            background-color: #0068B3;
+            color: white;
+            padding: 12px 24px;
+            border-radius: 4px;
+            margin: 20px 0;
+            transition: background-color 0.3s ease;
+            text-decoration: none;
+        }}
+        .button:hover {{
+            background-color: #005291;
+        }}
+        .token {{
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            margin: 10px 0;
+        }}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Sysco Pulse</h1>
+        </div>
+        <div class="content">
+            <h2>Password Reset Request</h2>
+            <p>Please review and approve the password reset request for:</p>
+
+            <div class="info-item">
+                <strong>Email:</strong> {user['email']}
+            </div>
+            <div class="info-item">
+                <strong>Employee ID:</strong> {user['employee_id']}
+            </div>
+            <div class="info-item">
+                <strong>Company Position:</strong> {user['company_position']}
+            </div>
+
+            <p>To approve this reset, click the button below:</p>
+            <a href="https://codefest-backend.azurewebsites.net/admin/reset-password?token={reset_token}&action=approve" class="button">
+                Approve Reset
+            </a>
+
+            <p>Or use the reset token:</p>
+            <div class="token">
+                {reset_token}
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+        """
+
+        send_email(
+            ADMIN_EMAIL,
+            f"Password Reset Approval Required - {user['email']}",
+            admin_email_body
+        )
+
+        # Send confirmation to user
+        user_email_body = """
+        <html>
+            <body>
+                <h2>Password Reset Request Received</h2>
+                <p>We have received your password reset request. An administrator will review and process your request shortly.</p>
+            </body>
+        </html>
+        """
+
+        send_email(
+            user['email'],
+            "Password Reset Request Received",
+            user_email_body
+        )
+
+        return {"message": "Password reset request sent to admin"}
+
+
+@router.post("/login")
+async def login(form_data: OAuth2PasswordRequestForm = Depends()):
+    """User login endpoint"""
+
+    with driver.session() as session:
+        user = session.execute_read(get_user, form_data.username)
+
+        if not user or user['status'] != 'active':
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid credentials or inactive account"
+            )
+
+        if form_data.password != user['password']:
+            raise HTTPException(
+                status_code=status.HTTP_401_UNAUTHORIZED,
+                detail="Invalid credentials"
+            )
+
+        return {
+            "detail": "true"
+        }
