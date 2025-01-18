@@ -96,12 +96,12 @@ class Settings(BaseModel):
     formality: str
     creativity: float
     response_length: str
-    time: str
 
 class Question(BaseModel):
     question: str
     session_id: str
     settings: Settings
+    timestamp: str
     question_history: List[str] = []  # Add this line
     answer_history: List[str] = []  # Add this line
 
@@ -414,7 +414,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
        - Politeness Level: {question.settings.politeness_level}
        - Formality: {question.settings.formality}
        - Response Length: {question.settings.response_length}
-       - Current time: {question.settings.time}
+       - Current time: {question.timestamp}
 
        Please adjust your response according to these settings:
        1. Use the specified {question.settings.language} language
@@ -884,7 +884,7 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                - Politeness Level: {question.settings.politeness_level}
                - Formality: {question.settings.formality}
                - Response Length: {question.settings.response_length}
-               - Current time: {question.settings.time}
+               - Current time: {question.timestamp}
 
                Please adjust your response according to these settings:
                1. Use the specified {question.settings.language} language
