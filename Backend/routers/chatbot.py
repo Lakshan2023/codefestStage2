@@ -845,7 +845,7 @@ async def chat(question: Question):
             if result["html_code_plotly"] and "alert alert-warning" not in result["html_code_plotly"].lower():
                 result["chart_analysis"] = generate_chart_analysis(
                     response_dict["plotly_code"],
-                    result["data"],
+                    result["data"][:100],
                     user_question,  # Pass the user's question
                     client,
                     deployment
