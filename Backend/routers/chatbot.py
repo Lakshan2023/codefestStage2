@@ -27,6 +27,9 @@ import plotly.utils
 import plotly.graph_objects as go
 import plotly.express as px
 from fastapi.staticfiles import StaticFiles
+from fastapi import APIRouter, HTTPException
+
+router = APIRouter()
 
 load_dotenv()
 
@@ -44,16 +47,6 @@ client = AzureOpenAI(
     api_version="2024-05-01-preview",
 )
 
-app = FastAPI()
-
-app.add_middleware(
-    CORSMiddleware,
-    allow_origins=["*"],
-    allow_credentials=False,
-    allow_methods=["*"],
-    allow_headers=["*"],
-)
-
 def connect_to_neo4j():
     try:
         driver = GraphDatabase.driver(uri, auth=(username, password))
@@ -67,7 +60,7 @@ def connect_to_neo4j():
 driver = connect_to_neo4j()
 
 # Load JSON data
-with open('sample.json', 'r') as file:
+with open('routers/sample.json', 'r') as file:
     data = json.load(file)
 
 # Extract questions and their corresponding cypher queries
@@ -105,8 +98,6 @@ class Question(BaseModel):
 
 # In-memory storage for chat histories
 chat_histories: Dict[str, Dict[str, List[str]]] = {}
-
-app.mount("/static", StaticFiles(directory="static"), name="static")
 
 
 graph_db_structure = """
@@ -516,7 +507,7 @@ def generate_query(user_question: str, session_id: str) -> str:
 
     return "Maximum retries exceeded"
 
-@app.post("/start_session")
+@router.post("/start_session")
 async def start_session():
     session_id = str(uuid.uuid4())
     chat_histories[session_id] = {
@@ -759,13 +750,13 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
     except Exception as e:
         return f"Unable to provide analytical insights at the moment. Error: {str(e)}"
 
-@app.post("/chat")
+@router.post("/chat")
 async def chat(question: Question):
     try:
         session_id = question.session_id
         user_question = question.question
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        static_dir = "static/temp"
+        static_dir = "../static/temp"
 
         if session_id not in chat_histories:
             return JSONResponse(
@@ -887,7 +878,3 @@ async def chat(question: Question):
             },
             status_code=500
         )
-
-if __name__ == "__main__":
-    uvicorn.run(app, host="0.0.0.0", port=8000)
-
