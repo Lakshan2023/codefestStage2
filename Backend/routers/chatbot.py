@@ -834,16 +834,15 @@ def generate_plotly_html(plotly_code, response_dict):
         if fig:
             # Configure the plot for web display with proper background settings
             fig.update_layout(
-                template='plotly_white',  # This sets the overall template
-                paper_bgcolor='white',    # Explicit background color for the paper
-                plot_bgcolor='white',     # Explicit background color for the plot
+                template='plotly_white',
+                paper_bgcolor='white',
+                plot_bgcolor='white',
                 margin=dict(t=50, l=50, r=50, b=50),
-                height=500,
+                autosize=True,  # Enables automatic resizing
                 showlegend=True,
-                # Add watermark or branding
                 annotations=[
                     dict(
-                        text="Sysco Labs Analytics",
+                        text="SyscoPulse Analytics",
                         xref="paper",
                         yref="paper",
                         x=0.98,
@@ -852,6 +851,13 @@ def generate_plotly_html(plotly_code, response_dict):
                         font=dict(size=10, color="gray"),
                     )
                 ]
+            )
+
+            # Make the figure responsive
+            fig.update_layout(
+                # Remove fixed height/width to allow responsiveness
+                height=None,
+                width=None
             )
 
             # Additional styling for better visualization
