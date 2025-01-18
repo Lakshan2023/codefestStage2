@@ -1005,6 +1005,10 @@
   {
   "question": "Analyze product category margins",
   "cypher_query": "OPTIONAL MATCH (o:Order) OPTIONAL MATCH (o)-[:CONTAINS]->(p:Product) RETURN p.Category, AVG(o.Cost_Per_Unit) as Avg_Unit_Cost, SUM(o.Total_Cost) as Total_Revenue, COUNT(*) as Order_Count ORDER BY Total_Revenue DESC"
+  },
+  {
+  "question": "Provide Montly sales trend",
+  "cypher_query": "OPTIONAL MATCH (o:Order) WITH o, date(o.Order_Date) AS orderDate RETURN date.truncate(\"month\", orderDate) AS Month, SUM(o.Total_Cost) AS Total_Sales ORDER BY Month"
   }
   ]
 }

@@ -28,6 +28,7 @@ import plotly.graph_objects as go
 import plotly.express as px
 from fastapi.staticfiles import StaticFiles
 from fastapi import APIRouter, HTTPException
+from pathlib import Path
 
 router = APIRouter()
 
@@ -58,6 +59,11 @@ def connect_to_neo4j():
         return None
 
 driver = connect_to_neo4j()
+
+# Get the current file's directory and set up static path
+CURRENT_DIR = Path(__file__).resolve().parent
+STATIC_DIR = CURRENT_DIR.parent / "static" / "temp"
+os.makedirs(STATIC_DIR, exist_ok=True)
 
 # Load JSON data
 with open('routers/sample.json', 'r') as file:
@@ -533,6 +539,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                            - Very Very Important: ⚠️⚠️⚠️ Do NOT use any example/dummy data or hardcoded values to the response_dict. response_dict is defined from outer scope.
                            - All data for visualization must come from response_dict
                            - response_dict contains the results of your Cypher query as a list of dictionaries
+                           ⚠️⚠️⚠️, therefore do not assign any sample values to the response dict. 
                            - Example correct usage: 
                              df = pd.DataFrame(response_dict)
                              fig = px.line(df, x='date_column', y='value_column')
@@ -976,7 +983,6 @@ async def chat(question: Question):
         session_id = question.session_id
         user_question = question.question
         timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-        static_dir = "../static/temp"
 
         if session_id not in chat_histories:
             return JSONResponse(
@@ -1035,13 +1041,20 @@ async def chat(question: Question):
 
                 # Save HTML table if it exists
                 if result["html_table_data"]:
-                    table_filename = f'table_{session_id}_{timestamp}.html'
-                    file_path = os.path.join(static_dir, table_filename)
-                    os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                    with open(file_path, 'w', encoding='utf-8') as f:
-                        f.write(result["html_table_data"])
-                    result[
-                        "table_file_url"] = f"https://codefest-backend.azurewebsites.net/static/temp/{table_filename}"
+                    try:
+                        table_filename = f'table_{session_id}_{timestamp}.html'
+                        file_path = STATIC_DIR / table_filename
+
+                        # Write the file
+                        with open(file_path, 'w', encoding='utf-8') as f:
+                            f.write(result["html_table_data"])
+
+                        # Set the correct URL using the base URL from environment
+                        base_url = os.getenv('API_BASE_URL', 'https://codefest-backend.azurewebsites.net')
+                        result["table_file_url"] = f"{base_url}/static/temp/{table_filename}"
+
+                    except Exception as e:
+                        print(f"Error saving table file: {str(e)}")
 
                 if result["html_table_data"]:
                     result["table_accept_status"] = generate_plot_analysis(result["data"][:300])
@@ -1055,13 +1068,20 @@ async def chat(question: Question):
 
                     # Save chart HTML if it exists
                     if result["html_code_plotly"]:
-                        chart_filename = f'chart_{session_id}_{timestamp}.html'
-                        file_path = os.path.join(static_dir, chart_filename)
-                        os.makedirs(os.path.dirname(file_path), exist_ok=True)
-                        with open(file_path, 'w', encoding='utf-8') as f:
-                            f.write(result["html_code_plotly"])
-                        result[
-                            "chart_file_url"] = f"https://codefest-backend.azurewebsites.net/static/temp/{chart_filename}"
+                        try:
+                            chart_filename = f'chart_{session_id}_{timestamp}.html'
+                            file_path = STATIC_DIR / chart_filename
+
+                            # Write the file
+                            with open(file_path, 'w', encoding='utf-8') as f:
+                                f.write(result["html_code_plotly"])
+
+                            # Set the correct URL using the base URL from environment
+                            base_url = os.getenv('API_BASE_URL', 'https://codefest-backend.azurewebsites.net')
+                            result["chart_file_url"] = f"{base_url}/static/temp/{chart_filename}"
+
+                        except Exception as e:
+                            print(f"Error saving chart file: {str(e)}")
                 else:
                     result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
 
