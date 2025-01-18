@@ -958,7 +958,16 @@ def generate_plot_analysis(data: str):
     try:
         analysis_prompt = f"""
                 If this data contains not only null values return 'yes'.
-                If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis.
+                If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis bit longer explanation.
+                Don't ever say, since data contains mostly null values or zeros you can't provide an answer.
+                
+                example data: 
+                {{
+                "OrderID": null,
+                "Product": null,
+                "Date": null,
+                "TotalCost": null
+                }} # If it is like this also say you cannot generate an answer at this moment bit longer ways.
                 
                 data : {data}
                 """
@@ -969,12 +978,40 @@ def generate_plot_analysis(data: str):
                 {"role": "user", "content": "Please return 'yes' or explanation based on data."}
             ],
             max_tokens=1000,
+            temperature=0.7
+        )
+
+        return completion.choices[0].message.content
+    except Exception as e:
+        return f"Unable to provide table insights at this moment. Error: {str(e)}"
+
+
+def explanation_handler(explanation: str):
+    try:
+        analysis_prompt = f"""
+                You are SyscoPulse.
+                If the below text explanation includes the meaning or terms like, this chert/plot/table analyses,
+                then please provide a statement that, you can't generate a plot at this moment.(Important :Use  professional emojis and use a bit longer text to explain it.) 
+                
+                If the text explanation is a general explanation, return the same answer as it is.
+                very very important: do not provide any other text.
+                
+                Text Explanation : {explanation}
+                """
+        completion = client.chat.completions.create(
+            model=deployment,
+            messages=[
+                {"role": "system", "content": analysis_prompt},
+                {"role": "user", "content": "Please do what has given in the system prompt properly."}
+            ],
+            max_tokens=1000,
             temperature=0
         )
 
         return completion.choices[0].message.content
     except Exception as e:
         return f"Unable to provide table insights at this moment. Error: {str(e)}"
+
 
 
 @router.post("/chat")
@@ -1098,6 +1135,9 @@ async def chat(question: Question):
                 result["chart_analysis"] = "Unable to provide analytical insights due to visualization error."
 
             chat_histories[session_id]["answers"].append(result["text_explanation"])
+
+            if result["data"] is None:
+                result["text_explanation"] = explanation_handler(result["text_explanation"])
 
             return JSONResponse(content={
                 "session_id": session_id,
