@@ -152,7 +152,6 @@ LOAD CSV WITH HEADERS FROM 'file:///modified_professional_development.csv' AS pd
 MATCH (s:Sales {Sales_Consultant_ID: pd.Consultant_ID})
 CREATE (p:ProfessionalDevelopment {
     Attendance_Status: pd.Attendance_Status,
-    Consultant_ID: pd.Consultant_ID,
     Event_ID: pd.Event_ID,
     Event_Type: pd.Event_Type,
     Event_Time: time(pd.Event_Time),
@@ -170,8 +169,6 @@ CREATE (m:Meeting {
     Meeting_Details: mt.Meeting_Details,
     Meeting_Date: date(mt.Meeting_Date),
     Meeting_ID: mt.Meeting_ID,
-    Customer_ID: mt.Customer_ID,
-    Sales_Consultant_ID: mt.Sales_Consultant_ID,
     Delivery_Type: mt.Delivery_Type
 })
 CREATE (s)-[:CONDUCTED]->(m)
@@ -187,8 +184,6 @@ CREATE (o:Order {
     Order_Date: date(od.Order_Date),
     Total_Cost: toFloat(od.Total_Cost),
     Sysco_Operation_Center: od.Sysco_Operation_Center,
-    Customer_ID: od.Customer_ID,
-    Sales_Consultant_ID: od.Sales_Consultant_ID,
     Order_ID: od.Order_ID,
     Order_Time: time(od.Order_Time),
     Product_ID: od.Product_ID,
