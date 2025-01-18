@@ -90,9 +90,18 @@ def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
 
     return similar_questions
 
+class Settings(BaseModel):
+    language: str
+    politeness_level: str
+    formality: str
+    creativity: float
+    response_length: str
+    time: str
+
 class Question(BaseModel):
     question: str
     session_id: str
+    settings: Settings
     question_history: List[str] = []  # Add this line
     answer_history: List[str] = []  # Add this line
 
@@ -101,136 +110,275 @@ chat_histories: Dict[str, Dict[str, List[str]]] = {}
 
 
 graph_db_structure = """
-// Create Sales Consultant nodes
-LOAD CSV WITH HEADERS FROM 'file:///sales_consultants.csv' AS ss
-CREATE (:Sales {
-    Sales_Consultant_ID: ss.Sales_Consultant_ID,
-    Name: ss.Name,
-    Email: ss.Email,
-    Sysco_Lab_Branch: ss.Sysco_Lab_Branch,
-    Address: ss.Address,
-    Contact_Number: ss.Contact_Number
-})
-WITH count(*) as dummy
+:param {
+  // Define the file path root and the individual file names required for loading.
+  // https://neo4j.com/docs/operations-manual/current/configuration/file-locations/
+  file_path_root: 'file:///', // Change this to the folder your script can access the files at.
+  file_0: 'sales_consultants.csv',
+  file_1: 'customers.csv',
+  file_2: 'Sysco_Food_Products.csv',
+  file_3: 'modified_professional_development.csv',
+  file_4: 'processed_meetings.csv',
+  file_5: 'order_data.csv',
+  file_6: 'food_vendor_data.csv',
+  file_7: 'stock_data.csv',
+  file_8: 'vendor_sales_consultant_mapping.csv',
+  file_9: 'vendor_product_relationships.csv'
+};
 
-// Create Customer nodes with updated properties
-LOAD CSV WITH HEADERS FROM 'file:///customers.csv' AS ct
-CREATE (:Customer {
-    Customer_ID: ct.Customer_ID,
-    Customer_Name: ct.Customer_Name,
-    Company_Name: ct.Company_Name,
-    Company_Type: ct.Company_Type,
-    Email: ct.Email,
-    Address: ct.Address,
-    Telephone: ct.Telephone,
-    City: ct.City,
-    Country: ct.Country,
-    Region: ct.Region
-})
-WITH count(*) as dummy2
+// CONSTRAINT creation
+// -------------------
+//
+// Create node uniqueness constraints, ensuring no duplicates for the given node label and ID property exist in the database. This also ensures no duplicates are introduced in future.
+//
+// NOTE: The following constraint creation syntax is generated based on the current connected database version 5.26-aura.
+CREATE CONSTRAINT Sales_Consultant_ID_Sales_uniq IF NOT EXISTS
+FOR (n: Sales)
+REQUIRE (n.Sales_Consultant_ID) IS UNIQUE;
+CREATE CONSTRAINT Customer_ID_Customer_uniq IF NOT EXISTS
+FOR (n: Customer)
+REQUIRE (n.Customer_ID) IS UNIQUE;
+CREATE CONSTRAINT Product_ID_Product__uniq IF NOT EXISTS
+FOR (n: `Product `)
+REQUIRE (n.Product_ID) IS UNIQUE;
+CREATE CONSTRAINT Event_ID_ProfessionalDevelopment_uniq IF NOT EXISTS
+FOR (n: ProfessionalDevelopment)
+REQUIRE (n.Event_ID) IS UNIQUE;
+CREATE CONSTRAINT Meeting_ID_Meeting__uniq IF NOT EXISTS
+FOR (n: `Meeting `)
+REQUIRE (n.Meeting_ID) IS UNIQUE;
+CREATE CONSTRAINT Order_ID_Order_uniq IF NOT EXISTS
+FOR (n: Order)
+REQUIRE (n.Order_ID) IS UNIQUE;
+CREATE CONSTRAINT Vendor_ID_Vendor_uniq IF NOT EXISTS
+FOR (n: Vendor)
+REQUIRE (n.Vendor_ID) IS UNIQUE;
+CREATE CONSTRAINT Stock_ID_Stock_uniq IF NOT EXISTS
+FOR (n: Stock)
+REQUIRE (n.Stock_ID) IS UNIQUE;
 
-// Create Product nodes
-LOAD CSV WITH HEADERS FROM 'file:///Sysco_Food_Products.csv' AS fp
-CREATE (:Product {
-    Product_Name: fp['Product Name'],
-    Category: fp.Category,
-    Product_ID: fp['Product ID']
-})
-WITH count(*) as dummy3
+:param {
+  idsToSkip: []
+};
 
-// Create Professional Development nodes and relationships
-LOAD CSV WITH HEADERS FROM 'file:///modified_professional_development.csv' AS pd
-MATCH (s:Sales {Sales_Consultant_ID: pd.Consultant_ID})
-CREATE (p:ProfessionalDevelopment {
-    Attendance_Status: pd.Attendance_Status,
-    Event_ID: pd.Event_ID,
-    Event_Type: pd.Event_Type,
-    Event_Time: time(pd.Event_Time),
-    Event_Date: date(pd.Event_Date)
-})
-CREATE (s)-[:ATTENDED]->(p)
-WITH count(*) as dummy4
+// NODE load
+// ---------
+//
+// Load nodes in batches, one node label at a time. Nodes will be created using a MERGE statement to ensure a node with the same label and ID property remains unique. Pre-existing nodes found by a MERGE statement will have their other properties set to the latest values encountered in a load file.
+//
+// NOTE: Any nodes with IDs in the 'idsToSkip' list parameter will not be loaded.
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_0) AS row
+WITH row
+WHERE NOT row.Sales_Consultant_ID IN $idsToSkip AND NOT row.Sales_Consultant_ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: Sales { Sales_Consultant_ID: row.Sales_Consultant_ID })
+  SET n.Sales_Consultant_ID = row.Sales_Consultant_ID
+  SET n.Name = row.Name
+  SET n.Address = row.Address
+  SET n.Email = row.Email
+  SET n.Contact_Number = row.Contact_Number
+  SET n.Sysco_Lab_Branch = row.Sysco_Lab_Branch
+} IN TRANSACTIONS OF 10000 ROWS;
 
-// Create Meeting nodes and relationships
-LOAD CSV WITH HEADERS FROM 'file:///processed_meetings.csv' AS mt
-MATCH (s:Sales {Sales_Consultant_ID: mt.Sales_Consultant_ID})
-MATCH (c:Customer {Customer_ID: mt.Customer_ID})
-CREATE (m:Meeting {
-    Meeting_Time: time(mt.Meeting_Time),
-    Meeting_Details: mt.Meeting_Details,
-    Meeting_Date: date(mt.Meeting_Date),
-    Meeting_ID: mt.Meeting_ID,
-    Delivery_Type: mt.Delivery_Type
-})
-CREATE (s)-[:CONDUCTED]->(m)
-CREATE (c)-[:PARTICIPATED_IN]->(m)
-WITH count(*) as dummy5
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_1) AS row
+WITH row
+WHERE NOT row.Customer_ID IN $idsToSkip AND NOT row.Customer_ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: Customer { Customer_ID: row.Customer_ID })
+  SET n.Customer_ID = row.Customer_ID
+  SET n.Customer_Name = row.Customer_Name
+  SET n.Company_Name = row.Company_Name
+  SET n.Company_Type = row.Company_Type
+  SET n.Email = row.Email
+  SET n.Address = row.Address
+  SET n.Telephone = row.Telephone
+  SET n.City = row.City
+  SET n.Country = row.Country
+  SET n.Region = row.Region
+} IN TRANSACTIONS OF 10000 ROWS;
 
-// Create Order nodes and relationships
-LOAD CSV WITH HEADERS FROM 'file:///order_data.csv' AS od
-MATCH (s:Sales {Sales_Consultant_ID: od.Sales_Consultant_ID})
-MATCH (c:Customer {Customer_ID: od.Customer_ID})
-MATCH (p:Product {Product_ID: od.Product_ID})
-CREATE (o:Order {
-    Order_Date: date(od.Order_Date),
-    Total_Cost: toFloat(od.Total_Cost),
-    Sysco_Operation_Center: od.Sysco_Operation_Center,
-    Order_ID: od.Order_ID,
-    Order_Time: time(od.Order_Time),
-    Product_ID: od.Product_ID,
-    Order_Type: od.Order_Type,
-    Order_Status: od.Order_Status,
-    Cost_Per_Unit: toFloat(od.Cost_Per_Unit),
-    Order_Amount: toInteger(od.Order_Amount)
-})
-CREATE (s)-[:PROCESSED]->(o)
-CREATE (c)-[:PLACED]->(o)
-CREATE (o)-[:CONTAINS]->(p)
-WITH count(*) as dummy6
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_2) AS row
+WITH row
+WHERE NOT row.Product ID IN $idsToSkip AND NOT row.Product ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: `Product ` { Product_ID: row.Product ID })
+  SET n.Product_ID = row.Product ID
+  SET n.Product_Name = row.Product Name
+  SET n.Category = row.Category
+} IN TRANSACTIONS OF 10000 ROWS;
 
-// Create Vendor nodes
-LOAD CSV WITH HEADERS FROM 'file:///food_vendor_data.csv' AS vd
-CREATE (:Vendor {
-    Vendor_ID: vd.Vendor_ID,
-    Vendor_Name: vd.Vendor_Name,
-    Representative_Name: vd.Representative_Name,
-    Email: vd.Email,
-    Telephone: vd.Telephone,
-    Address: vd.Address,
-    Country: vd.Country,
-    Region: vd.Region
-})
-WITH count(*) as dummy7
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_3) AS row
+WITH row
+WHERE NOT row.Event_ID IN $idsToSkip AND NOT row.Event_ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: ProfessionalDevelopment { Event_ID: row.Event_ID })
+  SET n.Event_ID = row.Event_ID
+  // Your script contains the datetime datatype. Our app attempts to convert dates to ISO 8601 date format before passing them to the Cypher function.
+  // This conversion cannot be done in a Cypher script load. Please ensure that your CSV file columns are in ISO 8601 date format to ensure equivalent loads.
+  SET n.Event_Date = datetime(row.Event_Date)
+  SET n.Event_Time = row.Event_Time
+  SET n.Event_Type = row.Event_Type
+  SET n.Attendance_Status = row.Attendance_Status
+} IN TRANSACTIONS OF 10000 ROWS;
 
-// Create relationships between Sales Consultants and Vendors
-LOAD CSV WITH HEADERS FROM 'file:///vendor_sales_consultant_mapping.csv' AS vm
-MATCH (s:Sales {Sales_Consultant_ID: vm.Sales_Consultant_ID})
-MATCH (v:Vendor {Vendor_ID: vm.Vendor_ID})
-CREATE (s)-[:MANAGES]->(v)
-WITH count(*) as dummy8
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_4) AS row
+WITH row
+WHERE NOT row.Meeting_ID IN $idsToSkip AND NOT row.Meeting_ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: `Meeting ` { Meeting_ID: row.Meeting_ID })
+  SET n.Meeting_ID = row.Meeting_ID
+  // Your script contains the datetime datatype. Our app attempts to convert dates to ISO 8601 date format before passing them to the Cypher function.
+  // This conversion cannot be done in a Cypher script load. Please ensure that your CSV file columns are in ISO 8601 date format to ensure equivalent loads.
+  SET n.Meeting_Date = datetime(row.Meeting_Date)
+  SET n.Meeting_Time = row.Meeting_Time
+  SET n.Meeting_Details = row.Meeting_Details
+  SET n.Delivery_Type = row.Delivery_Type
+} IN TRANSACTIONS OF 10000 ROWS;
 
-// Create relationships between Vendors and Products
-LOAD CSV WITH HEADERS FROM 'file:///vendor_products_relationships.csv' AS vp
-MATCH (v:Vendor {Vendor_ID: vp.Vendor_ID})
-MATCH (p:Product {Product_ID: vp.Food_ID})
-CREATE (v)-[:SUPPLIES]->(p)
-WITH count(*) as dummy9
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_5) AS row
+WITH row
+WHERE NOT row.Order_ID IN $idsToSkip AND NOT row.Order_ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: Order { Order_ID: row.Order_ID })
+  SET n.Order_ID = row.Order_ID
+  SET n.Order_Amount = toInteger(trim(row.Order_Amount))
+  SET n.Order_Status = row.Order_Status
+  // Your script contains the datetime datatype. Our app attempts to convert dates to ISO 8601 date format before passing them to the Cypher function.
+  // This conversion cannot be done in a Cypher script load. Please ensure that your CSV file columns are in ISO 8601 date format to ensure equivalent loads.
+  SET n.Order_Date = datetime(row.Order_Date)
+  SET n.Sysco_Operation_Center = row.Sysco_Operation_Center
+  SET n.Order_Type = row.Order_Type
+  SET n.Order_Time = row.Order_Time
+  SET n.Cost_Per_Unit = toFloat(trim(row.Cost_Per_Unit))
+  SET n.Total_Cost = toFloat(trim(row.Total_Cost))
+} IN TRANSACTIONS OF 10000 ROWS;
 
-// Create Stock nodes and relationships
-LOAD CSV WITH HEADERS FROM 'file:///stock_data.csv' AS sd
-MATCH (p:Product {Product_ID: sd.Food_ID})
-CREATE (s:Stock {
-    Stock_Amount: toInteger(sd.Stock_Amount),
-    Unit: sd.Unit,
-    Date: date(sd.Date),
-    Time: time(sd.Time),
-    Food_ID: sd.Food_ID
-})
-CREATE (p)-[:HAS_STOCK]->(s)
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_6) AS row
+WITH row
+WHERE NOT row.Vendor_ID IN $idsToSkip AND NOT row.Vendor_ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: Vendor { Vendor_ID: row.Vendor_ID })
+  SET n.Vendor_ID = row.Vendor_ID
+  SET n.Vendor_Name = row.Vendor_Name
+  SET n.Representative_Name = row.Representative_Name
+  SET n.Email = row.Email
+  SET n.Telephone = row.Telephone
+  SET n.Address = row.Address
+  SET n.Country = row.Country
+  SET n.Region = row.Region
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_7) AS row
+WITH row
+WHERE NOT row.Stock_ID IN $idsToSkip AND NOT row.Stock_ID IS NULL
+CALL {
+  WITH row
+  MERGE (n: Stock { Stock_ID: row.Stock_ID })
+  SET n.Stock_ID = row.Stock_ID
+  // Your script contains the datetime datatype. Our app attempts to convert dates to ISO 8601 date format before passing them to the Cypher function.
+  // This conversion cannot be done in a Cypher script load. Please ensure that your CSV file columns are in ISO 8601 date format to ensure equivalent loads.
+  SET n.Date = datetime(row.Date)
+  SET n.Time = row.Time
+  SET n.Stock_Amount = toFloat(trim(row.Stock_Amount))
+  SET n.Unit = row.Unit
+} IN TRANSACTIONS OF 10000 ROWS;
+
+
+// RELATIONSHIP load
+// -----------------
+//
+// Load relationships in batches, one relationship type at a time. Relationships are created using a MERGE statement, meaning only one relationship of a given type will ever be created between a pair of nodes.
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_3) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Sales { Sales_Consultant_ID: row.Consultant_ID })
+  MATCH (target: ProfessionalDevelopment { Event_ID: row.Event_ID })
+  MERGE (source)-[r: ATTENDED]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_4) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Sales { Sales_Consultant_ID: row.Sales_Consultant_ID })
+  MATCH (target: `Meeting ` { Meeting_ID: row.Meeting_ID })
+  MERGE (source)-[r: CONDUCTED]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_4) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Customer { Customer_ID: row.Customer_ID })
+  MATCH (target: `Meeting ` { Meeting_ID: row.Meeting_ID })
+  MERGE (source)-[r: PARTICIPATED_IN]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_5) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Sales { Sales_Consultant_ID: row.Sales_Consultant_ID })
+  MATCH (target: Order { Order_ID: row.Order_ID })
+  MERGE (source)-[r: PROCESSED]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_5) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Customer { Customer_ID: row.Customer_ID })
+  MATCH (target: Order { Order_ID: row.Order_ID })
+  MERGE (source)-[r: PLACED]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_5) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Order { Order_ID: row.Order_ID })
+  MATCH (target: `Product ` { Product_ID: row.Product_ID })
+  MERGE (source)-[r: CONTAINS]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_8) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Sales { Sales_Consultant_ID: row.Sales_Consultant_ID })
+  MATCH (target: Vendor { Vendor_ID: row.Vendor_ID })
+  MERGE (source)-[r: MANAGES]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_9) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: Vendor { Vendor_ID: row.Vendor_ID })
+  MATCH (target: `Product ` { Product_ID: row.Food_ID })
+  MERGE (source)-[r: SUPPLIES]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
+
+LOAD CSV WITH HEADERS FROM ($file_path_root + $file_7) AS row
+WITH row 
+CALL {
+  WITH row
+  MATCH (source: `Product ` { Product_ID: row.Food_ID })
+  MATCH (target: Stock { Stock_ID: row.Stock_ID })
+  MERGE (source)-[r: HAS_STOCK]->(target)
+} IN TRANSACTIONS OF 10000 ROWS;
 """
 
 
-def generate_query(user_question: str, session_id: str) -> str:
+def generate_query(user_question: str, session_id: str, question: Question) -> str:
     recent_history = []
     if session_id in chat_histories:
         questions = chat_histories[session_id]["questions"]
@@ -259,6 +407,21 @@ def generate_query(user_question: str, session_id: str) -> str:
         "plotly_code_generation_status": "Yes/No",
         "plotly_code": "plotly code"
     }
+
+    settings_prompt = f"""
+       Response Settings:
+       - Language: {question.settings.language}
+       - Politeness Level: {question.settings.politeness_level}
+       - Formality: {question.settings.formality}
+       - Response Length: {question.settings.response_length}
+       - Current time: {question.settings.time}
+
+       Please adjust your response according to these settings:
+       1. Use the specified {question.settings.language} language
+       2. Maintain {question.settings.politeness_level} politeness level
+       3. Keep {question.settings.formality} tone
+       5. Provide {question.settings.response_length} response length
+       """
 
     # Move the prompt template outside the function
     QUERY_CHAT_PROMPT = """Role and Context:
@@ -427,6 +590,9 @@ def generate_query(user_question: str, session_id: str) -> str:
                         - Professional Emojis is must
                         - If you do long explanations provide answers point wise
                         - Very Very Important: ⚠️⚠️If the user question is not related to visualizations, stat, numeric,or comparison data, do not ever provide visualizations.
+                        
+                        # Strictly follow this setting prompts as well
+                        {settings_prompt}  
 """
 
 
@@ -448,16 +614,15 @@ def generate_query(user_question: str, session_id: str) -> str:
     except Exception as e:
         similar_text = "No similar examples found."
 
-    timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
-
     # Format the prompt with all required values
     formatted_prompt = QUERY_CHAT_PROMPT.format(
-        date=timestamp,
+        date=question.settings.time,
         history_text=history_text,
         graph_db_structure=graph_db_structure,
         similar_chunks=similar_text,
         question=user_question,
-        template_cypher=TEMPLATE_CYPHER
+        template_cypher=TEMPLATE_CYPHER,
+        settings_prompt=settings_prompt
     )
 
     while retry_count < max_retries:
@@ -489,7 +654,7 @@ def generate_query(user_question: str, session_id: str) -> str:
                 model=deployment,
                 messages=chat_messages,
                 max_tokens=4096,
-                temperature=0.5,
+                temperature=question.settings.creativity,
                 top_p=0.95,
                 frequency_penalty=0,
                 presence_penalty=0,
@@ -696,7 +861,7 @@ def generate_plotly_html(plotly_code, response_dict):
 
 
 
-def generate_chart_analysis(plotly_code, data, user_question, client, deployment):
+def generate_chart_analysis(plotly_code, data, user_question, client, deployment, question):
     if not plotly_code or not data:
         return "Unable to provide analytical insights at the moment due to missing data or visualization."
 
@@ -712,6 +877,21 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
             chart_type = "pie chart"
         else:
             chart_type = "chart"
+
+        settings_prompt = f"""
+               Response Settings:
+               - Language: {question.settings.language}
+               - Politeness Level: {question.settings.politeness_level}
+               - Formality: {question.settings.formality}
+               - Response Length: {question.settings.response_length}
+               - Current time: {question.settings.time}
+
+               Please adjust your response according to these settings:
+               1. Use the specified {question.settings.language} language
+               2. Maintain {question.settings.politeness_level} politeness level
+               3. Keep {question.settings.formality} tone
+               5. Provide {question.settings.response_length} response length
+               """
 
         # Prepare prompt for LLM
         analysis_prompt = f"""You are an analytics expert at Sysco Labs. Analyze the following data visualization in context of the user's question and provide 3-4 key business insights.
@@ -732,7 +912,11 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
         8. Include relevant emojis for each point
         9. Ensure insights are directly relevant to what the user wanted to know
 
-        Format your response as a direct list of insights without any preamble or introduction."""
+        Format your response as a direct list of insights without any preamble or introduction.
+        
+        Please strictly follow this settings:
+            {settings_prompt}
+        """
 
         # Make API call
         completion = client.chat.completions.create(
@@ -742,7 +926,7 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                 {"role": "user", "content": "Please provide the analysis."}
             ],
             max_tokens=1000,
-            temperature=0.7
+            temperature= question.settings.creativity
         )
 
         return completion.choices[0].message.content
@@ -767,7 +951,7 @@ async def chat(question: Question):
         chat_histories[session_id]["questions"].append(user_question)
 
         # Get the query generation response
-        query_response = generate_query(user_question, session_id)
+        query_response = generate_query(user_question, session_id, question)
 
         try:
             try:
@@ -848,7 +1032,8 @@ async def chat(question: Question):
                     result["data"][:100],
                     user_question,  # Pass the user's question
                     client,
-                    deployment
+                    deployment,
+                    question
                 )
             else:
                 result["chart_analysis"] = "Unable to provide analytical insights due to visualization error."
