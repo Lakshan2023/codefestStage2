@@ -555,8 +555,10 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                                - Bar plots: Use '#2c5282' (deep blue) or '#276749' (green) for bars
                                - Multiple traces: Rotate through colors ['#1f77b4', '#2ca02c', '#9467bd', '#d62728']
                                - NEVER use the same color for different visualizations in the same analysis
+                               
                         Example of correct plotly code:
                         ----------------------------
+                        response_dict ### ⚠️⚠️ do not assign any value dictionaries for response dict because it is already assigned.
                         # This shows how to properly use response_dict
                         df = pd.DataFrame(response_dict)
                         fig = px.bar(df, 
