@@ -951,7 +951,7 @@ def generate_plot_analysis(data: str):
     try:
         analysis_prompt = f"""
                 If this data contains not only null values return 'yes'.
-                If the data only contains null values say you cannot generate an answer at the moment in a creative way with emojis.
+                If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis.
                 
                 data : {data}
                 """
