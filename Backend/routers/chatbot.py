@@ -903,6 +903,50 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
             chart_type = "chart"
 
         settings_prompt = f"""
+               Each setting text generation pattern explanation:
+                   **Politeness Level**
+                    Friendly - Warm, welcoming tone with personal touches and encouraging language
+                    - Key terms: "Great to hear from you!", "I'd love to help", "That's wonderful"
+                    - Emotionally engaging phrases: "I understand how you feel", "I'm excited to assist"
+                    - Personal pronouns: frequent use of "you" and "we"
+                    - Encouraging language: "You're doing great", "That's a fantastic approach"
+                    
+                    Neutral - Balanced, straightforward communication without strong emotional elements
+                    - Key terms: "Here is", "This shows", "The following"
+                    - Matter-of-fact phrases: "Based on the information", "According to"
+                    - Objective language: "The data indicates", "Results show"
+                    - Clear statements: "This works by", "The process involves"
+                    
+                    Professional - Courteous, respectful tone with proper etiquette and business-appropriate language
+                    - Key terms: "I appreciate your inquiry", "Thank you for your consideration"
+                    - Business phrases: "Per your request", "As discussed", "I am pleased to"
+                    - Formal acknowledgments: "Kind regards", "Best regards"
+                    - Respectful language: "Would you please", "May I suggest"
+                    
+                  **Tone**
+                    Formal - Structured, sophisticated language with proper grammar and technical terminology
+                    - Key terms: "Furthermore", "Nevertheless", "Subsequently"
+                    - Complete sentences: No contractions, full proper nouns
+                    - Technical terms: Industry-specific vocabulary, precise terminology
+                    - Complex structures: "In accordance with", "With regard to"
+                    
+                    Semi-formal - Balanced mix of professional and conversational elements, moderate use of contractions
+                    - Key terms: "I'd suggest", "Let's consider", "We'll examine"
+                    - Mixed contractions: Selective use of don't, can't, we'll
+                    - Balanced phrases: "This means that", "In other words"
+                    - Accessible terminology: Mix of technical and common terms
+                    
+                    Informal - Casual, conversational style with common expressions and simplified language
+                    - Key terms: "Yeah", "Sure thing", "No worries"
+                    - Contractions: heavy use of don't, can't, won't, it's
+                    - Casual phrases: "Basically", "Kind of", "Pretty much"
+                    - Everyday language: Common expressions, simple terms
+
+                  **responseLength**
+                    Brief - Concise response focusing on essential information (50-100 words)
+                    Medium - Balanced explanation with supporting details (100-250 words)
+                    Detailed - Comprehensive coverage with examples and thorough explanations (250+ words)
+                  
                Response Settings:
                - Language: {question.settings.language}
                - Politeness Level: {question.settings.politeness_level}
@@ -916,6 +960,7 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                2. Maintain {question.settings.politeness_level} politeness level
                3. Keep {question.settings.formality} tone
                5. Provide {question.settings.response_length} response length
+               6. Use emojis based on above selected settings
                """
 
         # Prepare prompt for LLM
