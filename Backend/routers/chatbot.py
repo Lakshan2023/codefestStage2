@@ -534,41 +534,178 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                            - 'No': If data isn't suitable for visualization
                            - Only set to 'Yes' for statistical, numeric, or time series data
                         
-                       5. plotly_code:
-                           - IMPORTANT: You must use 'response_dict' to access the actual query results
-                           - Very Very Important: ⚠️⚠️⚠️ Do NOT use any example/dummy data or hardcoded values to the response_dict. response_dict is defined from outer scope.
-                           - All data for visualization must come from response_dict
-                           - response_dict contains the results of your Cypher query as a list of dictionaries
-                           ⚠️⚠️⚠️, therefore do not assign any sample values to the response dict. 
-                           - Example correct usage: 
-                             df = pd.DataFrame(response_dict)
-                             fig = px.line(df, x='date_column', y='value_column')
-                           - ⚠️ All arguments should have the same length
-                           - ⚠️ You can generate bar charts, stack bar charts, line charts, pie charts or Data Cards / Big Numbers
-                           - Provide charts in decent colors (bars and lines should be dark and vibrant colors)
-                           - fig.show() code has to be there at the end (This is very very important)
-                           - Include visualization code only if plotly_code_generation_status is 'Yes'
-                           - Ensure visualizations are business-relevant and actionable
-                           - plotly_white is the background layout used. 
-                           Color requirements (MUST use different colors for different charts):
-                               - Line plots: Use '#1f77b4' (blue) or '#e41a1c' (red) for lines
-                               - Bar plots: Use '#2c5282' (deep blue) or '#276749' (green) for bars
-                               - Multiple traces: Rotate through colors ['#1f77b4', '#2ca02c', '#9467bd', '#d62728']
-                               - NEVER use the same color for different visualizations in the same analysis
-                               
-                        Example of correct plotly code:
-                        ----------------------------
-                        response_dict ### ⚠️⚠️ do not assign any value dictionaries for response dict because it is already assigned.
-                        # This shows how to properly use response_dict
-                        df = pd.DataFrame(response_dict)
-                        fig = px.bar(df, 
-                                    x=df['date_column'],
-                                    y=df['value_column'],
-                                    title='Chart Title')
+                       Plotly Visualization Code Generation Guidelines
+                        ⚠️ CRITICAL DATA SOURCE RULES ⚠️
                         
-                        # INCORRECT - Do not use:
-                        data = ['date': '2024-01', 'value': 100]  # Don't use example data
-                        df = pd.DataFrame(data)  # Don't create dummy dataframes
+                        NEVER modify or assign to response_dict:
+                        pythonCopy# ABSOLUTELY WRONG - NEVER DO THIS:
+                        response_dict = [
+                            {{'date': '2024-01', 'value': 100}},
+                            {{'date': '2024-02', 'value': 200}}
+                        ]
+                        
+                        # ABSOLUTELY WRONG - NEVER DO THIS:
+                        response_dict = {{
+                            'dates': ['2024-01', '2024-02'],
+                            'values': [100, 200]
+                        }}
+                        
+                        CORRECT Usage:
+                        pythonCopy# CORRECT - Use response_dict as is:
+                        df = pd.DataFrame(response_dict)
+                        
+                        The ONLY valid operations on response_dict:
+                        ---------------------------------------------------------
+                        Reading from it
+                        Converting to DataFrame
+                        Accessing its columns
+                        Filtering/transforming its data 
+                        
+                        
+                        Core Requirements
+                        ----------------------------------------------------------
+                        
+                        Data Source Rules
+                        ----------------------------------------------------------
+                        MUST use response_dict as the ONLY data source
+                        response_dict contains query results as a list of dictionaries
+                        NEVER create or assign sample/dummy data
+                        NEVER hardcode values
+                        NEVER modify response_dict structure
+                        
+                        
+                        Data Processing Requirements
+                        ------------------------------------------------------------
+                        Convert response_dict to DataFrame: df = pd.DataFrame(response_dict)
+                        Ensure all arguments have equal length
+                        Use only columns available in response_dict
+                        Validate data types and handle nulls if needed
+                        
+                        
+                        Supported Visualization Types
+                        ------------------------------------------------------------
+                        Bar charts
+                        Stacked bar charts
+                        Line charts
+                        Pie charts
+                        Data cards/Big numbers
+                        
+                        
+                        Visual Style Requirements
+                        -------------------------------------------------------------
+                        Use plotly_white as background layout
+                        MUST include fig.show() at the end of code
+                        Only generate visualization if plotly_code_generation_status is 'Yes'
+                        Charts must be business-relevant and actionable
+                        Use appropriate axis labels and titles
+                        Include legends where applicable
+                        
+        
+                        Color Specifications
+                        -----------------------------------------------------------
+                        Line Plots
+                        -----------------------------------------------------
+                        Blue: '#1f77b4'
+                        Red: '#e41a1c'
+                        Navy: '#1a365d'
+                        Royal Blue: '#2b6cb0'
+                        Steel Blue: '#4299e1'
+                        Sky Blue: '#63b3ed'
+                        Light Blue: '#90cdf4'
+                        Dark Teal: '#234e52'
+                        Teal: '#319795'
+                        Ocean: '#38b2ac'
+                        Aqua: '#4fd1c5'
+                        Mint: '#81e6d9'
+                        Deep Purple: '#322659'
+                        Royal Purple: '#553c9a'
+                        Medium Purple: '#6b46c1'
+                        Lavender: '#805ad5'
+                        Light Purple: '#9f7aea'
+                        
+                        Bar Plots
+                        ------------------------------------------------------------
+                        Deep Blue: '#2c5282'
+                        Green: '#276749'
+                         Navy: '#1a365d'
+                        Royal Blue: '#2b6cb0'
+                        Steel Blue: '#4299e1'
+                        Sky Blue: '#63b3ed'
+                        Light Blue: '#90cdf4'
+                        Dark Teal: '#234e52'
+                        Teal: '#319795'
+                        Ocean: '#38b2ac'
+                        Aqua: '#4fd1c5'
+                        Mint: '#81e6d9'
+                        Deep Purple: '#322659'
+                        Royal Purple: '#553c9a'
+                        Medium Purple: '#6b46c1'
+                        Lavender: '#805ad5'
+                        Light Purple: '#9f7aea'
+                        
+                        Multiple Traces
+                        --------------------------------------------------------------
+                        Color rotation: ['#1f77b4', '#2ca02c', '#9467bd', '#d62728']
+                        Cool professional : ['#2b6cb0', '#319795', '#553c9a', '#1a365d', '#234e52']
+                        Cool contrast : ['#4299e1', '#38b2ac', '#6b46c1', '#2d3748', '#805ad5']
+                        Cool pastel: ['#90cdf4', '#81e6d9', '#9f7aea', '#a0aec0', '#b2f5ea']
+                        
+                        NEVER reuse colors within the same analysis
+                        
+                        Required Code Structure
+                        -------------------------------------------------------------
+                        
+                        import plotly.express as px
+                        import pandas as pd
+                        
+                        # 1. Data Processing
+                        df = pd.DataFrame(response_dict)
+                        
+                        # 2. Create Visualization
+                        fig = px.line(df, 
+                                      x='actual_column_name',
+                                      y='actual_column_name',
+                                      title='Meaningful Title')
+                        
+                        # 3. Update Layout
+                        fig.update_layout(
+                            template='plotly_white',
+                            xaxis_title="X Axis Label",
+                            yaxis_title="Y Axis Label"
+                        )
+                        
+                        # 4. Display (REQUIRED)
+                        fig.show()
+                        Common Mistakes to Avoid
+                        
+                        Data Source Errors:
+                        pythonCopy# WRONG - Creating sample data
+                        response_dict = []
+                        
+                        # WRONG - Modifying response_dict
+                        response_dict.append({{'date': '2024-01'}})
+                        
+                        # WRONG - Reassigning response_dict
+                        response_dict = pd.DataFrame()
+                        
+                        # WRONG - Using dummy data
+                        test_data = {{'col1': [1,2,3]}}
+                        
+                        Code Structure Errors:
+                        
+                        Missing fig.show()
+                        Not using plotly_white template
+                        Hardcoding colors not from specification
+                        Reusing colors across visualizations
+                        Missing axis labels or titles
+                        
+                        
+                        Data Processing Errors:
+                        ----------------------------------------------------------
+                        Creating dummy DataFrames
+                        Using columns that might not exist
+                        Not handling potential null values
+                        Not validating data types
                 
                         Important Notes for visualizations:
                         --------------
@@ -922,7 +1059,7 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                     Professional - Courteous, respectful tone with proper etiquette and business-appropriate language
                     - Key terms: "I appreciate your inquiry", "Thank you for your consideration"
                     - Business phrases: "Per your request", "As discussed", "I am pleased to"
-                    - Formal acknowledgments: "Kind regards", "Best regards"
+                    - Formal acknowledgments: "Kind regards \n SyscoPulse Team", "Best regards \n SyscoPulse Team" (Mention SyscoPulse Team)
                     - Respectful language: "Would you please", "May I suggest"
                     
                   **Tone**
@@ -1041,6 +1178,13 @@ def generate_plot_analysis(data: str):
 
 def explanation_handler(explanation: str):
     try:
+        examples = """
+          Here are the customers who have placed orders with a total value exceeding $10,000.
+          
+          Here is the analysis of average order value for each product. This visualization helps in identifying which products contribute the most to the revenue.
+          
+          
+        """
         analysis_prompt = f"""
                 You are SyscoPulse.
                 If the below text explanation includes the meaning or terms like, this chert/plot/table analyses,
