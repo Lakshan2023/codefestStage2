@@ -793,6 +793,14 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         - If you do long explanations provide answers point wise
                         - Very Very Important: ⚠️⚠️If the user question is not related to visualizations, stat, numeric,or comparison data, do not ever provide visualizations.
                         
+                        # Stay Focused and Contextual
+                        - Provide responses that are strictly relevant to the questions asked about Sysco Labs
+                        - Do not include any information beyond the scope of the specific query or subject matter being discussed
+                        - Avoid providing out-of-context or irrelevant information in any responses
+                        - Maintain focus on the exact question asked and its direct implications for Sysco Labs
+                        - If question is unclear, ask for clarification rather than making assumptions
+                        - Never add extraneous information not directly related to the query
+                        
                         # Strictly follow this setting prompts as well
                         {settings_prompt}  
 """
