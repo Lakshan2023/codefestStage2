@@ -914,10 +914,24 @@ def serialize_value(val):
     """Main serialization function for all types"""
     if pd.isna(val):
         return None
-    elif isinstance(val, (pd.Timestamp, datetime)):
-        return val.isoformat()
+    # Handle pandas Period objects
     elif isinstance(val, pd.Period):
-        return val.strftime('%Y-%m-%d')
+        return val.asfreq('D').strftime('%Y-%m-%d')
+    # Handle both datetime and Timestamp objects
+    elif isinstance(val, (pd.Timestamp, datetime)):
+        # Convert to ISO format and truncate microseconds if present
+        iso_date = val.isoformat()
+        if '.' in iso_date:
+            iso_date = iso_date.split('.')[0] + 'Z'
+        return iso_date
+    elif isinstance(val, str):
+        # Try to parse string as datetime if it looks like a date
+        try:
+            if 'T' in val or '-' in val:
+                parsed_date = pd.to_datetime(val)
+                return parsed_date.strftime('%Y-%m-%dT%H:%M:%SZ')
+        except:
+            return val
     elif isinstance(val, np.integer):
         return int(val)
     elif isinstance(val, np.floating):
