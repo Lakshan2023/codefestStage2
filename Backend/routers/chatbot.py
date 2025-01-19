@@ -1183,11 +1183,12 @@ def explanation_handler(explanation: str):
           
           Here is the analysis of average order value for each product. This visualization helps in identifying which products contribute the most to the revenue.
           
-          
+          Here is the analysis of future meetings conducted by sales consultants. This will help in understanding the upcoming engagements and planning accordingly. 📅
         """
         analysis_prompt = f"""
                 You are SyscoPulse.
                 If the below text explanation includes the meaning or terms like, this chert/plot/table analyses,
+                Examples: {examples}
                 then please provide a statement that, you can't generate a plot at this moment.(Important :Use  professional emojis and use a bit longer text to explain it.) 
                 
                 If the text explanation is a general explanation, return the same answer as it is.
