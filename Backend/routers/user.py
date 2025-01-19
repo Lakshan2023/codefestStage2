@@ -20,6 +20,7 @@ import secrets
 from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException
+from fastapi import Query
 
 router = APIRouter()
 
@@ -343,7 +344,7 @@ async def create_account(user: UserCreate):
             </div>
 
             <p>To approve this account, click the button below:</p>
-            <a href="https://codefest-backend.azurewebsites.net/admin/approve-account?token={approval_token}&action=approve" class="button">
+            <a href="https://codefest-backend.azurewebsites.net/user/admin/approve-account?token={approval_token}&approved=true" class="button">
                 Approve Account
             </a>
 
@@ -366,19 +367,171 @@ async def create_account(user: UserCreate):
     return {"message": "Account creation request sent to admin for approval"}
 
 
+# @router.post("/admin/approve-account")
+# async def approve_account(approval: AdminApproval):
+#     """Admin approves or denies account creation"""
+#
+#     with driver.session() as session:
+#         user = session.execute_read(get_user_by_token, approval.approval_token)
+#         if not user:
+#             raise HTTPException(
+#                 status_code=404,
+#                 detail="Invalid approval token"
+#             )
+#
+#         if approval.approved:
+#             # Generate unique secure password for each user
+#             temp_password = generate_secure_password()
+#
+#             # Activate user account with encrypted password
+#             session.execute_write(activate_user, user['email'], temp_password)
+#
+#             # Send credentials to user
+#             user_email_body = f"""
+#            <!DOCTYPE html>
+# <html>
+# <head>
+#     <meta charset="UTF-8">
+#     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+#     <style>
+#         body {{
+#             font-family: Arial, sans-serif;
+#             line-height: 1.6;
+#             margin: 0;
+#             padding: 0;
+#             background-color: #f5f5f5;
+#         }}
+#         .container {{
+#             max-width: 600px;
+#             margin: 20px auto;
+#             background-color: white;
+#             padding: 30px;
+#             border-radius: 8px;
+#             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+#         }}
+#         .header {{
+#             background-color: #0068B3;
+#             color: white;
+#             padding: 20px;
+#             margin: -30px -30px 20px -30px;
+#             border-radius: 8px 8px 0 0;
+#             text-align: center;
+#         }}
+#         h1 {{
+#             margin: 0;
+#             font-size: 28px;
+#             font-weight: bold;
+#         }}
+#         h2 {{
+#             color: #0068B3;
+#             font-size: 22px;
+#             margin-top: 20px;
+#         }}
+#         .content {{
+#             padding: 20px 0;
+#         }}
+#         .info-item {{
+#             margin: 10px 0;
+#             padding: 10px;
+#             background-color: #f8f9fa;
+#             border-radius: 4px;
+#         }}
+#         .credentials-box {{
+#             background-color: #f8f9fa;
+#             border-left: 4px solid #0068B3;
+#             padding: 15px;
+#             margin: 20px 0;
+#             border-radius: 0 4px 4px 0;
+#         }}
+#         .important-note {{
+#             color: #721c24;
+#             background-color: #f8d7da;
+#             padding: 10px;
+#             border-radius: 4px;
+#             margin: 20px 0;
+#         }}
+#         .login-link {{
+#             display: inline-block;
+#             background-color: #0068B3;
+#             color: white;
+#             padding: 12px 24px;
+#             text-decoration: none;
+#             border-radius: 4px;
+#             margin: 20px 0;
+#             transition: background-color 0.3s ease;
+#         }}
+#         .login-link:hover{{
+#             background-color: #005291;
+#         }}
+#     </style>
+# </head>
+# <body>
+#     <div class="container">
+#         <div class="header">
+#             <h1>Sysco Pulse</h1>
+#         </div>
+#         <div class="content">
+#             <h2>Welcome to Sysco Pulse</h2>
+#             <p>Your account has been approved and is ready to use. Please find your login credentials below:</p>
+#
+#             <div class="credentials-box">
+#                 <div class="info-item">
+#                     <strong>Email:</strong> {user['email']}
+#                 </div>
+#                 <div class="info-item">
+#                     <strong>Password:</strong> {temp_password}
+#                 </div>
+#             </div>
+#             <p>If you have any questions or need assistance, please contact your system administrator.</p>
+#         </div>
+#     </div>
+# </body>
+# </html>
+#             """
+#
+#             send_email(
+#                 user['email'],
+#                 "Welcome to SyscoPulse - Account Approved",
+#                 user_email_body
+#             )
+#
+#             return {"message": "Account approved and credentials sent"}
+#         else:
+#             # Handle account denial
+#             # You might want to implement additional logic here
+#             return {"message": "Account denied"}
+
+
+
 @router.post("/admin/approve-account")
-async def approve_account(approval: AdminApproval):
+@router.get("/admin/approve-account")
+async def approve_account(
+        token: str = Query(None, alias="token"),
+        approved: bool = Query(None, alias="approved"),
+        approval: AdminApproval | None = None
+):
     """Admin approves or denies account creation"""
 
+    # Use either query parameters or body data
+    final_token = token if token else (approval.approval_token if approval else None)
+    final_approved = approved if approved is not None else (approval.approved if approval else None)
+
+    # Validate required data
+    if not final_token or final_approved is None:
+        raise HTTPException(
+            status_code=400,
+            detail="Missing required parameters. Provide either query parameters or request body."
+        )
+
     with driver.session() as session:
-        user = session.execute_read(get_user_by_token, approval.approval_token)
+        user = session.execute_read(get_user_by_token, final_token)
         if not user:
             raise HTTPException(
                 status_code=404,
                 detail="Invalid approval token"
             )
 
-        if approval.approved:
+        if final_approved:
             # Generate unique secure password for each user
             temp_password = generate_secure_password()
 
@@ -388,104 +541,104 @@ async def approve_account(approval: AdminApproval):
             # Send credentials to user
             user_email_body = f"""
            <!DOCTYPE html>
-<html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        body {{
-            font-family: Arial, sans-serif;
-            line-height: 1.6;
-            margin: 0;
-            padding: 0;
-            background-color: #f5f5f5;
-        }}
-        .container {{
-            max-width: 600px;
-            margin: 20px auto;
-            background-color: white;
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-        }}
-        .header {{
-            background-color: #0068B3;
-            color: white;
-            padding: 20px;
-            margin: -30px -30px 20px -30px;
-            border-radius: 8px 8px 0 0;
-            text-align: center;
-        }}
-        h1 {{
-            margin: 0;
-            font-size: 28px;
-            font-weight: bold;
-        }}
-        h2 {{
-            color: #0068B3;
-            font-size: 22px;
-            margin-top: 20px;
-        }}
-        .content {{
-            padding: 20px 0;
-        }}
-        .info-item {{
-            margin: 10px 0;
-            padding: 10px;
-            background-color: #f8f9fa;
-            border-radius: 4px;
-        }}
-        .credentials-box {{
-            background-color: #f8f9fa;
-            border-left: 4px solid #0068B3;
-            padding: 15px;
-            margin: 20px 0;
-            border-radius: 0 4px 4px 0;
-        }}
-        .important-note {{
-            color: #721c24;
-            background-color: #f8d7da;
-            padding: 10px;
-            border-radius: 4px;
-            margin: 20px 0;
-        }}
-        .login-link {{
-            display: inline-block;
-            background-color: #0068B3;
-            color: white;
-            padding: 12px 24px;
-            text-decoration: none;
-            border-radius: 4px;
-            margin: 20px 0;
-            transition: background-color 0.3s ease;
-        }}
-        .login-link:hover{{
-            background-color: #005291;
-        }}
-    </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <h1>Sysco Pulse</h1>
-        </div>
-        <div class="content">
-            <h2>Welcome to Sysco Pulse</h2>
-            <p>Your account has been approved and is ready to use. Please find your login credentials below:</p>
-
-            <div class="credentials-box">
-                <div class="info-item">
-                    <strong>Email:</strong> {user['email']}
-                </div>
-                <div class="info-item">
-                    <strong>Password:</strong> {temp_password}
-                </div>
-            </div>
-            <p>If you have any questions or need assistance, please contact your system administrator.</p>
-        </div>
-    </div>
-</body>
-</html>
+                <html>
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <style>
+                        body {{
+                            font-family: Arial, sans-serif;
+                            line-height: 1.6;
+                            margin: 0;
+                            padding: 0;
+                            background-color: #f5f5f5;
+                        }}
+                        .container {{
+                            max-width: 600px;
+                            margin: 20px auto;
+                            background-color: white;
+                            padding: 30px;
+                            border-radius: 8px;
+                            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                        }}
+                        .header {{
+                            background-color: #0068B3;
+                            color: white;
+                            padding: 20px;
+                            margin: -30px -30px 20px -30px;
+                            border-radius: 8px 8px 0 0;
+                            text-align: center;
+                        }}
+                        h1 {{
+                            margin: 0;
+                            font-size: 28px;
+                            font-weight: bold;
+                        }}
+                        h2 {{
+                            color: #0068B3;
+                            font-size: 22px;
+                            margin-top: 20px;
+                        }}
+                        .content {{
+                            padding: 20px 0;
+                        }}
+                        .info-item {{
+                            margin: 10px 0;
+                            padding: 10px;
+                            background-color: #f8f9fa;
+                            border-radius: 4px;
+                        }}
+                        .credentials-box {{
+                            background-color: #f8f9fa;
+                            border-left: 4px solid #0068B3;
+                            padding: 15px;
+                            margin: 20px 0;
+                            border-radius: 0 4px 4px 0;
+                        }}
+                        .important-note {{
+                            color: #721c24;
+                            background-color: #f8d7da;
+                            padding: 10px;
+                            border-radius: 4px;
+                            margin: 20px 0;
+                        }}
+                        .login-link {{
+                            display: inline-block;
+                            background-color: #0068B3;
+                            color: white;
+                            padding: 12px 24px;
+                            text-decoration: none;
+                            border-radius: 4px;
+                            margin: 20px 0;
+                            transition: background-color 0.3s ease;
+                        }}
+                        .login-link:hover{{
+                            background-color: #005291;
+                        }}
+                    </style>
+                </head>
+                <body>
+                    <div class="container">
+                        <div class="header">
+                            <h1>Sysco Pulse</h1>
+                        </div>
+                        <div class="content">
+                            <h2>Welcome to Sysco Pulse</h2>
+                            <p>Your account has been approved and is ready to use. Please find your login credentials below:</p>
+                
+                            <div class="credentials-box">
+                                <div class="info-item">
+                                    <strong>Email:</strong> {user['email']}
+                                </div>
+                                <div class="info-item">
+                                    <strong>Password:</strong> {temp_password}
+                                </div>
+                            </div>
+                            <p>If you have any questions or need assistance, please contact your system administrator.</p>
+                        </div>
+                    </div>
+                </body>
+                </html>
             """
 
             send_email(
@@ -497,7 +650,6 @@ async def approve_account(approval: AdminApproval):
             return {"message": "Account approved and credentials sent"}
         else:
             # Handle account denial
-            # You might want to implement additional logic here
             return {"message": "Account denied"}
 
 
@@ -610,7 +762,7 @@ async def forgot_password(request: ForgotPassword):
             </div>
 
             <p>To approve this reset, click the button below:</p>
-            <a href="https://codefest-backend.azurewebsites.net/admin/reset-password?token={reset_token}&action=approve" class="button">
+            <a href="https://codefest-backend.azurewebsites.net/user/admin/reset-password?token={reset_token}&action=approve" class="button">
                 Approve Reset
             </a>
 
@@ -647,6 +799,133 @@ async def forgot_password(request: ForgotPassword):
         )
 
         return {"message": "Password reset request sent to admin"}
+
+
+# Add this Neo4j function
+def reset_user_password(tx, reset_token: str, new_password: str):
+    encrypted_password = encrypt_password(new_password)
+    query = """
+    MATCH (u:User {reset_token: $reset_token})
+    SET u.password = $password,
+        u.reset_token = null
+    RETURN u
+    """
+    result = tx.run(query, reset_token=reset_token, password=encrypted_password)
+    record = result.single()
+    return record['u'] if record else None
+
+
+# Add this endpoint
+@router.post("/admin/reset-password")
+@router.get("/admin/reset-password")
+async def reset_password(
+        token: str = Query(None, alias="token"),
+        action: str = Query(None, alias="action")
+):
+    """Admin approves and processes password reset"""
+    if not token or not action:
+        raise HTTPException(
+            status_code=400,
+            detail="Missing required parameters"
+        )
+
+    if action.lower() != "approve":
+        raise HTTPException(
+            status_code=400,
+            detail="Invalid action"
+        )
+
+    # Generate new secure password
+    new_password = generate_secure_password()
+
+    with driver.session() as session:
+        user = session.execute_write(reset_user_password, token, new_password)
+
+        if not user:
+            raise HTTPException(
+                status_code=404,
+                detail="Invalid reset token"
+            )
+
+        # Send new credentials to user
+        user_email_body = f"""
+        <!DOCTYPE html>
+        <html>
+        <head>
+            <meta charset="UTF-8">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <style>
+                body {{
+                    font-family: Arial, sans-serif;
+                    line-height: 1.6;
+                    margin: 0;
+                    padding: 0;
+                    background-color: #f5f5f5;
+                }}
+                .container {{
+                    max-width: 600px;
+                    margin: 20px auto;
+                    background-color: white;
+                    padding: 30px;
+                    border-radius: 8px;
+                    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+                }}
+                .header {{
+                    background-color: #0068B3;
+                    color: white;
+                    padding: 20px;
+                    margin: -30px -30px 20px -30px;
+                    border-radius: 8px 8px 0 0;
+                    text-align: center;
+                }}
+                .credentials-box {{
+                    background-color: #f8f9fa;
+                    border-left: 4px solid #0068B3;
+                    padding: 15px;
+                    margin: 20px 0;
+                    border-radius: 0 4px 4px 0;
+                }}
+                .info-item {{
+                    margin: 10px 0;
+                    padding: 10px;
+                    background-color: #f8f9fa;
+                    border-radius: 4px;
+                }}
+            </style>
+        </head>
+        <body>
+            <div class="container">
+                <div class="header">
+                    <h1>Sysco Pulse</h1>
+                </div>
+                <div class="content">
+                    <h2>Password Reset Complete</h2>
+                    <p>Your password has been reset. Please find your new login credentials below:</p>
+
+                    <div class="credentials-box">
+                        <div class="info-item">
+                            <strong>Email:</strong> {user['email']}
+                        </div>
+                        <div class="info-item">
+                            <strong>New Password:</strong> {new_password}
+                        </div>
+                    </div>
+
+                    <p>Please change your password after logging in.</p>
+                    <p>If you did not request this password reset, please contact your administrator immediately.</p>
+                </div>
+            </div>
+        </body>
+        </html>
+        """
+
+        send_email(
+            user['email'],
+            "Password Reset Complete - Sysco Pulse",
+            user_email_body
+        )
+
+        return {"message": "Password reset successful and new credentials sent"}
 
 
 @router.post("/login")
