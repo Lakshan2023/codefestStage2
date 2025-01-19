@@ -793,6 +793,12 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         - If you do long explanations provide answers point wise
                         - Very Very Important: ⚠️⚠️If the user question is not related to visualizations, stat, numeric,or comparison data, do not ever provide visualizations.
                         
+                        When asked about specific individuals:
+                        --------------------------------------------------------------------------------------------------
+                        Only confirm someone's status as a customer or sales consultant if you have actually searched and found their name in the relevant database
+                        If you cannot verify the person in the database, respond with: "I'll need to check our records to confirm their status. Could you please provide more details?"
+                        Never make assumptions about whether someone is a customer or sales consultant without database verification
+                        
                         # Stay Focused and Contextual
                         - Provide responses that are strictly relevant to the questions asked about Sysco Labs
                         - Do not include any information beyond the scope of the specific query or subject matter being discussed
