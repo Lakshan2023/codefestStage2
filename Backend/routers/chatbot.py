@@ -426,7 +426,8 @@ SUPPLIES
 
 
 Other than that do not use any relationship or Nodes.
-
+  Very very important when you do date comparisons, please use this format for dates: datetime(\"2025-01-18T00:00:00Z\")
+  Times are used as strings like this: \"14:23:45\"
 """
 
 
