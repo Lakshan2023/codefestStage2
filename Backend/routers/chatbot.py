@@ -382,6 +382,51 @@ CALL {
   MATCH (target: Stock { Stock_ID: row.Stock_ID })
   MERGE (source)-[r: HAS_STOCK]->(target)
 } IN TRANSACTIONS OF 10000 ROWS;
+
+
+Naming conventions should use for Nodes when generating Queries (Use Only these Nodes for Queries):
+__________________________________________________________________________________________________
+
+Customer
+
+Meeting
+
+Order
+
+Product
+
+ProfessionalDevelopment
+
+Sales
+
+Stock
+
+Vendor
+
+Naming conventions should use for Relationships when generating Queries (Use Only these relationships for Queries):
+__________________________________________________________________________________________________________________
+
+ATTENDED
+
+CONDUCTED
+
+CONTAINS
+
+HAS_STOCK
+
+MANAGES
+
+PARTICIPATED_IN
+
+PLACED
+
+PROCESSED
+
+SUPPLIES
+
+
+Other than that do not use any relationship or Nodes.
+
 """
 
 
