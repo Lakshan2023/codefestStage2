@@ -1009,6 +1009,202 @@
   {
   "question": "Provide Montly sales trend",
   "cypher_query": "OPTIONAL MATCH (o:Order) WITH o, date(o.Order_Date) AS orderDate RETURN date.truncate(\"month\", orderDate) AS Month, SUM(o.Total_Cost) AS Total_Sales ORDER BY Month"
+  },
+  {
+  "question": "What is the monthly revenue trend across all branches?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN o.Order_Date.year AS Year, o.Order_Date.month AS Month, SUM(o.Total_Cost) AS Monthly_Revenue\nORDER BY Year, Month;"
+  },
+  {
+  "question": "What is the distribution of order types (e.g., Direct Supply vs. others) over the past year?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nWHERE o.Order_Date >= datetime() - duration({years: 1})\nRETURN o.Order_Type AS Order_Type, COUNT(o) AS Order_Count\nORDER BY Order_Count DESC;"
+  },
+  {
+  "question": "How has the average order value changed over time (weekly trend)?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN o.Order_Date.year AS Year, o.Order_Date.week AS Week, AVG(o.Total_Cost) AS Avg_Order_Value\nORDER BY Year, Week;"
+  },
+  {
+  "question": "What is the peak order time during the day?\n",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN time(o.Order_Time).hour AS Hour, COUNT(o) AS Order_Count\nORDER BY Order_Count DESC\nLIMIT 1;"
+  },
+  {
+  "question": "Which regions generate the most sales revenue?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)<-[:PLACED]-(c:Customer)\nRETURN c.Region AS Region, SUM(o.Total_Cost) AS Total_Revenue\nORDER BY Total_Revenue DESC;"
+  },
+  {
+  "question": "What is the sales distribution across Sysco Lab branches?\n",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)\nRETURN s.Sysco_Lab_Branch AS Branch, SUM(o.Total_Cost) AS Total_Sales\nORDER BY Total_Sales DESC;\n"
+  },
+   {
+  "question": "What is the customer order distribution by company type?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)<-[:PLACED]-(c:Customer)\nRETURN c.Company_Type AS Company_Type, COUNT(o) AS Order_Count\nORDER BY Order_Count DESC;\n"
+  },
+   {
+  "question": "What is the relationship between order value and order time (hourly distribution of revenue)?\n",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN time(o.Order_Time).hour AS Hour, SUM(o.Total_Cost) AS Hourly_Revenue\nORDER BY Hour;"
+  },
+   {
+  "question": "What is the sales trend for each product category over the last 6 months?\n",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWHERE o.Order_Date >= datetime() - duration({months: 6})\nRETURN p.Category AS Product_Category, o.Order_Date.month AS Month, SUM(o.Total_Cost) AS Monthly_Sales\nORDER BY Product_Category, Month;\n\n"
+  },{
+  "question": "What are the most frequently ordered products by month?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWHERE o.Order_Date >= datetime() - duration({months: 6})\nRETURN p.Category AS Product_Category, o.Order_Date.month AS Month, SUM(o.Total_Cost) AS Monthly_Sales\nORDER BY Product_Category, Month;\n"
+  },{
+  "question": "Identify any seasonal trends in order volume over the years.",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN o.Order_Date.month AS Month, COUNT(o) AS Order_Count\nORDER BY Month;\n\n"
+  },{
+  "question": "What is the distribution of total sales by customer region?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)<-[:PLACED]-(c:Customer)\nRETURN c.Region AS Region, SUM(o.Total_Cost) AS Total_Sales\nORDER BY Total_Sales DESC;\n"
+  },{
+  "question": "What is the correlation between order amount and revenue across different product categories?\n",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nRETURN p.Category AS Product_Category, o.Order_Amount AS Order_Amount, o.Total_Cost AS Revenue;\n\n"
+  },{
+  "question": "How do the sales consultants performances vary across branches?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)\nRETURN s.Sysco_Lab_Branch AS Branch, s.Name AS Sales_Consultant, SUM(o.Total_Cost) AS Total_Sales\nORDER BY Branch, Total_Sales DESC;\n\n"
+  },{
+  "question": "What is the revenue trend for returning vs. new customers?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)<-[:PLACED]-(c:Customer)\nWITH c, COUNT(o) AS Order_Count, SUM(o.Total_Cost) AS Total_Revenue\nRETURN CASE\n    WHEN Order_Count = 1 THEN 'New Customer'\n    ELSE 'Returning Customer'\nEND AS Customer_Type, SUM(Total_Revenue) AS Revenue\nORDER BY Customer_Type;"
+  },{
+  "question": "Which products drive the most repeat orders?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p, COUNT(o) AS Order_Count, COLLECT(o.Order_ID) AS Orders\nWHERE SIZE(Orders) > 1\nRETURN p.Product_Name AS Product, Order_Count\nORDER BY Order_Count DESC;"
+  },{
+  "question": "How does the order frequency change before and after professional development events for sales consultants?",
+  "cypher_query": "OPTIONAL MATCH (p:ProfessionalDevelopment)<-[:ATTENDED]-(s:Sales)-[:PROCESSED]->(o:Order)\nRETURN p.Event_Date AS Event_Date, s.Name AS Sales_Consultant, COUNT(o) AS Orders_Around_Event\nORDER BY Event_Date;"
+  },{
+  "question": "How does the revenue contribution vary by region over time?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)<-[:PLACED]-(c:Customer)\nRETURN c.Region AS Region, o.Order_Date.year AS Year, SUM(o.Total_Cost) AS Revenue\nORDER BY Region, Year;\n"
+  },{
+  "question": "Are there specific sales consultants who consistently outperform others in similar regions?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)<-[:PLACED]-(c:Customer)\nRETURN s.Name AS Sales_Consultant, c.Region AS Region, SUM(o.Total_Cost) AS Total_Sales\nORDER BY Region, Total_Sales DESC;\n"
+  },{
+  "question": "How does customer behavior differ between regions (e.g., order frequency, average order value)?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)<-[:PLACED]-(c:Customer)\nRETURN c.Region AS Region, COUNT(o) AS Order_Frequency, AVG(o.Total_Cost) AS Avg_Order_Value\nORDER BY Region;"
+  },{
+  "question": "What is the seasonal revenue pattern for top-performing products?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p.Product_Name AS Product, o.Order_Date.month AS Month, SUM(o.Total_Cost) AS Monthly_Revenue\nORDER BY Product, Month\nRETURN Product, Month, Monthly_Revenue\nORDER BY Product, Month;"
+  },{
+  "question": "Which vendors supply products that generate the highest revenue?",
+  "cypher_query": "OPTIONAL MATCH (v:Vendor)-[:SUPPLIES]->(p:Product)<-[:CONTAINS]-(o:Order)\nRETURN v.Vendor_Name AS Vendor, SUM(o.Total_Cost) AS Total_Revenue\nORDER BY Total_Revenue DESC;"
+  },{
+  "question": "Find the Average Order Value per Customer\n",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c.Customer_ID AS CustomerID, AVG(o.Total_Cost) AS AvgOrderValue\nRETURN CustomerID, AvgOrderValue\nORDER BY AvgOrderValue DESC\nLIMIT 10;"
+  },{
+  "question": "Analyze Sales Contribution by Product Category",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)\nWITH p.Category AS Category, SUM(o.Total_Cost) AS TotalRevenue\nRETURN Category, TotalRevenue\nORDER BY TotalRevenue DESC;"
+  },{
+  "question": "Detect High-Traffic Customer Segments by City",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c.City AS City, COUNT(o) AS TotalOrders\nRETURN City, TotalOrders\nORDER BY TotalOrders DESC\nLIMIT 10;"
+  },{
+  "question": "Track Vendor Contribution to Sales",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)<-[:SUPPLIES]-(v:Vendor)\nWITH v.Vendor_Name AS Vendor, SUM(o.Total_Cost) AS TotalRevenue\nRETURN Vendor, TotalRevenue\nORDER BY TotalRevenue DESC\nLIMIT 10;"
+  },{
+  "question": "Monitor Order Frequency by Time of Day",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nWITH o.Order_Time AS OrderTime, COUNT(o) AS TotalOrders\nRETURN OrderTime, TotalOrders\nORDER BY OrderTime ASC;"
+  },{
+  "question": "Calculate Lifetime Value (LTV) of Each Customer",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c.Customer_ID AS CustomerID, SUM(o.Total_Cost) AS LifetimeValue\nRETURN CustomerID, LifetimeValue\nORDER BY LifetimeValue DESC\nLIMIT 10;"
+  },
+  {
+    "question": "Find Sales Consultants Driving the Most Product Variety",
+    "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)-[:CONTAINS]->(p:Product)\nWITH s.Name AS Consultant, COUNT(DISTINCT p.Product_ID) AS ProductVariety\nRETURN Consultant, ProductVariety\nORDER BY ProductVariety DESC\nLIMIT 10;"
+  },{
+  "question": "Seasonal Sales Patterns (Monthly Breakdown)",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nWITH date.truncate('month', o.Order_Date) AS Month, SUM(o.Total_Cost) AS MonthlyRevenue\nRETURN Month, MonthlyRevenue\nORDER BY Month ASC;"
+  },{
+  "question": "Top Sales Consultant by Monthly Performance",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)\nWITH date.truncate('month', o.Order_Date) AS Month, s.Name AS Consultant, SUM(o.Total_Cost) AS MonthlyRevenue\nRETURN Month, Consultant, MonthlyRevenue\nORDER BY Month ASC, MonthlyRevenue DESC;"
+  },{
+  "question": "Average Order Value Trends Over Time",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nWITH date.truncate('month', o.Order_Date) AS Month, AVG(o.Total_Cost) AS AvgOrderValue\nRETURN Month, AvgOrderValue\nORDER BY Month ASC;"
+  },{
+  "question": "Identify Most Popular Product Categories by Region",
+  "cypher_query": "OPTIONAL MATCH (o:Order)-[:CONTAINS]->(p:Product)<-[:SUPPLIES]-(v:Vendor)\nOPTIONAL MATCH (c:Customer)-[:PLACED]->(o)\nWITH c.Region AS Region, p.Category AS Category, SUM(o.Total_Cost) AS Revenue\nRETURN Region, Category, Revenue\nORDER BY Region ASC, Revenue DESC"
+  },{
+  "question": "Sales Consultant Performance Over Time\n",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)\nWITH date.truncate('month', o.Order_Date) AS Month, s.Name AS Consultant, SUM(o.Total_Cost) AS TotalSales\nRETURN Month, Consultant, TotalSales\nORDER BY Consultant, Month ASC;"
+  },{
+  "question": "Trend in Vendor Contributions Over Time",
+  "cypher_query": "MATCH (v:Vendor)-[:SUPPLIES]->(p:Product)<-[:CONTAINS]-(o:Order)\nWITH date.truncate('month', o.Order_Date) AS Month, v.Vendor_Name AS Vendor, SUM(o.Total_Cost) AS MonthlyRevenue\nRETURN Month, Vendor, MonthlyRevenue\nORDER BY Vendor ASC, Month ASC;"
+  },{
+  "question": "Identify High-Growth Product Categories",
+  "cypher_query": "OPTIONAL MATCH (v:Vendor)-[:SUPPLIES]->(p:Product)<-[:CONTAINS]-(o:Order)\nWITH date.truncate('month', o.Order_Date) AS Month, v.Vendor_Name AS Vendor, SUM(o.Total_Cost) AS MonthlyRevenue\nRETURN Month, Vendor, MonthlyRevenue\nORDER BY Vendor ASC, Month ASC;\n"
+  },{
+  "question": "Most Active Sales Consultants for Each Region",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)<-[:PLACED]-(c:Customer)\nWITH c.Region AS Region, s.Name AS Consultant, COUNT(o) AS TotalOrders\nRETURN Region, Consultant, TotalOrders\nORDER BY Region ASC, TotalOrders DESC"
+  },{
+  "question": "Customer Churn Trends Over Time",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c.Customer_ID AS CustomerID, MAX(o.Order_Date) AS LastOrderDate\nWITH CustomerID, LastOrderDate, date.truncate('month', LastOrderDate) AS LastOrderMonth\nWHERE duration.inMonths(LastOrderDate, date()).months >= 6\nRETURN LastOrderMonth, COUNT(CustomerID) AS ChurnedCustomers\nORDER BY LastOrderMonth ASC;"
+  },{
+  "question": "Top-Performing Vendors for Each Category",
+  "cypher_query": "OPTIONAL MATCH (v:Vendor)-[:SUPPLIES]->(p:Product)<-[:CONTAINS]-(o:Order)\nWITH p.Category AS Category, v.Vendor_Name AS Vendor, SUM(o.Total_Cost) AS Revenue\nRETURN Category, Vendor, Revenue\nORDER BY Category ASC, Revenue DESC;"
+  },{
+  "question": "Geo-Trends in Sales Growth",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c.Region AS Region, date.truncate('month', o.Order_Date) AS Month, SUM(o.Total_Cost) AS Revenue\nRETURN Region, Month, Revenue\nORDER BY Region ASC, Month ASC;"
+  },{
+  "question": "Customer Lifecycle Analysis",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c.Customer_ID AS CustomerID, MIN(o.Order_Date) AS FirstPurchase, MAX(o.Order_Date) AS LastPurchase, COUNT(o) AS TotalOrders\nRETURN CustomerID, FirstPurchase, LastPurchase, TotalOrders, duration.inMonths(FirstPurchase, LastPurchase).months AS LifecycleMonths\nORDER BY LifecycleMonths DESC;"
+  },{
+  "question": "Which customers act as central nodes in the network of high-value interactions?\n",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c, COUNT(o) AS OrderCount, SUM(o.Total_Cost) AS TotalRevenue\nRETURN c.Customer_ID AS CustomerID, TotalRevenue, OrderCount\nORDER BY TotalRevenue DESC LIMIT 5;"
+  },{
+  "question": "Which sales consultants are most connected to high-revenue customers?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)<-[:PLACED]-(c:Customer)\nWITH s, c, SUM(o.Total_Cost) AS Revenue\nWHERE Revenue > 10000\nRETURN s.Name AS Consultant, COUNT(c) AS HighValueCustomers\nORDER BY HighValueCustomers DESC LIMIT 5;"
+  },{
+  "question": "Are there geographic regions that show unexpected order patterns?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c.Region AS Region, COUNT(o) AS OrderCount, AVG(o.Total_Cost) AS AvgRevenue\nRETURN Region, OrderCount, AvgRevenue\nORDER BY AvgRevenue DESC LIMIT 5;"
+  },{
+  "question": "Are there patterns in order types across different Sysco centers?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nWITH o.Sysco_Operation_Center AS Center, o.Order_Type AS Type, COUNT(o) AS OrderCount\nRETURN Center, Type, OrderCount\nORDER BY Center, OrderCount DESC;"
+  },{
+  "question": "Which products should vendors prioritize based on stock trends and demand?",
+  "cypher_query": "OPTIONAL MATCH (p:Product)-[:HAS_STOCK]->(s:Stock), (p)<-[:CONTAINS]-(o:Order)\nWITH p, AVG(s.Stock_Amount) AS AvgStock, COUNT(o) AS OrderCount\nWHERE OrderCount > AvgStock\nRETURN p.Product_Name AS Product, OrderCount, AvgStock\nORDER BY OrderCount DESC LIMIT 5;"
+  },{
+  "question": "What is the average order cost?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN AVG(o.Total_Cost) AS Average_Order_Cost;"
+  },{
+  "question": "What is the highest order cost recorded?",
+  "cypher_query": "MATCH (o:Order)\nRETURN MAX(o.Total_Cost) AS Highest_Order_Cost;\n"
+  },{
+  "question": "Which day of the week has the highest order frequency?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN date(o.Order_Date).dayOfWeek AS DayOfWeek, COUNT(o) AS Order_Count\nORDER BY Order_Count DESC\nLIMIT 1;"
+  },{
+  "question": "What is the total revenue generated by each product?",
+  "cypher_query": "OPTIONAL MATCH (p:Product)<-[:CONTAINS]-(o:Order)\nRETURN p.Product_Name AS Product, SUM(o.Total_Cost) AS Total_Revenue\nORDER BY Total_Revenue DESC;"
+  },{
+  "question": "Which product category generates the most revenue?",
+  "cypher_query": "OPTIONAL MATCH (p:Product)<-[:CONTAINS]-(o:Order)\nRETURN p.Category AS Category, SUM(o.Total_Cost) AS Total_Revenue\nORDER BY Total_Revenue DESC\nLIMIT 1;"
+  },{
+  "question": "What is the standard deviation of order costs?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN STDEV(o.Total_Cost) AS Order_Cost_SD;"
+  },{
+  "question": "What is the average order amount by product category?",
+  "cypher_query": "OPTIONAL MATCH (p:Product)<-[:CONTAINS]-(o:Order)\nRETURN p.Category AS Category, AVG(o.Order_Amount) AS Avg_Order_Amount\nORDER BY Avg_Order_Amount DESC;"
+  },{
+  "question": "Which region has the highest total sales?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nRETURN c.Region AS Region, SUM(o.Total_Cost) AS Total_Sales\nORDER BY Total_Sales DESC\nLIMIT 1;"
+  },{
+  "question": "Which customer has the highest lifetime value (total revenue generated)?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nRETURN c.Customer_Name AS Customer, SUM(o.Total_Cost) AS Lifetime_Value\nORDER BY Lifetime_Value DESC\nLIMIT 1;"
+  },{
+  "question": "What is the average order size (in units) across all products?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN date.truncate('month', o.Order_Date) AS Month, COUNT(o) AS Order_Count\nORDER BY Month ASC;"
+  },{
+  "question": "Which branch of Sysco Lab processes the most orders?",
+  "cypher_query": "OPTIONAL MATCH (o:Order)\nRETURN o.Sysco_Operation_Center AS Branch, COUNT(o) AS Order_Count\nORDER BY Order_Count DESC\nLIMIT 1;"
+  },{
+  "question": "What is the top-selling product in each category?",
+  "cypher_query": "OPTIONAL MATCH (p:Product)<-[:CONTAINS]-(o:Order)\nRETURN p.Category AS Category, p.Product_Name AS Product, COUNT(o) AS Sales_Count\nORDER BY Category, Sales_Count DESC;"
+  },{
+  "question": "Which sales consultant generates the highest average order value?",
+  "cypher_query": "OPTIONAL MATCH (s:Sales)-[:PROCESSED]->(o:Order)\nRETURN s.Name AS Sales_Consultant, AVG(o.Total_Cost) AS Avg_Order_Value\nORDER BY Avg_Order_Value DESC\nLIMIT 1;"
+  },{
+  "question": "Which product generates the highest average revenue per order?",
+  "cypher_query": "OPTIONAL MATCH (p:Product)<-[:CONTAINS]-(o:Order)\nRETURN p.Product_Name AS Product, AVG(o.Total_Cost) AS Avg_Revenue_Per_Order\nORDER BY Avg_Revenue_Per_Order DESC\nLIMIT 1;"
+  },{
+  "question": "What is the standard deviation of revenue per order for each product category?",
+  "cypher_query": "OPTIONAL MATCH (p:Product)<-[:CONTAINS]-(o:Order)\nRETURN p.Category AS Category, STDEV(o.Total_Cost) AS Revenue_StdDev\nORDER BY Revenue_StdDev DESC;"
+  },{
+  "question": "What is the average revenue contribution of repeat customers compared to one-time customers?",
+  "cypher_query": "OPTIONAL MATCH (c:Customer)-[:PLACED]->(o:Order)\nWITH c, COUNT(o) AS OrderCount, SUM(o.Total_Cost) AS Revenue\nRETURN CASE WHEN OrderCount > 1 THEN 'Repeat' ELSE 'One-Time' END AS CustomerType,\n       AVG(Revenue) AS Avg_Revenue\nORDER BY Avg_Revenue DESC;"
   }
   ]
 }
