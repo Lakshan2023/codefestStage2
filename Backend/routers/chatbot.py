@@ -30,10 +30,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi import APIRouter, HTTPException
 from pathlib import Path
 
+# Create FastAPI instance
 router = APIRouter()
 
+# Load environment variables
 load_dotenv()
 
+# Get environment variables
 endpoint = os.getenv("ENDPOINT_URL", "https://azurevision23.openai.azure.com/")
 deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4o")
 subscription_key = os.getenv("AZURE_OPENAI_API_KEY")
@@ -48,16 +51,18 @@ client = AzureOpenAI(
     api_version="2024-05-01-preview",
 )
 
+# Function to connect to Neo4j
 def connect_to_neo4j():
     try:
-        driver = GraphDatabase.driver(uri, auth=(username, password))
-        driver.verify_connectivity()
+        driver = GraphDatabase.driver(uri, auth=(username, password)) # Connect to the Neo4j database
+        driver.verify_connectivity() # Verify the connection
         print("Connection to Neo4j established successfully!")
         return driver
     except Exception as e:
-        print(f"Failed to connect to Neo4j: {str(e)}")
+        print(f"Failed to connect to Neo4j: {str(e)}") # Print the error message
         return None
 
+# Connect to Neo4j
 driver = connect_to_neo4j()
 
 # Get the current file's directory and set up static path
@@ -96,6 +101,7 @@ def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
 
     return similar_questions
 
+# Function to generate a Cypher query based on the user question
 class Settings(BaseModel):
     language: str
     politeness_level: str
@@ -103,6 +109,7 @@ class Settings(BaseModel):
     creativity: float
     response_length: str
 
+#  Add question_history and answer_history fields to the Question model
 class Question(BaseModel):
     question: str
     session_id: str
@@ -116,6 +123,7 @@ class Question(BaseModel):
 chat_histories: Dict[str, Dict[str, List[str]]] = {}
 
 
+# Function to generate a Cypher query based on the user question
 graph_db_structure = """
 :param {
   // Define the file path root and the individual file names required for loading.
@@ -430,12 +438,12 @@ Other than that do not use any relationship or Nodes.
   Times are used as strings like this: \"14:23:45\"
 """
 
-
+# Function to generate a Cypher query based on the user question
 def generate_query(user_question: str, session_id: str, question: Question) -> str:
-    recent_history = []
-    if session_id in chat_histories:
-        questions = chat_histories[session_id]["questions"]
-        answers = chat_histories[session_id]["answers"]
+    recent_history = [] # Initialize an empty list to store recent conversation history
+    if session_id in chat_histories: # Check if the session ID exists in the chat histories
+        questions = chat_histories[session_id]["questions"] # Get the questions from the chat histories
+        answers = chat_histories[session_id]["answers"] # Get the answers from the chat histories
         # Get the last 3 items, excluding the current question
         for i in range(max(len(questions) - 4, 0), len(questions) - 1):
             recent_history.append({
@@ -461,6 +469,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         "plotly_code": "plotly code"
     }
 
+    # Find the top 5 similar questions
     settings_prompt = f"""
        Response Settings:
        - Language: {question.settings.language}
@@ -812,8 +821,8 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
 """
 
 
-    retry_count = 0
-    max_retries = 4
+    retry_count = 0 # Initialize retry count
+    max_retries = 4 # Set maximum number of retries
 
     # # Get similar questions (assuming this function exists)
     # try:
@@ -842,16 +851,17 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         settings_prompt=settings_prompt
     )
 
+    # Retry loop for API call
     while retry_count < max_retries:
         try:
             # Construct chat messages
             chat_messages = [
                 {
-                    "role": "system",
-                    "content": [
+                    "role": "system", # System role for the AI assistant
+                    "content": [ # Content of the message
                         {
                             "type": "text",
-                            "text": formatted_prompt
+                        "text": formatted_prompt # Add the formatted prompt to the content
                         }
                     ]
                 },
@@ -860,7 +870,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                     "content": [
                         {
                             "type": "text",
-                            "text": user_question
+                            "text": user_question # Add the user question to the content
                         }
                     ]
                 }
@@ -879,37 +889,42 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                 stream=False
             )
 
+            # Check if the response contains the query generation status
             return completion.choices[0].message.content
 
+        # Retry on API errors
         except Exception as e:
             retry_count += 1
             if retry_count >= max_retries:
                 return f"Error after {max_retries} retries: {str(e)}"
             continue
-
+    # Return error message if maximum retries exceeded
     return "Maximum retries exceeded"
 
+# Define the FastAPI router
 @router.post("/start_session")
 async def start_session():
-    session_id = str(uuid.uuid4())
+    session_id = str(uuid.uuid4()) # Generate a unique session ID
     chat_histories[session_id] = {
         "questions": [],
         "answers": []
     }
-    return JSONResponse(content={"session_id": session_id})
+    return JSONResponse(content={"session_id": session_id}) # Return the session ID as JSON
 
+# Define the FastAPI router
 def serialize_neo4j_value(val):
     """Serialize Neo4j specific data types"""
-    if isinstance(val, (neo4j.time.DateTime, neo4j.time.Date)):
+    if isinstance(val, (neo4j.time.DateTime, neo4j.time.Date)): # Check for DateTime or Date objects
         return val.iso_format()
-    elif isinstance(val, neo4j.time.Time):
+    elif isinstance(val, neo4j.time.Time): # Check for Time objects
         return str(val)
-    elif isinstance(val, (int, float, str, bool)):
+    elif isinstance(val, (int, float, str, bool)): # Check for basic data types
         return val
     elif val is None:
         return None
     return str(val)
 
+# Define the FastAPI router
 def serialize_value(val):
     """Main serialization function for all types"""
     if pd.isna(val):
@@ -932,28 +947,29 @@ def serialize_value(val):
                 return parsed_date.strftime('%Y-%m-%dT%H:%M:%SZ')
         except:
             return val
-    elif isinstance(val, np.integer):
+    elif isinstance(val, np.integer): # Handle numpy integer types
         return int(val)
-    elif isinstance(val, np.floating):
+    elif isinstance(val, np.floating): # Handle numpy float types
         return float(val)
-    elif isinstance(val, np.bool_):
+    elif isinstance(val, np.bool_): # Handle numpy boolean types
         return bool(val)
-    elif isinstance(val, (np.ndarray, list)):
+    elif isinstance(val, (np.ndarray, list)): # Handle numpy arrays and lists
         return [serialize_value(v) for v in val]
-    elif isinstance(val, dict):
+    elif isinstance(val, dict): # Handle dictionaries
         return {k: serialize_value(v) for k, v in val.items()}
-    elif isinstance(val, pd.Index):
+    elif isinstance(val, pd.Index): # Handle pandas Index objects
         return serialize_value(val.tolist())
-    elif isinstance(val, pd.Series):
+    elif isinstance(val, pd.Series): # Handle pandas Series objects
         return serialize_value(val.tolist())
-    elif isinstance(val, pd.DataFrame):
+    elif isinstance(val, pd.DataFrame): # Handle pandas DataFrame objects
         return serialize_value(val.to_dict('records'))
-    elif isinstance(val, pd.DateOffset):
+    elif isinstance(val, pd.DateOffset): # Handle pandas DateOffset objects
         return str(val)
-    elif isinstance(val, pd.Interval):
+    elif isinstance(val, pd.Interval): # Handle pandas Interval objects
         return str(val)
-    return serialize_neo4j_value(val)
+    return serialize_neo4j_value(val) # Fallback to Neo4j serialization
 
+# Define the FastAPI router
 def execute_cypher_query(driver, query):
     """Execute a Cypher query and return serialized results"""
     try:
@@ -964,15 +980,15 @@ def execute_cypher_query(driver, query):
             for record in result:
                 # Convert each record to a dict and serialize all values
                 record_dict = {}
-                for key, value in dict(record).items():
+                for key, value in dict(record).items(): # Convert to dict to access items
                     record_dict[key] = serialize_value(value)
-                records.append(record_dict)
+                records.append(record_dict) # Append the serialized record to the list
             return records
-    except Exception as e:
+    except Exception as e: # Handle any exceptions
         print(f"Error executing query: {str(e)}")
         return None
 
-
+# Function to generate a Cypher query based on the user question
 def convert_to_html_table(data):
     if not data:
         return ""
@@ -1015,6 +1031,7 @@ def convert_to_html_table(data):
 
     return html_table
 
+# Function to generate a Cypher query based on the user question
 def generate_plotly_html(plotly_code, response_dict):
     """
     Generate HTML for plotly visualization with proper error handling and data validation
@@ -1089,32 +1106,35 @@ def generate_plotly_html(plotly_code, response_dict):
                     'modeBarButtonsToRemove': ['select2d', 'lasso2d']
                 }
             )
-            return plotly_html
+            # Return the generated HTML for the plotly visualization
+            return plotly_html # Return the generated HTML for the plotly visualization
         return "<div class='alert alert-warning'>No figure was generated from the plotly code</div>"
 
+    # Handle exceptions during plotly generation
     except Exception as e:
         print(f"Plotly Generation Error: {str(e)}")
         return f"<div class='alert alert-danger'>Error generating plot: {str(e)}</div>"
 
 
-
+# Function to generate a Cypher query based on the user question
 def generate_chart_analysis(plotly_code, data, user_question, client, deployment, question):
-    if not plotly_code or not data:
+    if not plotly_code or not data: # Check if plotly code or data is missing
         return "Unable to provide analytical insights at the moment due to missing data or visualization."
 
     try:
         # Extract key information from plotly code to understand chart type
         plotly_code_lower = plotly_code.lower()
         chart_type = ""
-        if "px.bar" in plotly_code_lower:
+        if "px.bar" in plotly_code_lower: # Check if the plotly code is for a bar chart
             chart_type = "bar chart"
-        elif "px.line" in plotly_code_lower:
+        elif "px.line" in plotly_code_lower: # Check if the plotly code is for a line chart
             chart_type = "line chart"
-        elif "px.pie" in plotly_code_lower:
+        elif "px.pie" in plotly_code_lower: # Check if the plotly code is for a pie chart
             chart_type = "pie chart"
         else:
-            chart_type = "chart"
+            chart_type = "chart" # Default to generic chart type
 
+        # Prepare settings prompt for the user
         settings_prompt = f"""
                Each setting text generation pattern explanation:
                    **Politeness Level**
@@ -1208,18 +1228,19 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                 {"role": "system", "content": analysis_prompt},
                 {"role": "user", "content": "Please provide the analysis."}
             ],
-            max_tokens=1000,
-            temperature= question.settings.creativity
+            max_tokens=1000, # Set maximum tokens for response
+            temperature= question.settings.creativity # Set the creativity level based on user settings
         )
 
-        return completion.choices[0].message.content
+        return completion.choices[0].message.content # Return the generated analysis
 
-    except Exception as e:
+    except Exception as e: # Handle any exceptions
         return f"Unable to provide analytical insights at the moment. Error: {str(e)}"
 
-
+# Function to generate a Cypher query based on the user question
 def generate_plot_analysis(data: str):
     try:
+        # Prepare prompt for LLM
         analysis_prompt = f"""
                 If this data contains not only null values return 'yes'.
                 If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis bit longer explanation.
@@ -1235,23 +1256,26 @@ def generate_plot_analysis(data: str):
                 
                 data : {data}
                 """
+
+        # Make API call
         completion = client.chat.completions.create(
             model=deployment,
             messages=[
                 {"role": "system", "content": analysis_prompt},
                 {"role": "user", "content": "Please return 'yes' or explanation based on data."}
             ],
-            max_tokens=1000,
-            temperature=0.7
+            max_tokens=1000, # Set maximum tokens for response
+            temperature=0.7 # Set the creativity level
         )
 
-        return completion.choices[0].message.content
+        return completion.choices[0].message.content # Return the generated analysis
     except Exception as e:
         return f"Unable to provide table insights at this moment. Error: {str(e)}"
 
-
+# Function to generate a Cypher query based on the user question
 def explanation_handler(explanation: str):
     try:
+        # Prepare prompt for LLM
         examples = """
           Here are the customers who have placed orders with a total value exceeding $10,000.
           
@@ -1259,6 +1283,7 @@ def explanation_handler(explanation: str):
           
           Here is the analysis of future meetings conducted by sales consultants. This will help in understanding the upcoming engagements and planning accordingly. 📅
         """
+        # Prepare prompt for LLM
         analysis_prompt = f"""
                 You are SyscoPulse.
                 If the below text explanation includes the meaning or terms like, this chert/plot/table analyses,
@@ -1270,35 +1295,39 @@ def explanation_handler(explanation: str):
                 
                 Text Explanation : {explanation}
                 """
+        # Make API call
         completion = client.chat.completions.create(
             model=deployment,
             messages=[
                 {"role": "system", "content": analysis_prompt},
                 {"role": "user", "content": "Please do what has given in the system prompt properly."}
             ],
-            max_tokens=1000,
-            temperature=0
+            max_tokens=1000, # Set maximum tokens for response
+            temperature=0 # Set the creativity level
         )
 
-        return completion.choices[0].message.content
+        return completion.choices[0].message.content # Return the generated analysis
     except Exception as e:
-        return f"Unable to provide table insights at this moment. Error: {str(e)}"
+        return f"Unable to provide table insights at this moment. Error: {str(e)}" # Return error message if exception occurs
 
 
-
+# Define the FastAPI router
 @router.post("/chat")
 async def chat(question: Question):
     try:
-        session_id = question.session_id
-        user_question = question.question
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Extract the required information from the question object
+        session_id = question.session_id # Extract the session ID
+        user_question = question.question # Extract the user question
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S") # Extract the current timestamp
 
+        # Check if the session ID is valid
         if session_id not in chat_histories:
             return JSONResponse(
                 content={"error": "Invalid session ID"},
                 status_code=400
             )
 
+        # Add the user question to the chat history
         chat_histories[session_id]["questions"].append(user_question)
 
         # Get the query generation response
@@ -1306,12 +1335,14 @@ async def chat(question: Question):
 
         try:
             try:
+                # Parse the response as JSON
                 response_dict = json.loads(query_response)
             except json.JSONDecodeError:
                 try:
+                    # Try to parse the response as a Python dict
                     response_dict = ast.literal_eval(query_response)
                 except (ValueError, SyntaxError):
-                    raise ValueError("Could not parse response as JSON or Python dict")
+                    raise ValueError("Could not parse response as JSON or Python dict") # Raise an error if parsing fails
 
             # Validate response format
             required_fields = [
@@ -1322,6 +1353,7 @@ async def chat(question: Question):
                 "plotly_code"
             ]
 
+            # Check if the response dictionary contains all required fields
             if not isinstance(response_dict, dict) or not all(
                     key in response_dict for key in required_fields):
                 raise ValueError("Invalid response format")
@@ -1351,28 +1383,29 @@ async def chat(question: Question):
                 # Save HTML table if it exists
                 if result["html_table_data"]:
                     try:
-                        table_filename = f'table_{session_id}_{timestamp}.html'
-                        file_path = STATIC_DIR / table_filename
+                        table_filename = f'table_{session_id}_{timestamp}.html' # Generate a unique filename
+                        file_path = STATIC_DIR / table_filename # Set the file path
 
                         # Write the file
-                        with open(file_path, 'w', encoding='utf-8') as f:
-                            f.write(result["html_table_data"])
+                        with open(file_path, 'w', encoding='utf-8') as f: # Open the file in write mode
+                            f.write(result["html_table_data"]) # Write the HTML table data to the file
 
                         # Set the correct URL using the base URL from environment
                         base_url = os.getenv('API_BASE_URL', 'https://codefest-backend.azurewebsites.net')
                         result["table_file_url"] = f"{base_url}/static/temp/{table_filename}"
 
-                    except Exception as e:
+                    except Exception as e: # Handle any exceptions
                         print(f"Error saving table file: {str(e)}")
 
-                if result["html_table_data"]:
+                if result["html_table_data"]: # Check if the HTML table data exists
                     result["table_accept_status"] = generate_plot_analysis(result["data"][:300])
 
+            # Generate Plotly visualization if status is "Yes"
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
                 if result["data"]:  # Only attempt to plot if we have data
                     result["html_code_plotly"] = generate_plotly_html(
-                        response_dict["plotly_code"],
-                        result["data"]
+                        response_dict["plotly_code"], # Extract the plotly code
+                        result["data"] # Extract the data
                     )
 
                     # Save chart HTML if it exists
@@ -1388,34 +1421,36 @@ async def chat(question: Question):
                             # Set the correct URL using the base URL from environment
                             base_url = os.getenv('API_BASE_URL', 'https://codefest-backend.azurewebsites.net')
                             result["chart_file_url"] = f"{base_url}/static/temp/{chart_filename}"
-
+                        # Handle any exceptions
                         except Exception as e:
                             print(f"Error saving chart file: {str(e)}")
-                else:
+                else: # If no data is available, set an alert message
                     result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
 
-            if result["html_code_plotly"] and "alert alert-warning" not in result["html_code_plotly"].lower():
-                result["chart_analysis"] = generate_chart_analysis(
-                    response_dict["plotly_code"],
-                    result["data"][:100],
+            # Generate chart analysis if plotly code was generated successfully
+            if result["html_code_plotly"] and "alert alert-warning" not in result["html_code_plotly"].lower(): # Check if plotly code exists
+                result["chart_analysis"] = generate_chart_analysis( # Generate chart analysis
+                    response_dict["plotly_code"], # Extract the plotly code
+                    result["data"][:100], # Extract the data
                     user_question,  # Pass the user's question
                     client,
                     deployment,
                     question
                 )
             else:
-                result["chart_analysis"] = "Unable to provide analytical insights due to visualization error."
+                result["chart_analysis"] = "Unable to provide analytical insights due to visualization error." # Set error message
 
-            chat_histories[session_id]["answers"].append(result["text_explanation"])
+            chat_histories[session_id]["answers"].append(result["text_explanation"]) # Append the text explanation to chat history
 
             if result["data"] is None:
-                result["text_explanation"] = explanation_handler(result["text_explanation"])
+                result["text_explanation"] = explanation_handler(result["text_explanation"]) # Handle explanation based on data availability
 
+            # Return the response as a JSON object
             return JSONResponse(content={
                 "session_id": session_id,
                 "result": result
             })
-
+        # Handle any exceptions
         except Exception as e:
             return JSONResponse(
                 content={
@@ -1424,7 +1459,7 @@ async def chat(question: Question):
                 },
                 status_code=500
             )
-
+    # Handle any exceptions
     except Exception as e:
         print(f"Error in chat endpoint: {str(e)}")
         return JSONResponse(
