@@ -1,23 +1,17 @@
-from fastapi import FastAPI, HTTPException, Depends, status
+from fastapi import Depends, status
 from fastapi.security import OAuth2PasswordBearer, OAuth2PasswordRequestForm
 from pydantic import BaseModel, EmailStr
-from typing import Optional
-import jwt
-from datetime import datetime, timedelta
 import smtplib
 from email.mime.text import MIMEText
 from email.mime.multipart import MIMEMultipart
 from neo4j import GraphDatabase
-import uvicorn
 import os
-import secrets
 from cryptography.fernet import Fernet
 import base64
 from cryptography.hazmat.primitives import hashes
 from cryptography.hazmat.primitives.kdf.pbkdf2 import PBKDF2HMAC
 import string
 import secrets
-from fastapi.middleware.cors import CORSMiddleware
 from dotenv import load_dotenv
 from fastapi import APIRouter, HTTPException
 from fastapi import Query
