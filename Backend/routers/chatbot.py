@@ -444,11 +444,11 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
     if session_id in chat_histories: # Check if the session ID exists in the chat histories
         questions = chat_histories[session_id]["questions"] # Get the questions from the chat histories
         answers = chat_histories[session_id]["answers"] # Get the answers from the chat histories
-        # Get the last 5 items, excluding the current question
-        for i in range(max(len(questions) - 6, 0), len(questions) - 1):
+        # Get the last 3 items, excluding the current question
+        for i in range(max(len(questions) - 4, 0), len(questions) - 1):
             recent_history.append({
                 "question": questions[i],
-                "answer": str(answers[i])
+                "answer": answers[i]
             })
 
     # Format the conversation history
@@ -492,7 +492,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         
                         Recent Conversation History: (This contains the recent questions user asked)
                         -------------------------
-                        {history_text}  (Make sure that last question is given by user is at top of the history list).
+                        {history_text}
                         
                         Core Capabilities:
                         ----------------
@@ -635,20 +635,15 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         Ensure all arguments have equal length
                         Use only columns available in response_dict
                         Validate data types and handle nulls if needed
-                        # DateTime Handling
-                        - Convert datetime strings to pandas datetime objects with proper timezone handling:
-                        - For UTC timestamps: df['date_column'] = pd.to_datetime(df['date_column'], utc=True)
-                        - For local time display: df['date_column'] = df['date_column'].dt.tz_localize(None)
-                        - Validate timezone information in datetime columns before processing
                         
                         
                         Supported Visualization Types
                         ------------------------------------------------------------
                         Bar charts
                         Stacked bar charts
-                        Line charts 
-                        Pie charts (Use it only when user specifically ask for it)
-                        Data cards/Big numbers (When user ask for average, total etc)
+                        Line charts
+                        Pie charts
+                        Data cards/Big numbers
                         
                         
                         Visual Style Requirements
@@ -665,11 +660,43 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         -----------------------------------------------------------
                         Line Plots
                         -----------------------------------------------------
-                        #ef476f, #00193b, #fb8500,#1b7b3d, #90be6d,#001e45,#eb5133, #22b455,#002657, #002d67, #00377e, #280659,#341671,#1d3557, #457b9d, #003554, #03273c, #009944
+                        Blue: '#1f77b4'
+                        Red: '#e41a1c'
+                        Navy: '#1a365d'
+                        Royal Blue: '#2b6cb0'
+                        Steel Blue: '#4299e1'
+                        Sky Blue: '#63b3ed'
+                        Light Blue: '#90cdf4'
+                        Dark Teal: '#234e52'
+                        Teal: '#319795'
+                        Ocean: '#38b2ac'
+                        Aqua: '#4fd1c5'
+                        Mint: '#81e6d9'
+                        Deep Purple: '#322659'
+                        Royal Purple: '#553c9a'
+                        Medium Purple: '#6b46c1'
+                        Lavender: '#805ad5'
+                        Light Purple: '#9f7aea'
                         
                         Bar Plots
                         ------------------------------------------------------------
-                        '#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', #145da0, #0c2d48, #2e8bc0, #fd7f20, #fc2e20, #fdb750, #175873, #2b7c85, #87aca3,#0c1446
+                        Deep Blue: '#2c5282'
+                        Green: '#276749'
+                         Navy: '#1a365d'
+                        Royal Blue: '#2b6cb0'
+                        Steel Blue: '#4299e1'
+                        Sky Blue: '#63b3ed'
+                        Light Blue: '#90cdf4'
+                        Dark Teal: '#234e52'
+                        Teal: '#319795'
+                        Ocean: '#38b2ac'
+                        Aqua: '#4fd1c5'
+                        Mint: '#81e6d9'
+                        Deep Purple: '#322659'
+                        Royal Purple: '#553c9a'
+                        Medium Purple: '#6b46c1'
+                        Lavender: '#805ad5'
+                        Light Purple: '#9f7aea'
                         
                         Multiple Traces
                         --------------------------------------------------------------
@@ -714,9 +741,9 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         
                         # 4. Display (REQUIRED)
                         fig.show()
-                        
+                          
                         Common Mistakes to Avoid
-                        -----------------------------------------
+                        ----------------------------------------
                         Data Source Errors:
                         pythonCopy# WRONG - Creating sample data
                         response_dict = []
@@ -737,13 +764,6 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         Hardcoding colors not from specification
                         Reusing colors across visualizations
                         Missing axis labels or titles
-                        
-                        DateTime Handling:
-                        # CORRECT - Simple string conversion
-                        df['date'] = pd.to_datetime(df['date']).dt.strftime('%Y-%m-%d')
-                        
-                        # For time-specific data
-                        df['datetime'] = pd.to_datetime(df['datetime']).dt.strftime('%Y-%m-%d %H:%M:%S')
                         
                         
                         Data Processing Errors:
@@ -1229,15 +1249,12 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
         return f"Unable to provide analytical insights at the moment. Error: {str(e)}"
 
 # Function to generate a Cypher query based on the user question
-def generate_plot_analysis(data: str, question: Question):
+def generate_plot_analysis(data: str):
     try:
         # Prepare prompt for LLM
         analysis_prompt = f"""
-                Users question: {question.question}
                 If this data contains not only null values return 'yes'.
                 If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis bit longer explanation.
-                Do not say null values are there in the data. just say you can't generate an answer at this moment by using user's question. (don not use the term with provided data, say with existing data that I can access)
-                Say it professionally and use emojis.
                 Don't ever say, since data contains mostly null values or zeros you can't provide an answer.
                 
                 example data: 
@@ -1392,7 +1409,7 @@ async def chat(question: Question):
                         print(f"Error saving table file: {str(e)}")
 
                 if result["html_table_data"]: # Check if the HTML table data exists
-                    result["table_accept_status"] = generate_plot_analysis(result["data"][:300], question) # Generate table analysis
+                    result["table_accept_status"] = generate_plot_analysis(result["data"][:300])
 
             # Generate Plotly visualization if status is "Yes"
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
@@ -1434,7 +1451,7 @@ async def chat(question: Question):
             else:
                 result["chart_analysis"] = "Unable to provide analytical insights due to visualization error." # Set error message
 
-            chat_histories[session_id]["answers"].append([result["text_explanation"], result["query"], result["plotly_code"], result["chart_analysis"]]) # Append the text explanation to chat history
+            chat_histories[session_id]["answers"].append(result["text_explanation"]) # Append the text explanation to chat history
 
             if result["data"] is None:
                 result["text_explanation"] = explanation_handler(result["text_explanation"]) # Handle explanation based on data availability
