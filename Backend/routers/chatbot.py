@@ -779,7 +779,6 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         - If you are not capable of providing an answer explain it as well and say you can provide answers only about sysco labs.
                         - For basic questions ("What is", "Who is CEO"):
                           Provide clear, direct answers about Sysco Labs without mentioning data sources
-                        - Do not ever say 'You are trained on data up to October 2023. Do not ever mention you are trained upto this date to user'.
                         
                         - For complex queries:
                           Focus on insights and actionable recommendations
