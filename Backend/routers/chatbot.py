@@ -448,7 +448,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         for i in range(max(len(questions) - 6, 0), len(questions) - 1):
             recent_history.append({
                 "question": questions[i],
-                "answer": answers[i]
+                "answer": str(answers[i])
             })
 
     # Format the conversation history
@@ -492,7 +492,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         
                         Recent Conversation History: (This contains the recent questions user asked)
                         -------------------------
-                        {history_text}
+                        {history_text}  (Make sure that last question is given by user is at top of the history list).
                         
                         Core Capabilities:
                         ----------------
@@ -779,6 +779,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         - If you are not capable of providing an answer explain it as well and say you can provide answers only about sysco labs.
                         - For basic questions ("What is", "Who is CEO"):
                           Provide clear, direct answers about Sysco Labs without mentioning data sources
+                        - Do not ever say 'You are trained on data up to October 2023. Do not ever mention you are trained upto this date to user'.
                         
                         - For complex queries:
                           Focus on insights and actionable recommendations
@@ -1434,7 +1435,7 @@ async def chat(question: Question):
             else:
                 result["chart_analysis"] = "Unable to provide analytical insights due to visualization error." # Set error message
 
-            chat_histories[session_id]["answers"].append(result["text_explanation"]) # Append the text explanation to chat history
+            chat_histories[session_id]["answers"].append([result["text_explanation"], result["query"], result["plotly_code"], result["chart_analysis"]]) # Append the text explanation to chat history
 
             if result["data"] is None:
                 result["text_explanation"] = explanation_handler(result["text_explanation"]) # Handle explanation based on data availability
