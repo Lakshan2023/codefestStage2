@@ -646,9 +646,9 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         ------------------------------------------------------------
                         Bar charts
                         Stacked bar charts
-                        Line charts
-                        Pie charts
-                        Data cards/Big numbers
+                        Line charts 
+                        Pie charts (Use it only when user specifically ask for it)
+                        Data cards/Big numbers (When user ask for average, total etc)
                         
                         
                         Visual Style Requirements
@@ -665,43 +665,11 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         -----------------------------------------------------------
                         Line Plots
                         -----------------------------------------------------
-                        Blue: '#1f77b4'
-                        Red: '#e41a1c'
-                        Navy: '#1a365d'
-                        Royal Blue: '#2b6cb0'
-                        Steel Blue: '#4299e1'
-                        Sky Blue: '#63b3ed'
-                        Light Blue: '#90cdf4'
-                        Dark Teal: '#234e52'
-                        Teal: '#319795'
-                        Ocean: '#38b2ac'
-                        Aqua: '#4fd1c5'
-                        Mint: '#81e6d9'
-                        Deep Purple: '#322659'
-                        Royal Purple: '#553c9a'
-                        Medium Purple: '#6b46c1'
-                        Lavender: '#805ad5'
-                        Light Purple: '#9f7aea'
+                        #ef476f, #00193b, #fb8500,#1b7b3d, #90be6d,#001e45,#eb5133, #22b455,#002657, #002d67, #00377e, #280659,#341671,#1d3557, #457b9d, #003554, #03273c, #009944
                         
                         Bar Plots
                         ------------------------------------------------------------
-                        Deep Blue: '#2c5282'
-                        Green: '#276749'
-                         Navy: '#1a365d'
-                        Royal Blue: '#2b6cb0'
-                        Steel Blue: '#4299e1'
-                        Sky Blue: '#63b3ed'
-                        Light Blue: '#90cdf4'
-                        Dark Teal: '#234e52'
-                        Teal: '#319795'
-                        Ocean: '#38b2ac'
-                        Aqua: '#4fd1c5'
-                        Mint: '#81e6d9'
-                        Deep Purple: '#322659'
-                        Royal Purple: '#553c9a'
-                        Medium Purple: '#6b46c1'
-                        Lavender: '#805ad5'
-                        Light Purple: '#9f7aea'
+                        '#636EFA', '#EF553B', '#00CC96', '#AB63FA', '#FFA15A', #145da0, #0c2d48, #2e8bc0, #fd7f20, #fc2e20, #fdb750, #175873, #2b7c85, #87aca3,#0c1446
                         
                         Multiple Traces
                         --------------------------------------------------------------
@@ -1269,6 +1237,7 @@ def generate_plot_analysis(data: str, question: Question):
                 If this data contains not only null values return 'yes'.
                 If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis bit longer explanation.
                 Do not say null values are there in the data. just say you can't generate an answer at this moment by using user's question. (don not use the term with provided data, say with existing data that I can access)
+                Say it professionally and use emojis.
                 Don't ever say, since data contains mostly null values or zeros you can't provide an answer.
                 
                 example data: 
