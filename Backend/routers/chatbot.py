@@ -444,8 +444,8 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
     if session_id in chat_histories: # Check if the session ID exists in the chat histories
         questions = chat_histories[session_id]["questions"] # Get the questions from the chat histories
         answers = chat_histories[session_id]["answers"] # Get the answers from the chat histories
-        # Get the last 3 items, excluding the current question
-        for i in range(max(len(questions) - 4, 0), len(questions) - 1):
+        # Get the last 5 items, excluding the current question
+        for i in range(max(len(questions) - 6, 0), len(questions) - 1):
             recent_history.append({
                 "question": questions[i],
                 "answer": answers[i]
@@ -635,6 +635,11 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         Ensure all arguments have equal length
                         Use only columns available in response_dict
                         Validate data types and handle nulls if needed
+                        # DateTime Handling
+                        - Convert datetime strings to pandas datetime objects with proper timezone handling:
+                        - For UTC timestamps: df['date_column'] = pd.to_datetime(df['date_column'], utc=True)
+                        - For local time display: df['date_column'] = df['date_column'].dt.tz_localize(None)
+                        - Validate timezone information in datetime columns before processing
                         
                         
                         Supported Visualization Types
@@ -716,6 +721,16 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         # 1. Data Processing
                         df = pd.DataFrame(response_dict)
                         
+                        # Simple datetime handling - convert to string format
+                        datetime_columns = [col for col in df.columns if 'date' in col.lower() or 'time' in col.lower()]
+                        for col in datetime_columns:
+                            try:
+                                # Convert to string format YYYY-MM-DD
+                                df[col] = pd.to_datetime(df[col]).dt.strftime('%Y-%m-%d')
+                            except:
+                                # If conversion fails, keep original data
+                                continue
+                        
                         # 2. Create Visualization
                         fig = px.line(df, 
                                       x='actual_column_name',
@@ -731,8 +746,9 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         
                         # 4. Display (REQUIRED)
                         fig.show()
-                        Common Mistakes to Avoid
                         
+                        Common Mistakes to Avoid
+                        -----------------------------------------
                         Data Source Errors:
                         pythonCopy# WRONG - Creating sample data
                         response_dict = []
@@ -753,6 +769,13 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         Hardcoding colors not from specification
                         Reusing colors across visualizations
                         Missing axis labels or titles
+                        
+                        DateTime Handling:
+                        # CORRECT - Simple string conversion
+                        df['date'] = pd.to_datetime(df['date']).dt.strftime('%Y-%m-%d')
+                        
+                        # For time-specific data
+                        df['datetime'] = pd.to_datetime(df['datetime']).dt.strftime('%Y-%m-%d %H:%M:%S')
                         
                         
                         Data Processing Errors:
@@ -1238,12 +1261,14 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
         return f"Unable to provide analytical insights at the moment. Error: {str(e)}"
 
 # Function to generate a Cypher query based on the user question
-def generate_plot_analysis(data: str):
+def generate_plot_analysis(data: str, question: Question):
     try:
         # Prepare prompt for LLM
         analysis_prompt = f"""
+                Users question: {question.question}
                 If this data contains not only null values return 'yes'.
                 If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis bit longer explanation.
+                Do not say null values are there in the data. just say you can't generate an answer at this moment by using user's question. (don not use the term with provided data, say with existing data that I can access)
                 Don't ever say, since data contains mostly null values or zeros you can't provide an answer.
                 
                 example data: 
@@ -1398,7 +1423,7 @@ async def chat(question: Question):
                         print(f"Error saving table file: {str(e)}")
 
                 if result["html_table_data"]: # Check if the HTML table data exists
-                    result["table_accept_status"] = generate_plot_analysis(result["data"][:300])
+                    result["table_accept_status"] = generate_plot_analysis(result["data"][:300], question) # Generate table analysis
 
             # Generate Plotly visualization if status is "Yes"
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
