@@ -712,25 +712,36 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         
                         import plotly.express as px
                         import pandas as pd
-                        
+
                         # 1. Data Processing
                         df = pd.DataFrame(response_dict)
-                        
+
+                        # Simple datetime handling - convert to string format
+                        datetime_columns = [col for col in df.columns if 'date' in col.lower() or 'time' in col.lower()]
+                        for col in datetime_columns:
+                            try:
+                                # Convert to string format YYYY-MM-DD
+                                df[col] = pd.to_datetime(df[col]).dt.strftime('%Y-%m-%d')
+                            except:
+                                # If conversion fails, keep original data
+                                continue
+
                         # 2. Create Visualization
                         fig = px.line(df, 
                                       x='actual_column_name',
                                       y='actual_column_name',
                                       title='Meaningful Title')
-                        
+
                         # 3. Update Layout
                         fig.update_layout(
                             template='plotly_white',
                             xaxis_title="X Axis Label",
                             yaxis_title="Y Axis Label"
                         )
-                        
+
                         # 4. Display (REQUIRED)
                         fig.show()
+                        
                         Common Mistakes to Avoid
                         
                         Data Source Errors:
