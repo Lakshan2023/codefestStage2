@@ -73,7 +73,7 @@ cypher_queries = [item['cypher_query'] for item in data['data']]
 
 
 # Function to find the top 5 similar questions
-def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
+def find_similar_questions(user_query, questions, cypher_queries, top_n=3):
     # Combine user query with the questions
     corpus = questions + [user_query]
 
@@ -739,7 +739,7 @@ async def chat(question: Question):
             else:
                 result["chart_analysis"] = "Unable to provide analytical insights due to visualization error." # Set error message
 
-            chat_histories[session_id]["answers"].append([result["text_explanation"], result["query"], result["plotly_code"]]) # Append the text explanation to chat history
+            chat_histories[session_id]["answers"].append(result["text_explanation"]) # Append the text explanation to chat history
 
             if result["data"] is None:
                 result["text_explanation"] = explanation_handler(result["text_explanation"]) # Handle explanation based on data availability
