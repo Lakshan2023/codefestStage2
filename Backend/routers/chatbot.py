@@ -121,13 +121,15 @@ graph_db_structure = prompts.graph_db_structure
 
 # Function to generate a Cypher query based on the user question
 def generate_query(user_question: str, session_id: str, question: Question) -> str:
-    global QUERY_CHAT_PROMPT
+    global QUERY_CHAT_PROMPT, questions, cypher_queries
+    Question = questions
+    CypherQueries = cypher_queries
     recent_history = [] # Initialize an empty list to store recent conversation history
     if session_id in chat_histories: # Check if the session ID exists in the chat histories
         questions = chat_histories[session_id]["questions"] # Get the questions from the chat histories
         answers = chat_histories[session_id]["answers"] # Get the answers from the chat histories
         # Get the last 3 items, excluding the current question
-        for i in range(max(len(questions) - 4, 0), len(questions) - 1):
+        for i in range(max(len(questions) - 6, 0), len(questions) - 1):
             recent_history.append({
                 "question": questions[i],
                 "answer": answers[i]
@@ -182,7 +184,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
     #     return f"Error finding similar questions: {str(e)}"
 
     try:
-        similar_results = find_similar_questions(user_question, questions, cypher_queries)
+        similar_results = find_similar_questions(user_question, Question, CypherQueries)
         similar_text = "\n".join([
             f"Reference Q: {q}\nReference Query: {c}\nSimilarity: {s:.2f}"
             for q, c, s in similar_results
@@ -201,6 +203,8 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         template_cypher=TEMPLATE_CYPHER,
         settings_prompt=settings_prompt
     )
+
+    print(similar_text)
 
     # Retry loop for API call
     while retry_count < max_retries:
@@ -735,7 +739,7 @@ async def chat(question: Question):
             else:
                 result["chart_analysis"] = "Unable to provide analytical insights due to visualization error." # Set error message
 
-            chat_histories[session_id]["answers"].append(result["text_explanation"]) # Append the text explanation to chat history
+            chat_histories[session_id]["answers"].append([result["text_explanation"], result["query"], result["plotly_code"]]) # Append the text explanation to chat history
 
             if result["data"] is None:
                 result["text_explanation"] = explanation_handler(result["text_explanation"]) # Handle explanation based on data availability
