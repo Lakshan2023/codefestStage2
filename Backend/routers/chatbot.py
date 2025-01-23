@@ -30,10 +30,13 @@ from fastapi.staticfiles import StaticFiles
 from fastapi import APIRouter, HTTPException
 from pathlib import Path
 
+# Create FastAPI instance
 router = APIRouter()
 
+# Load environment variables
 load_dotenv()
 
+# Get environment variables
 endpoint = os.getenv("ENDPOINT_URL", "https://azurevision23.openai.azure.com/")
 deployment = os.getenv("DEPLOYMENT_NAME", "gpt-4o")
 subscription_key = os.getenv("AZURE_OPENAI_API_KEY")
@@ -48,16 +51,18 @@ client = AzureOpenAI(
     api_version="2024-05-01-preview",
 )
 
+# Function to connect to Neo4j
 def connect_to_neo4j():
     try:
-        driver = GraphDatabase.driver(uri, auth=(username, password))
-        driver.verify_connectivity()
+        driver = GraphDatabase.driver(uri, auth=(username, password)) # Connect to the Neo4j database
+        driver.verify_connectivity() # Verify the connection
         print("Connection to Neo4j established successfully!")
         return driver
     except Exception as e:
-        print(f"Failed to connect to Neo4j: {str(e)}")
+        print(f"Failed to connect to Neo4j: {str(e)}") # Print the error message
         return None
 
+# Connect to Neo4j
 driver = connect_to_neo4j()
 
 # Get the current file's directory and set up static path
@@ -96,6 +101,7 @@ def find_similar_questions(user_query, questions, cypher_queries, top_n=5):
 
     return similar_questions
 
+# Function to generate a Cypher query based on the user question
 class Settings(BaseModel):
     language: str
     politeness_level: str
@@ -103,6 +109,7 @@ class Settings(BaseModel):
     creativity: float
     response_length: str
 
+#  Add question_history and answer_history fields to the Question model
 class Question(BaseModel):
     question: str
     session_id: str
@@ -116,6 +123,7 @@ class Question(BaseModel):
 chat_histories: Dict[str, Dict[str, List[str]]] = {}
 
 
+# Function to generate a Cypher query based on the user question
 graph_db_structure = """
 :param {
   // Define the file path root and the individual file names required for loading.
@@ -382,14 +390,60 @@ CALL {
   MATCH (target: Stock { Stock_ID: row.Stock_ID })
   MERGE (source)-[r: HAS_STOCK]->(target)
 } IN TRANSACTIONS OF 10000 ROWS;
+
+
+Naming conventions should use for Nodes when generating Queries (Use Only these Nodes for Queries):
+__________________________________________________________________________________________________
+
+Customer
+
+Meeting
+
+Order
+
+Product
+
+ProfessionalDevelopment
+
+Sales
+
+Stock
+
+Vendor
+
+Naming conventions should use for Relationships when generating Queries (Use Only these relationships for Queries):
+__________________________________________________________________________________________________________________
+
+ATTENDED
+
+CONDUCTED
+
+CONTAINS
+
+HAS_STOCK
+
+MANAGES
+
+PARTICIPATED_IN
+
+PLACED
+
+PROCESSED
+
+SUPPLIES
+
+
+Other than that do not use any relationship or Nodes.
+  Very very important when you do date comparisons, please use this format for dates: datetime(\"2025-01-18T00:00:00Z\")
+  Times are used as strings like this: \"14:23:45\"
 """
 
-
+# Function to generate a Cypher query based on the user question
 def generate_query(user_question: str, session_id: str, question: Question) -> str:
-    recent_history = []
-    if session_id in chat_histories:
-        questions = chat_histories[session_id]["questions"]
-        answers = chat_histories[session_id]["answers"]
+    recent_history = [] # Initialize an empty list to store recent conversation history
+    if session_id in chat_histories: # Check if the session ID exists in the chat histories
+        questions = chat_histories[session_id]["questions"] # Get the questions from the chat histories
+        answers = chat_histories[session_id]["answers"] # Get the answers from the chat histories
         # Get the last 3 items, excluding the current question
         for i in range(max(len(questions) - 4, 0), len(questions) - 1):
             recent_history.append({
@@ -415,6 +469,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         "plotly_code": "plotly code"
     }
 
+    # Find the top 5 similar questions
     settings_prompt = f"""
        Response Settings:
        - Language: {question.settings.language}
@@ -534,39 +589,189 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                            - 'No': If data isn't suitable for visualization
                            - Only set to 'Yes' for statistical, numeric, or time series data
                         
-                       5. plotly_code:
-                           - IMPORTANT: You must use 'response_dict' to access the actual query results
-                           - Very Very Important: ⚠️⚠️⚠️ Do NOT use any example/dummy data or hardcoded values to the response_dict. response_dict is defined from outer scope.
-                           - All data for visualization must come from response_dict
-                           - response_dict contains the results of your Cypher query as a list of dictionaries
-                           ⚠️⚠️⚠️, therefore do not assign any sample values to the response dict. 
-                           - Example correct usage: 
-                             df = pd.DataFrame(response_dict)
-                             fig = px.line(df, x='date_column', y='value_column')
-                           - ⚠️ All arguments should have the same length
-                           - ⚠️ You can generate bar charts, stack bar charts, line charts, pie charts or Data Cards / Big Numbers
-                           - Provide charts in decent colors (bars and lines should be dark and vibrant colors)
-                           - fig.show() code has to be there at the end (This is very very important)
-                           - Include visualization code only if plotly_code_generation_status is 'Yes'
-                           - Ensure visualizations are business-relevant and actionable
-                           - plotly_white is the background layout used. 
-                           Color requirements (MUST use different colors for different charts):
-                               - Line plots: Use '#1f77b4' (blue) or '#e41a1c' (red) for lines
-                               - Bar plots: Use '#2c5282' (deep blue) or '#276749' (green) for bars
-                               - Multiple traces: Rotate through colors ['#1f77b4', '#2ca02c', '#9467bd', '#d62728']
-                               - NEVER use the same color for different visualizations in the same analysis
-                        Example of correct plotly code:
-                        ----------------------------
-                        # This shows how to properly use response_dict
-                        df = pd.DataFrame(response_dict)
-                        fig = px.bar(df, 
-                                    x=df['date_column'],
-                                    y=df['value_column'],
-                                    title='Chart Title')
+                       Plotly Visualization Code Generation Guidelines
+                        ⚠️ CRITICAL DATA SOURCE RULES ⚠️
                         
-                        # INCORRECT - Do not use:
-                        data = ['date': '2024-01', 'value': 100]  # Don't use example data
-                        df = pd.DataFrame(data)  # Don't create dummy dataframes
+                        NEVER modify or assign to response_dict:
+                        pythonCopy# ABSOLUTELY WRONG - NEVER DO THIS:
+                        response_dict = [
+                            {{'date': '2024-01', 'value': 100}},
+                            {{'date': '2024-02', 'value': 200}}
+                        ]
+                        
+                        # ABSOLUTELY WRONG - NEVER DO THIS:
+                        response_dict = {{
+                            'dates': ['2024-01', '2024-02'],
+                            'values': [100, 200]
+                        }}
+                        
+                        CORRECT Usage:
+                        pythonCopy# CORRECT - Use response_dict as is:
+                        df = pd.DataFrame(response_dict)
+                        
+                        The ONLY valid operations on response_dict:
+                        ---------------------------------------------------------
+                        Reading from it
+                        Converting to DataFrame
+                        Accessing its columns
+                        Filtering/transforming its data 
+                        
+                        
+                        Core Requirements
+                        ----------------------------------------------------------
+                        
+                        Data Source Rules
+                        ----------------------------------------------------------
+                        MUST use response_dict as the ONLY data source
+                        response_dict contains query results as a list of dictionaries
+                        NEVER create or assign sample/dummy data
+                        NEVER hardcode values
+                        NEVER modify response_dict structure
+                        
+                        
+                        Data Processing Requirements
+                        ------------------------------------------------------------
+                        Convert response_dict to DataFrame: df = pd.DataFrame(response_dict)
+                        Ensure all arguments have equal length
+                        Use only columns available in response_dict
+                        Validate data types and handle nulls if needed
+                        
+                        
+                        Supported Visualization Types
+                        ------------------------------------------------------------
+                        Bar charts
+                        Stacked bar charts
+                        Line charts
+                        Pie charts
+                        Data cards/Big numbers
+                        
+                        
+                        Visual Style Requirements
+                        -------------------------------------------------------------
+                        Use plotly_white as background layout
+                        MUST include fig.show() at the end of code
+                        Only generate visualization if plotly_code_generation_status is 'Yes'
+                        Charts must be business-relevant and actionable
+                        Use appropriate axis labels and titles
+                        Include legends where applicable
+                        
+        
+                        Color Specifications
+                        -----------------------------------------------------------
+                        Line Plots
+                        -----------------------------------------------------
+                        Blue: '#1f77b4'
+                        Red: '#e41a1c'
+                        Navy: '#1a365d'
+                        Royal Blue: '#2b6cb0'
+                        Steel Blue: '#4299e1'
+                        Sky Blue: '#63b3ed'
+                        Light Blue: '#90cdf4'
+                        Dark Teal: '#234e52'
+                        Teal: '#319795'
+                        Ocean: '#38b2ac'
+                        Aqua: '#4fd1c5'
+                        Mint: '#81e6d9'
+                        Deep Purple: '#322659'
+                        Royal Purple: '#553c9a'
+                        Medium Purple: '#6b46c1'
+                        Lavender: '#805ad5'
+                        Light Purple: '#9f7aea'
+                        
+                        Bar Plots
+                        ------------------------------------------------------------
+                        Deep Blue: '#2c5282'
+                        Green: '#276749'
+                         Navy: '#1a365d'
+                        Royal Blue: '#2b6cb0'
+                        Steel Blue: '#4299e1'
+                        Sky Blue: '#63b3ed'
+                        Light Blue: '#90cdf4'
+                        Dark Teal: '#234e52'
+                        Teal: '#319795'
+                        Ocean: '#38b2ac'
+                        Aqua: '#4fd1c5'
+                        Mint: '#81e6d9'
+                        Deep Purple: '#322659'
+                        Royal Purple: '#553c9a'
+                        Medium Purple: '#6b46c1'
+                        Lavender: '#805ad5'
+                        Light Purple: '#9f7aea'
+                        
+                        Multiple Traces
+                        --------------------------------------------------------------
+                        Color rotation: ['#1f77b4', '#2ca02c', '#9467bd', '#d62728']
+                        Cool professional : ['#2b6cb0', '#319795', '#553c9a', '#1a365d', '#234e52']
+                        Cool contrast : ['#4299e1', '#38b2ac', '#6b46c1', '#2d3748', '#805ad5']
+                        Cool pastel: ['#90cdf4', '#81e6d9', '#9f7aea', '#a0aec0', '#b2f5ea']
+                        
+                        NEVER reuse colors within the same analysis
+                        
+                        Required Code Structure
+                        -------------------------------------------------------------
+                        
+                        import plotly.express as px
+                        import pandas as pd
+
+                        # 1. Data Processing
+                        df = pd.DataFrame(response_dict)
+
+                        # Simple datetime handling - convert to string format
+                        datetime_columns = [col for col in df.columns if 'date' in col.lower() or 'time' in col.lower()]
+                        for col in datetime_columns:
+                            try:
+                                # Convert to string format YYYY-MM-DD
+                                df[col] = pd.to_datetime(df[col]).dt.strftime('%Y-%m-%d')
+                            except:
+                                # If conversion fails, keep original data
+                                continue
+
+                        # 2. Create Visualization
+                        fig = px.line(df, 
+                                      x='actual_column_name',
+                                      y='actual_column_name',
+                                      title='Meaningful Title')
+
+                        # 3. Update Layout
+                        fig.update_layout(
+                            template='plotly_white',
+                            xaxis_title="X Axis Label",
+                            yaxis_title="Y Axis Label"
+                        )
+
+                        # 4. Display (REQUIRED)
+                        fig.show()
+                        
+                        Common Mistakes to Avoid
+                        
+                        Data Source Errors:
+                        pythonCopy# WRONG - Creating sample data
+                        response_dict = []
+                        
+                        # WRONG - Modifying response_dict
+                        response_dict.append({{'date': '2024-01'}})
+                        
+                        # WRONG - Reassigning response_dict
+                        response_dict = pd.DataFrame()
+                        
+                        # WRONG - Using dummy data
+                        test_data = {{'col1': [1,2,3]}}
+                        
+                        Code Structure Errors:
+                        
+                        Missing fig.show()
+                        Not using plotly_white template
+                        Hardcoding colors not from specification
+                        Reusing colors across visualizations
+                        Missing axis labels or titles
+                        
+                        
+                        Data Processing Errors:
+                        ----------------------------------------------------------
+                        Creating dummy DataFrames
+                        Using columns that might not exist
+                        Not handling potential null values
+                        Not validating data types
                 
                         Important Notes for visualizations:
                         --------------
@@ -608,13 +813,27 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                         - If you do long explanations provide answers point wise
                         - Very Very Important: ⚠️⚠️If the user question is not related to visualizations, stat, numeric,or comparison data, do not ever provide visualizations.
                         
+                        When asked about specific individuals:
+                        --------------------------------------------------------------------------------------------------
+                        Only confirm someone's status as a customer or sales consultant if you have actually searched and found their name in the relevant database
+                        If you cannot verify the person in the database, respond with: "I'll need to check our records to confirm their status. Could you please provide more details?"
+                        Never make assumptions about whether someone is a customer or sales consultant without database verification
+                        
+                        # Stay Focused and Contextual
+                        - Provide responses that are strictly relevant to the questions asked about Sysco Labs
+                        - Do not include any information beyond the scope of the specific query or subject matter being discussed
+                        - Avoid providing out-of-context or irrelevant information in any responses
+                        - Maintain focus on the exact question asked and its direct implications for Sysco Labs
+                        - If question is unclear, ask for clarification rather than making assumptions
+                        - Never add extraneous information not directly related to the query
+                        
                         # Strictly follow this setting prompts as well
                         {settings_prompt}  
 """
 
 
-    retry_count = 0
-    max_retries = 4
+    retry_count = 0 # Initialize retry count
+    max_retries = 4 # Set maximum number of retries
 
     # # Get similar questions (assuming this function exists)
     # try:
@@ -643,16 +862,17 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
         settings_prompt=settings_prompt
     )
 
+    # Retry loop for API call
     while retry_count < max_retries:
         try:
             # Construct chat messages
             chat_messages = [
                 {
-                    "role": "system",
-                    "content": [
+                    "role": "system", # System role for the AI assistant
+                    "content": [ # Content of the message
                         {
                             "type": "text",
-                            "text": formatted_prompt
+                        "text": formatted_prompt # Add the formatted prompt to the content
                         }
                     ]
                 },
@@ -661,7 +881,7 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                     "content": [
                         {
                             "type": "text",
-                            "text": user_question
+                            "text": user_question # Add the user question to the content
                         }
                     ]
                 }
@@ -680,67 +900,87 @@ def generate_query(user_question: str, session_id: str, question: Question) -> s
                 stream=False
             )
 
+            # Check if the response contains the query generation status
             return completion.choices[0].message.content
 
+        # Retry on API errors
         except Exception as e:
             retry_count += 1
             if retry_count >= max_retries:
                 return f"Error after {max_retries} retries: {str(e)}"
             continue
-
+    # Return error message if maximum retries exceeded
     return "Maximum retries exceeded"
 
+# Define the FastAPI router
 @router.post("/start_session")
 async def start_session():
-    session_id = str(uuid.uuid4())
+    session_id = str(uuid.uuid4()) # Generate a unique session ID
     chat_histories[session_id] = {
         "questions": [],
         "answers": []
     }
-    return JSONResponse(content={"session_id": session_id})
+    return JSONResponse(content={"session_id": session_id}) # Return the session ID as JSON
 
+# Define the FastAPI router
 def serialize_neo4j_value(val):
     """Serialize Neo4j specific data types"""
-    if isinstance(val, (neo4j.time.DateTime, neo4j.time.Date)):
+    if isinstance(val, (neo4j.time.DateTime, neo4j.time.Date)): # Check for DateTime or Date objects
         return val.iso_format()
-    elif isinstance(val, neo4j.time.Time):
+    elif isinstance(val, neo4j.time.Time): # Check for Time objects
         return str(val)
-    elif isinstance(val, (int, float, str, bool)):
+    elif isinstance(val, (int, float, str, bool)): # Check for basic data types
         return val
     elif val is None:
         return None
     return str(val)
 
+# Define the FastAPI router
 def serialize_value(val):
     """Main serialization function for all types"""
     if pd.isna(val):
         return None
-    elif isinstance(val, (pd.Timestamp, datetime)):
-        return val.isoformat()
+    # Handle pandas Period objects
     elif isinstance(val, pd.Period):
-        return val.strftime('%Y-%m-%d')
-    elif isinstance(val, np.integer):
+        return val.asfreq('D').strftime('%Y-%m-%d')
+    # Handle both datetime and Timestamp objects
+    elif isinstance(val, (pd.Timestamp, datetime)):
+        # Convert to ISO format and truncate microseconds if present
+        iso_date = val.isoformat()
+        if '.' in iso_date:
+            iso_date = iso_date.split('.')[0] + 'Z'
+        return iso_date
+    elif isinstance(val, str):
+        # Try to parse string as datetime if it looks like a date
+        try:
+            if 'T' in val or '-' in val:
+                parsed_date = pd.to_datetime(val)
+                return parsed_date.strftime('%Y-%m-%dT%H:%M:%SZ')
+        except:
+            return val
+    elif isinstance(val, np.integer): # Handle numpy integer types
         return int(val)
-    elif isinstance(val, np.floating):
+    elif isinstance(val, np.floating): # Handle numpy float types
         return float(val)
-    elif isinstance(val, np.bool_):
+    elif isinstance(val, np.bool_): # Handle numpy boolean types
         return bool(val)
-    elif isinstance(val, (np.ndarray, list)):
+    elif isinstance(val, (np.ndarray, list)): # Handle numpy arrays and lists
         return [serialize_value(v) for v in val]
-    elif isinstance(val, dict):
+    elif isinstance(val, dict): # Handle dictionaries
         return {k: serialize_value(v) for k, v in val.items()}
-    elif isinstance(val, pd.Index):
+    elif isinstance(val, pd.Index): # Handle pandas Index objects
         return serialize_value(val.tolist())
-    elif isinstance(val, pd.Series):
+    elif isinstance(val, pd.Series): # Handle pandas Series objects
         return serialize_value(val.tolist())
-    elif isinstance(val, pd.DataFrame):
+    elif isinstance(val, pd.DataFrame): # Handle pandas DataFrame objects
         return serialize_value(val.to_dict('records'))
-    elif isinstance(val, pd.DateOffset):
+    elif isinstance(val, pd.DateOffset): # Handle pandas DateOffset objects
         return str(val)
-    elif isinstance(val, pd.Interval):
+    elif isinstance(val, pd.Interval): # Handle pandas Interval objects
         return str(val)
-    return serialize_neo4j_value(val)
+    return serialize_neo4j_value(val) # Fallback to Neo4j serialization
 
+# Define the FastAPI router
 def execute_cypher_query(driver, query):
     """Execute a Cypher query and return serialized results"""
     try:
@@ -751,15 +991,15 @@ def execute_cypher_query(driver, query):
             for record in result:
                 # Convert each record to a dict and serialize all values
                 record_dict = {}
-                for key, value in dict(record).items():
+                for key, value in dict(record).items(): # Convert to dict to access items
                     record_dict[key] = serialize_value(value)
-                records.append(record_dict)
+                records.append(record_dict) # Append the serialized record to the list
             return records
-    except Exception as e:
+    except Exception as e: # Handle any exceptions
         print(f"Error executing query: {str(e)}")
         return None
 
-
+# Function to generate a Cypher query based on the user question
 def convert_to_html_table(data):
     if not data:
         return ""
@@ -802,6 +1042,7 @@ def convert_to_html_table(data):
 
     return html_table
 
+# Function to generate a Cypher query based on the user question
 def generate_plotly_html(plotly_code, response_dict):
     """
     Generate HTML for plotly visualization with proper error handling and data validation
@@ -834,16 +1075,15 @@ def generate_plotly_html(plotly_code, response_dict):
         if fig:
             # Configure the plot for web display with proper background settings
             fig.update_layout(
-                template='plotly_white',  # This sets the overall template
-                paper_bgcolor='white',    # Explicit background color for the paper
-                plot_bgcolor='white',     # Explicit background color for the plot
+                template='plotly_white',
+                paper_bgcolor='white',
+                plot_bgcolor='white',
                 margin=dict(t=50, l=50, r=50, b=50),
-                height=500,
+                autosize=True,  # Enables automatic resizing
                 showlegend=True,
-                # Add watermark or branding
                 annotations=[
                     dict(
-                        text="Sysco Labs Analytics",
+                        text="SyscoPulse Analytics",
                         xref="paper",
                         yref="paper",
                         x=0.98,
@@ -852,6 +1092,13 @@ def generate_plotly_html(plotly_code, response_dict):
                         font=dict(size=10, color="gray"),
                     )
                 ]
+            )
+
+            # Make the figure responsive
+            fig.update_layout(
+                # Remove fixed height/width to allow responsiveness
+                height=None,
+                width=None
             )
 
             # Additional styling for better visualization
@@ -870,33 +1117,80 @@ def generate_plotly_html(plotly_code, response_dict):
                     'modeBarButtonsToRemove': ['select2d', 'lasso2d']
                 }
             )
-            return plotly_html
+            # Return the generated HTML for the plotly visualization
+            return plotly_html # Return the generated HTML for the plotly visualization
         return "<div class='alert alert-warning'>No figure was generated from the plotly code</div>"
 
+    # Handle exceptions during plotly generation
     except Exception as e:
         print(f"Plotly Generation Error: {str(e)}")
         return f"<div class='alert alert-danger'>Error generating plot: {str(e)}</div>"
 
 
-
+# Function to generate a Cypher query based on the user question
 def generate_chart_analysis(plotly_code, data, user_question, client, deployment, question):
-    if not plotly_code or not data:
+    if not plotly_code or not data: # Check if plotly code or data is missing
         return "Unable to provide analytical insights at the moment due to missing data or visualization."
 
     try:
         # Extract key information from plotly code to understand chart type
         plotly_code_lower = plotly_code.lower()
         chart_type = ""
-        if "px.bar" in plotly_code_lower:
+        if "px.bar" in plotly_code_lower: # Check if the plotly code is for a bar chart
             chart_type = "bar chart"
-        elif "px.line" in plotly_code_lower:
+        elif "px.line" in plotly_code_lower: # Check if the plotly code is for a line chart
             chart_type = "line chart"
-        elif "px.pie" in plotly_code_lower:
+        elif "px.pie" in plotly_code_lower: # Check if the plotly code is for a pie chart
             chart_type = "pie chart"
         else:
-            chart_type = "chart"
+            chart_type = "chart" # Default to generic chart type
 
+        # Prepare settings prompt for the user
         settings_prompt = f"""
+               Each setting text generation pattern explanation:
+                   **Politeness Level**
+                    Friendly - Warm, welcoming tone with personal touches and encouraging language
+                    - Key terms: "Great to hear from you!", "I'd love to help", "That's wonderful"
+                    - Emotionally engaging phrases: "I understand how you feel", "I'm excited to assist"
+                    - Personal pronouns: frequent use of "you" and "we"
+                    - Encouraging language: "You're doing great", "That's a fantastic approach"
+                    
+                    Neutral - Balanced, straightforward communication without strong emotional elements
+                    - Key terms: "Here is", "This shows", "The following"
+                    - Matter-of-fact phrases: "Based on the information", "According to"
+                    - Objective language: "The data indicates", "Results show"
+                    - Clear statements: "This works by", "The process involves"
+                    
+                    Professional - Courteous, respectful tone with proper etiquette and business-appropriate language
+                    - Key terms: "I appreciate your inquiry", "Thank you for your consideration"
+                    - Business phrases: "Per your request", "As discussed", "I am pleased to"
+                    - Formal acknowledgments: "Kind regards \n SyscoPulse Team", "Best regards \n SyscoPulse Team" (Mention SyscoPulse Team)
+                    - Respectful language: "Would you please", "May I suggest"
+                    
+                  **Tone**
+                    Formal - Structured, sophisticated language with proper grammar and technical terminology
+                    - Key terms: "Furthermore", "Nevertheless", "Subsequently"
+                    - Complete sentences: No contractions, full proper nouns
+                    - Technical terms: Industry-specific vocabulary, precise terminology
+                    - Complex structures: "In accordance with", "With regard to"
+                    
+                    Semi-formal - Balanced mix of professional and conversational elements, moderate use of contractions
+                    - Key terms: "I'd suggest", "Let's consider", "We'll examine"
+                    - Mixed contractions: Selective use of don't, can't, we'll
+                    - Balanced phrases: "This means that", "In other words"
+                    - Accessible terminology: Mix of technical and common terms
+                    
+                    Informal - Casual, conversational style with common expressions and simplified language
+                    - Key terms: "Yeah", "Sure thing", "No worries"
+                    - Contractions: heavy use of don't, can't, won't, it's
+                    - Casual phrases: "Basically", "Kind of", "Pretty much"
+                    - Everyday language: Common expressions, simple terms
+
+                  **responseLength**
+                    Brief - Concise response focusing on essential information (50-100 words)
+                    Medium - Balanced explanation with supporting details (100-250 words)
+                    Detailed - Comprehensive coverage with examples and thorough explanations (250+ words)
+                  
                Response Settings:
                - Language: {question.settings.language}
                - Politeness Level: {question.settings.politeness_level}
@@ -910,6 +1204,7 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                2. Maintain {question.settings.politeness_level} politeness level
                3. Keep {question.settings.formality} tone
                5. Provide {question.settings.response_length} response length
+               6. Use emojis based on above selected settings
                """
 
         # Prepare prompt for LLM
@@ -944,18 +1239,19 @@ def generate_chart_analysis(plotly_code, data, user_question, client, deployment
                 {"role": "system", "content": analysis_prompt},
                 {"role": "user", "content": "Please provide the analysis."}
             ],
-            max_tokens=1000,
-            temperature= question.settings.creativity
+            max_tokens=1000, # Set maximum tokens for response
+            temperature= question.settings.creativity # Set the creativity level based on user settings
         )
 
-        return completion.choices[0].message.content
+        return completion.choices[0].message.content # Return the generated analysis
 
-    except Exception as e:
+    except Exception as e: # Handle any exceptions
         return f"Unable to provide analytical insights at the moment. Error: {str(e)}"
 
-
+# Function to generate a Cypher query based on the user question
 def generate_plot_analysis(data: str):
     try:
+        # Prepare prompt for LLM
         analysis_prompt = f"""
                 If this data contains not only null values return 'yes'.
                 If the data only contains null values say you cannot generate an answer with data table at the moment in a creative way with emojis bit longer explanation.
@@ -971,26 +1267,38 @@ def generate_plot_analysis(data: str):
                 
                 data : {data}
                 """
+
+        # Make API call
         completion = client.chat.completions.create(
             model=deployment,
             messages=[
                 {"role": "system", "content": analysis_prompt},
                 {"role": "user", "content": "Please return 'yes' or explanation based on data."}
             ],
-            max_tokens=1000,
-            temperature=0.7
+            max_tokens=1000, # Set maximum tokens for response
+            temperature=0.7 # Set the creativity level
         )
 
-        return completion.choices[0].message.content
+        return completion.choices[0].message.content # Return the generated analysis
     except Exception as e:
         return f"Unable to provide table insights at this moment. Error: {str(e)}"
 
-
+# Function to generate a Cypher query based on the user question
 def explanation_handler(explanation: str):
     try:
+        # Prepare prompt for LLM
+        examples = """
+          Here are the customers who have placed orders with a total value exceeding $10,000.
+          
+          Here is the analysis of average order value for each product. This visualization helps in identifying which products contribute the most to the revenue.
+          
+          Here is the analysis of future meetings conducted by sales consultants. This will help in understanding the upcoming engagements and planning accordingly. 📅
+        """
+        # Prepare prompt for LLM
         analysis_prompt = f"""
                 You are SyscoPulse.
                 If the below text explanation includes the meaning or terms like, this chert/plot/table analyses,
+                Examples: {examples}
                 then please provide a statement that, you can't generate a plot at this moment.(Important :Use  professional emojis and use a bit longer text to explain it.) 
                 
                 If the text explanation is a general explanation, return the same answer as it is.
@@ -998,35 +1306,39 @@ def explanation_handler(explanation: str):
                 
                 Text Explanation : {explanation}
                 """
+        # Make API call
         completion = client.chat.completions.create(
             model=deployment,
             messages=[
                 {"role": "system", "content": analysis_prompt},
                 {"role": "user", "content": "Please do what has given in the system prompt properly."}
             ],
-            max_tokens=1000,
-            temperature=0
+            max_tokens=1000, # Set maximum tokens for response
+            temperature=0 # Set the creativity level
         )
 
-        return completion.choices[0].message.content
+        return completion.choices[0].message.content # Return the generated analysis
     except Exception as e:
-        return f"Unable to provide table insights at this moment. Error: {str(e)}"
+        return f"Unable to provide table insights at this moment. Error: {str(e)}" # Return error message if exception occurs
 
 
-
+# Define the FastAPI router
 @router.post("/chat")
 async def chat(question: Question):
     try:
-        session_id = question.session_id
-        user_question = question.question
-        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+        # Extract the required information from the question object
+        session_id = question.session_id # Extract the session ID
+        user_question = question.question # Extract the user question
+        timestamp = datetime.now().strftime("%Y%m%d_%H%M%S") # Extract the current timestamp
 
+        # Check if the session ID is valid
         if session_id not in chat_histories:
             return JSONResponse(
                 content={"error": "Invalid session ID"},
                 status_code=400
             )
 
+        # Add the user question to the chat history
         chat_histories[session_id]["questions"].append(user_question)
 
         # Get the query generation response
@@ -1034,12 +1346,14 @@ async def chat(question: Question):
 
         try:
             try:
+                # Parse the response as JSON
                 response_dict = json.loads(query_response)
             except json.JSONDecodeError:
                 try:
+                    # Try to parse the response as a Python dict
                     response_dict = ast.literal_eval(query_response)
                 except (ValueError, SyntaxError):
-                    raise ValueError("Could not parse response as JSON or Python dict")
+                    raise ValueError("Could not parse response as JSON or Python dict") # Raise an error if parsing fails
 
             # Validate response format
             required_fields = [
@@ -1050,6 +1364,7 @@ async def chat(question: Question):
                 "plotly_code"
             ]
 
+            # Check if the response dictionary contains all required fields
             if not isinstance(response_dict, dict) or not all(
                     key in response_dict for key in required_fields):
                 raise ValueError("Invalid response format")
@@ -1079,28 +1394,29 @@ async def chat(question: Question):
                 # Save HTML table if it exists
                 if result["html_table_data"]:
                     try:
-                        table_filename = f'table_{session_id}_{timestamp}.html'
-                        file_path = STATIC_DIR / table_filename
+                        table_filename = f'table_{session_id}_{timestamp}.html' # Generate a unique filename
+                        file_path = STATIC_DIR / table_filename # Set the file path
 
                         # Write the file
-                        with open(file_path, 'w', encoding='utf-8') as f:
-                            f.write(result["html_table_data"])
+                        with open(file_path, 'w', encoding='utf-8') as f: # Open the file in write mode
+                            f.write(result["html_table_data"]) # Write the HTML table data to the file
 
                         # Set the correct URL using the base URL from environment
                         base_url = os.getenv('API_BASE_URL', 'https://codefest-backend.azurewebsites.net')
                         result["table_file_url"] = f"{base_url}/static/temp/{table_filename}"
 
-                    except Exception as e:
+                    except Exception as e: # Handle any exceptions
                         print(f"Error saving table file: {str(e)}")
 
-                if result["html_table_data"]:
+                if result["html_table_data"]: # Check if the HTML table data exists
                     result["table_accept_status"] = generate_plot_analysis(result["data"][:300])
 
+            # Generate Plotly visualization if status is "Yes"
             if response_dict["plotly_code_generation_status"].lower() == "yes" and response_dict["plotly_code"]:
                 if result["data"]:  # Only attempt to plot if we have data
                     result["html_code_plotly"] = generate_plotly_html(
-                        response_dict["plotly_code"],
-                        result["data"]
+                        response_dict["plotly_code"], # Extract the plotly code
+                        result["data"] # Extract the data
                     )
 
                     # Save chart HTML if it exists
@@ -1116,34 +1432,36 @@ async def chat(question: Question):
                             # Set the correct URL using the base URL from environment
                             base_url = os.getenv('API_BASE_URL', 'https://codefest-backend.azurewebsites.net')
                             result["chart_file_url"] = f"{base_url}/static/temp/{chart_filename}"
-
+                        # Handle any exceptions
                         except Exception as e:
                             print(f"Error saving chart file: {str(e)}")
-                else:
+                else: # If no data is available, set an alert message
                     result["html_code_plotly"] = "<div class='alert alert-warning'>No data available for plotting</div>"
 
-            if result["html_code_plotly"] and "alert alert-warning" not in result["html_code_plotly"].lower():
-                result["chart_analysis"] = generate_chart_analysis(
-                    response_dict["plotly_code"],
-                    result["data"][:100],
+            # Generate chart analysis if plotly code was generated successfully
+            if result["html_code_plotly"] and "alert alert-warning" not in result["html_code_plotly"].lower(): # Check if plotly code exists
+                result["chart_analysis"] = generate_chart_analysis( # Generate chart analysis
+                    response_dict["plotly_code"], # Extract the plotly code
+                    result["data"][:100], # Extract the data
                     user_question,  # Pass the user's question
                     client,
                     deployment,
                     question
                 )
             else:
-                result["chart_analysis"] = "Unable to provide analytical insights due to visualization error."
+                result["chart_analysis"] = "Unable to provide analytical insights due to visualization error." # Set error message
 
-            chat_histories[session_id]["answers"].append(result["text_explanation"])
+            chat_histories[session_id]["answers"].append(result["text_explanation"]) # Append the text explanation to chat history
 
             if result["data"] is None:
-                result["text_explanation"] = explanation_handler(result["text_explanation"])
+                result["text_explanation"] = explanation_handler(result["text_explanation"]) # Handle explanation based on data availability
 
+            # Return the response as a JSON object
             return JSONResponse(content={
                 "session_id": session_id,
                 "result": result
             })
-
+        # Handle any exceptions
         except Exception as e:
             return JSONResponse(
                 content={
@@ -1152,7 +1470,7 @@ async def chat(question: Question):
                 },
                 status_code=500
             )
-
+    # Handle any exceptions
     except Exception as e:
         print(f"Error in chat endpoint: {str(e)}")
         return JSONResponse(
